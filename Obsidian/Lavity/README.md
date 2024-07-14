@@ -13,12 +13,11 @@ Made using
   - Free, [open source](https://github.com/GNOME/gimp)
 - [FL Studio](https://www.image-line.com/) 
   - Digital Audio Workstation 
-  - Free trial avialable
+  - Free trial available
 - [VS Code](https://code.visualstudio.com/)
   - Code Editor
-  - Free, [open source](https://github.com/microsoft/vscode)
+  - Free, open source
 - [Obsidian.md](https://obsidian.md/)
-  - Free for personal use
 
 
 ## Community

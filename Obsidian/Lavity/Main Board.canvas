@@ -1,0 +1,13 @@
+{
+	"nodes":[
+		{"id":"fcb2332c9b3abf81","x":-315,"y":-189,"width":400,"height":400,"type":"file","file":"mof.png"},
+		{"id":"80ba8c39ed7bb400","x":-240,"y":300,"width":250,"height":60,"type":"text","text":"This is our main character\n"},
+		{"id":"626a5e1ce90d70ec","x":-315,"y":-760,"width":400,"height":410,"type":"file","file":"TODOS.md"},
+		{"id":"87a9050fed2b428d","x":280,"y":-720,"width":900,"height":531,"type":"file","file":"README.md"},
+		{"id":"94a2d8913499d096","x":-435,"y":-1280,"width":640,"height":357,"type":"link","url":"https://www.youtube.com/watch?v=FRH6Xdmq6O0&ab_channel=AndrewHoffman"}
+	],
+	"edges":[
+		{"id":"59e6f84d9880e2d9","fromNode":"fcb2332c9b3abf81","fromSide":"bottom","toNode":"80ba8c39ed7bb400","toSide":"top"},
+		{"id":"ff4b1307f66d3417","fromNode":"626a5e1ce90d70ec","fromSide":"right","toNode":"94a2d8913499d096","toSide":"bottom"}
+	]
+}
