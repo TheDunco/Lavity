@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dl216ku264sj6"]
+
+[ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="1_vr4jh"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Characters/Player/Player.tscn" id="2_j3qp8"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasModulate-Darkness" type="CanvasModulate" parent="."]
+color = Color(0.00392157, 0.00392157, 0.00784314, 0.952941)
+
+[node name="LavityLight" parent="." instance=ExtResource("1_vr4jh")]
+position = Vector2(313, 89)
+
+[node name="Player" parent="." instance=ExtResource("2_j3qp8")]
+position = Vector2(37, 36)

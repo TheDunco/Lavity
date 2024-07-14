@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6mk1ytuv5x03"]
+
+[ext_resource type="AudioStream" uid="uid://cvh4wyiydnq2r" path="res://assets/audio/music/A Moth in Light.ogg" id="1_6wvmn"]
+
+[node name="Music" type="Node2D"]
+
+[node name="A Moth in Light" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_6wvmn")
+volume_db = -5.225
+autoplay = true

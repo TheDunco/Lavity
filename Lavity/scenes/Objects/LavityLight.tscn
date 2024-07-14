@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://iynkceabfekf"]
+
+[ext_resource type="Script" path="res://scenes/Objects/LavityLight.gd" id="1_myj33"]
+
+[sub_resource type="Gradient" id="Gradient_2kxv7"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.00333333, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.513233, 0.513233, 0.513233, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vgskw"]
+gradient = SubResource("Gradient_2kxv7")
+width = 1000
+height = 1000
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k4b6v"]
+radius = 500.0
+
+[node name="LavityLight" type="Node2D"]
+script = ExtResource("1_myj33")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+position = Vector2(-500, -500)
+color = Color(0, 0, 0, 1)
+
+[node name="LavityLightLight" type="PointLight2D" parent="."]
+scale = Vector2(0.5, 0.5)
+color = Color(1, 1, 0.87451, 1)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_vgskw")
+
+[node name="GravityArea" type="Area2D" parent="LavityLightLight"]
+collision_layer = 2
+collision_mask = 2
+gravity_space_override = 1
+gravity_point = true
+gravity_point_unit_distance = 0.1
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = -980.0
+
+[node name="GravityShape" type="CollisionShape2D" parent="LavityLightLight/GravityArea"]
+shape = SubResource("CircleShape2D_k4b6v")
