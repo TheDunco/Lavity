@@ -1,10 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://b6mk1ytuv5x03"]
+[gd_scene load_steps=3 format=3 uid="uid://b6mk1ytuv5x03"]
 
-[ext_resource type="AudioStream" uid="uid://cvh4wyiydnq2r" path="res://assets/audio/music/A Moth in Light.ogg" id="1_6wvmn"]
+[ext_resource type="AudioStream" uid="uid://c7ds0wbsj4hbc" path="res://assets/audio/music/A Moth in Light.wav" id="1_5sajd"]
+[ext_resource type="Script" path="res://scenes/Utils/A Moth in Light_wav.gd" id="2_3ddmx"]
 
 [node name="Music" type="Node2D"]
 
-[node name="A Moth in Light" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_6wvmn")
-volume_db = -5.225
+[node name="A Moth in Light_wav" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_5sajd")
+volume_db = -8.617
 autoplay = true
+mix_target = 1
+bus = &"Music"
+script = ExtResource("2_3ddmx")
+
+[connection signal="finished" from="A Moth in Light_wav" to="A Moth in Light_wav" method="_on_finished"]

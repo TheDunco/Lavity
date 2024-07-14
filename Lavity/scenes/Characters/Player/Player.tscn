@@ -2,22 +2,22 @@
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Characters/Player/Player.gd" id="1_jm2c2"]
-[ext_resource type="Texture2D" uid="uid://xk5cn1uba4bm" path="res://assets/mof.png" id="1_pgvpy"]
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_ulvpy"]
 [ext_resource type="Texture2D" uid="uid://efuds0wien0b" path="res://assets/Point Lights/Flashlight/flashlight.png" id="2_layuk"]
 [ext_resource type="Script" path="res://scenes/Characters/Player/PlayerGravityArea.gd" id="3_lyccb"]
+[ext_resource type="Texture2D" uid="uid://q6p6817vpxy8" path="res://assets/good-boyo-chibi.png" id="5_ekqag"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 16.0
-height = 82.0
+radius = 25.0
+height = 66.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ho2d5"]
 shader = ExtResource("1_ulvpy")
 shader_parameter/displacement = 5.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhi4l"]
-radius = 16.0
-height = 80.0
+radius = 25.0
+height = 66.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mw44x"]
 
@@ -40,7 +40,8 @@ collision_layer = 0
 script = ExtResource("1_jm2c2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-11, 2)
+z_index = 2
+position = Vector2(-2, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_uyvyt")
 debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
@@ -68,10 +69,12 @@ texture_scale = 0.01
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ho2d5")
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_pgvpy")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_ekqag")
 
 [node name="GravityArea" type="Area2D" parent="."]
+z_index = 3
+position = Vector2(13, 0)
 collision_layer = 0
 collision_mask = 2
 gravity_space_override = 1
@@ -82,13 +85,14 @@ gravity_direction = Vector2(0, 0)
 script = ExtResource("3_lyccb")
 
 [node name="GravityShape" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(-10, 2)
+position = Vector2(-15, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qhi4l")
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
+z_index = -2
 material = SubResource("ShaderMaterial_mw44x")
-position = Vector2(-1, 4.76837e-07)
+position = Vector2(5, 0)
 scale = Vector2(0.4, 0.4)
 color = Color(1, 0.823529, 0.823529, 1)
 energy = 0.09
