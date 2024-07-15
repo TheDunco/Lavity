@@ -1,4 +1,5 @@
 extends Node2D
+class_name LavityLight
 
 @export var energy := 1.0
 

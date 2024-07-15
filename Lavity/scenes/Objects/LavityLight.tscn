@@ -22,11 +22,6 @@ radius = 500.0
 [node name="LavityLight" type="Node2D"]
 script = ExtResource("1_myj33")
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-position = Vector2(-500, -500)
-color = Color(0, 0, 0, 1)
-
 [node name="LavityLightLight" type="PointLight2D" parent="."]
 scale = Vector2(0.5, 0.5)
 color = Color(1, 1, 0.87451, 1)

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://bq3b61fnupsma"]
+
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Enemy.gd" id="1_tipsn"]
+[ext_resource type="Texture2D" uid="uid://c6li75d1ul8r2" path="res://assets/Base pack/Enemies/fishSwim1.png" id="1_wkcef"]
+[ext_resource type="Texture2D" uid="uid://4ej82tn2c6dl" path="res://assets/Base pack/Enemies/fishSwim2.png" id="2_vw1y6"]
+[ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="3_3fme4"]
+[ext_resource type="Shape2D" uid="uid://d3ajwiads8jei" path="res://scenes/Entities/Enemies/FishEnemyCollisionShape.tres" id="4_p0xlk"]
+[ext_resource type="Script" path="res://scenes/Entities/Player/VelocityComponent.gd" id="6_03kip"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bo7l5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wkcef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_vw1y6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_tipsn")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="VelocityComponent" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("Entity")]
+script = ExtResource("6_03kip")
+Entity = NodePath("..")
+
+[node name="EnemySpriteAnimated" type="AnimatedSprite2D" parent="CharacterBody2D"]
+sprite_frames = SubResource("SpriteFrames_bo7l5")
+frame_progress = 0.0830558
+flip_h = true
+
+[node name="GravityArea" parent="CharacterBody2D" instance=ExtResource("3_3fme4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/GravityArea"]
+position = Vector2(-2, 1)
+rotation = 1.5708
+shape = ExtResource("4_p0xlk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-2, 1)
+rotation = 1.5708
+shape = ExtResource("4_p0xlk")
