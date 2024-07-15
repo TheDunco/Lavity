@@ -8,3 +8,4 @@ Todos
 - [ ] Items
 	- [ ] Flowers
 	- [ ] Floating bioluminescent grass
+- [ ] Change light with particles to have each one be it's own scene with params so that we can apply lavity to them

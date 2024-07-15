@@ -46,3 +46,4 @@ gravity = -980.0
 
 [node name="GravityShape" type="CollisionShape2D" parent="LavityLightLight/GravityArea"]
 shape = SubResource("CircleShape2D_k4b6v")
+debug_color = Color(1, 1, 1, 0.0313726)
