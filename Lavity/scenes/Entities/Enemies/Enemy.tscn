@@ -1,11 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bq3b61fnupsma"]
+[gd_scene load_steps=10 format=3 uid="uid://bq3b61fnupsma"]
 
-[ext_resource type="Script" path="res://scenes/Entities/Enemies/Enemy.gd" id="1_tipsn"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/EnemyCharacterBody2D.gd" id="1_3eh5j"]
 [ext_resource type="Texture2D" uid="uid://c6li75d1ul8r2" path="res://assets/Base pack/Enemies/fishSwim1.png" id="1_wkcef"]
+[ext_resource type="Script" path="res://scenes/Entities/Utils/VelocityComponent.gd" id="2_7iob0"]
 [ext_resource type="Texture2D" uid="uid://4ej82tn2c6dl" path="res://assets/Base pack/Enemies/fishSwim2.png" id="2_vw1y6"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="3_3fme4"]
+[ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="3_28p7o"]
 [ext_resource type="Shape2D" uid="uid://d3ajwiads8jei" path="res://scenes/Entities/Enemies/FishEnemyCollisionShape.tres" id="4_p0xlk"]
-[ext_resource type="Script" path="res://scenes/Entities/Player/VelocityComponent.gd" id="6_03kip"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sv1bu"]
+shader = ExtResource("3_28p7o")
+shader_parameter/displacement = 5.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bo7l5"]
 animations = [{
@@ -21,28 +26,30 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Enemy" type="Node2D"]
-script = ExtResource("1_tipsn")
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_3eh5j")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-
-[node name="VelocityComponent" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("Entity")]
-script = ExtResource("6_03kip")
+[node name="VelocityComponent" type="Node2D" parent="." node_paths=PackedStringArray("Entity")]
+script = ExtResource("2_7iob0")
 Entity = NodePath("..")
+MaxVelocity = 900
 
-[node name="EnemySpriteAnimated" type="AnimatedSprite2D" parent="CharacterBody2D"]
+[node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_sv1bu")
+rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_bo7l5")
-frame_progress = 0.0830558
+frame_progress = 0.84999
 flip_h = true
 
-[node name="GravityArea" parent="CharacterBody2D" instance=ExtResource("3_3fme4")]
+[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("3_3fme4")]
+Entity = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/GravityArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
 position = Vector2(-2, 1)
 rotation = 1.5708
 shape = ExtResource("4_p0xlk")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 1)
 rotation = 1.5708
 shape = ExtResource("4_p0xlk")

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=13 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_ulvpy"]
 [ext_resource type="Texture2D" uid="uid://q6p6817vpxy8" path="res://assets/good-boyo-chibi.png" id="5_ekqag"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="6_bki26"]
+[ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="7_0mjfq"]
 [ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="7_vlmlf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
@@ -35,6 +36,9 @@ position = Vector2(0, 1)
 collision_layer = 0
 script = ExtResource("1_jm2c2")
 
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
+Entity = NodePath("..")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
 position = Vector2(-2, 2)
@@ -52,12 +56,13 @@ layer_0/tile_data = PackedInt32Array(-393224, 0, 0, -327688, 0, 1, -262152, 0, 2
 visible = false
 color = Color(0.0142752, 0.0142752, 0.0142752, 1)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="FlippingSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ho2d5")
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_ekqag")
 
-[node name="GravityArea" parent="." instance=ExtResource("6_bki26")]
+[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("6_bki26")]
+Entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
 position = Vector2(-2, 2)

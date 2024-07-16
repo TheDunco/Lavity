@@ -4,9 +4,13 @@ extends Area2D
 const LAVITY := 9.8 * 2
 const DISTANCE_MULT := 75
 
-func processLavityAreaCollisions():
+@export var Entity: CharacterBody2D = null
+
+func _ready():
+	assert(Entity != null)
+
+func _process(_delta):
 	var areas = get_overlapping_areas()
-	var entity: CharacterBody2D = $".."
 
 	for area in areas:
 		var lavityEmitter: Light2D = area.find_parent("LavityLightLight")
@@ -14,13 +18,11 @@ func processLavityAreaCollisions():
 			continue
 			
 		var areaPosition = area.global_position
-		var distance = areaPosition.distance_to(entity.global_position)
+		var distance = areaPosition.distance_to(Entity.global_position)
 			
 		var magnitude = (lavityEmitter.energy * LAVITY) / (distance / DISTANCE_MULT)
 		
-		var areaToEntityVector: Vector2 = area.global_position.direction_to(entity.global_position)
+		var areaToEntityVector: Vector2 = area.global_position.direction_to(Entity.global_position)
 		
-		entity.velocity += areaToEntityVector * magnitude
-
-func _process(_delta):
-	processLavityAreaCollisions()
+		Entity.velocity += areaToEntityVector * magnitude
+	Entity.move_and_slide()
