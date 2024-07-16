@@ -28,6 +28,7 @@ animations = [{
 
 [node name="Enemy" type="CharacterBody2D"]
 script = ExtResource("1_3eh5j")
+Acceleration = 0.7
 
 [node name="VelocityComponent" type="Node2D" parent="." node_paths=PackedStringArray("Entity")]
 script = ExtResource("2_7iob0")
@@ -36,7 +37,6 @@ MaxVelocity = 900
 
 [node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_sv1bu")
-rotation = 4.71239
 sprite_frames = SubResource("SpriteFrames_bo7l5")
 frame_progress = 0.84999
 flip_h = true

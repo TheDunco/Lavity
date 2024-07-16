@@ -7,7 +7,10 @@ extends Node2D
 @export var MaxVelocity := 1000
 @export var OverspeedDamping := 10
 
+var flippingSprite: Node2D = null
+
 func _ready():
+	flippingSprite = Entity.find_child("FlippingSprite")
 	assert(Entity != null)
 
 func handleExistingVelocity():
@@ -34,17 +37,16 @@ func handleExistingVelocity():
 		velocity.y += - (OverspeedDamping + (velocity.y + MaxVelocity))
 	return velocity
 		
-func _process_physics():
+# This function is not getting called??? Why???
+func _process_physics(_delta):
 	Entity.velocity = handleExistingVelocity()
-	
-	var flippingSprite = Entity.find_child("FlippingSprite")
-	
-	print("FlippingSprite", flippingSprite)
-	if Entity.velocity.x > 0:
-		flippingSprite.flip_v = false
-		flippingSprite.flip_v = false
-	elif Entity.velocity.x < 0:
-		flippingSprite.flip_v = true
-		flippingSprite.flip_v = true
-		
 	Entity.move_and_slide()
+	
+func _process(_delta):
+	if flippingSprite != null:
+		if Entity.velocity.x > 0:
+			flippingSprite.flip_v = false
+			flippingSprite.flip_v = false
+		elif Entity.velocity.x < 0:
+			flippingSprite.flip_v = true
+			flippingSprite.flip_v = true

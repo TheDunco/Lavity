@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 @export var player: CharacterBody2D = null
-@export var Acceleration := 1
+@export var Acceleration := 1.0
 
 func _ready():
 	$FlippingSprite.play()
