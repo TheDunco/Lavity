@@ -13,7 +13,7 @@ func _ready():
 	flippingSprite = Entity.find_child("FlippingSprite")
 	assert(Entity != null)
 
-func handleExistingVelocity():
+func handleExistingVelocity(Entity: CharacterBody2D):
 	var currVelocity := Entity.velocity
 	var velocity := Entity.velocity
 	if currVelocity.x > 0 and currVelocity.x - AirResistance > 0:
@@ -36,11 +36,6 @@ func handleExistingVelocity():
 	elif velocity.y < - MaxVelocity:
 		velocity.y += - (OverspeedDamping + (velocity.y + MaxVelocity))
 	return velocity
-		
-# This function is not getting called??? Why???
-func _process_physics(_delta):
-	Entity.velocity = handleExistingVelocity()
-	Entity.move_and_slide()
 	
 func _process(_delta):
 	if flippingSprite != null:

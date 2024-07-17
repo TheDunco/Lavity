@@ -28,4 +28,5 @@ func _process(delta):
 	
 func _physics_process(_delta):
 	handleInput()
+	velocity = $VelocityComponent.handleExistingVelocity(self)
 	move_and_slide()
