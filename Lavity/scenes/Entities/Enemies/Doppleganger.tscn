@@ -34,6 +34,7 @@ fill_to = Vector2(0.474359, 0.0683761)
 [node name="Doppleganger" type="CharacterBody2D"]
 position = Vector2(0, 1)
 script = ExtResource("1_6ruje")
+playAnimatedSprite = false
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_a4asj")]
 Entity = NodePath("..")
@@ -74,5 +75,5 @@ material = SubResource("ShaderMaterial_mw44x")
 position = Vector2(5, 0)
 scale = Vector2(0.4, 0.4)
 color = Color(0.999999, 0.561435, 0.579212, 1)
-energy = 0.07
+energy = 0.04
 texture = SubResource("GradientTexture2D_3xlt7")
