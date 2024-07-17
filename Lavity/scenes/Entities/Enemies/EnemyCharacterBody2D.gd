@@ -6,7 +6,7 @@ class_name Enemy
 @export var Acceleration := 3.0
 
 func _ready():
-	$FlippingSprite.play()
+	#$FlippingSprite.play()
 	assert(player != null)
 	
 func _process(_delta):
