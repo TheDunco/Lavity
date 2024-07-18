@@ -1,20 +1,36 @@
-[gd_scene load_steps=13 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=16 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
-[ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_ulvpy"]
-[ext_resource type="Texture2D" uid="uid://q6p6817vpxy8" path="res://assets/good-boyo-chibi.png" id="5_ekqag"]
+[ext_resource type="Material" uid="uid://clyiv5dbfapk2" path="res://scenes/Entities/Player/PlayerChromAbbShader.tres" id="4_d520f"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="6_bki26"]
+[ext_resource type="Texture2D" uid="uid://bc6nx8vj8tv2r" path="res://assets/Moth Flying/flying-moth_0001.png" id="6_xqfgo"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="7_0mjfq"]
+[ext_resource type="Texture2D" uid="uid://6kgmynju76tm" path="res://assets/Moth Flying/flying-moth_0004.png" id="7_h0at1"]
 [ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="7_vlmlf"]
+[ext_resource type="Script" path="res://scenes/Utils/AutoplayAnimatedSprite.gd" id="8_j118b"]
+[ext_resource type="Texture2D" uid="uid://drrcgu7apxg1j" path="res://assets/Moth Flying/flying-moth_0006.png" id="8_nx7p7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
 radius = 25.0
 height = 66.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ho2d5"]
-shader = ExtResource("1_ulvpy")
-shader_parameter/displacement = 5.0
+[sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_xqfgo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h0at1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nx7p7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mw44x"]
 
@@ -56,10 +72,12 @@ layer_0/tile_data = PackedInt32Array(-393224, 0, 0, -327688, 0, 1, -262152, 0, 2
 visible = false
 color = Color(0.0142752, 0.0142752, 0.0142752, 1)
 
-[node name="FlippingSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ho2d5")
+[node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
+material = ExtResource("4_d520f")
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("5_ekqag")
+sprite_frames = SubResource("SpriteFrames_yn8d8")
+frame_progress = 0.98357
+script = ExtResource("8_j118b")
 
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("6_bki26")]
 Entity = NodePath("..")

@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://clyiv5dbfapk2"]
+
+[ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_i7srt"]
+
+[resource]
+shader = ExtResource("1_i7srt")
+shader_parameter/displacement = 5.0

@@ -6,6 +6,14 @@ class_name Enemy
 @export var Acceleration := 3.0
 @export var playAnimatedSprite := true
 
+#TODO Componentize with one in Player
+func getAnimationSpeed(velo: Vector2):
+	var combinedVelocity: float = abs(velo.x) + abs(velo.y)
+
+	if combinedVelocity > 0.0:
+		return log(combinedVelocity * 100) - 7.0
+	return 0.0
+
 func _ready():
 	if playAnimatedSprite:
 		$FlippingSprite.play()
@@ -14,8 +22,11 @@ func _ready():
 func _process(_delta):
 	var directionToPlayer = global_position.direction_to(player.global_position)
 	look_at(player.global_position)
+	
+	$FlippingSprite.speed_scale = getAnimationSpeed(velocity)
+	
 	velocity += directionToPlayer * Acceleration
 	velocity += directionToPlayer * Acceleration
-	print("Enemy velocity: ", velocity)
 	velocity = $VelocityComponent.handleExistingVelocity(self)
+	
 	move_and_slide()

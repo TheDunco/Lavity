@@ -1,20 +1,37 @@
-[gd_scene load_steps=13 format=3 uid="uid://csrin0xrbjeni"]
+[gd_scene load_steps=17 format=3 uid="uid://csrin0xrbjeni"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/EnemyCharacterBody2D.gd" id="1_6ruje"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_a4asj"]
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="3_odebf"]
-[ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="4_cns7p"]
-[ext_resource type="Texture2D" uid="uid://q6p6817vpxy8" path="res://assets/good-boyo-chibi.png" id="5_lct1t"]
+[ext_resource type="Material" uid="uid://clyiv5dbfapk2" path="res://scenes/Entities/Player/PlayerChromAbbShader.tres" id="4_77y6b"]
+[ext_resource type="Texture2D" uid="uid://bc6nx8vj8tv2r" path="res://assets/Moth Flying/flying-moth_0001.png" id="5_undp1"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="6_lw2q0"]
+[ext_resource type="Texture2D" uid="uid://6kgmynju76tm" path="res://assets/Moth Flying/flying-moth_0004.png" id="6_qh35r"]
 [ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="7_7yt35"]
+[ext_resource type="Texture2D" uid="uid://drrcgu7apxg1j" path="res://assets/Moth Flying/flying-moth_0006.png" id="7_8bgoy"]
+[ext_resource type="Script" path="res://scenes/Utils/AutoplayAnimatedSprite.gd" id="8_cnb27"]
+[ext_resource type="AudioStream" uid="uid://c7wwap7ebpu1" path="res://assets/audio/sfx/wing_flap.wav" id="9_d2mf7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
 radius = 25.0
 height = 66.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ho2d5"]
-shader = ExtResource("4_cns7p")
-shader_parameter/displacement = 5.0
+[sub_resource type="SpriteFrames" id="SpriteFrames_focnk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_undp1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qh35r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8bgoy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mw44x"]
 
@@ -56,10 +73,14 @@ layer_0/tile_data = PackedInt32Array(-393224, 0, 0, -327688, 0, 1, -262152, 0, 2
 visible = false
 color = Color(0.0142752, 0.0142752, 0.0142752, 1)
 
-[node name="FlippingSprite" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_ho2d5")
+[node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
+material = ExtResource("4_77y6b")
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("5_lct1t")
+sprite_frames = SubResource("SpriteFrames_focnk")
+script = ExtResource("8_cnb27")
+
+[node name="WingFlap" type="AudioStreamPlayer2D" parent="FlippingSprite"]
+stream = ExtResource("9_d2mf7")
 
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("6_lw2q0")]
 Entity = NodePath("..")
