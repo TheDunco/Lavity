@@ -1,4 +1,23 @@
-[gd_scene format=3 uid="uid://bkue2rlje5opm"]
+[gd_scene load_steps=2 format=3 uid="uid://bkue2rlje5opm"]
 
-[node name="CanvasModulate-Darkness" type="CanvasModulate"]
+[ext_resource type="Script" path="res://scenes/Utils/BrightnessSlider.gd" id="1_4kjq3"]
+
+[node name="CanvasModulateDarkness" type="CanvasModulate"]
 color = Color(0.00392157, 0.00392157, 0.00392157, 0.941176)
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_right = 208.0
+offset_bottom = 110.0
+
+[node name="HSlider" type="HSlider" parent="Control/PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+script = ExtResource("1_4kjq3")

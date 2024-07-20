@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 @export var UserMovementSpeed := 20
 
+var isTrackableByEnemy: bool = true
+
 func handleInput():
 	var isHandlingVelocityInput := false
 	if Input.is_action_pressed("move_right"):
@@ -28,10 +30,12 @@ func handleInput():
 	
 	if Input.is_action_just_pressed("toggle_flashlight"):
 		$PlayerLight.enabled = not $PlayerLight.enabled
+		isTrackableByEnemy = $PlayerLight.enabled
+		
 
 var time := 0.0
 func getPulseTime(delta):
-	time += 3 * delta
+	time += max($FlippingSprite.speed_scale, 3) * delta
 	if time > 1.0e30:
 		time = 0
 	return sin(time)
@@ -43,6 +47,10 @@ func _process(delta):
 
 	if $PlayerLight.enabled:
 		$PlayerLight.energy += getPulseTime(delta) / 1000
+	if $GravityArea.isEntityInGravityArea:
+		isTrackableByEnemy = true
+	else:
+		isTrackableByEnemy = $PlayerLight.enabled
 	
 func _physics_process(_delta):
 	handleInput()

@@ -6,15 +6,10 @@ class_name Enemy
 @export var Acceleration := 3.0
 @export var playAnimatedSprite := true
 
-var playerLight: PointLight2D = null
-
 func _ready():
 	if playAnimatedSprite:
 		$FlippingSprite.play()
 	assert(player != null)
-	
-	playerLight = player.find_child("PlayerLight")
-	assert(playerLight != null)
 	
 func moveTowardPlayer():
 	var directionToPlayer = global_position.direction_to(player.global_position)
@@ -27,7 +22,7 @@ func moveTowardPlayer():
 func _process(_delta):
 	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
 	
-	if playerLight.enabled:
+	if player.isTrackableByEnemy:
 		moveTowardPlayer()
 	
 	move_and_slide()
