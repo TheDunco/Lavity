@@ -6,27 +6,28 @@ class_name Enemy
 @export var Acceleration := 3.0
 @export var playAnimatedSprite := true
 
-#TODO Componentize with one in Player
-func getAnimationSpeed(velo: Vector2):
-	var combinedVelocity: float = abs(velo.x) + abs(velo.y)
-
-	if combinedVelocity > 0.0:
-		return log(combinedVelocity * 100) - 7.0
-	return 0.0
+var playerLight: PointLight2D = null
 
 func _ready():
 	if playAnimatedSprite:
 		$FlippingSprite.play()
 	assert(player != null)
 	
-func _process(_delta):
+	playerLight = player.find_child("PlayerLight")
+	assert(playerLight != null)
+	
+func moveTowardPlayer():
 	var directionToPlayer = global_position.direction_to(player.global_position)
 	look_at(player.global_position)
-	
-	$FlippingSprite.speed_scale = getAnimationSpeed(velocity)
-	
+
 	velocity += directionToPlayer * Acceleration
 	velocity += directionToPlayer * Acceleration
 	velocity = $VelocityComponent.handleExistingVelocity(self)
+	
+func _process(_delta):
+	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
+	
+	if playerLight.enabled:
+		moveTowardPlayer()
 	
 	move_and_slide()

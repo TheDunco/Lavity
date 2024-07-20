@@ -7,7 +7,6 @@
 
 [node name="A Moth in Light" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_5sajd")
-volume_db = -8.617
 autoplay = true
 mix_target = 1
 bus = &"Music"

@@ -2,37 +2,32 @@ extends CharacterBody2D
 
 @export var UserMovementSpeed := 20
 
-#TODO Componentize with one in Doppleganger
-func getAnimationSpeed(velo: Vector2):
-	var combinedVelocity: float = abs(velo.x) + abs(velo.y)
-
-	if combinedVelocity > 0.0:
-		return log(combinedVelocity * 100) - 7.0
-	return 0.0
-
 func handleInput():
-	var isHandlingInput := false
+	var isHandlingVelocityInput := false
 	if Input.is_action_pressed("move_right"):
-		isHandlingInput = true
+		isHandlingVelocityInput = true
 		velocity.x += UserMovementSpeed
 	if Input.is_action_pressed("move_left"):
-		isHandlingInput = true
+		isHandlingVelocityInput = true
 		velocity.x -= UserMovementSpeed
 	if Input.is_action_pressed("move_up"):
-		isHandlingInput = true
+		isHandlingVelocityInput = true
 		velocity.y -= UserMovementSpeed
 	if Input.is_action_pressed("move_down"):
-		isHandlingInput = true
+		isHandlingVelocityInput = true
 		velocity.y += UserMovementSpeed
 		
-	if isHandlingInput:
-		$FlippingSprite.speed_scale = getAnimationSpeed(velocity)
+	if isHandlingVelocityInput:
+		$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
 	elif $FlippingSprite.speed_scale < 0:
 		$FlippingSprite.speed_scale -= 1
 	else:
 		$FlippingSprite.speed_scale = 0
 		if $FlippingSprite.frame != 0:
 			$FlippingSprite.frame -= 1
+	
+	if Input.is_action_just_pressed("toggle_flashlight"):
+		$PlayerLight.enabled = not $PlayerLight.enabled
 
 var time := 0.0
 func getPulseTime(delta):
@@ -46,7 +41,8 @@ func _process(delta):
 	if velocity.x != 0 and velocity.y != 0:
 		look_at(velocity + global_position)
 
-	$PlayerLight.energy += getPulseTime(delta) / 1000
+	if $PlayerLight.enabled:
+		$PlayerLight.energy += getPulseTime(delta) / 1000
 	
 func _physics_process(_delta):
 	handleInput()

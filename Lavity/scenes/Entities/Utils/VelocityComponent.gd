@@ -13,6 +13,13 @@ func _ready():
 	flippingSprite = Entity.find_child("FlippingSprite")
 	assert(Entity != null)
 
+func getAnimationSpeed(velo: Vector2):
+	var combinedVelocity: float = abs(velo.x) + abs(velo.y)
+
+	if combinedVelocity > 0.0:
+		return log(combinedVelocity * 100) - 7.0
+	return 0.0
+
 func handleExistingVelocity(Entity: CharacterBody2D):
 	var currVelocity := Entity.velocity
 	var velocity := Entity.velocity
