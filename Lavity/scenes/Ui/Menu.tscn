@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://br4oisj0kpf2q"]
+
+[ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
+
+[sub_resource type="SystemFont" id="SystemFont_fsfaq"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aei6w")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_fsfaq")
+text = "Play"
+
+[node name="Options" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_fsfaq")
+text = "Options"
+
+[node name="Quit" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_fsfaq")
+text = "Quit
+"
+
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

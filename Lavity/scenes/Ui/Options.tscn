@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2nndt12dp3ch"]
+
+[ext_resource type="Script" path="res://scenes/Ui/Options.gd" id="1_6cxqj"]
+[ext_resource type="AudioStream" uid="uid://b6enmfb2u0xx1" path="res://assets/audio/music/Light.wav" id="2_pcb0o"]
+[ext_resource type="Script" path="res://scenes/Utils/Autoplay.gd" id="3_i6qrd"]
+
+[sub_resource type="SystemFont" id="SystemFont_fsfaq"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6cxqj")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MasterVol" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MasterVol"]
+layout_mode = 2
+text = "Master Volume (wip)"
+
+[node name="Volume" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MasterVol"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MusicVol" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicVol"]
+layout_mode = 2
+text = "Music Volume (wip)"
+
+[node name="Volume" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/MusicVol"]
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Brightness" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer/Brightness"]
+layout_mode = 2
+text = "Brightness (wip)
+"
+
+[node name="Volume" type="HSlider" parent="AspectRatioContainer/MarginContainer/VBoxContainer/Brightness"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Back" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("SystemFont_fsfaq")
+text = "Back"
+
+[node name="Light" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_pcb0o")
+script = ExtResource("3_i6qrd")
+
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
