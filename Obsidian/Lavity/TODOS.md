@@ -10,9 +10,14 @@ Todos
 		- [ ] Light/bioluminescence meter
 		- [ ] Health
 	- [ ] Floating bioluminescent grass
-- [ ] Make menu a 2D node with 2d buttons
+- [ ] Make menu a 2D node with 2D buttons
 	- [ ] Apply WorldEnvironment
-	- [ ] Apply CanvasModulateDarkness
+	- [ ] Apply CanvasModulateDarkness (a bit brighter than usual)
 	- [ ] Affix a LavityLight to the mouse
 	- [ ] Put moving lights and doppelgangers on the main screen/page
-	- [ ] Ensure the LavityLight on the mouse is able to interract with the doppelgangers
+	- [ ] Ensure the LavityLight on the mouse is able to interact with the doppelgangers
+- [ ] Fix menu issues
+	- [ ] song doesn't keep playing on scene transitions. Need to reparent? ([SEE LINK](https://www.youtube.com/watch?v=lILnUD3xph8&ab_channel=SomaAnimus))
+	- [ ] Font
+	- [ ] Spacing
+	- [ ] 

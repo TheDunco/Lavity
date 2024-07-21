@@ -34,6 +34,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Press \"F\" to turn off your light"
+
 [node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 20

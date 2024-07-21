@@ -6,11 +6,13 @@
 		{"id":"d66f042f16c73667","type":"link","url":"https://www.youtube.com/watch?v=yS9cuu5o5Ug&ab_channel=GDQuest","x":-1180,"y":-2040,"width":640,"height":360},
 		{"id":"8eb1d1a5be48acf1","type":"text","text":"Why Godot? Free and open source and never going away!","x":-939,"y":-1554,"width":250,"height":114},
 		{"id":"4ee0082f62020879","type":"file","file":"good-boyo-chibi.png","x":-860,"y":-750,"width":400,"height":400},
-		{"id":"80ba8c39ed7bb400","type":"text","text":"This is our main character: NAME. As a moth you're pretty much at the bottom of the food chain when it comes to the animal kingdom even if light = gravity\n","x":-895,"y":-280,"width":470,"height":220}
+		{"id":"80ba8c39ed7bb400","type":"text","text":"This is our main character: NAME. As a moth you're pretty much at the bottom of the food chain when it comes to the animal kingdom even if light = gravity\n","x":-895,"y":-280,"width":470,"height":220},
+		{"id":"769ea2f75d6f857c","x":620,"y":-430,"width":640,"height":360,"type":"link","url":"https://www.youtube.com/watch?v=lILnUD3xph8&ab_channel=SomaAnimus"}
 	],
 	"edges":[
 		{"id":"59e6f84d9880e2d9","fromNode":"fcb2332c9b3abf81","fromSide":"bottom","toNode":"80ba8c39ed7bb400","toSide":"top"},
 		{"id":"ff4b1307f66d3417","fromNode":"626a5e1ce90d70ec","fromSide":"right","toNode":"94a2d8913499d096","toSide":"bottom"},
-		{"id":"0eb4423cdcaae4cf","fromNode":"d66f042f16c73667","fromSide":"bottom","toNode":"8eb1d1a5be48acf1","toSide":"top"}
+		{"id":"0eb4423cdcaae4cf","fromNode":"d66f042f16c73667","fromSide":"bottom","toNode":"8eb1d1a5be48acf1","toSide":"top"},
+		{"id":"5747834c0a6d7bbc","fromNode":"626a5e1ce90d70ec","fromSide":"right","toNode":"769ea2f75d6f857c","toSide":"left"}
 	]
 }
