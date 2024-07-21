@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2nndt12dp3ch"]
+[gd_scene load_steps=3 format=3 uid="uid://b2nndt12dp3ch"]
 
 [ext_resource type="Script" path="res://scenes/Ui/Options.gd" id="1_6cxqj"]
-[ext_resource type="AudioStream" uid="uid://b6enmfb2u0xx1" path="res://assets/audio/music/Light.wav" id="2_pcb0o"]
-[ext_resource type="Script" path="res://scenes/Utils/Autoplay.gd" id="3_i6qrd"]
 
 [sub_resource type="SystemFont" id="SystemFont_fsfaq"]
 
@@ -75,9 +73,5 @@ size_flags_vertical = 4
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_fsfaq")
 text = "Back"
-
-[node name="Light" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_pcb0o")
-script = ExtResource("3_i6qrd")
 
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

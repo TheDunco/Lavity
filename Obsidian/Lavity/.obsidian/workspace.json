@@ -15,8 +15,8 @@
               "state": {
                 "file": "Main Board.canvas",
                 "viewState": {
-                  "x": 82.37029510099444,
-                  "y": -503.1834695741609,
+                  "x": 0.37029510099443996,
+                  "y": -433.1834695741609,
                   "zoom": 1.1102230246251565e-16
                 }
               }
@@ -88,7 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Main Board.canvas",
+                "file": "TODOS.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Main Board.canvas",
+                "file": "TODOS.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Main Board.canvas"
+                "file": "TODOS.md"
               }
             }
           }

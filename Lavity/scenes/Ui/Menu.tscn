@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://br4oisj0kpf2q"]
+[gd_scene load_steps=7 format=3 uid="uid://br4oisj0kpf2q"]
 
+[ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
+[ext_resource type="AudioStream" uid="uid://b6enmfb2u0xx1" path="res://assets/audio/music/Light.wav" id="3_ofhj4"]
+[ext_resource type="Script" path="res://scenes/Utils/Autoplay.gd" id="4_2fjkp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p6upt"]
+shader = ExtResource("1_a310j")
+shader_parameter/displacement = 3.0
 
 [sub_resource type="SystemFont" id="SystemFont_fsfaq"]
 
 [node name="Menu" type="Control"]
+material = SubResource("ShaderMaterial_p6upt")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +20,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aei6w")
+
+[node name="Light" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ofhj4")
+autoplay = true
+script = ExtResource("4_2fjkp")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -48,6 +61,7 @@ theme_override_fonts/font = SubResource("SystemFont_fsfaq")
 text = "Quit
 "
 
+[connection signal="finished" from="Light" to="Light" method="_on_finished"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

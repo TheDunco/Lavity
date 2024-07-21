@@ -7,5 +7,12 @@ Todos
 	- [ ] Random light params (energy, scale)
 - [ ] Items
 	- [ ] Flowers
+		- [ ] Light/bioluminescence meter
+		- [ ] Health
 	- [ ] Floating bioluminescent grass
-- [ ] Change light with particles to have each one be it's own scene with params so that we can apply lavity to them
+- [ ] Make menu a 2D node with 2d buttons
+	- [ ] Apply WorldEnvironment
+	- [ ] Apply CanvasModulateDarkness
+	- [ ] Affix a LavityLight to the mouse
+	- [ ] Put moving lights and doppelgangers on the main screen/page
+	- [ ] Ensure the LavityLight on the mouse is able to interract with the doppelgangers

@@ -1,7 +1,6 @@
 extends Control
 
-func _on_ready():
-	$Light.play()
+
 	
 
 func _on_back_pressed():
