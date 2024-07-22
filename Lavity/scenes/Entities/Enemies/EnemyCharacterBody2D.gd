@@ -22,6 +22,8 @@ func moveTowardPlayer():
 func _process(_delta):
 	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
 	
+
+func _physics_process(_delta):
 	if player.isTrackableByEnemy:
 		moveTowardPlayer()
 	

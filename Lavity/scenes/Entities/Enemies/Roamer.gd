@@ -3,7 +3,7 @@ class_name Roamer
 
 @export var acceleration := 10
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	var mousePos = get_global_mouse_position()
 	var direction = global_position.direction_to(mousePos)
 	look_at(mousePos)
