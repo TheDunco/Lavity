@@ -3,11 +3,14 @@ class_name Menu
 
 var newConfig = ConfigFile.new()
 var configFile = newConfig.load(GLOBAL.SETTINGS_SAVE_PATH)
+@export var player: Player = null
 
 func _ready():
 	var darkness = newConfig.get_value("MAIN", "DARKNESS")
 	if darkness and darkness > 0:
 		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider.value = darkness
+		
+	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = GLOBAL.VERSION
 
 # Main Menu
 func _on_play_pressed():
@@ -29,3 +32,8 @@ func _on_options_back_pressed():
 func _on_brightness_slider_value_changed(value):
 	newConfig.set_value("MAIN", "DARKNESS", value)
 	$"../../CanvasModulateDarkness".color.a = value
+
+func _on_summon_player_pressed():
+	print("mouse: ", get_global_mouse_position(), "player: ", player.global_position)
+	player.position = $AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer.global_position
+	player.velocity = Vector2.ZERO

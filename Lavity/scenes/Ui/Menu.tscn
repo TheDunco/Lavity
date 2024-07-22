@@ -50,9 +50,10 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer2" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
+[node name="Instruction" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Press \"F\" to turn off your light"
+text = "Press \"F\" to turn off your light
+Use \"WASD\" to move"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -80,11 +81,20 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_fsfaq")
 text = "Options"
 
+[node name="SummonPlayer" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Summon Cosmo"
+
 [node name="Quit" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_fsfaq")
 text = "Quit
 "
+
+[node name="Version" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.0980392)
+text = "version"
 
 [node name="Options" type="Control" parent="."]
 visible = false
@@ -137,6 +147,10 @@ custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
+[node name="DarknessInstruction" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Turn off your player light and adjust so you can barely see yourself"
+
 [node name="Darkness" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -148,9 +162,9 @@ text = "Darkness"
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
-min_value = 0.9
+min_value = 0.8
 max_value = 1.0
-step = 0.01
+step = 0.001
 value = 0.9
 
 [node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
@@ -161,6 +175,7 @@ text = "Back"
 [connection signal="finished" from="Light" to="Light" method="_on_finished"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer" to="." method="_on_summon_player_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
