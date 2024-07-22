@@ -32,7 +32,7 @@ func handleInput():
 		$PlayerLight.enabled = not $PlayerLight.enabled
 		isTrackableByEnemy = $PlayerLight.enabled
 	if Input.is_action_just_pressed("ui_esc"):
-		get_tree().change_scene_to_file("res://scenes/Ui/Menu.tscn")
+		get_tree().change_scene_to_file("res://scenes/Ui/Menu2D.tscn")
 		
 
 var time := 0.0
