@@ -7,3 +7,5 @@ class_name LavityLight
 func _ready():
 	$LavityLightLight.energy = energy
  
+func set_energy(val: float):
+	$LavityLightLight.energy = val

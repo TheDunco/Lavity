@@ -38,6 +38,13 @@ position = Vector2(833, 40)
 position = Vector2(164, 427)
 
 [node name="MouseLight" parent="." instance=ExtResource("6_8h01j")]
+top_level = true
+z_index = 5
 position = Vector2(576, 292)
 scale = Vector2(0.2, 0.2)
 energy = 0.5
+
+[connection signal="mouse_light_visible_change" from="." to="Roamer" method="_on_menu_2d_mouse_light_visible_change"]
+[connection signal="mouse_light_visible_change" from="." to="Roamer2" method="_on_menu_2d_mouse_light_visible_change"]
+[connection signal="mouse_light_visible_change" from="." to="Roamer3" method="_on_menu_2d_mouse_light_visible_change"]
+[connection signal="mouse_light_visible_change" from="." to="Roamer4" method="_on_menu_2d_mouse_light_visible_change"]
