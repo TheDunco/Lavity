@@ -9,7 +9,6 @@ func chaseMouse():
 	var direction = global_position.direction_to(mousePos)
 	look_at(mousePos)
 	var distanceToMouse = global_position.distance_to(mousePos)
-	print(distanceToMouse)
 	velocity += direction * (acceleration + distanceToMouse/100)
 
 func _physics_process(_delta):

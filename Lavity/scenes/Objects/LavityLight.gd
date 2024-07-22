@@ -5,7 +5,7 @@ class_name LavityLight
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$LavityLightLight.energy = energy
+	$LavityLightLight.energy = energy 
  
 func set_energy(val: float):
 	$LavityLightLight.energy = val

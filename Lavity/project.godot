@@ -21,6 +21,10 @@ config/default_gravity=0.0
 
 buses/default_bus_layout="res://mixer/default_bus_layout.tres"
 
+[autoload]
+
+GLOBAL="*res://scenes/Utils/Global.gd"
+
 [display]
 
 window/stretch/aspect="expand"

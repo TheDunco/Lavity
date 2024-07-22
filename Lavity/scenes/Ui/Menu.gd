@@ -1,7 +1,13 @@
 extends Control
 class_name Menu
 
-const settings_save_path = "user://settings.save"
+var newConfig = ConfigFile.new()
+var configFile = newConfig.load(GLOBAL.SETTINGS_SAVE_PATH)
+
+func _ready():
+	var darkness = newConfig.get_value("MAIN", "DARKNESS")
+	if darkness and darkness > 0:
+		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider.value = darkness
 
 # Main Menu
 func _on_play_pressed():
@@ -18,7 +24,8 @@ func _on_quit_pressed():
 func _on_options_back_pressed():
 	$Options.hide()
 	$AspectRatioContainer.show()
-	
+	newConfig.save(GLOBAL.SETTINGS_SAVE_PATH)
 
 func _on_brightness_slider_value_changed(value):
-	pass
+	newConfig.set_value("MAIN", "DARKNESS", value)
+	$"../../CanvasModulateDarkness".color.a = value

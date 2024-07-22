@@ -112,6 +112,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="MasterVol" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/MasterVol"]
@@ -124,6 +125,7 @@ layout_mode = 2
 size_flags_vertical = 4
 
 [node name="MusicVol" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/MusicVol"]
@@ -135,18 +137,21 @@ custom_minimum_size = Vector2(310, 0)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Brightness" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Darkness" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
 layout_mode = 2
-text = "Brightness (wip)
-"
+text = "Darkness"
 
-[node name="BrightnessSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness"]
+[node name="DarknessSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+min_value = 0.9
+max_value = 1.0
+step = 0.01
+value = 0.9
 
 [node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -157,5 +162,5 @@ text = "Back"
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
