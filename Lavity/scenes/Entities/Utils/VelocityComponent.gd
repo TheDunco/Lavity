@@ -20,9 +20,10 @@ func getAnimationSpeed(velo: Vector2):
 		return log(combinedVelocity * 100) - 7.0
 	return 0.0
 
-func handleExistingVelocity(Entity: CharacterBody2D):
-	var currVelocity := Entity.velocity
-	var velocity := Entity.velocity
+func handleExistingVelocity(entity: CharacterBody2D):
+	var currVelocity := entity.velocity
+	var velocity := entity.velocity
+
 	if currVelocity.x > 0 and currVelocity.x - AirResistance > 0:
 		velocity.x -= AirResistance
 	elif currVelocity.x < 0 and currVelocity.x + AirResistance < 0:

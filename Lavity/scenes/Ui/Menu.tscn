@@ -56,8 +56,9 @@ layout_mode = 2
 
 [node name="Instruction" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Press \"F\" to turn off your light
-Use \"WASD\" to move"
+text = "Use \"WASD\" to move
+Press \"F\" to turn off your light
+Press \"C\" to randomize colors"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
@@ -101,12 +102,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.0980392)
 text = "version"
 
 [node name="Options" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 647.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="Options"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -124,32 +125,6 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer"]
 layout_mode = 2
 alignment = 1
-
-[node name="MasterVol" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/MasterVol"]
-layout_mode = 2
-text = "Master Volume (wip)"
-
-[node name="Volume" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/MasterVol"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="MusicVol" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/MusicVol"]
-layout_mode = 2
-text = "Music Volume (wip)"
-
-[node name="Volume" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/MusicVol"]
-custom_minimum_size = Vector2(310, 0)
-layout_mode = 2
-size_flags_vertical = 4
 
 [node name="DarknessInstruction" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
