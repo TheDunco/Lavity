@@ -3,7 +3,7 @@
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
 [ext_resource type="AudioStream" uid="uid://b6enmfb2u0xx1" path="res://assets/audio/music/Light.wav" id="3_ofhj4"]
-[ext_resource type="Script" path="res://scenes/Utils/Autoplay.gd" id="4_2fjkp"]
+[ext_resource type="AudioStream" uid="uid://b6geq8lun2xtw" path="res://assets/audio/music/Gavity.wav" id="3_rdllg"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p6upt"]
 shader = ExtResource("1_a310j")
@@ -27,10 +27,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_aei6w")
 
+[node name="Gravity" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rdllg")
+bus = &"Music"
+
 [node name="Light" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_ofhj4")
 autoplay = true
-script = ExtResource("4_2fjkp")
+bus = &"Music"
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -97,12 +101,12 @@ theme_override_colors/font_color = Color(1, 1, 1, 0.0980392)
 text = "version"
 
 [node name="Options" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 offset_right = 1153.0
 offset_bottom = 647.0
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="Options"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -167,15 +171,32 @@ max_value = 1.0
 step = 0.001
 value = 0.9
 
+[node name="Volume" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume"]
+layout_mode = 2
+text = "Volume
+"
+
+[node name="VolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -24.0
+max_value = 8.0
+
 [node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_w1wen")
 text = "Back"
 
-[connection signal="finished" from="Light" to="Light" method="_on_finished"]
+[connection signal="finished" from="Gravity" to="." method="_on_gravity_finished"]
+[connection signal="finished" from="Light" to="." method="_on_light_finished"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer" to="." method="_on_summon_player_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]

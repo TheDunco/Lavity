@@ -48,6 +48,7 @@ func _process(delta):
 	if velocity.x != 0 and velocity.y != 0:
 		look_at(velocity + global_position)
 
+	# Pulse the player light
 	if $PlayerLight.enabled:
 		$PlayerLight.energy += getPulseTime(delta) / 1000
 	if $GravityArea.isEntityInGravityArea:

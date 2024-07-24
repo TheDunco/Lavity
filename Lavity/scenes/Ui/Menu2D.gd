@@ -3,7 +3,7 @@ class_name MouseLight
 
 signal mouse_light_visible_change
 
-func _process(delta):
+func _process(_delta):
 	$MouseLight.position = get_global_mouse_position()
 	
 func _unhandled_input(event):

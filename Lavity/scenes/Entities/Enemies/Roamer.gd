@@ -9,7 +9,10 @@ func chaseMouse():
 	var direction = global_position.direction_to(mousePos)
 	look_at(mousePos)
 	var distanceToMouse = global_position.distance_to(mousePos)
-	velocity += direction * (acceleration + distanceToMouse/100)
+	velocity += direction * (acceleration + distanceToMouse / 100)
+	
+func randomizeColor():
+	$RandColorLight.color = GLOBAL_UTILS.randColor()
 
 func _physics_process(_delta):
 	if shouldChaseMouse:
@@ -18,6 +21,8 @@ func _physics_process(_delta):
 	
 func _process(_delta):
 	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
+	if Input.is_action_just_pressed("space"):
+		randomizeColor()
 
 func _on_menu_2d_mouse_light_visible_change(vis):
 	shouldChaseMouse = vis

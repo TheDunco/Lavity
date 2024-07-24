@@ -5,12 +5,22 @@ var newConfig = ConfigFile.new()
 var configFile = newConfig.load(GLOBAL.SETTINGS_SAVE_PATH)
 @export var player: Player = null
 
-func _ready():
+func loadOptions():
 	var darkness = newConfig.get_value("MAIN", "DARKNESS")
 	if darkness and darkness > 0:
 		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider.value = darkness
 		
 	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = GLOBAL.VERSION
+
+func _on_light_finished():
+	$Gravity.play()
+	
+func _on_gravity_finished():
+	$Light.play()
+
+func _ready():
+	loadOptions()
+	$Light.play()
 
 # Main Menu
 func _on_play_pressed():
@@ -37,3 +47,6 @@ func _on_summon_player_pressed():
 	print("mouse: ", get_global_mouse_position(), "player: ", player.global_position)
 	player.position = $AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer.global_position
 	player.velocity = Vector2.ZERO
+	
+func _on_volume_slider_value_changed(value):
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)

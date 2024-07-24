@@ -92,5 +92,5 @@ material = SubResource("ShaderMaterial_mw44x")
 position = Vector2(1, -1)
 scale = Vector2(0.5, 0.5)
 color = Color(1, 0.823529, 0.823529, 1)
-energy = 0.1
+energy = 0.2
 texture = SubResource("GradientTexture2D_3xlt7")

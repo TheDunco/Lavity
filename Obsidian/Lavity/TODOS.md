@@ -20,4 +20,6 @@ Todos
 	- [ ] song doesn't keep playing on scene transitions. Need to reparent? ([SEE LINK](https://www.youtube.com/watch?v=lILnUD3xph8&ab_channel=SomaAnimus))
 	- [ ] Font
 	- [ ] Spacing
-	- [ ] 
+- [ ] Menu new features
+	- [ ] Allow player to select their color
+	- [x] Master Volume
