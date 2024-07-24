@@ -5,7 +5,7 @@ Todos
 	- [ ] Infinite tilemap generation
 	- [ ] Random light placement
 	- [ ] Random light params (energy, scale)
-- [ ] Items
+- [ ] Items: **The mechanics of the items should be that they're floating Lavity lights that you slowly have to push around to absorb their powers and that affects the color of your player light. Certain enemies could be attracted to certain types of light! THIS IS THE GAME!**
 	- [ ] Flowers
 		- [ ] Light/bioluminescence meter
 		- [ ] Health
