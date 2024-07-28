@@ -14,8 +14,10 @@ shader = ExtResource("1_a310j")
 shader_parameter/displacement = 3.0
 
 [sub_resource type="SystemFont" id="SystemFont_fsfaq"]
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_w1wen"]
+subpixel_positioning = 0
 
 [node name="Menu" type="Control"]
 material = SubResource("ShaderMaterial_p6upt")
@@ -89,6 +91,10 @@ text = "Options"
 [node name="SummonPlayer" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Summon Cosmo"
+
+[node name="Procedural Snake" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Show Procedural Snake"
 
 [node name="Quit" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -171,6 +177,7 @@ text = "Back"
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer" to="." method="_on_summon_player_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Procedural Snake" to="." method="_on_procedural_snake_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

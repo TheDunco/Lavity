@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://ckegvnp5qckrb"]
+
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Snake/Snake.gd" id="1_6wf3m"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Snake/SnakeLine.gd" id="2_rm7n3"]
+[ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="3_ep3qq"]
+
+[sub_resource type="Curve" id="Curve_3avmm"]
+min_value = 1.0
+max_value = 5.0
+_data = [Vector2(0, 5), 0.0, 1.14666, 0, 0, Vector2(0.242588, 2.91241), 0.0, 0.0, 0, 0, Vector2(0.601078, 3.37331), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_f23xf"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ky5wt"]
+
+[node name="Snake" type="CharacterBody2D"]
+script = ExtResource("1_6wf3m")
+
+[node name="Line2D" type="Line2D" parent="."]
+width_curve = SubResource("Curve_3avmm")
+gradient = SubResource("Gradient_f23xf")
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("2_rm7n3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("SegmentShape2D_ky5wt")
+disabled = true
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("3_ep3qq")]
+Entity = NodePath("..")

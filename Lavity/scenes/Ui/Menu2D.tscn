@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://gcao2h68fauk"]
+[gd_scene load_steps=10 format=3 uid="uid://gcao2h68fauk"]
 
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="1_k6842"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu2D.gd" id="1_li1tr"]
@@ -6,8 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="3_l8kwu"]
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="4_5p6v2"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="6_8h01j"]
-[ext_resource type="PackedScene" uid="uid://bv6grq3e8ay6" path="res://scenes/Entities/Enemies/Roamer.tscn" id="7_j0bbl"]
+[ext_resource type="PackedScene" uid="uid://bv6grq3e8ay6" path="res://scenes/Entities/Enemies/Roamer/Roamer.tscn" id="7_j0bbl"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="8_pgiwv"]
+[ext_resource type="PackedScene" uid="uid://ckegvnp5qckrb" path="res://scenes/Entities/Enemies/Snake/Snake.tscn" id="9_4dcco"]
 
 [node name="Menu2D" type="Node2D"]
 script = ExtResource("1_li1tr")
@@ -23,12 +24,10 @@ layer_0/tile_data = PackedInt32Array(-4718694, 0, 0, -4653158, 0, 1, -4587622, 0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("1_k6842")]
+[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "snake") instance=ExtResource("1_k6842")]
 player = NodePath("../../Player")
+snake = NodePath("../../Snake")
 metadata/_edit_use_anchors_ = true
-
-[node name="Roamer" parent="." instance=ExtResource("7_j0bbl")]
-position = Vector2(198, 377)
 
 [node name="MouseLight" parent="." instance=ExtResource("6_8h01j")]
 top_level = true
@@ -37,9 +36,8 @@ position = Vector2(576, 292)
 scale = Vector2(0.2, 0.2)
 energy = 0.5
 
-[node name="Player" parent="." instance=ExtResource("8_pgiwv")]
-position = Vector2(284, 161)
-UserMovementSpeed = 10
+[node name="Roamer" parent="." instance=ExtResource("7_j0bbl")]
+position = Vector2(198, 377)
 
 [node name="Roamer2" parent="." instance=ExtResource("7_j0bbl")]
 position = Vector2(675, 525)
@@ -49,5 +47,14 @@ position = Vector2(871, 144)
 
 [node name="Roamer4" parent="." instance=ExtResource("7_j0bbl")]
 position = Vector2(902, 573)
+
+[node name="Snake" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_4dcco")]
+visible = false
+position = Vector2(4, 7)
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("8_pgiwv")]
+position = Vector2(4, 7)
+UserMovementSpeed = 10
 
 [connection signal="mouse_light_visible_change" from="." to="Roamer" method="_on_menu_2d_mouse_light_visible_change"]

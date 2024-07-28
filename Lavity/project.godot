@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lavity"
-config/version="0.0.14"
+config/version="0.0.15"
 run/main_scene="res://scenes/Ui/Menu2D.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://assets/good-boyo-chibi.png"

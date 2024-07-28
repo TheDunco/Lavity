@@ -4,6 +4,7 @@ class_name Menu
 var newConfig = ConfigFile.new()
 var configFile = newConfig.load(GLOBAL.SETTINGS_SAVE_PATH)
 @export var player: Player = null
+@export var snake: CharacterBody2D = null
 
 func loadOptions():
 	var darkness = newConfig.get_value("MAIN", "DARKNESS")
@@ -49,3 +50,7 @@ func _on_summon_player_pressed():
 	
 func _on_volume_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
+
+
+func _on_procedural_snake_pressed():
+	snake.visible = not snake.visible

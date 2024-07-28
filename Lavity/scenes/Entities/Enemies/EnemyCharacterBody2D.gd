@@ -2,7 +2,7 @@ extends CharacterBody2D
 class_name Enemy
 
 # A reference to the player so we know where to look/move
-@export var player: CharacterBody2D = null
+@export var player: Player = null
 @export var Acceleration := 3.0
 @export var playAnimatedSprite := true
 
