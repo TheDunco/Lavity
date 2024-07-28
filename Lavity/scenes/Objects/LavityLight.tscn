@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" path="res://scenes/Objects/LavityLight.gd" id="1_myj33"]
 
-[sub_resource type="Gradient" id="Gradient_2kxv7"]
+[sub_resource type="Gradient" id="Gradient_hgx7v"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.00333333, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.513233, 0.513233, 0.513233, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vgskw"]
-gradient = SubResource("Gradient_2kxv7")
+gradient = SubResource("Gradient_hgx7v")
 width = 1000
 height = 1000
 fill = 1

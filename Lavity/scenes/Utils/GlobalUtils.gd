@@ -1,8 +1,11 @@
 extends Node
 class_name GlobalUtilsClass
 
-func randColorInRange(minRgb=0.0, maxRgb=50.0):
-	return randf_range(minRgb, maxRgb)
+const MAX_RGB := 7.0
+const MIN_RGB := 0.0
+
+func randColorInRange(maxRgb=MAX_RGB):
+	return randf_range(MIN_RGB, maxRgb)
 	
-func randColor(minRgb=0.0, maxRgb=50.0) -> Color:
-	return Color(randColorInRange(minRgb, maxRgb), randColorInRange(minRgb, maxRgb), randColorInRange(minRgb, maxRgb))
+func randColor(maxRgb=MAX_RGB) -> Color:
+	return Color(randColorInRange(maxRgb), randColorInRange(maxRgb), randColorInRange(maxRgb))

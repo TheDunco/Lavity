@@ -44,7 +44,6 @@ func _on_brightness_slider_value_changed(value):
 	$"../../CanvasModulateDarkness".color.a = value
 
 func _on_summon_player_pressed():
-	print("mouse: ", get_global_mouse_position(), "player: ", player.global_position)
 	player.position = $AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer.global_position
 	player.velocity = Vector2.ZERO
 	

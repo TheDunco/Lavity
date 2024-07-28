@@ -40,7 +40,7 @@ var time := 0.0
 func getPulseTime(delta):
 	time += max($FlippingSprite.speed_scale, 3) * delta
 	if time > 1.0e30:
-		time = 0
+		time = 0.0
 	return sin(time)
 
 func _process(delta):
@@ -50,7 +50,7 @@ func _process(delta):
 
 	# Pulse the player light
 	if $PlayerLight.enabled:
-		$PlayerLight.energy += getPulseTime(delta) / 1000
+		$PlayerLight.energy += getPulseTime(delta) / 100
 	if $GravityArea.isEntityInGravityArea:
 		isTrackableByEnemy = true
 	else:

@@ -48,7 +48,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.474359, 0.0683761)
 
-[node name="Doppleganger" type="CharacterBody2D"]
+[node name="Doppelganger" type="CharacterBody2D"]
 position = Vector2(0, 1)
 script = ExtResource("1_6ruje")
 playAnimatedSprite = false

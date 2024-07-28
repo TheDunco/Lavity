@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bv6grq3e8ay6"]
+[gd_scene load_steps=19 format=3 uid="uid://bv6grq3e8ay6"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Roamer.gd" id="1_c2bhm"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_ucr6e"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="10_txlik"]
 [ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="11_acwt6"]
 [ext_resource type="Script" path="res://scenes/Utils/RandColorLight.gd" id="12_wipv5"]
+[ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="13_smubi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
 radius = 25.0
@@ -98,7 +99,9 @@ z_index = -2
 material = SubResource("ShaderMaterial_mw44x")
 position = Vector2(5, 0)
 scale = Vector2(0.4, 0.4)
-color = Color(0, 0.780392, 0.988235, 0.941176)
-energy = 0.04
+color = Color(0.0980392, 0.431373, 0.345098, 0.941176)
+energy = 0.2
 texture = SubResource("GradientTexture2D_3xlt7")
 script = ExtResource("12_wipv5")
+
+[node name="LightDecayComponent" parent="RandColorLight" instance=ExtResource("13_smubi")]

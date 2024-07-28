@@ -28,16 +28,7 @@ player = NodePath("../../Player")
 metadata/_edit_use_anchors_ = true
 
 [node name="Roamer" parent="." instance=ExtResource("7_j0bbl")]
-position = Vector2(685, 484)
-
-[node name="Roamer2" parent="." instance=ExtResource("7_j0bbl")]
-position = Vector2(661, 145)
-
-[node name="Roamer3" parent="." instance=ExtResource("7_j0bbl")]
-position = Vector2(833, 40)
-
-[node name="Roamer4" parent="." instance=ExtResource("7_j0bbl")]
-position = Vector2(164, 427)
+position = Vector2(198, 377)
 
 [node name="MouseLight" parent="." instance=ExtResource("6_8h01j")]
 top_level = true
@@ -47,10 +38,16 @@ scale = Vector2(0.2, 0.2)
 energy = 0.5
 
 [node name="Player" parent="." instance=ExtResource("8_pgiwv")]
-position = Vector2(340, 116)
+position = Vector2(284, 161)
 UserMovementSpeed = 10
 
+[node name="Roamer2" parent="." instance=ExtResource("7_j0bbl")]
+position = Vector2(675, 525)
+
+[node name="Roamer3" parent="." instance=ExtResource("7_j0bbl")]
+position = Vector2(871, 144)
+
+[node name="Roamer4" parent="." instance=ExtResource("7_j0bbl")]
+position = Vector2(902, 573)
+
 [connection signal="mouse_light_visible_change" from="." to="Roamer" method="_on_menu_2d_mouse_light_visible_change"]
-[connection signal="mouse_light_visible_change" from="." to="Roamer2" method="_on_menu_2d_mouse_light_visible_change"]
-[connection signal="mouse_light_visible_change" from="." to="Roamer3" method="_on_menu_2d_mouse_light_visible_change"]
-[connection signal="mouse_light_visible_change" from="." to="Roamer4" method="_on_menu_2d_mouse_light_visible_change"]

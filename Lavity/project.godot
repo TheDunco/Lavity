@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Lavity"
-config/version="0.0.11"
+config/version="0.0.14"
 run/main_scene="res://scenes/Ui/Menu2D.tscn"
 config/features=PackedStringArray("4.2")
-config/icon="res://assets/mof.png"
+config/icon="res://assets/good-boyo-chibi.png"
 config/default_gravity=0.0
 
 [audio]
@@ -28,7 +28,11 @@ GLOBAL_UTILS="*res://scenes/Utils/GlobalUtils.gd"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+mouse_cursor/custom_image="res://assets/good-boyo-chibi.png"
 
 [input]
 
