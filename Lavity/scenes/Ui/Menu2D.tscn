@@ -52,6 +52,7 @@ position = Vector2(902, 573)
 visible = false
 position = Vector2(4, 7)
 player = NodePath("../Player")
+acceleration = 3.0
 
 [node name="Player" parent="." instance=ExtResource("8_pgiwv")]
 position = Vector2(4, 7)

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Roamer
 
-@export var acceleration := 5
+@export var acceleration := 10.0
 var shouldChaseMouse := true
 
 func chaseMouse():
@@ -17,7 +17,7 @@ func randomizeColor():
 func _physics_process(_delta):
 	if shouldChaseMouse:
 		chaseMouse()
-	$VelocityComponent.handleExistingVelocity(self)
+	velocity = $VelocityComponent.handleExistingVelocity(self)
 	
 func _process(_delta):
 	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)

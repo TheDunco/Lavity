@@ -45,7 +45,7 @@ func getPulseTime(delta):
 
 func _process(delta):
 	# Look towards the direction of travel
-	if velocity.x != 0 and velocity.y != 0:
+	if abs(velocity.x) > 0.1 and abs(velocity.y) > 0.1:
 		look_at(velocity + global_position)
 
 	# Pulse the player light

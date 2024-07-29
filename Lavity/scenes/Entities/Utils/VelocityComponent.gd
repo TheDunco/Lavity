@@ -2,10 +2,10 @@ extends Node2D
 
 @export var Entity: CharacterBody2D = null
 
-@export var SpeedMultiplier := 20
-@export var AirResistance := 5
-@export var MaxVelocity := 1000
-@export var OverspeedDamping := 10
+@export var speedMultiplier := 20
+@export var airResistance := 5
+@export var maxVelocity := 1000
+@export var overspeedDamping := 10
 
 var flippingSprite: Node2D = null
 
@@ -20,29 +20,28 @@ func getAnimationSpeed(velo: Vector2):
 		return log(combinedVelocity * 100) - 7.0
 	return 0.0
 
-func handleExistingVelocity(entity: CharacterBody2D):
+func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.velocity):
 	var currVelocity := entity.velocity
-	var velocity := entity.velocity
 
-	if currVelocity.x > 0 and currVelocity.x - AirResistance > 0:
-		velocity.x -= AirResistance
-	elif currVelocity.x < 0 and currVelocity.x + AirResistance < 0:
-		velocity.x += AirResistance
+	if currVelocity.x > 0 and currVelocity.x - airResistance > 0:
+		velocity.x -= airResistance
+	elif currVelocity.x < 0 and currVelocity.x + airResistance < 0:
+		velocity.x += airResistance
 		
-	if velocity.y > 0 and currVelocity.y - AirResistance > 0:
-		velocity.y -= AirResistance
-	elif velocity.y < 0 and currVelocity.y + AirResistance < 0:
-		velocity.y += AirResistance
+	if velocity.y > 0 and currVelocity.y - airResistance > 0:
+		velocity.y -= airResistance
+	elif velocity.y < 0 and currVelocity.y + airResistance < 0:
+		velocity.y += airResistance
 
-	if velocity.x > MaxVelocity:
-		velocity.x -= (OverspeedDamping + (velocity.x - MaxVelocity))
-	elif velocity.x < - MaxVelocity:
-		velocity.x -= (OverspeedDamping + (velocity.x + MaxVelocity))
+	if velocity.x > maxVelocity:
+		velocity.x -= (overspeedDamping + (velocity.x - maxVelocity))
+	elif velocity.x < - maxVelocity:
+		velocity.x -= (overspeedDamping + (velocity.x + maxVelocity))
 
-	if velocity.y > MaxVelocity:
-		velocity.y += (OverspeedDamping + (velocity.y - MaxVelocity))
-	elif velocity.y < - MaxVelocity:
-		velocity.y += - (OverspeedDamping + (velocity.y + MaxVelocity))
+	if velocity.y > maxVelocity:
+		velocity.y += (overspeedDamping + (velocity.y - maxVelocity))
+	elif velocity.y < - maxVelocity:
+		velocity.y += - (overspeedDamping + (velocity.y + maxVelocity))
 	return velocity
 	
 func _process(_delta):

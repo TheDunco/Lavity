@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyn34imd0o1gn"]
+
+[ext_resource type="PackedScene" uid="uid://ckegvnp5qckrb" path="res://scenes/Entities/Enemies/Snake/Snake.tscn" id="1_r7gny"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="2_doi48"]
+[ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="3_fe01s"]
+
+[node name="SnakeTest" type="Node2D"]
+
+[node name="Snake" parent="." node_paths=PackedStringArray("player") instance=ExtResource("1_r7gny")]
+position = Vector2(1, -1)
+player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_doi48")]
+position = Vector2(-3, 0)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("3_fe01s")]

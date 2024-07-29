@@ -13,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="11_c7gky"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 25.0
-height = 66.0
+radius = 28.0
+height = 94.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -57,7 +57,7 @@ Entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-position = Vector2(-2, 2)
+position = Vector2(-2, -1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_uyvyt")
 debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
@@ -82,12 +82,13 @@ script = ExtResource("8_j118b")
 Entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(-2, 2)
+position = Vector2(-2, -1)
 rotation = 1.5708
 shape = ExtResource("7_vlmlf")
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
-scale = Vector2(0.17, 0.15)
+position = Vector2(0, -1)
+scale = Vector2(0.18, 0.18)
 color = Color(1, 1, 0.87451, 1)
 blend_mode = 2
 shadow_enabled = true
