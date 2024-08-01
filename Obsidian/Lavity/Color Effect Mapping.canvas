@@ -1,0 +1,19 @@
+{
+	"nodes":[
+		{"id":"5acdf77e7b61ad86","type":"file","file":"Pasted image 20240731220031.jpg","x":480,"y":-210,"width":1680,"height":1632},
+		{"id":"984ebd485e0bfe9f","type":"text","text":"# Absorption","x":1195,"y":546,"width":250,"height":60,"color":"#ffffff"},
+		{"id":"815dba8470056617","type":"text","text":"# Health","x":1040,"y":-40,"width":250,"height":60,"color":"#e3181a"},
+		{"id":"14596dce75133f3a","type":"text","text":"# ","x":1360,"y":-40,"width":250,"height":60,"color":"#f4a400"},
+		{"id":"27c8a19164589aae","type":"text","text":"# Speed","x":1610,"y":120,"width":250,"height":60,"color":"#f2eb00"},
+		{"id":"f59aab42f8cbbd1d","type":"text","text":"","x":1800,"y":419,"width":250,"height":60,"color":"#9fca2d"},
+		{"id":"bc5faaac483cb213","type":"text","text":"#","x":1735,"y":720,"width":250,"height":60,"color":"#7ac04e"},
+		{"id":"4abf7ce518c6a161","type":"text","text":"","x":1610,"y":990,"width":250,"height":60,"color":"#7bc5a4"},
+		{"id":"b1baa5389486a9b5","type":"text","text":"# ","x":1360,"y":1160,"width":250,"height":60,"color":"5"},
+		{"id":"2448654d28783677","type":"text","text":"# ","x":1040,"y":1160,"width":250,"height":60,"color":"#4a70b8"},
+		{"id":"e7f2f8b476959af0","type":"text","text":"# Stealth\n","x":720,"y":990,"width":250,"height":60,"color":"#5c53a5"},
+		{"id":"20cad18796218d04","x":595,"y":720,"width":250,"height":60,"color":"#8451a1","type":"text","text":"#"},
+		{"id":"83c975d401da52cf","type":"text","text":"#","x":595,"y":419,"width":250,"height":60,"color":"#c9489c"},
+		{"id":"0eced187ac3fd547","x":720,"y":120,"width":250,"height":60,"color":"#e3137a","type":"text","text":"# Vision"}
+	],
+	"edges":[]
+}

@@ -13,15 +13,8 @@ func loadOptions():
 		
 	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = GLOBAL.VERSION
 
-func _on_light_finished():
-	$Gravity.play()
-	
-func _on_gravity_finished():
-	$Light.play()
-
 func _ready():
 	loadOptions()
-	$Light.play()
 
 # Main Menu
 func _on_play_pressed():

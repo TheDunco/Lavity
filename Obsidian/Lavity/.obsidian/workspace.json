@@ -13,11 +13,11 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Main Board.canvas",
+                "file": "Color Effect Mapping.canvas",
                 "viewState": {
-                  "x": -6.035198130203611,
-                  "y": -619.3277858493338,
-                  "zoom": 0.3333333333333334
+                  "x": 1624.4487453913027,
+                  "y": 858.2461739001736,
+                  "zoom": -1.1179443314952104
                 }
               }
             }
@@ -88,7 +88,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "TODOS.md",
+                "file": "Color Effect Mapping.canvas",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +105,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "TODOS.md",
+                "file": "Color Effect Mapping.canvas",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,7 +128,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "TODOS.md"
+                "file": "Color Effect Mapping.canvas"
               }
             }
           }
@@ -151,10 +151,14 @@
   },
   "active": "58ac3cb4587ee91a",
   "lastOpenFiles": [
+    "Pasted image 20240731215944.jpg",
+    "Color Effect Mapping.canvas",
+    "Pasted image 20240731220031.jpg",
+    "Main Board.canvas",
+    "Untitled.md",
     "good-boyo-chibi.png",
     "mof.png",
     "TODOS.md",
-    "Main Board.canvas",
     "README.md",
     "Welcome.md"
   ]
