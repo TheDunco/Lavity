@@ -48,6 +48,11 @@ position = Vector2(871, 144)
 [node name="Roamer4" parent="." instance=ExtResource("7_j0bbl")]
 position = Vector2(902, 573)
 
+[node name="LavityLight" parent="." instance=ExtResource("6_8h01j")]
+position = Vector2(645, 624)
+canChangeColor = true
+randomizeColorOnReady = false
+
 [node name="Snake" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_4dcco")]
 visible = false
 position = Vector2(4, 7)

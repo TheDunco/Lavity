@@ -18,14 +18,22 @@ func _ready():
 
 # Main Menu
 func _on_play_pressed():
-	get_tree().change_scene_to_file("res://scenes/Worlds/TestWorld.tscn")
+	GameFlow.switchScene("res://scenes/Worlds/TestWorld.tscn")
+	MusicComponent.playSong(MusicComponent.SongEnum.A_MOTH_IN_LIGHT)
 
 func _on_options_pressed():
 	$Options.show()
 	$AspectRatioContainer.hide()
+	
+func _on_summon_player_pressed():
+	player.position = $AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer.global_position
+	player.velocity = Vector2.ZERO
 
 func _on_quit_pressed():
-	get_tree().quit()
+	GameFlow.quit()
+
+func _on_next_song_pressed():
+	MusicComponent.next()
 	
 # Options
 func _on_options_back_pressed():
@@ -37,9 +45,7 @@ func _on_brightness_slider_value_changed(value):
 	newConfig.set_value("MAIN", "DARKNESS", value)
 	$"../../CanvasModulateDarkness".color.a = value
 
-func _on_summon_player_pressed():
-	player.position = $AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer.global_position
-	player.velocity = Vector2.ZERO
+
 	
 func _on_volume_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
@@ -47,3 +53,7 @@ func _on_volume_slider_value_changed(value):
 
 func _on_procedural_snake_pressed():
 	snake.visible = not snake.visible
+
+
+func _on_light_effects_world_pressed():
+	GameFlow.switchScene("res://scenes/Worlds/EffectTestingWorld.tscn")

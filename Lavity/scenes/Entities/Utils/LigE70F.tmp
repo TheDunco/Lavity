@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3qn2hllt3wn7"]
+
+[ext_resource type="Script" path="res://scenes/Entities/Utils/LightDecayComponent.gd" id="1_7tiup"]
+
+[node name="LightDecayComponent" type="Node2D"]
+script = ExtResource("1_7tiup")

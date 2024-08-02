@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cycilpk4eefu8"]
+
+[ext_resource type="Script" path="res://scenes/Music/MusicComponent.gd" id="1_xm5us"]
+[ext_resource type="AudioStream" uid="uid://b6enmfb2u0xx1" path="res://assets/audio/music/Light.wav" id="2_0jreg"]
+[ext_resource type="AudioStream" uid="uid://bn8mkeglrverm" path="res://assets/audio/music/A New Color.wav" id="3_44k2q"]
+[ext_resource type="AudioStream" uid="uid://b6geq8lun2xtw" path="res://assets/audio/music/Gavity.wav" id="4_hgarr"]
+[ext_resource type="AudioStream" uid="uid://c7ds0wbsj4hbc" path="res://assets/audio/music/A Moth in Light.wav" id="5_57hwm"]
+
+[node name="MusicComponent" type="AudioStreamPlayer" node_paths=PackedStringArray("musicRotation")]
+script = ExtResource("1_xm5us")
+musicRotation = [NodePath("Light"), NodePath("A New Color"), NodePath("Gravity"), NodePath("A Moth in Light")]
+
+[node name="Light" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0jreg")
+bus = &"Music"
+
+[node name="A New Color" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_44k2q")
+bus = &"Music"
+
+[node name="Gravity" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hgarr")
+bus = &"Music"
+
+[node name="A Moth in Light" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_57hwm")
+bus = &"Music"
+
+[connection signal="finished" from="Light" to="." method="_on_light_finished"]
+[connection signal="finished" from="A New Color" to="." method="_on_a_new_color_finished"]
+[connection signal="finished" from="Gravity" to="." method="_on_gravity_finished"]
+[connection signal="finished" from="A Moth in Light" to="." method="_on_a_moth_in_light_finished"]

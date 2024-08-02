@@ -3,10 +3,12 @@ extends Node2D
 const LIGHT_DECAY_MULT := 0.10
 const DECAY_THRESHOlD := 0.1
 
+var light: Light2D 
+
+func _ready():
+	light = get_parent()
 
 func _process(delta):
-	var light: Light2D = get_parent()
-
 	if light.enabled:
 		if light.color.r > DECAY_THRESHOlD:
 			light.color.r -= LIGHT_DECAY_MULT * delta

@@ -3,15 +3,21 @@ class_name LavityLight
 
 @export var energy := 1.0
 @export var MaxRgb := GLOBAL_UTILS.MAX_RGB
+@export var canChangeColor := false
+@export var randomizeColorOnReady := true
+@export var initColor: Color
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$LavityLightLight.energy = energy
-	$LavityLightLight.color = GLOBAL_UTILS.randColor(MaxRgb)
+	if randomizeColorOnReady:
+		$LavityLightLight.color = GLOBAL_UTILS.randColor(MaxRgb)
+	else:
+		$LavityLightLight.color = initColor
  
 func set_energy(val: float):
 	$LavityLightLight.energy = val
 
-func _process(_delta):
-	if Input.is_action_just_pressed("change_color"):
+func _unhandled_input(event):
+	if event.is_action_pressed("change_color") and canChangeColor:
 		$LavityLightLight.color = GLOBAL_UTILS.randColor(MaxRgb)

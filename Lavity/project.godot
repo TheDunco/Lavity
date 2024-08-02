@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lavity"
-config/version="0.0.16"
+config/version="0.0.17"
 run/main_scene="res://scenes/Ui/Menu2D.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://assets/good-boyo-chibi.png"
@@ -25,6 +25,8 @@ buses/default_bus_layout="res://mixer/default_bus_layout.tres"
 
 GLOBAL="*res://scenes/Utils/Global.gd"
 GLOBAL_UTILS="*res://scenes/Utils/GlobalUtils.gd"
+GameFlow="*res://scenes/Utils/GameFlow.tscn"
+MusicComponent="*res://scenes/Music/MusicComponent.tscn"
 
 [display]
 
