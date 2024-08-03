@@ -1,6 +1,6 @@
 extends Node2D
 
-const LIGHT_DECAY_MULT := 0.10
+const LIGHT_DECAY_MULT := 0.02
 const DECAY_THRESHOlD := 0.1
 
 var light: Light2D 

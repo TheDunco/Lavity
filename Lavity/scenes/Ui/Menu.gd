@@ -45,15 +45,11 @@ func _on_brightness_slider_value_changed(value):
 	newConfig.set_value("MAIN", "DARKNESS", value)
 	$"../../CanvasModulateDarkness".color.a = value
 
-
-	
 func _on_volume_slider_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 
-
 func _on_procedural_snake_pressed():
 	snake.visible = not snake.visible
-
 
 func _on_light_effects_world_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/EffectTestingWorld.tscn")

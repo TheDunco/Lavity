@@ -54,6 +54,7 @@ script = ExtResource("1_jm2c2")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
+airResistance = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
@@ -89,7 +90,7 @@ shape = ExtResource("7_vlmlf")
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(0, -1)
 scale = Vector2(0.18, 0.18)
-color = Color(1, 1, 0.87451, 1)
+color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_rtjsw")

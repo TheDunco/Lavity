@@ -27,6 +27,7 @@ GLOBAL="*res://scenes/Utils/Global.gd"
 GLOBAL_UTILS="*res://scenes/Utils/GlobalUtils.gd"
 GameFlow="*res://scenes/Utils/GameFlow.tscn"
 MusicComponent="*res://scenes/Music/MusicComponent.tscn"
+PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
 [display]
 
@@ -35,6 +36,10 @@ window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 mouse_cursor/custom_image="res://assets/good-boyo-chibi.png"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
@@ -92,8 +97,8 @@ next_song={
 
 [physics]
 
+2d/run_on_separate_thread=true
 2d/default_gravity=0.0
-common/enable_pause_aware_picking=true
 
 [rendering]
 
