@@ -166,6 +166,10 @@ size_flags_vertical = 4
 min_value = -24.0
 max_value = 8.0
 
+[node name="Fullscreen" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Fullscreen"
+
 [node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_w1wen")
@@ -180,4 +184,5 @@ text = "Back"
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]

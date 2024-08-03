@@ -53,8 +53,10 @@ func _process(delta):
 		isTrackableByEnemy = true
 	else:
 		isTrackableByEnemy = $PlayerLight.enabled
+		
 	
 func _physics_process(_delta):
 	handleInput()
 	velocity = $VelocityComponent.handleExistingVelocity(self)
 	move_and_slide()
+	
