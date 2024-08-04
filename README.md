@@ -2,7 +2,11 @@
 
 ## About
 
-A game where you're a moth in a world where no ambient gravity exists. Instead, light pushes you away just as much as your moth brain is attracted to it.
+A game where you're a moth in a world where no ambient gravity exists. Instead, light pushes you away just as much as your moth brain is attracted to it. You can absorb the colors of the light around you, and your color determines your stats and characteristics in the moment.
+
+You can find the [devlog](https://thedunco.itch.io/lavity/devlog) and a web-playable version of the game for free on the [itch.io](https://thedunco.itch.io/lavity) page. 
+
+Feel free to dowload and support the Windows version of the game. The web's lacking graphical capabilities make the game look a bit dull and muted.
 
 Made using
 - [Godot 4](https://godotengine.org/)
