@@ -55,7 +55,7 @@ func _setAttributesFromStats():
 	$PlayerLight.scale.y = stats["vision"]
 	
 	# green/speed
-	playerMovementSpeed = stats["speed"] * 20
+	playerMovementSpeed = stats["speed"] * 25
 	
 
 func _process(delta):
