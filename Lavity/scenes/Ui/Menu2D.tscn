@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://gcao2h68fauk"]
+[gd_scene load_steps=11 format=3 uid="uid://gcao2h68fauk"]
 
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="1_k6842"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu2D.gd" id="1_li1tr"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bv6grq3e8ay6" path="res://scenes/Entities/Enemies/Roamer/Roamer.tscn" id="7_j0bbl"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="8_pgiwv"]
 [ext_resource type="PackedScene" uid="uid://ckegvnp5qckrb" path="res://scenes/Entities/Enemies/Snake/Snake.tscn" id="9_4dcco"]
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="10_smu23"]
 
 [node name="Menu2D" type="Node2D"]
 script = ExtResource("1_li1tr")
@@ -60,7 +61,12 @@ position = Vector2(4, 7)
 player = NodePath("../Player")
 acceleration = 3.0
 
-[node name="Player" parent="." instance=ExtResource("8_pgiwv")]
-position = Vector2(4, 7)
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("8_pgiwv")]
+position = Vector2(677, 214)
+worldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("10_smu23")]
+position = Vector2(677, 214)
+follow_target = NodePath("../Player")
 
 [connection signal="mouse_light_visible_change" from="." to="Roamer" method="_on_menu_2d_mouse_light_visible_change"]

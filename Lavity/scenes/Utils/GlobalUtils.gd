@@ -53,24 +53,3 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 
 	# Calculate the score based on the average difference
 	return 1.0 - avgDiff
-
-func getStatsFromColor(currentColor: Color) -> Dictionary:
-	var statsPerColor := {}
-	
-	# Figure out how similar to each color we are
-	for colorName in colorNames:
-		var score := scoreColorLikeness(currentColor, colors[colorName])
-		statsPerColor[colorName] = score
-
-	# Map that to the stats
-	var stats := {
-		"health": statsPerColor["red"],
-		"damage" : statsPerColor["orange"],
-		"speed": statsPerColor["green"],
-		"sonar": statsPerColor["blue"],
-		"stealth": statsPerColor["blue_purple"],
-		"vision": statsPerColor["yellow"],
-		"regeneration": statsPerColor["pink"],
-	}
-
-	return stats

@@ -7,9 +7,9 @@ var configFile = newConfig.load(GLOBAL.SETTINGS_SAVE_PATH)
 @export var snake: CharacterBody2D = null
 
 func loadOptions():
-	var darkness = newConfig.get_value("MAIN", "DARKNESS")
-	if darkness and darkness > 0:
-		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider.value = darkness
+	var brightness = newConfig.get_value("MAIN", "BRIGHTNESS")
+	if brightness and brightness > 0:
+		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider.value = brightness
 		
 	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
 
@@ -42,11 +42,15 @@ func _on_options_back_pressed():
 	newConfig.save(GLOBAL.SETTINGS_SAVE_PATH)
 
 func _on_brightness_slider_value_changed(value):
-	newConfig.set_value("MAIN", "DARKNESS", value)
-	$"../../CanvasModulateDarkness".color.a = value
+	newConfig.set_value("MAIN", "BRIGTHNESS", value)
+	$"../../WorldEnvironment".environment.adjustment_brightness = value
 
 func _on_volume_slider_value_changed(value):
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
+	if value == $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.min_value:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	else:
+		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
 
 func _on_procedural_snake_pressed():
 	snake.visible = not snake.visible

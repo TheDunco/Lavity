@@ -1,7 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkue2rlje5opm"]
-
-[ext_resource type="Script" path="res://scenes/Utils/CanvasModulateDarkness.gd" id="1_cernu"]
+[gd_scene format=3 uid="uid://bkue2rlje5opm"]
 
 [node name="CanvasModulateDarkness" type="CanvasModulate"]
 color = Color(0.00392157, 0.00392157, 0.00392157, 0.941176)
-script = ExtResource("1_cernu")
