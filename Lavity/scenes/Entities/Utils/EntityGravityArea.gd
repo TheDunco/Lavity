@@ -1,14 +1,14 @@
 extends Area2D
 
 # The force of gravity emitted by the light
-const LAVITY := 9.8 * 2
-const DISTANCE_MULT := 75
+@export var lavity := 9.8 * 2
+@export var distanceMult := 75
 
 @export var Entity: CharacterBody2D = null
 var isEntityInGravityArea := false
 var isPlayerLike := false
 
-const ABSORBTION_MULT := 0.001
+@export var absorbtionMult := 0.2
 
 func _ready():
 	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy
@@ -23,7 +23,7 @@ func getPlayerLikeLight() -> PointLight2D:
 		return Entity.find_child("LavityLightLight")
 	return null
 
-func _process(_delta):
+func _process(delta):
 	var areas = get_overlapping_areas()
 	
 	if areas.size() > 0:
@@ -42,21 +42,22 @@ func _process(_delta):
 				
 				if playerLikeLight == null:
 					continue
-
-				if playerLikeLight.color.r < 1.0:
-					playerLikeLight.color.r += lavityEmitter.color.r * ABSORBTION_MULT * lavityEmitter.energy
-					# lavityEmitter.color.r -= (lavityEmitter.color.r * ABSORBTION_MULT) / 2
-				if playerLikeLight.color.g < 1.0:
-					playerLikeLight.color.g += lavityEmitter.color.g * ABSORBTION_MULT * lavityEmitter.energy
-					# lavityEmitter.color.g -= (lavityEmitter.color.g * ABSORBTION_MULT) / 2
-				if playerLikeLight.color.b < 1.0:
-					playerLikeLight.color.b += lavityEmitter.color.b * ABSORBTION_MULT * lavityEmitter.energy
-					# lavityEmitter.color.b -= (lavityEmitter.color.b * ABSORBTION_MULT) / 2
+				
+				var rComponent = lavityEmitter.color.r * absorbtionMult * delta
+				var gComponent = lavityEmitter.color.g * absorbtionMult * delta
+				var bComponent = lavityEmitter.color.b * absorbtionMult * delta
+				
+				if playerLikeLight.color.r  + rComponent < 1.0:
+					playerLikeLight.color.r += rComponent
+				if playerLikeLight.color.g + gComponent < 1.0:
+					playerLikeLight.color.g += gComponent
+				if playerLikeLight.color.b  + bComponent < 1.0:
+					playerLikeLight.color.b += bComponent
 
 			# Gravity
 			var areaPosition = area.global_position
 			var distance = areaPosition.distance_to(Entity.global_position)
-			var magnitude = (lavityEmitter.energy * LAVITY) / (distance / DISTANCE_MULT)
+			var magnitude = (lavityEmitter.energy * lavity) / (distance / distanceMult)
 			
 			var areaToEntityVector: Vector2 = area.global_position.direction_to(Entity.global_position)
 			

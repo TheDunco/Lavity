@@ -35,6 +35,7 @@ z_index = 5
 position = Vector2(576, 292)
 scale = Vector2(0.2, 0.2)
 energy = 0.5
+canChangeColor = true
 
 [node name="Roamer" parent="." instance=ExtResource("7_j0bbl")]
 position = Vector2(198, 377)
@@ -61,6 +62,5 @@ acceleration = 3.0
 
 [node name="Player" parent="." instance=ExtResource("8_pgiwv")]
 position = Vector2(4, 7)
-UserMovementSpeed = 10
 
 [connection signal="mouse_light_visible_change" from="." to="Roamer" method="_on_menu_2d_mouse_light_visible_change"]

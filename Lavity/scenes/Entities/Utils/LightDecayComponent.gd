@@ -1,7 +1,7 @@
 extends Node2D
 
-const LIGHT_DECAY_MULT := 0.02
-const DECAY_THRESHOlD := 0.1
+@export var ligthDecayMult := 0.02
+@export var decayThreshold := 0.05
 
 var light: Light2D 
 
@@ -10,9 +10,9 @@ func _ready():
 
 func _process(delta):
 	if light.enabled:
-		if light.color.r > DECAY_THRESHOlD:
-			light.color.r -= LIGHT_DECAY_MULT * delta
-		if light.color.g > DECAY_THRESHOlD:
-			light.color.g -= LIGHT_DECAY_MULT * delta
-		if light.color.b > DECAY_THRESHOlD:
-			light.color.b -= LIGHT_DECAY_MULT * delta
+		if light.color.r > decayThreshold:
+			light.color.r -= ligthDecayMult * delta
+		if light.color.g > decayThreshold:
+			light.color.g -= ligthDecayMult * delta
+		if light.color.b > decayThreshold:
+			light.color.b -= ligthDecayMult * delta

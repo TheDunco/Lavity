@@ -2,7 +2,7 @@ extends Node2D
 class_name LavityLight
 
 @export var energy := 1.0
-@export var MaxRgb := GLOBAL_UTILS.MAX_RGB
+@export var MaxRgb := GLOBAL_UTILS.MAX_RAND_RGB
 @export var canChangeColor := false
 @export var randomizeColorOnReady := true
 @export var initColor: Color
