@@ -1,12 +1,23 @@
 extends CharacterBody2D
 class_name Player
 
-@export_range(0, 2) var spriteBasePosition = 0
 @export var worldEnvironment: WorldEnvironment
 
+@export_range(0, 2) var spriteBasePosition = 0
 @export var maxZoom := 0.3
+@export var lookThreshold := 50
+@export var baseMovementSpeed := 7
 
-var stats := {}
+var stats := {
+	"health": 0.5,
+	"damage" : 0.5,
+	"speed": 0.5,
+	"sonar": 0.5,
+	"stealth": 0.5,
+	"vision": 0.5,
+	"regeneration": 0.5,
+}
+
 var playerMovementSpeed := 20
 # TODO: Switch this to be a number representing the range at which the player can be seen by enemies thereby implementing stealth
 var isTrackableByEnemy: bool = true
@@ -63,7 +74,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 		statsPerColor[colorName] = score
 
 	# Map that to the stats
-	var stats := {
+	var statsToSet := {
 		"health": statsPerColor["red"],
 		"damage" : statsPerColor["orange"],
 		"speed": statsPerColor["green"],
@@ -73,7 +84,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 		"regeneration": statsPerColor["pink"],
 	}
 
-	return stats
+	return statsToSet
 	
 func _setAttributesFromStats():
 	# yellow/vision
@@ -82,12 +93,12 @@ func _setAttributesFromStats():
 	$"../PlayerFollowingPhantomCam".zoom.y = zoomLevel
 	
 	# green/speed
-	playerMovementSpeed = (stats["speed"] * 20) + 10
+	playerMovementSpeed = (stats["speed"] * 20) + baseMovementSpeed
 	
 func _process(delta):
 	# Look towards the direction of travel
-	if abs(velocity.x) > 0.1 and abs(velocity.y) > 0.1:
-		look_at(velocity + global_position)
+	if abs(velocity.x) > lookThreshold and abs(velocity.y) > lookThreshold:
+		look_at(velocity.normalized() + position)
 		
 	# Pulse the player light
 	if $PlayerLight.enabled:

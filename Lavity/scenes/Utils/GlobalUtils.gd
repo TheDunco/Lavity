@@ -1,5 +1,5 @@
 extends Node
-class_name GlobalUtilsClass
+class_name GlobalUtils
 
 const MAX_RAND_RGB := 7.0
 const MIN_RAND_RGB := 0.0

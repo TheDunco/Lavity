@@ -1,20 +1,22 @@
 extends Control
 class_name Menu
 
-var newConfig = ConfigFile.new()
-var configFile = newConfig.load(GLOBAL.SETTINGS_SAVE_PATH)
 @export var player: Player = null
 @export var snake: CharacterBody2D = null
 
 func loadOptions():
-	var brightness = newConfig.get_value("MAIN", "BRIGHTNESS")
+	var brightness = GLOBAL.getSetting("BRIGHTNESS")
 	if brightness and brightness > 0:
 		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider.value = brightness
+		$"../../WorldEnvironment".environment.adjustment_brightness = brightness
 		
 	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
 
 func _ready():
 	loadOptions()
+	
+func _exit_tree() -> void:
+	GLOBAL._saveSettings()
 
 # Main Menu
 func _on_play_pressed():
@@ -39,18 +41,19 @@ func _on_next_song_pressed():
 func _on_options_back_pressed():
 	$Options.hide()
 	$AspectRatioContainer.show()
-	newConfig.save(GLOBAL.SETTINGS_SAVE_PATH)
+	GLOBAL._saveSettings()
 
 func _on_brightness_slider_value_changed(value):
-	newConfig.set_value("MAIN", "BRIGTHNESS", value)
+	GLOBAL.setSetting("BRIGHTNESS", value)
 	$"../../WorldEnvironment".environment.adjustment_brightness = value
 
 func _on_volume_slider_value_changed(value):
+	var masterBusIndex = AudioServer.get_bus_index("Master")
 	if value == $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.min_value:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+		AudioServer.set_bus_mute(masterBusIndex, true)
 	else:
-		AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
-		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), value)
+		AudioServer.set_bus_mute(masterBusIndex, false)
+		AudioServer.set_bus_volume_db(masterBusIndex, value)
 
 func _on_procedural_snake_pressed():
 	snake.visible = not snake.visible

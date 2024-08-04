@@ -1,6 +1,6 @@
 {
 	"nodes":[
-		{"id":"a09fd3a2f4e7b248","x":1119,"y":302,"width":250,"height":60,"type":"text","text":""},
+		{"id":"a09fd3a2f4e7b248","type":"text","text":"","x":1119,"y":302,"width":250,"height":60},
 		{"id":"984ebd485e0bfe9f","type":"text","text":"# Absorption+","x":1195,"y":546,"width":250,"height":60,"color":"#ffffff"},
 		{"id":"815dba8470056617","type":"text","text":"# Health","x":1040,"y":-40,"width":250,"height":60,"color":"#e3181a"},
 		{"id":"14596dce75133f3a","type":"text","text":"# ","x":1360,"y":-40,"width":250,"height":60,"color":"#f4a400"},

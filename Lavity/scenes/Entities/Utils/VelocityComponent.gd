@@ -2,10 +2,12 @@ extends Node2D
 
 @export var Entity: CharacterBody2D = null
 
+@export_category("Velocity Config")
 @export var speedMultiplier := 20
 @export var airResistance := 5
-@export var maxVelocity := 1000
+@export var overspeedThreshold := 1000
 @export var overspeedDamping := 10
+@export var maxVelocity := 1500
 
 var flippingSprite: Node2D = null
 
@@ -23,6 +25,7 @@ func getAnimationSpeed(velo: Vector2):
 func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.velocity):
 	var currVelocity := entity.velocity
 
+	# Handle air resistance
 	if currVelocity.x > 0 and currVelocity.x - airResistance > 0:
 		velocity.x -= airResistance
 	elif currVelocity.x < 0 and currVelocity.x + airResistance < 0:
@@ -33,22 +36,34 @@ func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.
 	elif velocity.y < 0 and currVelocity.y + airResistance < 0:
 		velocity.y += airResistance
 
-	if velocity.x > maxVelocity:
-		velocity.x -= (overspeedDamping + (velocity.x - maxVelocity))
-	elif velocity.x < - maxVelocity:
-		velocity.x -= (overspeedDamping + (velocity.x + maxVelocity))
+	# Handle overspeed threshold
+	if velocity.x > overspeedThreshold:
+		velocity.x -= (overspeedDamping + (velocity.x - overspeedThreshold))
+	elif velocity.x < - overspeedThreshold:
+		velocity.x -= (overspeedDamping + (velocity.x + overspeedThreshold))
 
+	if velocity.y > overspeedThreshold:
+		velocity.y += (overspeedDamping + (velocity.y - overspeedThreshold))
+	elif velocity.y < - overspeedThreshold:
+		velocity.y -= - (overspeedDamping + (velocity.y + overspeedThreshold))
+	
+	# Handle max velocity
+	if velocity.x > maxVelocity:
+		velocity.x = maxVelocity
+	elif velocity.x < -maxVelocity:
+		velocity.x = -maxVelocity
+	
 	if velocity.y > maxVelocity:
-		velocity.y += (overspeedDamping + (velocity.y - maxVelocity))
-	elif velocity.y < - maxVelocity:
-		velocity.y += - (overspeedDamping + (velocity.y + maxVelocity))
+		velocity.y = maxVelocity
+	elif velocity.y < -maxVelocity:
+		velocity.y = -maxVelocity
+	
 	return velocity
 	
 func _process(_delta):
 	if flippingSprite != null:
-		if Entity.velocity.x > 0:
-			flippingSprite.flip_v = false
-			flippingSprite.flip_v = false
-		elif Entity.velocity.x < 0:
+		var rotation = Entity.rotation
+		if cos(rotation) < 0:
 			flippingSprite.flip_v = true
-			flippingSprite.flip_v = true
+		else:
+			flippingSprite.flip_v = false

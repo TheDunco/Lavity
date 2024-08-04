@@ -14,7 +14,7 @@ config/name="Lavity"
 config/version="0.0.19"
 run/main_scene="res://scenes/Ui/Menu2D.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://assets/good-boyo-chibi.png"
+config/icon="res://assets/cosmo.png"
 config/default_gravity=0.0
 
 [audio]
