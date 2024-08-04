@@ -97,7 +97,7 @@ func _setAttributesFromStats():
 	
 func _process(delta):
 	# Look towards the direction of travel
-	if abs(velocity.x) > lookThreshold and abs(velocity.y) > lookThreshold:
+	if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
 		look_at(velocity.normalized() + position)
 		
 	# Pulse the player light
