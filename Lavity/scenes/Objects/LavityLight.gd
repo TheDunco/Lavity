@@ -5,7 +5,7 @@ class_name LavityLight
 @export var MaxRgb := GLOBAL_UTILS.MAX_RAND_RGB
 @export var canChangeColor := false
 @export var randomizeColorOnReady := true
-@export var initColor: Color
+@export_color_no_alpha var initColor: Color
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
