@@ -1,11 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://br4oisj0kpf2q"]
+[gd_scene load_steps=11 format=3 uid="uid://br4oisj0kpf2q"]
 
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
+[ext_resource type="StyleBox" uid="uid://dldp3dbs1imkr" path="res://scenes/Ui/Theme/ButtonHover.tres" id="2_aytpv"]
+[ext_resource type="StyleBox" uid="uid://bu3scftnt3y7p" path="res://scenes/Ui/Theme/ButtonNormal.tres" id="2_oop8y"]
+[ext_resource type="StyleBox" uid="uid://cwryjdych647e" path="res://scenes/Ui/Theme/ButtonPress.tres" id="3_n00ye"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p6upt"]
 shader = ExtResource("1_a310j")
 shader_parameter/displacement = 3.0
+
+[sub_resource type="Theme" id="Theme_d7y4k"]
+Button/styles/hover = ExtResource("2_aytpv")
+Button/styles/normal = ExtResource("2_oop8y")
+Button/styles/pressed = ExtResource("3_n00ye")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wsqbv"]
 shader = ExtResource("1_a310j")
@@ -25,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_d7y4k")
 script = ExtResource("1_aei6w")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
