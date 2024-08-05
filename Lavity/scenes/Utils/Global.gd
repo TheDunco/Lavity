@@ -24,4 +24,3 @@ func _saveSettings():
 	
 func _exit_tree() -> void:
 	_saveSettings()
-	

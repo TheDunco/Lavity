@@ -53,3 +53,12 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 
 	# Calculate the score based on the average difference
 	return 1.0 - avgDiff
+	
+func getPlayerLikeLight(entity: CharacterBody2D) -> PointLight2D:
+	if entity is Player:
+		return entity.find_child("PlayerLight", false)
+	elif entity is Roamer:
+		return entity.find_child("RandColorLight", false)
+	elif entity is Enemy:
+		return entity.find_child("LavityLightLight")
+	return null

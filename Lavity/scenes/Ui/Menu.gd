@@ -9,15 +9,11 @@ func loadOptions():
 	if brightness and brightness > 0:
 		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider.value = brightness
 		$"../../WorldEnvironment".environment.adjustment_brightness = brightness
-		
-	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
 
 func _ready():
 	loadOptions()
+	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
 	
-func _exit_tree() -> void:
-	GLOBAL._saveSettings()
-
 # Main Menu
 func _on_play_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/TestWorld.tscn")
@@ -26,10 +22,6 @@ func _on_play_pressed():
 func _on_options_pressed():
 	$Options.show()
 	$AspectRatioContainer.hide()
-	
-func _on_summon_player_pressed():
-	player.position = $AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer.global_position
-	player.velocity = Vector2.ZERO
 
 func _on_quit_pressed():
 	GameFlow.quit()
@@ -48,7 +40,7 @@ func _on_brightness_slider_value_changed(value):
 	$"../../WorldEnvironment".environment.adjustment_brightness = value
 
 func _on_volume_slider_value_changed(value):
-	var masterBusIndex = AudioServer.get_bus_index("Master")
+	var masterBusIndex := AudioServer.get_bus_index("Master")
 	if value == $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.min_value:
 		AudioServer.set_bus_mute(masterBusIndex, true)
 	else:

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7avjve2gyt4y"]
-
-[ext_resource type="Script" path="res://scenes/Entities/Utils/LightAbsorptionComponent.gd" id="1_qie1j"]
-
-[node name="LightAbsorptionComponent" type="Node2D"]
-script = ExtResource("1_qie1j")

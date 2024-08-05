@@ -2,14 +2,15 @@ extends CharacterBody2D
 class_name Roamer
 
 @export var acceleration := 10.0
-var shouldChaseMouse := true
+@export var shouldChaseMouse := true
+@export var distanceMult := 1.0/100.0
 
 func chaseMouse():
 	var mousePos = get_global_mouse_position()
 	var direction = global_position.direction_to(mousePos)
 	look_at(mousePos)
 	var distanceToMouse = global_position.distance_to(mousePos)
-	velocity += direction * (acceleration + distanceToMouse / 100)
+	velocity += direction * (acceleration + distanceToMouse * distanceMult)
 	
 func randomizeColor():
 	$RandColorLight.color = GLOBAL_UTILS.randColor()

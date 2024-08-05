@@ -3,10 +3,14 @@ class_name Player
 
 @export var worldEnvironment: WorldEnvironment
 
+@export_category("Player Config")
 @export_range(0, 2) var spriteBasePosition = 0
 @export var maxZoom := 0.3
 @export var lookThreshold := 50
 @export var baseMovementSpeed := 7
+@export var cameraBaseZoom := 1.35
+
+const BASE_MOVEMENT_SPEED := 20
 
 var stats := {
 	"health": 0.5,
@@ -18,7 +22,7 @@ var stats := {
 	"regeneration": 0.5,
 }
 
-var playerMovementSpeed := 20
+var playerMovementSpeed := BASE_MOVEMENT_SPEED
 # TODO: Switch this to be a number representing the range at which the player can be seen by enemies thereby implementing stealth
 var isTrackableByEnemy: bool = true
 
@@ -88,12 +92,12 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	
 func _setAttributesFromStats():
 	# yellow/vision
-	var zoomLevel: float = max(1.35 - stats["vision"], maxZoom)
+	var zoomLevel: float = max(cameraBaseZoom - stats["vision"], maxZoom)
 	$"../PlayerFollowingPhantomCam".zoom.x = zoomLevel
 	$"../PlayerFollowingPhantomCam".zoom.y = zoomLevel
 	
 	# green/speed
-	playerMovementSpeed = (stats["speed"] * 20) + baseMovementSpeed
+	playerMovementSpeed = (stats["speed"] * BASE_MOVEMENT_SPEED) + baseMovementSpeed
 	
 func _process(delta):
 	# Look towards the direction of travel

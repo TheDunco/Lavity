@@ -32,7 +32,6 @@ script = ExtResource("1_3eh5j")
 [node name="VelocityComponent" type="Node2D" parent="." node_paths=PackedStringArray("Entity")]
 script = ExtResource("2_7iob0")
 Entity = NodePath("..")
-MaxVelocity = 900
 
 [node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_sv1bu")

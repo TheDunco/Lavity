@@ -1,4 +1,5 @@
 extends Node2D
+class_name LightDecayComponent
 
 @export var ligthDecayMult := 0.02
 @export var decayThreshold := 0.05

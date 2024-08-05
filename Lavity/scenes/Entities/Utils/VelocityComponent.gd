@@ -1,4 +1,5 @@
 extends Node2D
+class_name VelocityComponent
 
 @export var Entity: CharacterBody2D = null
 
@@ -8,6 +9,10 @@ extends Node2D
 @export var overspeedThreshold := 1000
 @export var overspeedDamping := 10
 @export var maxVelocity := 1500
+
+@export_category("Sprite Effect Config")
+@export var animationSpeedVeloMult := 100.0
+@export var animationSpeedVeloTamingConst := 7.0
 
 var flippingSprite: Node2D = null
 
@@ -19,10 +24,10 @@ func getAnimationSpeed(velo: Vector2):
 	var combinedVelocity: float = abs(velo.x) + abs(velo.y)
 
 	if combinedVelocity > 0.0:
-		return log(combinedVelocity * 100) - 7.0
+		return log(combinedVelocity * animationSpeedVeloMult) - animationSpeedVeloTamingConst
 	return 0.0
 
-func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.velocity):
+func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.velocity) -> Vector2:
 	var currVelocity := entity.velocity
 
 	# Handle air resistance

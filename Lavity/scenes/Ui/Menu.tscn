@@ -82,10 +82,6 @@ layout_mode = 2
 theme_override_fonts/font = SubResource("SystemFont_fsfaq")
 text = "Options"
 
-[node name="SummonPlayer" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Summon Cosmo"
-
 [node name="Procedural Snake" type="Button" parent="AspectRatioContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -175,7 +171,6 @@ text = "Back"
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/SummonPlayer" to="." method="_on_summon_player_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Procedural Snake" to="." method="_on_procedural_snake_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Next Song" to="." method="_on_next_song_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

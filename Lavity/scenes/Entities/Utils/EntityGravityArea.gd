@@ -1,27 +1,22 @@
 extends Area2D
+class_name EntityGravityArea
 
+@export var Entity: CharacterBody2D = null
+
+@export_category("Gravity")
 # The force of gravity emitted by the light
 @export var lavity := 9.8 * 2
 @export var distanceMult := 75
 
-@export var Entity: CharacterBody2D = null
+@export_category("Color Absorbption")
+@export var absorbtionMult := 0.2
+
 var isEntityInGravityArea := false
 var isPlayerLike := false
-
-@export var absorbtionMult := 0.2
 
 func _ready():
 	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy
 	assert(Entity != null)
-
-func getPlayerLikeLight() -> PointLight2D:
-	if Entity is Player:
-		return Entity.find_child("PlayerLight", false)
-	elif Entity is Roamer:
-		return Entity.find_child("RandColorLight", false)
-	elif Entity is Enemy:
-		return Entity.find_child("LavityLightLight")
-	return null
 
 func _process(delta):
 	var areas = get_overlapping_areas()
@@ -38,7 +33,7 @@ func _process(delta):
 
 				
 			if isPlayerLike:
-				var playerLikeLight = getPlayerLikeLight()
+				var playerLikeLight = GLOBAL_UTILS.getPlayerLikeLight(Entity)
 				
 				if playerLikeLight == null:
 					continue
