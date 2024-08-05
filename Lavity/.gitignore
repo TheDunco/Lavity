@@ -16,3 +16,5 @@ mono_crash.*.json
 
 assets
 addons
+
+.vscode/settings.json

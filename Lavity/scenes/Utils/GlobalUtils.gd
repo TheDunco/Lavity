@@ -43,7 +43,7 @@ func randColor(maxRgb := MAX_RAND_RGB) -> Color:
 
 # Given two colors, return a score of how similar they are
 func scoreColorLikeness(color1: Color, color2: Color) -> float:
-	# Calculate the difference between the RGB values of the two colorswwwwwwwwww
+	# Calculate the difference between the RGB values of the two colors
 	var rDiff = abs(color1.r - color2.r)
 	var gDiff = abs(color1.g - color2.g)
 	var bDiff = abs(color1.b - color2.b)
