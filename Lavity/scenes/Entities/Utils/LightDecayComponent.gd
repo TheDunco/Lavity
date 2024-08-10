@@ -4,10 +4,7 @@ class_name LightDecayComponent
 @export var ligthDecayMult := 0.02
 @export var decayThreshold := 0.05
 
-var light: Light2D 
-
-func _ready():
-	light = get_parent()
+@onready var light: Light2D = get_parent()
 
 func _process(delta):
 	if light.enabled:

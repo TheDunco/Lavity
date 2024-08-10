@@ -7,13 +7,18 @@ class_name Player
 @export_range(0, 2) var spriteBasePosition = 0
 @export var maxZoom := 0.3
 @export var lookThreshold := 50
-@export var baseMovementSpeed := 7
 @export var cameraBaseZoom := 1.35
 
-const BASE_MOVEMENT_SPEED := 20
+@export_category("Player Stats")
+@export var baseMovementSpeed := 7
+@export var movementSpeedMult := 20
+@export var baseTrackableDistance := 2500.0
+
+const STEALTH_FLASHLIGHT_CUTOFF := 0.85
+@export var SUM_DAMAGE_CUTOFF := 0.01
 
 var stats := {
-	"health": 0.5,
+	"damageReduction": 0.5,
 	"damage" : 0.5,
 	"speed": 0.5,
 	"sonar": 0.5,
@@ -22,9 +27,9 @@ var stats := {
 	"regeneration": 0.5,
 }
 
-var playerMovementSpeed := BASE_MOVEMENT_SPEED
-# TODO: Switch this to be a number representing the range at which the player can be seen by enemies thereby implementing stealth
+var playerMovementSpeed := movementSpeedMult
 var isTrackableByEnemy: bool = true
+var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
 	$PlayerLight.color = Color(0.5, 0.5, 0.5)
@@ -57,8 +62,12 @@ func handleInput():
 			else:
 				$FlippingSprite.frame += 1
 	
-	if Input.is_action_just_pressed("toggle_flashlight"):
-		$PlayerLight.enabled = not $PlayerLight.enabled
+	if Input.is_action_just_pressed("toggle_flashlight") :
+		if $PlayerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
+			$PlayerLight.enabled = false
+		else:
+			$PlayerLight.enabled = true
+
 		isTrackableByEnemy = $PlayerLight.enabled
 		
 
@@ -79,7 +88,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 
 	# Map that to the stats
 	var statsToSet := {
-		"health": statsPerColor["red"],
+		"damageReduction": statsPerColor["red"],
 		"damage" : statsPerColor["orange"],
 		"speed": statsPerColor["green"],
 		"sonar": statsPerColor["blue"],
@@ -97,9 +106,63 @@ func _setAttributesFromStats():
 	$"../PlayerFollowingPhantomCam".zoom.y = zoomLevel
 	
 	# green/speed
-	playerMovementSpeed = (stats["speed"] * BASE_MOVEMENT_SPEED) + baseMovementSpeed
+	playerMovementSpeed = (stats["speed"] * movementSpeedMult) + baseMovementSpeed
+
+	# purple/stealth
+	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance
+
+func setChromaticAbberration(on: bool) -> void:
+	$FlippingSprite.use_parent_material = !on
+	
+func takeDamage(damage := 0.01) -> void:
+	var reduction = stats["damageReduction"]/500
+	damage = damage - reduction
+	if damage <= 0:
+		return
+	
+	setChromaticAbberration(true)
+	$DamageEffectsTimer.start()
+	
+	var playerLightColor = $PlayerLight.color
+
+	var numColorsThatCanTakeDamage := 0
+	var rCanTakeDamage = playerLightColor.r > 0
+	var gCanTakeDamage = playerLightColor.g > 0
+	var bCanTakeDamage = playerLightColor.b > 0
+
+	if rCanTakeDamage:
+		numColorsThatCanTakeDamage += 1
+	if gCanTakeDamage:
+		numColorsThatCanTakeDamage += 1
+	if bCanTakeDamage:
+		numColorsThatCanTakeDamage += 1
+
+	
+	if rCanTakeDamage:
+		playerLightColor.r -= damage / numColorsThatCanTakeDamage
+		playerLightColor.r = max(playerLightColor.r, 0)
+	
+	if gCanTakeDamage:
+		playerLightColor.g -= damage / numColorsThatCanTakeDamage
+		playerLightColor.g = max(playerLightColor.g, 0)
+
+	if bCanTakeDamage:
+		playerLightColor.b -= damage / numColorsThatCanTakeDamage
+		playerLightColor.b = max(playerLightColor.b, 0)
+	
+	if GLOBAL_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
+		$DeathTimer.start()
+		scale = Vector2(0.5, 0.4)
+	
+	$PlayerLight.color = playerLightColor
+
+	
 	
 func _process(delta):
+	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF:
+		scale = Vector2(1, 1)
+		$DeathTimer.stop()
+	
 	# Look towards the direction of travel
 	if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
 		look_at(velocity.normalized() + position)
@@ -107,6 +170,8 @@ func _process(delta):
 	# Pulse the player light
 	if $PlayerLight.enabled:
 		$PlayerLight.energy += getPulseTime(delta) / 100
+		
+	# Make the player visible if they are collecting color
 	if $GravityArea.isEntityInGravityArea:
 		isTrackableByEnemy = true
 	else:
@@ -119,4 +184,9 @@ func _physics_process(_delta):
 	handleInput()
 	velocity = $VelocityComponent.handleExistingVelocity(self)
 	move_and_slide()
-	
+
+func _on_damage_effects_timer_timeout() -> void:
+	setChromaticAbberration(false)
+
+func _on_death_timer_timeout() -> void:
+	GameFlow.gameOver()

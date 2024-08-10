@@ -53,6 +53,9 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 
 	# Calculate the score based on the average difference
 	return 1.0 - avgDiff
+
+func sumColor(color: Color) -> float:
+	return color.r + color.g + color.b
 	
 func getPlayerLikeLight(entity: CharacterBody2D) -> PointLight2D:
 	if entity is Player:

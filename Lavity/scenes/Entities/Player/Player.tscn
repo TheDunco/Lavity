@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=17 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -13,8 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="11_c7gky"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 28.0
-height = 94.0
+radius = 22.0
+height = 66.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -33,13 +33,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_2kxv7"]
+[sub_resource type="Gradient" id="Gradient_gjhgk"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.00333333, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.513233, 0.513233, 0.513233, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rtjsw"]
-gradient = SubResource("Gradient_2kxv7")
+gradient = SubResource("Gradient_gjhgk")
 width = 1000
 height = 1000
 fill = 1
@@ -47,11 +47,23 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jw6a"]
+radius = 29.0
+height = 92.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
 position = Vector2(0, 1)
 collision_layer = 0
 script = ExtResource("1_jm2c2")
+
+[node name="DamageEffectsTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
@@ -59,7 +71,7 @@ airResistance = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-position = Vector2(-2, -1)
+position = Vector2(4, 7)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_uyvyt")
 debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
@@ -81,16 +93,16 @@ sprite_frames = SubResource("SpriteFrames_yn8d8")
 frame_progress = 0.98357
 script = ExtResource("8_j118b")
 
-[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("6_bki26")]
+[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
 Entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(-2, -1)
+position = Vector2(4, 7)
 rotation = 1.5708
 shape = ExtResource("7_vlmlf")
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
-position = Vector2(-7.62939e-06, -1)
+position = Vector2(-2.28882e-05, -0.999992)
 scale = Vector2(0.18, 0.18)
 color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2
@@ -100,3 +112,15 @@ texture = SubResource("GradientTexture2D_rtjsw")
 [node name="LightDecayComponent" parent="PlayerLight" instance=ExtResource("11_c7gky")]
 scale = Vector2(5.88235, 6.66667)
 ligthDecayMult = 0.05
+
+[node name="DamageableArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageableArea"]
+position = Vector2(2, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1jw6a")
+
+[connection signal="timeout" from="DamageEffectsTimer" to="." method="_on_damage_effects_timer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

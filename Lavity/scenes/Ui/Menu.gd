@@ -12,7 +12,7 @@ func loadOptions():
 
 func _ready():
 	loadOptions()
-	$AspectRatioContainer/MarginContainer/VBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
+	$AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
 	
 # Main Menu
 func _on_play_pressed():

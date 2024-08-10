@@ -4,6 +4,7 @@ extends Node2D
 # https://www.youtube.com/watch?v=RMdf60IAxY0
 
 var current_scene: Node = null
+var toastText := ""
 
 func _ready():
 	var root = get_tree().root
@@ -28,3 +29,6 @@ func _unhandled_input(event):
 		if current_scene.name == "Menu2D":
 			quit()
 		switchScene("res://scenes/Ui/Menu2D.tscn")
+
+func gameOver():
+	switchScene("res://scenes/Ui/Menu2D.tscn")

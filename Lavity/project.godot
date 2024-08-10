@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lavity"
-config/version="0.0.20"
+config/version="0.0.21"
 run/main_scene="res://scenes/Ui/Menu2D.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://assets/cosmo.png"
@@ -39,6 +39,10 @@ window/stretch/aspect="expand"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
+
+[global_group]
+
+Player=""
 
 [input]
 
@@ -93,6 +97,7 @@ next_song={
 2d_render/layer_1="Light"
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Gravity"
+2d_physics/layer_3="Damage"
 
 [physics]
 

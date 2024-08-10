@@ -8,7 +8,7 @@ var settingsConfig = ConfigFile.new()
 var _loadOk = settingsConfig.load(SETTINGS_SAVE_PATH)
 
 func getSetting(key: String):
-	print(settingsConfig.encode_to_text())
+	# print(settingsConfig.encode_to_text())
 	var val = settingsConfig.get_value(_SETTINGS_SECTION, key)
 	if not val:
 		print("failed to get setting ", key)

@@ -15,7 +15,7 @@ var isEntityInGravityArea := false
 var isPlayerLike := false
 
 func _ready():
-	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy
+	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy or Entity
 	assert(Entity != null)
 
 func _process(delta):

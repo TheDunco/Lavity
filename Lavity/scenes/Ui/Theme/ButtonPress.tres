@@ -3,8 +3,8 @@
 [resource]
 content_margin_top = 7.0
 content_margin_bottom = 7.0
-bg_color = Color(0.522965, 0.616374, 0.671848, 1)
-border_width_bottom = 3
+bg_color = Color(0, 0, 0, 1)
+border_color = Color(0, 0, 0, 0)
 border_blend = true
 corner_radius_top_left = 10
 corner_radius_top_right = 10

@@ -6,6 +6,8 @@ class_name Enemy
 @export var Acceleration := 3.0
 @export var playAnimatedSprite := true
 
+@export var damageMult := 0.01
+
 func _ready():
 	if playAnimatedSprite:
 		$FlippingSprite.play()
@@ -21,10 +23,10 @@ func moveTowardPlayer():
 	
 func _process(_delta):
 	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
-	
 
 func _physics_process(_delta):
-	if player.isTrackableByEnemy:
+	var distanceToPlayer = global_position.distance_to(player.global_position)
+	if player.isTrackableByEnemy and distanceToPlayer < player.trackableDistance:
 		moveTowardPlayer()
 	
 	move_and_slide()

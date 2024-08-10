@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsyg8i2o7exhs"]
+
+[ext_resource type="Script" path="res://scenes/Entities/Utils/FlippingSpriteComponent.gd" id="1_1uo8m"]
+
+[node name="FlippingSpriteComponent" type="Node"]
+script = ExtResource("1_1uo8m")
