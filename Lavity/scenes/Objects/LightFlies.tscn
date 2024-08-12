@@ -1,14 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://b0ytc126gjf4r"]
+[gd_scene load_steps=8 format=3 uid="uid://b0ytc126gjf4r"]
 
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="1_ip5e4"]
-[ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="2_scvxq"]
 [ext_resource type="Texture2D" uid="uid://c0r5a7ob3pj8c" path="res://assets/Point Lights/Lightfly.png" id="4_p0ey0"]
 [ext_resource type="Script" path="res://scenes/Objects/LightFlyParticles.gd" id="5_ki4tr"]
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="5_tly4q"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_jjyu6"]
-shader = ExtResource("2_scvxq")
-shader_parameter/displacement = 3.0
 
 [sub_resource type="Curve" id="Curve_dxnuv"]
 min_value = -0.75
@@ -28,7 +23,7 @@ point_count = 2
 [node name="LightFlies" type="Node2D"]
 
 [node name="LavityLight" parent="." instance=ExtResource("1_ip5e4")]
-material = SubResource("ShaderMaterial_jjyu6")
+randomizeColorOnReady = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 modulate = Color(0.463856, 0.000194641, 0.479988, 0.47451)

@@ -1,0 +1,155 @@
+[gd_scene load_steps=14 format=3 uid="uid://djqoum5472ui7"]
+
+[ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="1_fgad0"]
+[ext_resource type="Texture2D" uid="uid://cms5vxkwddxkj" path="res://assets/Backgrounds/streetlamps_texture.png" id="2_7efv8"]
+[ext_resource type="Texture2D" uid="uid://b3ijhmqciyaqf" path="res://assets/Backgrounds/bg-warped-buildings.png" id="2_sr3ci"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="3_08e7e"]
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="4_qkn0n"]
+[ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="5_ko015"]
+[ext_resource type="PackedScene" uid="uid://cikbfevvqein8" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.tscn" id="7_v38gk"]
+[ext_resource type="PackedScene" uid="uid://b0ytc126gjf4r" path="res://scenes/Objects/LightFlies.tscn" id="8_p2hde"]
+
+[sub_resource type="Environment" id="Environment_t2yug"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_intensity = 2.04
+glow_strength = 1.54
+glow_bloom = 0.02
+glow_blend_mode = 1
+adjustment_brightness = 1.96
+adjustment_contrast = 2.88
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h47dt"]
+distance = -6580.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mymw"]
+normal = Vector2(0, 1)
+distance = -206.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3x51u"]
+normal = Vector2(1, 0)
+distance = -206.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ihrqo"]
+normal = Vector2(-1, 0)
+distance = -9728.0
+
+[node name="Buildings" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t2yug")
+
+[node name="CanvasModulateDarkness" parent="." instance=ExtResource("1_fgad0")]
+position = Vector2(468, 261)
+scale = Vector2(1, 1)
+color = Color(0, 0, 0, 0.905882)
+
+[node name="BackgroundSpace" type="Sprite2D" parent="."]
+clip_children = 2
+z_index = -1
+position = Vector2(-11282, -7564)
+scale = Vector2(11.0208, 7.48254)
+texture = ExtResource("2_7efv8")
+
+[node name="BackgroundSpace2" type="Sprite2D" parent="."]
+clip_children = 2
+z_index = -1
+position = Vector2(11287, -7655)
+scale = Vector2(11.0208, 7.48254)
+texture = ExtResource("2_7efv8")
+metadata/_edit_lock_ = true
+
+[node name="BackgroundSpace3" type="Sprite2D" parent="."]
+clip_children = 2
+z_index = -1
+position = Vector2(20616, 7641)
+scale = Vector2(11.0208, 7.48254)
+texture = ExtResource("2_7efv8")
+metadata/_edit_lock_ = true
+
+[node name="BackgroundSpace4" type="Sprite2D" parent="."]
+clip_children = 2
+z_index = -1
+position = Vector2(-11282, 7760)
+scale = Vector2(11.0208, 7.48254)
+texture = ExtResource("2_7efv8")
+metadata/_edit_lock_ = true
+
+[node name="BackgroundSpace5" type="Sprite2D" parent="."]
+clip_children = 2
+z_index = -1
+position = Vector2(4681, 17518)
+scale = Vector2(4.56836, 10.9737)
+texture = ExtResource("2_7efv8")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(4667, 3144)
+scale = Vector2(9.10938, 6.08043)
+texture = ExtResource("2_sr3ci")
+metadata/_edit_lock_ = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Background"]
+process_mode = 4
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/StaticBody2D"]
+position = Vector2(-512, -516.329)
+scale = Vector2(0.109777, 0.164462)
+polygon = PackedVector2Array(339, 2826, 333, 2855, 368, 2861, 364, 2985, 155, 2998, 161, 3061, 304, 3077, 460, 3204, 593, 3233, 625, 3347, 669, 3372, 669, 3433, 698, 3430, 714, 3376, 749, 3350, 761, 3252, 745, 3182, 857, 3214, 907, 3318, 901, 3487, 507, 3499, 495, 3544, 387, 3563, 387, 3611, 285, 3617, 298, 3690, 326, 3706, 323, 3738, 418, 3760, 457, 3906, 523, 3922, 533, 4080, 507, 4122, 526, 4173, 577, 4176, 574, 4252, 612, 4271, 603, 4471, 612, 4509, 653, 4455, 660, 4525, 644, 4541, 644, 4607, 599, 4633, 603, 4684, 676, 4715, 749, 4728, 825, 4731, 901, 4792, 920, 4877, 891, 4915, 882, 4933, 958, 4946, 952, 5066, 1012, 5193, 1025, 5250, 1070, 5276, 1117, 5241, 1120, 5174, 1197, 5184, 1232, 5174, 1238, 5130, 1190, 5095, 1193, 5050, 1355, 5050, 1355, 4971, 1346, 4879, 1559, 4746, 1593, 4765, 1625, 4761, 1641, 4669, 1451, 4625, 1438, 4311, 2030, 4288, 2133, 4066, 1959, 4028, 1965, 3895, 1898, 3825, 1771, 3815, 1771, 3692, 1797, 3644, 1984, 3657, 2025, 3577, 1743, 3558, 1739, 3431, 1339, 3412, 1339, 3247, 1568, 3180, 1590, 3092, 1762, 3111, 1787, 3015, 1676, 2974, 1679, 2857, 1647, 2774, 1505, 2784, 1438, 2771, 1393, 2704, 1317, 2618, 1282, 2717, 854, 2723, 822, 2777)
+
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("3_08e7e")]
+position = Vector2(669, 408)
+worldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("4_qkn0n")]
+position = Vector2(669, 408)
+follow_target = NodePath("../Player")
+
+[node name="LLSoft" parent="." instance=ExtResource("5_ko015")]
+position = Vector2(1930, 2936)
+initColor = Color(0.838897, 0.838897, 0.838897, 1)
+
+[node name="LLRed" parent="." instance=ExtResource("5_ko015")]
+position = Vector2(1066, 5236)
+initColor = Color(0.99, 0, 0, 1)
+
+[node name="LLGreen" parent="." instance=ExtResource("5_ko015")]
+position = Vector2(4720, 3144)
+initColor = Color(0.0524999, 0.63, 0, 1)
+
+[node name="LLYellow" parent="." instance=ExtResource("5_ko015")]
+position = Vector2(1430, 909)
+energy = 2.0
+initColor = Color(1, 0.967333, 0.02, 1)
+
+[node name="BackgroundVisibilityLight" type="DirectionalLight2D" parent="."]
+position = Vector2(0.000488281, 0.000244141)
+scale = Vector2(1, 1)
+color = Color(0.0338533, 0.0338533, 0.0338533, 1)
+energy = 0.04
+blend_mode = 2
+
+[node name="WorldBorder" type="StaticBody2D" parent="."]
+
+[node name="Bottom" type="CollisionShape2D" parent="WorldBorder"]
+shape = SubResource("WorldBoundaryShape2D_h47dt")
+
+[node name="Top" type="CollisionShape2D" parent="WorldBorder"]
+shape = SubResource("WorldBoundaryShape2D_7mymw")
+
+[node name="Left" type="CollisionShape2D" parent="WorldBorder"]
+shape = SubResource("WorldBoundaryShape2D_3x51u")
+
+[node name="Right" type="CollisionShape2D" parent="WorldBorder"]
+shape = SubResource("WorldBoundaryShape2D_ihrqo")
+
+[node name="Lanternfly" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_v38gk")]
+position = Vector2(1524, 5294)
+player = NodePath("../Player")
+Acceleration = 7.0
+
+[node name="LightFlies" parent="." instance=ExtResource("8_p2hde")]
+position = Vector2(1758, 4764)

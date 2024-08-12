@@ -4,7 +4,7 @@ class_name LavityLight
 @export var energy := 1.0
 @export var MaxRgb := GLOBAL_UTILS.MAX_RAND_RGB
 @export var canChangeColor := false
-@export var randomizeColorOnReady := true
+@export var randomizeColorOnReady := false
 @export_color_no_alpha var initColor: Color
 
 # Called when the node enters the scene tree for the first time.

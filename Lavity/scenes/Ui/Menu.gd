@@ -8,7 +8,7 @@ func loadOptions():
 	var brightness = GLOBAL.getSetting("BRIGHTNESS")
 	if brightness and brightness > 0:
 		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider.value = brightness
-		$"../../WorldEnvironment".environment.adjustment_brightness = brightness
+		#$"../../WorldEnvironment".environment.adjustment_brightness = brightness
 
 func _ready():
 	loadOptions()
@@ -16,7 +16,7 @@ func _ready():
 	
 # Main Menu
 func _on_play_pressed():
-	GameFlow.switchScene("res://scenes/Worlds/TestWorld.tscn")
+	GameFlow.switchScene("res://scenes/Worlds/Buildings.tscn")
 	MusicComponent.playSong(MusicComponent.SongEnum.A_MOTH_IN_LIGHT)
 
 func _on_options_pressed():
@@ -37,7 +37,7 @@ func _on_options_back_pressed():
 
 func _on_brightness_slider_value_changed(value):
 	GLOBAL.setSetting("BRIGHTNESS", value)
-	$"../../WorldEnvironment".environment.adjustment_brightness = value
+	#$"../../WorldEnvironment".environment.adjustment_brightness = value
 
 func _on_volume_slider_value_changed(value):
 	var masterBusIndex := AudioServer.get_bus_index("Master")

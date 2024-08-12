@@ -2,6 +2,7 @@ extends CharacterBody2D
 class_name Player
 
 @export var worldEnvironment: WorldEnvironment
+@onready var defaultSaturation = worldEnvironment.environment.adjustment_saturation
 
 @export_category("Player Config")
 @export_range(0, 2) var spriteBasePosition = 0
@@ -14,7 +15,7 @@ class_name Player
 @export var movementSpeedMult := 20
 @export var baseTrackableDistance := 2500.0
 
-const STEALTH_FLASHLIGHT_CUTOFF := 0.85
+@export var STEALTH_FLASHLIGHT_CUTOFF := 0.80
 @export var SUM_DAMAGE_CUTOFF := 0.01
 
 var stats := {
@@ -152,7 +153,7 @@ func takeDamage(damage := 0.01) -> void:
 	
 	if GLOBAL_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
 		$DeathTimer.start()
-		scale = Vector2(0.5, 0.4)
+		worldEnvironment.environment.adjustment_saturation = 0.1
 	
 	$PlayerLight.color = playerLightColor
 
@@ -160,7 +161,7 @@ func takeDamage(damage := 0.01) -> void:
 	
 func _process(delta):
 	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF:
-		scale = Vector2(1, 1)
+		worldEnvironment.environment.adjustment_saturation = defaultSaturation
 		$DeathTimer.stop()
 	
 	# Look towards the direction of travel

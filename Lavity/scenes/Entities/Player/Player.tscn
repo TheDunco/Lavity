@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=20 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -10,7 +10,10 @@
 [ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="7_vlmlf"]
 [ext_resource type="Script" path="res://scenes/Utils/AutoplayAnimatedSprite.gd" id="8_j118b"]
 [ext_resource type="Texture2D" uid="uid://drrcgu7apxg1j" path="res://assets/Moth Flying/flying-moth_0006.png" id="8_nx7p7"]
+[ext_resource type="Script" path="res://scenes/Entities/Player/WingFlap.gd" id="9_5eh2y"]
+[ext_resource type="AudioStream" uid="uid://6eb7c0r4ygr4" path="res://assets/audio/sfx/wing_flap1.wav" id="10_0jq3m"]
 [ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="11_c7gky"]
+[ext_resource type="AudioStream" uid="uid://bqismph8dboi" path="res://assets/audio/sfx/wing_flap2.wav" id="11_cty4c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
 radius = 22.0
@@ -54,7 +57,6 @@ height = 92.0
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
 position = Vector2(0, 1)
-collision_layer = 0
 script = ExtResource("1_jm2c2")
 
 [node name="DamageEffectsTimer" type="Timer" parent="."]
@@ -93,6 +95,23 @@ sprite_frames = SubResource("SpriteFrames_yn8d8")
 frame_progress = 0.98357
 script = ExtResource("8_j118b")
 
+[node name="WingFlapSounds" type="Node2D" parent="FlippingSprite" node_paths=PackedStringArray("sounds")]
+scale = Vector2(1, 1)
+script = ExtResource("9_5eh2y")
+sounds = [NodePath("WingFlap1"), NodePath("WingFlap2")]
+spriteFrameToPlaySound = 2
+
+[node name="WingFlap1" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
+scale = Vector2(2.5, 2.5)
+stream = ExtResource("10_0jq3m")
+volume_db = -10.0
+bus = &"WingFlap"
+
+[node name="WingFlap2" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
+stream = ExtResource("11_cty4c")
+volume_db = -10.0
+bus = &"WingFlap"
+
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
 Entity = NodePath("..")
 
@@ -111,7 +130,7 @@ texture = SubResource("GradientTexture2D_rtjsw")
 
 [node name="LightDecayComponent" parent="PlayerLight" instance=ExtResource("11_c7gky")]
 scale = Vector2(5.88235, 6.66667)
-ligthDecayMult = 0.05
+ligthDecayMult = 0.03
 
 [node name="DamageableArea" type="Area2D" parent="."]
 collision_layer = 4
