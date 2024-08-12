@@ -69,9 +69,9 @@ func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.
 	return velocity
 	
 func _process(_delta):
-	if flippingSprite != null:
-		var rotation = Entity.rotation
-		if cos(rotation) < 0:
-			flippingSprite.flip_v = true
-		else:
-			flippingSprite.flip_v = false
+	var curScaleY = Entity.scale.y
+	var rotationCos = cos(Entity.rotation)
+	if rotationCos < 0 and curScaleY > 0:
+		Entity.scale.y = -Entity.scale.y
+	elif rotationCos > 0 and curScaleY < 0:
+		Entity.scale = Vector2(Entity.scale.x, abs(Entity.scale.y))

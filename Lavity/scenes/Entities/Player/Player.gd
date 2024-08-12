@@ -18,6 +18,9 @@ class_name Player
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.80
 @export var SUM_DAMAGE_CUTOFF := 0.01
 
+@onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
+@onready var reverbEffect: AudioEffectReverb = AudioServer.get_bus_effect(reverbBusIndex, 0)
+
 var stats := {
 	"damageReduction": 0.5,
 	"damage" : 0.5,
@@ -154,6 +157,7 @@ func takeDamage(damage := 0.01) -> void:
 	if GLOBAL_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
 		$DeathTimer.start()
 		worldEnvironment.environment.adjustment_saturation = 0.1
+		reverbEffect.wet *= 2
 	
 	$PlayerLight.color = playerLightColor
 
@@ -163,6 +167,7 @@ func _process(delta):
 	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF:
 		worldEnvironment.environment.adjustment_saturation = defaultSaturation
 		$DeathTimer.stop()
+		reverbEffect.wet /= 2
 	
 	# Look towards the direction of travel
 	if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:

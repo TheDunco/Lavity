@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=27 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -8,16 +8,19 @@
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="7_0mjfq"]
 [ext_resource type="Texture2D" uid="uid://6kgmynju76tm" path="res://assets/Moth Flying/flying-moth_0004.png" id="7_h0at1"]
 [ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="7_vlmlf"]
-[ext_resource type="Script" path="res://scenes/Utils/AutoplayAnimatedSprite.gd" id="8_j118b"]
+[ext_resource type="Texture2D" uid="uid://gfofvv7tpa5w" path="res://assets/Moth Flying/without-legs/Timeline 1_0001.png" id="8_cfyrq"]
 [ext_resource type="Texture2D" uid="uid://drrcgu7apxg1j" path="res://assets/Moth Flying/flying-moth_0006.png" id="8_nx7p7"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/WingFlap.gd" id="9_5eh2y"]
+[ext_resource type="Texture2D" uid="uid://caud5smw21i2q" path="res://assets/Moth Flying/without-legs/Timeline 1_0002.png" id="9_n3tn3"]
 [ext_resource type="AudioStream" uid="uid://6eb7c0r4ygr4" path="res://assets/audio/sfx/wing_flap1.wav" id="10_0jq3m"]
+[ext_resource type="Texture2D" uid="uid://m6u3vex6jp5s" path="res://assets/Moth Flying/without-legs/Timeline 1_0003.png" id="10_tnmfl"]
 [ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="11_c7gky"]
 [ext_resource type="AudioStream" uid="uid://bqismph8dboi" path="res://assets/audio/sfx/wing_flap2.wav" id="11_cty4c"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 22.0
-height = 66.0
+[ext_resource type="Script" path="res://scenes/Entities/Player/PlayerSprites.gd" id="11_w31v0"]
+[ext_resource type="Texture2D" uid="uid://prgsy2vimnga" path="res://assets/Moth Flying/without-legs/individual-leg_0001.png" id="15_ybomp"]
+[ext_resource type="Texture2D" uid="uid://4u1is0is8p7r" path="res://assets/Moth Flying/without-legs/individual-leg_0002.png" id="16_46v3y"]
+[ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
+[ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -32,9 +35,31 @@ animations = [{
 "texture": ExtResource("8_nx7p7")
 }],
 "loop": true,
-"name": &"default",
+"name": &"with_legs",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_cfyrq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_n3tn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_tnmfl")
+}],
+"loop": true,
+"name": &"without_extremedies",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
+radius = 22.0
+height = 66.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jw6a"]
+radius = 29.0
+height = 92.0
 
 [sub_resource type="Gradient" id="Gradient_gjhgk"]
 interpolation_mode = 2
@@ -50,33 +75,17 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jw6a"]
-radius = 29.0
-height = 92.0
-
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
 position = Vector2(0, 1)
+motion_mode = 1
 script = ExtResource("1_jm2c2")
 
-[node name="DamageEffectsTimer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
-[node name="DeathTimer" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-
-[node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity", "flippingSprite") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
 airResistance = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 2
-position = Vector2(4, 7)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_uyvyt")
-debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
+flippingSprite = NodePath("../FlippingSprite")
+shouldFindFlippingSprite = false
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
@@ -87,13 +96,25 @@ layer_0/tile_data = PackedInt32Array(-393224, 524288, 7, -327688, 524288, 8, -26
 [node name="CanvasModulate" type="CanvasModulate" parent="TileMap"]
 color = Color(0.0142752, 0.0142752, 0.0142752, 1)
 
-[node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
+[node name="DamageEffectsTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="FlippingSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("legs", "antenna")]
+z_index = 2
 material = ExtResource("4_d520f")
 use_parent_material = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_yn8d8")
-frame_progress = 0.98357
-script = ExtResource("8_j118b")
+animation = &"without_extremedies"
+script = ExtResource("11_w31v0")
+legs = [NodePath("Individual-leg0001"), NodePath("Individual-leg0002"), NodePath("Individual-leg0003")]
+antenna = NodePath("Antenna0001")
+metadata/_edit_lock_ = true
 
 [node name="WingFlapSounds" type="Node2D" parent="FlippingSprite" node_paths=PackedStringArray("sounds")]
 scale = Vector2(1, 1)
@@ -112,13 +133,62 @@ stream = ExtResource("11_cty4c")
 volume_db = -10.0
 bus = &"WingFlap"
 
+[node name="Individual-leg0001" type="Sprite2D" parent="FlippingSprite"]
+z_index = -1
+position = Vector2(20, 70)
+scale = Vector2(0.875, 0.875)
+texture = ExtResource("15_ybomp")
+offset = Vector2(-20, -69)
+
+[node name="Individual-leg0002" type="Sprite2D" parent="FlippingSprite"]
+z_index = -1
+position = Vector2(-10, 75)
+scale = Vector2(0.875, 0.875)
+texture = ExtResource("16_46v3y")
+offset = Vector2(10, -75)
+
+[node name="Individual-leg0003" type="Sprite2D" parent="FlippingSprite"]
+z_index = -1
+position = Vector2(45, 62.5)
+scale = Vector2(1, 1)
+texture = ExtResource("17_fk10i")
+offset = Vector2(-44, -63)
+
+[node name="Antenna0001" type="Sprite2D" parent="FlippingSprite"]
+z_index = -1
+position = Vector2(87.5, 0)
+scale = Vector2(1, 1)
+texture = ExtResource("18_0slyg")
+offset = Vector2(-88, -7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 2
+position = Vector2(4, 7)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_uyvyt")
+debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
+metadata/_edit_lock_ = true
+
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
 Entity = NodePath("..")
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
 position = Vector2(4, 7)
 rotation = 1.5708
 shape = ExtResource("7_vlmlf")
+metadata/_edit_lock_ = true
+
+[node name="DamageableArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageableArea"]
+position = Vector2(2, 4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1jw6a")
+metadata/_edit_lock_ = true
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(-2.28882e-05, -0.999992)
@@ -127,19 +197,11 @@ color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_rtjsw")
+metadata/_edit_lock_ = true
 
 [node name="LightDecayComponent" parent="PlayerLight" instance=ExtResource("11_c7gky")]
 scale = Vector2(5.88235, 6.66667)
 ligthDecayMult = 0.03
-
-[node name="DamageableArea" type="Area2D" parent="."]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageableArea"]
-position = Vector2(2, 4)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_1jw6a")
 
 [connection signal="timeout" from="DamageEffectsTimer" to="." method="_on_damage_effects_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
