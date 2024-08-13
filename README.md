@@ -22,7 +22,10 @@ Made using
   - Code Editor
   - Free, [open source](https://github.com/microsoft/vscode)
 - [Obsidian.md](https://obsidian.md/)
+  - Planning/idea board
   - Free for personal use
+- [Stable Diffusion](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
+  - Used only for difficult to see background art
 
 
 ## Community
