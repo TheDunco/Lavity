@@ -9,6 +9,7 @@ class_name Player
 @export var maxZoom := 0.3
 @export var lookThreshold := 50
 @export var cameraBaseZoom := 1.35
+@export var deathTimerBaseSeconds := 7
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
@@ -38,6 +39,7 @@ var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
 	$PlayerLight.color = Color(0.5, 0.5, 0.5)
+	$DeathTimer.wait_time = deathTimerBaseSeconds
 
 func handleInput():
 	var isHandlingVelocityInput := false
@@ -102,7 +104,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 		"speed": (statsPerColor["green"] + white - black) * baseStatsMult,
 		"sonar": (statsPerColor["blue"] + white - black) * baseStatsMult,
 		"stealth": (statsPerColor["blue_purple"] + white - black) * baseStatsMult,
-		"vision": (statsPerColor["yellow"] + white - black) * baseStatsMult,
+		"vision": (statsPerColor["yellow"] + white/2 - black) * baseStatsMult,
 		"regeneration": (statsPerColor["pink"] + white - black) * baseStatsMult,
 	}
 	
@@ -211,7 +213,7 @@ func _process(delta):
 	
 func _physics_process(_delta):
 	handleInput()
-	velocity = $VelocityComponent.handleExistingVelocity(self)
+	velocity = $VelocityComponent.handleExistingVelocity(self.velocity)
 	move_and_slide()
 
 func _on_damage_effects_timer_timeout() -> void:

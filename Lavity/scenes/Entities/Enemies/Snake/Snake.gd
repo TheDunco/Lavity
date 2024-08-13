@@ -16,7 +16,7 @@ func _physics_process(_delta):
 		pointVelocity += directionToPlayer * acceleration
 		pointVelocity += directionToPlayer * acceleration
 
-	pointVelocity = $VelocityComponent.handleExistingVelocity(self, pointVelocity)
+	pointVelocity = $VelocityComponent.handleExistingVelocity(pointVelocity)
 
 	$Line2D.set_point_position(0, global_position + pointVelocity)
 	move_and_slide()

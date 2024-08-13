@@ -19,7 +19,7 @@ func moveTowardPlayer():
 
 	velocity += directionToPlayer * Acceleration
 	velocity += directionToPlayer * Acceleration
-	velocity = $VelocityComponent.handleExistingVelocity(self)
+	velocity = $VelocityComponent.handleExistingVelocity(self.velocity)
 	
 func _process(_delta):
 	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)

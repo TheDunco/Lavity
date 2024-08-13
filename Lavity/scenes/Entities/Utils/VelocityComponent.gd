@@ -7,7 +7,6 @@ class_name VelocityComponent
 @export var speedMultiplier := 20
 @export var airResistance := 5
 @export var overspeedThreshold := 1000
-@export var overspeedDamping := 10
 @export var maxVelocity := 1500
 
 @export_category("Sprite Effect Config")
@@ -24,43 +23,32 @@ func getAnimationSpeed(velo: Vector2):
 		return log(combinedVelocity * animationSpeedVeloMult) - animationSpeedVeloTamingConst
 	return 0.0
 
-func handleExistingVelocity(entity: CharacterBody2D, velocity: Vector2 = entity.velocity) -> Vector2:
-	var currVelocity := entity.velocity
+func handleExistingVelocity(velocity: Vector2) -> Vector2:
+	var currVelocity := velocity
+
+	# Handle max velocity
+	if currVelocity.x > maxVelocity:
+		currVelocity.x = maxVelocity - 1.0
+	elif currVelocity.x < -maxVelocity:
+		currVelocity.x = -maxVelocity + 1.0
+	
+	if currVelocity.y > maxVelocity:
+		currVelocity.y = maxVelocity - 1.0
+	elif currVelocity.y < -maxVelocity:
+		currVelocity.y = -maxVelocity + 1.0
 
 	# Handle air resistance
 	if currVelocity.x > 0 and currVelocity.x - airResistance > 0:
-		velocity.x -= airResistance
+		currVelocity.x -= airResistance
 	elif currVelocity.x < 0 and currVelocity.x + airResistance < 0:
-		velocity.x += airResistance
+		currVelocity.x += airResistance
 		
-	if velocity.y > 0 and currVelocity.y - airResistance > 0:
-		velocity.y -= airResistance
-	elif velocity.y < 0 and currVelocity.y + airResistance < 0:
-		velocity.y += airResistance
-
-	# Handle overspeed threshold
-	if velocity.x > overspeedThreshold:
-		velocity.x -= (overspeedDamping + (velocity.x - overspeedThreshold))
-	elif velocity.x < - overspeedThreshold:
-		velocity.x -= (overspeedDamping + (velocity.x + overspeedThreshold))
-
-	if velocity.y > overspeedThreshold:
-		velocity.y += (overspeedDamping + (velocity.y - overspeedThreshold))
-	elif velocity.y < - overspeedThreshold:
-		velocity.y -= - (overspeedDamping + (velocity.y + overspeedThreshold))
+	if currVelocity.y > 0 and currVelocity.y - airResistance > 0:
+		currVelocity.y -= airResistance
+	elif currVelocity.y < 0 and currVelocity.y + airResistance < 0:
+		currVelocity.y += airResistance
 	
-	# Handle max velocity
-	if velocity.x > maxVelocity:
-		velocity.x = maxVelocity
-	elif velocity.x < -maxVelocity:
-		velocity.x = -maxVelocity
-	
-	if velocity.y > maxVelocity:
-		velocity.y = maxVelocity
-	elif velocity.y < -maxVelocity:
-		velocity.y = -maxVelocity
-	
-	return velocity
+	return currVelocity
 	
 func _process(_delta):
 	var curScaleY = Entity.scale.y

@@ -92,23 +92,13 @@ scale = Vector2(9.10938, 6.08043)
 texture = ExtResource("2_sr3ci")
 metadata/_edit_lock_ = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Background"]
-process_mode = 4
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Background/StaticBody2D"]
-position = Vector2(-512, -516.329)
-scale = Vector2(0.109777, 0.164462)
-polygon = PackedVector2Array(339, 2826, 333, 2855, 368, 2861, 364, 2985, 155, 2998, 161, 3061, 304, 3077, 460, 3204, 593, 3233, 625, 3347, 669, 3372, 669, 3433, 698, 3430, 714, 3376, 749, 3350, 761, 3252, 745, 3182, 857, 3214, 907, 3318, 901, 3487, 507, 3499, 495, 3544, 387, 3563, 387, 3611, 285, 3617, 298, 3690, 326, 3706, 323, 3738, 418, 3760, 457, 3906, 523, 3922, 533, 4080, 507, 4122, 526, 4173, 577, 4176, 574, 4252, 612, 4271, 603, 4471, 612, 4509, 653, 4455, 660, 4525, 644, 4541, 644, 4607, 599, 4633, 603, 4684, 676, 4715, 749, 4728, 825, 4731, 901, 4792, 920, 4877, 891, 4915, 882, 4933, 958, 4946, 952, 5066, 1012, 5193, 1025, 5250, 1070, 5276, 1117, 5241, 1120, 5174, 1197, 5184, 1232, 5174, 1238, 5130, 1190, 5095, 1193, 5050, 1355, 5050, 1355, 4971, 1346, 4879, 1559, 4746, 1593, 4765, 1625, 4761, 1641, 4669, 1451, 4625, 1438, 4311, 2030, 4288, 2133, 4066, 1959, 4028, 1965, 3895, 1898, 3825, 1771, 3815, 1771, 3692, 1797, 3644, 1984, 3657, 2025, 3577, 1743, 3558, 1739, 3431, 1339, 3412, 1339, 3247, 1568, 3180, 1590, 3092, 1762, 3111, 1787, 3015, 1676, 2974, 1679, 2857, 1647, 2774, 1505, 2784, 1438, 2771, 1393, 2704, 1317, 2618, 1282, 2717, 854, 2723, 822, 2777)
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("4_qkn0n")]
+position = Vector2(951, 894)
+follow_target = NodePath("../Player")
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("3_08e7e")]
-position = Vector2(669, 408)
+position = Vector2(951, 894)
 worldEnvironment = NodePath("../WorldEnvironment")
-
-[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("4_qkn0n")]
-position = Vector2(669, 408)
-follow_target = NodePath("../Player")
 
 [node name="LLSoft" parent="." instance=ExtResource("5_ko015")]
 position = Vector2(1930, 2936)
@@ -116,6 +106,7 @@ initColor = Color(0.838897, 0.838897, 0.838897, 1)
 
 [node name="LLRed" parent="." instance=ExtResource("5_ko015")]
 position = Vector2(2180, 4113)
+energy = 1.5
 initColor = Color(1, 0, 0, 1)
 
 [node name="LLGreen" parent="." instance=ExtResource("5_ko015")]
@@ -158,4 +149,5 @@ position = Vector2(1079, 5236)
 
 [node name="LavityLight" parent="." instance=ExtResource("5_ko015")]
 position = Vector2(2902, 4426)
+energy = 1.5
 initColor = Color(0, 0, 1, 1)

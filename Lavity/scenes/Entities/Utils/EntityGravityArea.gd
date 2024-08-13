@@ -38,6 +38,8 @@ func _process(delta):
 				if playerLikeLight == null:
 					continue
 				
+				playerLikeLight.enabled = true
+				
 				var rComponent = lavityEmitter.color.r * absorbtionMult * delta
 				var gComponent = lavityEmitter.color.g * absorbtionMult * delta
 				var bComponent = lavityEmitter.color.b * absorbtionMult * delta

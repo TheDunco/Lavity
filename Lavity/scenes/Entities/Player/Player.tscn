@@ -131,7 +131,7 @@ volume_db = -10.0
 bus = &"WingFlap"
 
 [node name="Individual-leg0001" type="Sprite2D" parent="FlippingSprite"]
-self_modulate = Color(0.205117, 0.205117, 0.205117, 1)
+self_modulate = Color(0.231373, 0.262745, 0.305882, 1)
 z_index = -1
 position = Vector2(15, 67.5)
 scale = Vector2(0.875, 1.25)
@@ -139,7 +139,7 @@ texture = ExtResource("15_ybomp")
 offset = Vector2(-20, -69)
 
 [node name="Individual-leg0002" type="Sprite2D" parent="FlippingSprite"]
-self_modulate = Color(0.184413, 0.211236, 0.24879, 1)
+self_modulate = Color(0.230714, 0.262278, 0.30647, 1)
 z_index = -1
 position = Vector2(-12.5, 70)
 scale = Vector2(0.871, 1.25)
@@ -148,7 +148,7 @@ offset = Vector2(20, -70)
 flip_h = true
 
 [node name="Individual-leg0003" type="Sprite2D" parent="FlippingSprite"]
-self_modulate = Color(0.187696, 0.214864, 0.252901, 1)
+self_modulate = Color(0.231373, 0.262745, 0.305882, 1)
 z_index = -1
 position = Vector2(40, 57.5)
 scale = Vector2(0.875, 1.25)
@@ -171,6 +171,7 @@ debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
+collision_layer = 2
 Entity = NodePath("..")
 metadata/_edit_lock_ = true
 
