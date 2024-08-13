@@ -9,12 +9,15 @@ func _ready():
 func _process(_delta: float) -> void:
 	var velocity = $"..".velocity
 	var velocitySum = abs(velocity.x) + abs(velocity.y)
-	var rotation := remap(velocitySum, 0, $"../VelocityComponent".maxVelocity/2, 0, 40)
+	if velocitySum < 7:
+		return
+	var legRotation := remap(velocitySum, 0, $"../VelocityComponent".maxVelocity/2, 0, 40)
+	var antennaRotation := remap(velocitySum, 0, $"../VelocityComponent".maxVelocity/2, 0, 30)
 	
-	if rotation > 20.0:
-		rotation += randf_range(-10.0, 10.0)
+	if legRotation > 20.0:
+		legRotation += randf_range(-2.5, 2.5)
 
 	for leg in legs:
-		leg.rotation_degrees = rotation + randf_range(-5.0, 5.0)
+		leg.rotation_degrees = legRotation + randf_range(-2.5, 2.5)
 		
-	antenna.rotation_degrees = -rotation
+	antenna.rotation_degrees = -antennaRotation

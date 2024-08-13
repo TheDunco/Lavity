@@ -11,15 +11,16 @@ class_name Player
 @export var cameraBaseZoom := 1.35
 
 @export_category("Player Stats")
+@export var baseStatsMult := 1.0
 @export var baseMovementSpeed := 7
 @export var movementSpeedMult := 20
 @export var baseTrackableDistance := 2500.0
 
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.80
-@export var SUM_DAMAGE_CUTOFF := 0.01
+@export var SUM_DAMAGE_CUTOFF := 0.02 
 
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
-@onready var reverbEffect: AudioEffectReverb = AudioServer.get_bus_effect(reverbBusIndex, 0)
+@onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
 
 var stats := {
 	"damageReduction": 0.5,
@@ -69,8 +70,10 @@ func handleInput():
 	if Input.is_action_just_pressed("toggle_flashlight") :
 		if $PlayerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
 			$PlayerLight.enabled = false
+			startDying()
 		else:
 			$PlayerLight.enabled = true
+			stopDying()
 
 		isTrackableByEnemy = $PlayerLight.enabled
 		
@@ -87,20 +90,22 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	
 	# Figure out how similar to each color we are
 	for colorName in GLOBAL_UTILS.colorNames:
-		var score := GLOBAL_UTILS.scoreColorLikeness(currentColor, GLOBAL_UTILS.colors[colorName])
-		statsPerColor[colorName] = score
+		statsPerColor[colorName] = GLOBAL_UTILS.scoreColorLikeness(currentColor, GLOBAL_UTILS.colors[colorName])
+	
+	var white = GLOBAL_UTILS.scoreColorLikeness(currentColor, Color.WHITE)
+	var black = GLOBAL_UTILS.scoreColorLikeness(currentColor, Color.BLACK)/2
 
 	# Map that to the stats
 	var statsToSet := {
-		"damageReduction": statsPerColor["red"],
-		"damage" : statsPerColor["orange"],
-		"speed": statsPerColor["green"],
-		"sonar": statsPerColor["blue"],
-		"stealth": statsPerColor["blue_purple"],
-		"vision": statsPerColor["yellow"],
-		"regeneration": statsPerColor["pink"],
+		"damageReduction": (statsPerColor["red"] + white - black) * baseStatsMult,
+		"damage" : (statsPerColor["orange"] + white - black) * baseStatsMult,
+		"speed": (statsPerColor["green"] + white - black) * baseStatsMult,
+		"sonar": (statsPerColor["blue"] + white - black) * baseStatsMult,
+		"stealth": (statsPerColor["blue_purple"] + white - black) * baseStatsMult,
+		"vision": (statsPerColor["yellow"] + white - black) * baseStatsMult,
+		"regeneration": (statsPerColor["pink"] + white - black) * baseStatsMult,
 	}
-
+	
 	return statsToSet
 	
 func _setAttributesFromStats():
@@ -118,11 +123,24 @@ func _setAttributesFromStats():
 func setChromaticAbberration(on: bool) -> void:
 	$FlippingSprite.use_parent_material = !on
 	
-func takeDamage(damage := 0.01) -> void:
+func setSaturation(val: float) -> void:
+	worldEnvironment.environment.adjustment_saturation = val
+
+func startDying():
+	$DeathTimer.start()
+	setSaturation(0.1)
+
+func stopDying():
+	$DeathTimer.stop()
+	setSaturation(defaultSaturation)
+	
+func takeDamage(damage := 0.01) -> bool:
 	var reduction = stats["damageReduction"]/500
 	damage = damage - reduction
+	
+	var didTakeDamage = false
 	if damage <= 0:
-		return
+		return didTakeDamage
 	
 	setChromaticAbberration(true)
 	$DamageEffectsTimer.start()
@@ -136,11 +154,13 @@ func takeDamage(damage := 0.01) -> void:
 
 	if rCanTakeDamage:
 		numColorsThatCanTakeDamage += 1
+		didTakeDamage = true
 	if gCanTakeDamage:
 		numColorsThatCanTakeDamage += 1
+		didTakeDamage = true
 	if bCanTakeDamage:
 		numColorsThatCanTakeDamage += 1
-
+		didTakeDamage = true
 	
 	if rCanTakeDamage:
 		playerLightColor.r -= damage / numColorsThatCanTakeDamage
@@ -156,18 +176,21 @@ func takeDamage(damage := 0.01) -> void:
 	
 	if GLOBAL_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
 		$DeathTimer.start()
-		worldEnvironment.environment.adjustment_saturation = 0.1
-		reverbEffect.wet *= 2
+		setSaturation(0.1)
 	
 	$PlayerLight.color = playerLightColor
+	
+	return didTakeDamage
 
-	
-	
 func _process(delta):
-	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF:
-		worldEnvironment.environment.adjustment_saturation = defaultSaturation
-		$DeathTimer.stop()
-		reverbEffect.wet /= 2
+	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
+		stopDying()
+	
+	if $DeathTimer.is_stopped():
+		if lowPassEffect.cutoff_hz <= 20000:
+			lowPassEffect.cutoff_hz += 90
+	elif lowPassEffect.cutoff_hz > 1000:
+			lowPassEffect.cutoff_hz = 1000
 	
 	# Look towards the direction of travel
 	if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:

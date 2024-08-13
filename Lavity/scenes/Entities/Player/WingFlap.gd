@@ -8,6 +8,6 @@ extends Node2D
 func _process(_delta: float) -> void:
 	if sprite.frame == spriteFrameToPlaySound:
 		var sound: AudioStreamPlayer2D = sounds.pick_random()
-		sound.pitch_scale = randf_range(0.5, 1.2)
+		sound.pitch_scale = randf_range(0.7, 1.2)
 		sound.play()
 		

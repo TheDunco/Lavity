@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://djqoum5472ui7"]
+[gd_scene load_steps=15 format=3 uid="uid://djqoum5472ui7"]
 
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="1_fgad0"]
+[ext_resource type="Script" path="res://scenes/Utils/SetWorldEnvironmentBrightness.gd" id="1_ye2qi"]
 [ext_resource type="Texture2D" uid="uid://cms5vxkwddxkj" path="res://assets/Backgrounds/streetlamps_texture.png" id="2_7efv8"]
 [ext_resource type="Texture2D" uid="uid://b3ijhmqciyaqf" path="res://assets/Backgrounds/bg-warped-buildings.png" id="2_sr3ci"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="3_08e7e"]
@@ -39,11 +40,12 @@ distance = -9728.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_t2yug")
+script = ExtResource("1_ye2qi")
 
 [node name="CanvasModulateDarkness" parent="." instance=ExtResource("1_fgad0")]
 position = Vector2(468, 261)
 scale = Vector2(1, 1)
-color = Color(0, 0, 0, 0.905882)
+color = Color(0.052, 0.052, 0.052, 0.914)
 
 [node name="BackgroundSpace" type="Sprite2D" parent="."]
 clip_children = 2
@@ -113,8 +115,8 @@ position = Vector2(1930, 2936)
 initColor = Color(0.838897, 0.838897, 0.838897, 1)
 
 [node name="LLRed" parent="." instance=ExtResource("5_ko015")]
-position = Vector2(1066, 5236)
-initColor = Color(0.99, 0, 0, 1)
+position = Vector2(2180, 4113)
+initColor = Color(1, 0, 0, 1)
 
 [node name="LLGreen" parent="." instance=ExtResource("5_ko015")]
 position = Vector2(4720, 3144)
@@ -152,4 +154,8 @@ player = NodePath("../Player")
 Acceleration = 7.0
 
 [node name="LightFlies" parent="." instance=ExtResource("8_p2hde")]
-position = Vector2(1758, 4764)
+position = Vector2(1079, 5236)
+
+[node name="LavityLight" parent="." instance=ExtResource("5_ko015")]
+position = Vector2(2902, 4426)
+initColor = Color(0, 0, 1, 1)

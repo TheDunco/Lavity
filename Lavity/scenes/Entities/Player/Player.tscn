@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=26 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -18,7 +18,6 @@
 [ext_resource type="AudioStream" uid="uid://bqismph8dboi" path="res://assets/audio/sfx/wing_flap2.wav" id="11_cty4c"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/PlayerSprites.gd" id="11_w31v0"]
 [ext_resource type="Texture2D" uid="uid://prgsy2vimnga" path="res://assets/Moth Flying/without-legs/individual-leg_0001.png" id="15_ybomp"]
-[ext_resource type="Texture2D" uid="uid://4u1is0is8p7r" path="res://assets/Moth Flying/without-legs/individual-leg_0002.png" id="16_46v3y"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
 
@@ -81,11 +80,9 @@ position = Vector2(0, 1)
 motion_mode = 1
 script = ExtResource("1_jm2c2")
 
-[node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity", "flippingSprite") instance=ExtResource("7_0mjfq")]
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
 airResistance = 4
-flippingSprite = NodePath("../FlippingSprite")
-shouldFindFlippingSprite = false
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
@@ -134,23 +131,27 @@ volume_db = -10.0
 bus = &"WingFlap"
 
 [node name="Individual-leg0001" type="Sprite2D" parent="FlippingSprite"]
+self_modulate = Color(0.205117, 0.205117, 0.205117, 1)
 z_index = -1
-position = Vector2(20, 70)
-scale = Vector2(0.875, 0.875)
+position = Vector2(15, 67.5)
+scale = Vector2(0.875, 1.25)
 texture = ExtResource("15_ybomp")
 offset = Vector2(-20, -69)
 
 [node name="Individual-leg0002" type="Sprite2D" parent="FlippingSprite"]
+self_modulate = Color(0.184413, 0.211236, 0.24879, 1)
 z_index = -1
-position = Vector2(-10, 75)
-scale = Vector2(0.875, 0.875)
-texture = ExtResource("16_46v3y")
-offset = Vector2(10, -75)
+position = Vector2(-12.5, 70)
+scale = Vector2(0.871, 1.25)
+texture = ExtResource("15_ybomp")
+offset = Vector2(20, -70)
+flip_h = true
 
 [node name="Individual-leg0003" type="Sprite2D" parent="FlippingSprite"]
+self_modulate = Color(0.187696, 0.214864, 0.252901, 1)
 z_index = -1
-position = Vector2(45, 62.5)
-scale = Vector2(1, 1)
+position = Vector2(40, 57.5)
+scale = Vector2(0.875, 1.25)
 texture = ExtResource("17_fk10i")
 offset = Vector2(-44, -63)
 
@@ -192,7 +193,7 @@ metadata/_edit_lock_ = true
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
 position = Vector2(-2.28882e-05, -0.999992)
-scale = Vector2(0.18, 0.18)
+scale = Vector2(0.2, 0.2)
 color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2
 shadow_enabled = true

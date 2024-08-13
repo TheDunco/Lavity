@@ -14,13 +14,7 @@ class_name VelocityComponent
 @export var animationSpeedVeloMult := 100.0
 @export var animationSpeedVeloTamingConst := 7.0
 
-@export_category("Flipping Behavior")
-@export var flippingSprite: Node2D = null
-@export var shouldFindFlippingSprite = true
-
 func _ready():
-	if shouldFindFlippingSprite:
-		flippingSprite = Entity.find_child("FlippingSprite")
 	assert(Entity != null)
 
 func getAnimationSpeed(velo: Vector2):
