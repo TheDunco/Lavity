@@ -37,7 +37,15 @@ func _on_options_back_pressed():
 
 func _on_brightness_slider_value_changed(value):
 	GLOBAL.setSetting("BRIGHTNESS", value)
-	#$"../../WorldEnvironment".environment.adjustment_brightness = value
+	var worldEnv: WorldEnvironment = $"../../WorldEnvironment"
+	if worldEnv:
+		worldEnv.environment.adjustment_brightness = value
+	
+func _on_glow_slider_value_changed(value: float) -> void:
+	GLOBAL.setSetting("GLOW", value)
+	var worldEnv: WorldEnvironment = $"../../WorldEnvironment"
+	if worldEnv:
+		worldEnv.environment.glow_intensity = value
 
 func _on_volume_slider_value_changed(value):
 	var masterBusIndex := AudioServer.get_bus_index("Master")

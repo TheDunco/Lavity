@@ -77,7 +77,6 @@ metadata/_snap_enabled = true
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
 position = Vector2(0, 1)
-motion_mode = 1
 script = ExtResource("1_jm2c2")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
@@ -114,7 +113,6 @@ antenna = NodePath("Antenna0001")
 metadata/_edit_lock_ = true
 
 [node name="WingFlapSounds" type="Node2D" parent="FlippingSprite" node_paths=PackedStringArray("sounds")]
-scale = Vector2(1, 1)
 script = ExtResource("9_5eh2y")
 sounds = [NodePath("WingFlap1"), NodePath("WingFlap2")]
 spriteFrameToPlaySound = 2
@@ -158,7 +156,6 @@ offset = Vector2(-44, -63)
 [node name="Antenna0001" type="Sprite2D" parent="FlippingSprite"]
 z_index = -1
 position = Vector2(87.5, 0)
-scale = Vector2(1, 1)
 texture = ExtResource("18_0slyg")
 offset = Vector2(-88, -7)
 

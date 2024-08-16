@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5wfrwp7xlhkr"]
+
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="1_rx054"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="2_7yfwj"]
+
+[node name="Tutorial" type="Node2D"]
+
+[node name="PlayerFollowingPhantomCam" parent="." instance=ExtResource("1_rx054")]
+
+[node name="Player" parent="." instance=ExtResource("2_7yfwj")]
