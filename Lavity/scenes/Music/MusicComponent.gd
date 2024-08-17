@@ -9,7 +9,8 @@ enum SongEnum {
 	LIGHT,
 	A_NEW_COLOR,
 	GRAVITY,
-	A_MOTH_IN_LIGHT
+	A_MOTH_IN_LIGHT,
+	LANTERN
 }
 
 func playSong(song: SongEnum):
@@ -40,6 +41,9 @@ func _on_next_song_pressed():
 	next()
 
 func _on_a_moth_in_light_finished():
+	next()
+	
+func _on_lantern_finished() -> void:
 	next()
 	
 func _input(event):

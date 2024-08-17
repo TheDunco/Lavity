@@ -52,7 +52,6 @@ script = ExtResource("1_li1tr")
 
 [node name="CanvasModulateDarkness" parent="." instance=ExtResource("3_l8kwu")]
 position = Vector2(6.10352e-05, 6.10352e-05)
-scale = Vector2(1, 1)
 color = Color(0.0937951, 0.0817919, 0.0785522, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -61,13 +60,15 @@ script = ExtResource("3_cm6sv")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "snake") instance=ExtResource("1_k6842")]
+[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "snake", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
 offset_left = 27.0
 offset_top = 5.0
 offset_right = 27.0
 offset_bottom = 5.0
 player = NodePath("../../Player")
 snake = NodePath("../../Snake")
+_canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")
+_worldEnvironment = NodePath("../../WorldEnvironment")
 metadata/_edit_use_anchors_ = true
 
 [node name="Backgrounds" type="Node2D" parent="."]

@@ -4,11 +4,27 @@ class_name Menu
 @export var player: Player = null
 @export var snake: CharacterBody2D = null
 
+@export var _canvasModulateDarkness: CanvasModulate
+@export var _worldEnvironment: WorldEnvironment
+
 func loadOptions():
 	var brightness = GLOBAL.getSetting("BRIGHTNESS")
 	if brightness and brightness > 0:
 		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider.value = brightness
-		#$"../../WorldEnvironment".environment.adjustment_brightness = brightness
+
+	var darkness = GLOBAL.getSetting("DARKNESS")
+	if darkness and darkness > 0:
+		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider.value = darkness
+		
+	var glow = GLOBAL.getSetting("GLOW")
+	if glow and glow > 0:
+		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/GlowSlider.value = glow
+		
+	var volume = GLOBAL.getSetting("VOLUME")
+	if volume and volume > 0:
+		$Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.value = volume
+		_on_volume_slider_value_changed(volume)
+
 
 func _ready():
 	loadOptions()
@@ -38,8 +54,20 @@ func _on_options_back_pressed():
 func _on_brightness_slider_value_changed(value):
 	GLOBAL.setSetting("BRIGHTNESS", value)
 	var worldEnv: WorldEnvironment = $"../../WorldEnvironment"
-	if worldEnv:
+	if _worldEnvironment:
+		_worldEnvironment.environment.adjustment_brightness = value
+	elif worldEnv:
 		worldEnv.environment.adjustment_brightness = value
+		
+func _on_darkness_slider_value_changed(value: float) -> void:
+	GLOBAL.setSetting("DARKNESS", value)
+	var canvasModulateDarkness: CanvasModulate = $"../../CanvasModulateDarkness"
+	if _canvasModulateDarkness:
+		print("alpha", _canvasModulateDarkness.color.a)
+		_canvasModulateDarkness.color.a = value
+	elif canvasModulateDarkness:
+		canvasModulateDarkness.color.a = value
+	
 	
 func _on_glow_slider_value_changed(value: float) -> void:
 	GLOBAL.setSetting("GLOW", value)
@@ -48,6 +76,7 @@ func _on_glow_slider_value_changed(value: float) -> void:
 		worldEnv.environment.glow_intensity = value
 
 func _on_volume_slider_value_changed(value):
+	GLOBAL.setSetting("VOLUME", value)
 	var masterBusIndex := AudioServer.get_bus_index("Master")
 	if value == $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.min_value:
 		AudioServer.set_bus_mute(masterBusIndex, true)
