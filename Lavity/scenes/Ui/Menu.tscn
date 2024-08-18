@@ -123,7 +123,7 @@ text = "version"
 [node name="Song" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.517647, 0.517647, 0.517647, 1)
-text = " 🎵 TheDunco - Light"
+text = "Dunco - Light"
 horizontal_alignment = 2
 
 [node name="Options" type="Control" parent="."]

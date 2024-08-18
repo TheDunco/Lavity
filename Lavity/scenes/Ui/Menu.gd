@@ -125,7 +125,7 @@ func _on_fullscreen_pressed() -> void:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func _on_song_changed(to: String) -> void:
-	var labelFormat = "🎵TheDunco - %s"
+	var labelFormat = "Dunco - %s"
 	$AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Song.text = labelFormat % to
 
 var DEFAULTS := {
