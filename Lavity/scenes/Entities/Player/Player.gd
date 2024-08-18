@@ -17,7 +17,7 @@ class_name Player
 @export var movementSpeedMult := 20
 @export var baseTrackableDistance := 2500.0
 
-@export var STEALTH_FLASHLIGHT_CUTOFF := 0.80
+@export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
 @export var SUM_DAMAGE_CUTOFF := 0.02 
 
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
@@ -39,7 +39,6 @@ var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
 	$PlayerLight.color = Color(0.5, 0.5, 0.5)
-	$DeathTimer.wait_time = deathTimerBaseSeconds
 
 func handleInput():
 	var isHandlingVelocityInput := false
@@ -104,7 +103,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 		"speed": (statsPerColor["green"] + white - black) * baseStatsMult,
 		"sonar": (statsPerColor["blue"] + white - black) * baseStatsMult,
 		"stealth": (statsPerColor["blue_purple"] + white - black) * baseStatsMult,
-		"vision": (statsPerColor["yellow"] + white/2 - black) * baseStatsMult,
+		"vision": (statsPerColor["yellow"] + white/4 - black) * baseStatsMult,
 		"regeneration": (statsPerColor["pink"] + white - black) * baseStatsMult,
 	}
 	
@@ -119,7 +118,7 @@ func _setAttributesFromStats():
 	# green/speed
 	playerMovementSpeed = (stats["speed"] * movementSpeedMult) + baseMovementSpeed
 
-	# purple/stealth
+	# blue purple/stealth
 	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance
 
 func setChromaticAbberration(on: bool) -> void:
@@ -129,7 +128,8 @@ func setSaturation(val: float) -> void:
 	worldEnvironment.environment.adjustment_saturation = val
 
 func startDying():
-	$DeathTimer.start()
+	$DeathTimer.paused = false
+	$DeathTimer.start(deathTimerBaseSeconds)
 	setSaturation(0.1)
 
 func stopDying():
@@ -187,6 +187,8 @@ func takeDamage(damage := 0.01) -> bool:
 func _process(delta):
 	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
 		stopDying()
+
+	print("isStopped", $DeathTimer.is_stopped())
 	
 	if $DeathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:

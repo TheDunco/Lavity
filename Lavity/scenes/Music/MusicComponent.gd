@@ -1,5 +1,7 @@
 extends AudioStreamPlayer
 
+signal songChanged(to: String)
+
 @export var musicRotation: Array[AudioStreamPlayer] = []
 var currentIndex = 0
 
@@ -17,6 +19,7 @@ func playSong(song: SongEnum):
 	musicRotation[currentIndex].stop()
 	currentIndex = song
 	musicRotation[currentIndex].play()
+	emit_signal("songChanged", musicRotation[currentIndex].name)
 
 func _ready():
 	musicRotation[currentIndex].play()
@@ -27,6 +30,7 @@ func next():
 	if currentIndex >= musicRotation.size():
 		currentIndex = 0
 	musicRotation[currentIndex].play()
+	emit_signal("songChanged", musicRotation[currentIndex].name)
 
 func _on_light_finished():
 	next()

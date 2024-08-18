@@ -12,7 +12,7 @@ shader_parameter/displacement = 3.0
 [sub_resource type="SystemFont" id="SystemFont_w1wen"]
 subpixel_positioning = 0
 
-[node name="Menu" type="Control"]
+[node name="Menu" type="Control" node_paths=PackedStringArray("brightnessSlider", "darknessSlider", "glowIntensitySlider", "glowStrengthSlider", "bloomSlider", "volumeSlider", "mainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -21,6 +21,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pq815")
 script = ExtResource("1_aei6w")
+brightnessSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider")
+darknessSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider")
+glowIntensitySlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider")
+glowStrengthSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer/GlowStrengthSlider")
+bloomSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer/BloomSlider")
+volumeSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider")
+mainMenuButton = NodePath("AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 1
@@ -79,6 +86,10 @@ text = "Play"
 layout_mode = 2
 text = "Light Effects Testing"
 
+[node name="MainMenuButton" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+
 [node name="Options" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_83hcn")
@@ -99,10 +110,21 @@ theme_override_fonts/font = ExtResource("4_83hcn")
 text = "Quit
 "
 
-[node name="Version" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HSplitContainer" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 1, 1, 0.0980392)
+split_offset = 20
+dragger_visibility = 2
+
+[node name="Version" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.517184, 0.517184, 0.517184, 1)
 text = "version"
+
+[node name="Song" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.517647, 0.517647, 0.517647, 1)
+text = " 🎵 TheDunco - Light"
+horizontal_alignment = 2
 
 [node name="Options" type="Control" parent="."]
 visible = false
@@ -118,7 +140,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 354.0
-offset_right = -376.0
+offset_right = -333.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -127,7 +149,7 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Brightness" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
@@ -169,7 +191,22 @@ layout_mode = 2
 layout_mode = 2
 text = "Glow"
 
-[node name="GlowSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow"]
+[node name="Sliders" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow"]
+layout_mode = 2
+
+[node name="GlowIntensity" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer"]
+layout_mode = 2
+text = "Intensity"
+
+[node name="GlowSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -177,6 +214,46 @@ min_value = 0.5
 max_value = 5.0
 step = 0.001
 value = 1.0
+
+[node name="GlowStrength" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label2" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer"]
+layout_mode = 2
+text = "Strength"
+
+[node name="GlowStrengthSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 2.0
+step = 0.001
+value = 1.4
+
+[node name="Bloom" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer"]
+layout_mode = 2
+text = "Bloom"
+
+[node name="BloomSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 0.2
+step = 0.001
+value = 0.02
 
 [node name="Volume" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -192,6 +269,11 @@ layout_mode = 2
 size_flags_vertical = 4
 min_value = -24.0
 max_value = 8.0
+tick_count = 32
+
+[node name="Reset to Default" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset To Default"
 
 [node name="Fullscreen" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -204,13 +286,17 @@ text = "Back"
 
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Procedural Snake" to="." method="_on_procedural_snake_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Next Song" to="." method="_on_next_song_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_darkness_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/GlowSlider" to="." method="_on_glow_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider" to="." method="_on_glow_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer/GlowStrengthSlider" to="." method="_on_glow_strength_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer/BloomSlider" to="." method="_on_bloom_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Reset to Default" to="." method="_on_reset_to_default_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
