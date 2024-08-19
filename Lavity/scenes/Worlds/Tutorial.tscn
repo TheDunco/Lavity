@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5wfrwp7xlhkr"]
+[gd_scene load_steps=14 format=3 uid="uid://c5wfrwp7xlhkr"]
 
 [ext_resource type="Texture2D" uid="uid://bt0021c3olxa7" path="res://assets/Base pack/Tiles/snowCenter.png" id="1_4jc6j"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="1_rx054"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="2_n1x0y"]
 [ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="2_pbpck"]
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="8_hssgk"]
+[ext_resource type="PackedScene" uid="uid://b1x6e0bi4gjo0" path="res://scenes/Entities/Passive/Firefly.tscn" id="9_c360q"]
+[ext_resource type="PackedScene" uid="uid://cikbfevvqein8" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.tscn" id="10_sxuky"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="11_bb1vw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w3ohk"]
@@ -221,8 +223,10 @@ position = Vector2(-227, -131)
 color = Color(0.0999859, 0.099986, 0.099986, 0.941176)
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("1_rx054")]
-position = Vector2(0, 1)
+position = Vector2(2.8026e-45, 1)
 follow_target = NodePath("../Player")
+limit_right = 1500
+limit_target = NodePath("../TileMap")
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_7yfwj")]
 worldEnvironment = NodePath("../WorldEnvironment")
@@ -231,9 +235,73 @@ worldEnvironment = NodePath("../WorldEnvironment")
 position = Vector2(229, -548)
 scale = Vector2(2, 2)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("8_hssgk")]
+[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("8_hssgk")]
 player = NodePath("../../Player")
 _canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")
 _worldEnvironment = NodePath("../../WorldEnvironment")
+
+[node name="Fireflies" type="Node" parent="."]
+
+[node name="Firefly" parent="Fireflies" node_paths=PackedStringArray("lavityLight") instance=ExtResource("9_c360q")]
+position = Vector2(-376, 166)
+lavityLight = NodePath("LavityLight")
+
+[node name="LavityLight" parent="Fireflies/Firefly" instance=ExtResource("11_bb1vw")]
+scale = Vector2(0.5, 0.5)
+energy = 0.75
+
+[node name="Firefly2" parent="Fireflies" node_paths=PackedStringArray("lavityLight") instance=ExtResource("9_c360q")]
+position = Vector2(-597, -249)
+lavityLight = NodePath("LavityLight")
+
+[node name="LavityLight" parent="Fireflies/Firefly2" instance=ExtResource("11_bb1vw")]
+scale = Vector2(0.5, 0.5)
+energy = 0.75
+initColor = Color(0.0166667, 1, 0, 1)
+
+[node name="Firefly3" parent="Fireflies" node_paths=PackedStringArray("lavityLight") instance=ExtResource("9_c360q")]
+position = Vector2(1030, -334)
+lavityLight = NodePath("LavityLight")
+
+[node name="LavityLight" parent="Fireflies/Firefly3" instance=ExtResource("11_bb1vw")]
+scale = Vector2(0.5, 0.5)
+energy = 0.75
+randomizeColorOnReady = true
+initColor = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="Firefly4" parent="Fireflies" node_paths=PackedStringArray("lavityLight") instance=ExtResource("9_c360q")]
+position = Vector2(1030, -334)
+lavityLight = NodePath("LavityLight")
+
+[node name="LavityLight" parent="Fireflies/Firefly4" instance=ExtResource("11_bb1vw")]
+scale = Vector2(0.5, 0.5)
+energy = 0.75
+randomizeColorOnReady = true
+initColor = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="Firefly5" parent="Fireflies" node_paths=PackedStringArray("lavityLight") instance=ExtResource("9_c360q")]
+position = Vector2(1030, -334)
+lavityLight = NodePath("LavityLight")
+
+[node name="LavityLight" parent="Fireflies/Firefly5" instance=ExtResource("11_bb1vw")]
+scale = Vector2(0.5, 0.5)
+energy = 0.75
+randomizeColorOnReady = true
+initColor = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="Firefly6" parent="Fireflies" node_paths=PackedStringArray("lavityLight") instance=ExtResource("9_c360q")]
+position = Vector2(1030, -334)
+lavityLight = NodePath("LavityLight")
+
+[node name="LavityLight" parent="Fireflies/Firefly6" instance=ExtResource("11_bb1vw")]
+scale = Vector2(0.5, 0.5)
+energy = 0.75
+randomizeColorOnReady = true
+initColor = Color(0.190762, 0.190762, 0.190762, 1)
+
+[node name="Lanternfly" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_sxuky")]
+position = Vector2(1096, -4)
+player = NodePath("../Player")
+Acceleration = 5.0

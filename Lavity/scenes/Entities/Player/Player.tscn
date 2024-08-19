@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=28 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://prgsy2vimnga" path="res://assets/Moth Flying/without-legs/individual-leg_0001.png" id="15_ybomp"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
+[ext_resource type="Texture2D" uid="uid://dj7donbsc648h" path="res://assets/Point Lights/PointLight.png" id="21_7vffy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -73,6 +74,10 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_w0i1t"]
+_data = [Vector2(0, 0.021978), 0.0, 0.0, 0, 0, Vector2(1, 0.010989), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
@@ -201,6 +206,22 @@ metadata/_edit_lock_ = true
 [node name="LightDecayComponent" parent="PlayerLight" instance=ExtResource("11_c7gky")]
 scale = Vector2(5.88235, 6.66667)
 ligthDecayMult = 0.03
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+z_as_relative = false
+position = Vector2(31, 7)
+rotation = 3.14159
+explosiveness = 0.05
+randomness = 0.08
+texture = ExtResource("21_7vffy")
+emission_shape = 3
+emission_rect_extents = Vector2(10, 10)
+spread = 17.59
+gravity = Vector2(0, 0)
+initial_velocity_min = 225.56
+initial_velocity_max = 278.2
+scale_amount_curve = SubResource("Curve_w0i1t")
 
 [connection signal="timeout" from="DamageEffectsTimer" to="." method="_on_damage_effects_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

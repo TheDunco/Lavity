@@ -18,7 +18,7 @@ class_name Player
 @export var baseTrackableDistance := 2500.0
 
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
-@export var SUM_DAMAGE_CUTOFF := 0.02 
+@export var SUM_DAMAGE_CUTOFF := 0.03
 
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
 @onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
@@ -185,16 +185,17 @@ func takeDamage(damage := 0.01) -> bool:
 	return didTakeDamage
 
 func _process(delta):
+	# handle death timer and effects
+	print("sumColor ", GLOBAL_UTILS.sumColor($PlayerLight.color))
 	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
 		stopDying()
-
-	print("isStopped", $DeathTimer.is_stopped())
 	
 	if $DeathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:
 			lowPassEffect.cutoff_hz += 90
 	elif lowPassEffect.cutoff_hz > 1000:
 			lowPassEffect.cutoff_hz = 1000
+			
 	
 	# Look towards the direction of travel
 	if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
@@ -212,6 +213,8 @@ func _process(delta):
 	
 	stats = _getStatsFromColor($PlayerLight.color)
 	_setAttributesFromStats()
+	
+	$CPUParticles2D.color = $PlayerLight.color
 	
 func _physics_process(_delta):
 	handleInput()

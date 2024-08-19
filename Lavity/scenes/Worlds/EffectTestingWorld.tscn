@@ -111,6 +111,12 @@ initColor = Color(0.83, 0, 0.655, 1)
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("5_814ms")]
 position = Vector2(-8, 2.8026e-45)
 follow_target = NodePath("../Player")
+limit_left = -14000
+limit_top = -7000
+limit_right = 8000
+limit_bottom = 6000
+limit_target = NodePath("../TileMap")
+limit_margin = Vector4i(800, 737, 1167, 540)
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("1_x53om")]
 position = Vector2(-8, 0)

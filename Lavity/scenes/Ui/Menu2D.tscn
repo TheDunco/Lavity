@@ -58,9 +58,9 @@ color = Color(0.0937951, 0.0817919, 0.0785522, 1)
 environment = SubResource("Environment_vdcqo")
 script = ExtResource("3_cm6sv")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "snake", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
+[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "snake", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
 offset_left = 27.0
 offset_top = 5.0
 offset_right = 27.0
