@@ -15,7 +15,7 @@ var isEntityInGravityArea := false
 var isPlayerLike := false
 
 func _ready():
-	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy or Entity
+	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy
 	assert(Entity != null)
 
 func _process(delta):
@@ -33,6 +33,7 @@ func _process(delta):
 
 				
 			if isPlayerLike:
+				# TODO: pass a reference to the light. Issue: Firefly has light defined elsewhere
 				var playerLikeLight = GLOBAL_UTILS.getPlayerLikeLight(Entity)
 				
 				if playerLikeLight == null:
@@ -61,4 +62,3 @@ func _process(delta):
 			Entity.velocity += areaToEntityVector * magnitude
 	else:
 		isEntityInGravityArea = false
-	Entity.move_and_slide()

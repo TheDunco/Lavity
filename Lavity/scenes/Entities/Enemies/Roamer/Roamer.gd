@@ -19,9 +19,10 @@ func _physics_process(_delta):
 	if shouldChaseMouse:
 		chaseMouse()
 	velocity = $VelocityComponent.handleExistingVelocity(self.velocity)
+	move_and_slide()
 	
 func _process(_delta):
-	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
+	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(self.velocity)
 	if Input.is_action_just_pressed("change_color"):
 		randomizeColor()
 

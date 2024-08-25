@@ -46,6 +46,7 @@ layer_0/tile_data = PackedInt32Array(-458760, 0, 0, -393224, 0, 1, -327688, 0, 2
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_r1sna")]
 Entity = NodePath("..")
 animationSpeedVeloMult = 200.0
+animationSpeedVeloTamingConst = 6.0
 
 [node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -67,6 +68,16 @@ blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("8_o8dp4")
 
+[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("10_w4khb")]
+collision_layer = 2
+Entity = NodePath("..")
+
+[node name="LanternflyCollisionShape" type="CollisionShape2D" parent="GravityArea"]
+position = Vector2(15, 5)
+scale = Vector2(12.1167, 3.25052)
+shape = ExtResource("8_puo3w")
+debug_color = Color(0.917647, 0.309804, 0.160784, 0.0196078)
+
 [node name="DamageArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
@@ -76,12 +87,3 @@ position = Vector2(38, 3)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_cqcql")
 debug_color = Color(0.996078, 0, 0.192157, 0.239216)
-
-[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("10_w4khb")]
-Entity = NodePath("..")
-
-[node name="LanternflyCollisionShape" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(15, 5)
-scale = Vector2(12.1167, 3.25052)
-shape = ExtResource("8_puo3w")
-debug_color = Color(0.917647, 0.309804, 0.160784, 0.0196078)

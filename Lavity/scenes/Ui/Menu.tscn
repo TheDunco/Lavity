@@ -49,9 +49,9 @@ layout_mode = 2
 
 [node name="Instruction" type="Label" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
-text = "Use \"WASD\" to move
+text = "Use \"WASD\" to move, \"Q\" to flip orientation,  \"E\" to auto toggle auto orientation
+Press \"Space\" to lock onto surfaces
 Press \"F\" to turn off your light
-Press \"C\" to randomize colors
 Press \"N\" to skip to the next song"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]

@@ -3,6 +3,8 @@ extends Enemy
 var vampiricBoost := 0.1
 
 func _process(delta):
+	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(self.velocity)
+
 	var areas = $DamageArea.get_overlapping_areas()
 	if vampiricBoost > 0.1:
 		vampiricBoost -= 0.08 * delta

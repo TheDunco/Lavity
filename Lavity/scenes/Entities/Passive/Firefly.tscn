@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1x6e0bi4gjo0"]
+[gd_scene load_steps=7 format=3 uid="uid://b1x6e0bi4gjo0"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly.gd" id="1_pi4ac"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_56n36"]
 [ext_resource type="Texture2D" uid="uid://cv25og8ck8v4y" path="res://assets/Firefly/Firefly.png" id="3_kken1"]
+[ext_resource type="Shape2D" uid="uid://d1gaxyn4r0efc" path="res://scenes/Entities/Passive/FireflyCollisionShape.tres" id="4_bqaxv"]
+[ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="5_ksqup"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cab34"]
 animations = [{
@@ -14,10 +16,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ec5ex"]
-radius = 13.0
-height = 44.0
 
 [node name="Firefly" type="CharacterBody2D" node_paths=PackedStringArray("impulseTimer", "lightTimer")]
 script = ExtResource("1_pi4ac")
@@ -36,7 +34,7 @@ sprite_frames = SubResource("SpriteFrames_cab34")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_ec5ex")
+shape = ExtResource("4_bqaxv")
 
 [node name="ImpulseTimer" type="Timer" parent="."]
 autostart = true
@@ -44,6 +42,15 @@ autostart = true
 [node name="LightTimer" type="Timer" parent="."]
 wait_time = 0.207
 autostart = true
+
+[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("5_ksqup")]
+process_mode = 4
+collision_layer = 2
+Entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
+rotation = 1.5708
+shape = ExtResource("4_bqaxv")
 
 [connection signal="timeout" from="ImpulseTimer" to="." method="_on_impulse_timer_timeout"]
 [connection signal="timeout" from="LightTimer" to="." method="_on_light_timer_timeout"]

@@ -41,22 +41,52 @@ func _ready() -> void:
 	$PlayerLight.color = Color(0.5, 0.5, 0.5)
 
 func handleInput():
+	var isLocked = Input.is_action_pressed("lock")
+	var isOnCeiling = is_on_ceiling()
+	var isOnFloor = is_on_floor()
+	var isOnWall = is_on_wall()
+	
 	var isHandlingVelocityInput := false
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move_right") and not (isLocked and isOnWall):
 		isHandlingVelocityInput = true
 		velocity.x += playerMovementSpeed
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move_left") and not (isLocked and isOnWall):
 		isHandlingVelocityInput = true
 		velocity.x -= playerMovementSpeed
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("move_up") and not (isLocked and isOnFloor):
 		isHandlingVelocityInput = true
 		velocity.y -= playerMovementSpeed
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("move_down") and not (isLocked and isOnCeiling):
 		isHandlingVelocityInput = true
 		velocity.y += playerMovementSpeed
 		
+	if Input.is_action_just_pressed("flip"):
+		scale.x = -scale.x
+	if Input.is_action_just_pressed("auto_flip"):
+		$VelocityComponent.bypassAutoOrientation = !$VelocityComponent.bypassAutoOrientation
+		
+	if Input.is_action_just_pressed("toggle_flashlight") :
+		if $PlayerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
+			$PlayerLight.enabled = false
+			startDying()
+		else:
+			$PlayerLight.enabled = true
+			stopDying()
+
+		isTrackableByEnemy = $PlayerLight.enabled
+	
+	if isLocked:
+		#$VelocityComponent.bypassAutoOrientation = true
+		if isOnCeiling or isOnFloor:
+			velocity.y = 0
+	else:
+		#$VelocityComponent.bypassAutoOrientation = false
+		# Look towards the direction of travel
+		if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
+			look_at(velocity.normalized() + position)
+			
 	if isHandlingVelocityInput:
-		$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
+		$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(self.velocity)
 	elif $FlippingSprite.speed_scale < 0:
 		$FlippingSprite.speed_scale -= 1
 	else:
@@ -67,17 +97,6 @@ func handleInput():
 				$FlippingSprite.frame -= 1
 			else:
 				$FlippingSprite.frame += 1
-	
-	if Input.is_action_just_pressed("toggle_flashlight") :
-		if $PlayerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
-			$PlayerLight.enabled = false
-			startDying()
-		else:
-			$PlayerLight.enabled = true
-			stopDying()
-
-		isTrackableByEnemy = $PlayerLight.enabled
-		
 
 var time := 0.0
 func getPulseTime(delta):
@@ -102,7 +121,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 		"damage" : (statsPerColor["orange"] + white - black) * baseStatsMult,
 		"speed": (statsPerColor["green"] + white - black) * baseStatsMult,
 		"sonar": (statsPerColor["blue"] + white - black) * baseStatsMult,
-		"stealth": (statsPerColor["blue_purple"] + white - black) * baseStatsMult,
+		"stealth": (statsPerColor["blue_purple"]) * baseStatsMult,
 		"vision": (statsPerColor["yellow"] + white/4 - black) * baseStatsMult,
 		"regeneration": (statsPerColor["pink"] + white - black) * baseStatsMult,
 	}
@@ -186,7 +205,6 @@ func takeDamage(damage := 0.01) -> bool:
 
 func _process(delta):
 	# handle death timer and effects
-	print("sumColor ", GLOBAL_UTILS.sumColor($PlayerLight.color))
 	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
 		stopDying()
 	
@@ -195,12 +213,7 @@ func _process(delta):
 			lowPassEffect.cutoff_hz += 90
 	elif lowPassEffect.cutoff_hz > 1000:
 			lowPassEffect.cutoff_hz = 1000
-			
 	
-	# Look towards the direction of travel
-	if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
-		look_at(velocity.normalized() + position)
-		
 	# Pulse the player light
 	if $PlayerLight.enabled:
 		$PlayerLight.energy += getPulseTime(delta) / 100

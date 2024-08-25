@@ -12,6 +12,7 @@ class_name VelocityComponent
 @export_category("Sprite Effect Config")
 @export var animationSpeedVeloMult := 100.0
 @export var animationSpeedVeloTamingConst := 7.0
+@export var bypassAutoOrientation := false
 
 func _ready():
 	assert(Entity != null)
@@ -50,10 +51,15 @@ func handleExistingVelocity(velocity: Vector2) -> Vector2:
 	
 	return currVelocity
 	
-func _process(_delta):
+func _orientByRotation():
+	if bypassAutoOrientation:
+		return
 	var curScaleY = Entity.scale.y
 	var rotationCos = cos(Entity.rotation)
 	if rotationCos < 0 and curScaleY > 0:
 		Entity.scale.y = -Entity.scale.y
 	elif rotationCos > 0 and curScaleY < 0:
 		Entity.scale = Vector2(Entity.scale.x, abs(Entity.scale.y))
+	
+func _process(_delta):
+	_orientByRotation()

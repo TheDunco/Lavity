@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="13_smubi"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 25.0
+radius = 22.0
 height = 66.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_focnk"]
@@ -59,7 +59,7 @@ Entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-position = Vector2(-2, 2)
+position = Vector2(3, 6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_uyvyt")
 debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
@@ -87,7 +87,7 @@ stream = ExtResource("9_v2v3t")
 Entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(-2, 2)
+position = Vector2(3, 6)
 rotation = 1.5708
 shape = ExtResource("11_acwt6")
 
@@ -100,5 +100,7 @@ color = Color(0.0980392, 0.431373, 0.345098, 0.941176)
 energy = 0.2
 texture = SubResource("GradientTexture2D_3xlt7")
 script = ExtResource("12_wipv5")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
 [node name="LightDecayComponent" parent="RandColorLight" instance=ExtResource("13_smubi")]
