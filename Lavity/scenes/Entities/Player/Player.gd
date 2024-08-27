@@ -105,6 +105,9 @@ func getPulseTime(delta):
 		time = 0.0
 	return sin(time)
 	
+func getLightColor() -> Color:
+	return $PlayerLight.color
+
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsPerColor := {}
 	

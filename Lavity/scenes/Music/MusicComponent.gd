@@ -12,10 +12,13 @@ enum SongEnum {
 	A_NEW_COLOR,
 	GRAVITY,
 	A_MOTH_IN_LIGHT,
-	LANTERN
+	LANTERN,
+	ECHOES_FROM_THE_DARK
 }
 
-func playSong(song: SongEnum):
+func playSong(song: SongEnum, startOver: bool = false):
+	if currentIndex == song and not startOver:
+		return
 	musicRotation[currentIndex].stop()
 	currentIndex = song
 	musicRotation[currentIndex].play()
@@ -48,6 +51,9 @@ func _on_a_moth_in_light_finished():
 	next()
 	
 func _on_lantern_finished() -> void:
+	next()
+
+func _on_echoes_from_the_dark_finished() -> void:
 	next()
 	
 func _input(event):

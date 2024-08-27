@@ -51,7 +51,7 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 	# Calculate the average difference
 	var avgDiff: float = (rDiff + gDiff + bDiff) / 3.0
 
-	# Calculate the score based on the average difference
+	# Score is the inverse of the average difference
 	return 1.0 - avgDiff
 
 func sumColor(color: Color) -> float:

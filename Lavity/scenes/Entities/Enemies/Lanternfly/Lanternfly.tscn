@@ -32,6 +32,8 @@ animations = [{
 radius = 15.0
 
 [node name="Lanternfly" type="CharacterBody2D"]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_h7r8b")
 damageMult = 0.005
 

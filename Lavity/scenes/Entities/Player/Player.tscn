@@ -82,6 +82,9 @@ point_count = 2
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
 position = Vector2(0, 1)
+collision_layer = 24
+collision_mask = 7
+collision_priority = 2.0
 floor_snap_length = 2.0
 script = ExtResource("1_jm2c2")
 

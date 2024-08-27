@@ -57,7 +57,7 @@ func _ready():
 # Main Menu
 func _on_play_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/Tutorial.tscn")
-	#MusicComponent.playSong(MusicComponent.SongEnum.A_MOTH_IN_LIGHT)
+	MusicComponent.playSong(MusicComponent.SongEnum.ECHOES_FROM_THE_DARK)
 	
 func _on_light_effects_world_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/EffectTestingWorld.tscn")

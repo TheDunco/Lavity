@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cycilpk4eefu8"]
+[gd_scene load_steps=8 format=3 uid="uid://cycilpk4eefu8"]
 
 [ext_resource type="Script" path="res://scenes/Music/MusicComponent.gd" id="1_xm5us"]
 [ext_resource type="AudioStream" uid="uid://b6enmfb2u0xx1" path="res://assets/audio/music/Light.wav" id="2_0jreg"]
@@ -6,10 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://b6geq8lun2xtw" path="res://assets/audio/music/Gavity.wav" id="4_hgarr"]
 [ext_resource type="AudioStream" uid="uid://c7ds0wbsj4hbc" path="res://assets/audio/music/A Moth in Light.wav" id="5_57hwm"]
 [ext_resource type="AudioStream" uid="uid://dyo1yxkn1i3nm" path="res://assets/audio/music/Lantern.wav" id="6_fgh4p"]
+[ext_resource type="AudioStream" uid="uid://cdpmjrwljqhle" path="res://assets/audio/music/Echoes form the Dark.wav" id="7_a6lfj"]
 
 [node name="MusicComponent" type="AudioStreamPlayer" node_paths=PackedStringArray("musicRotation")]
 script = ExtResource("1_xm5us")
-musicRotation = [NodePath("Light"), NodePath("A New Color"), NodePath("Gravity"), NodePath("A Moth in Light"), NodePath("Lantern")]
+musicRotation = [NodePath("Light"), NodePath("A New Color"), NodePath("Gravity"), NodePath("A Moth in Light"), NodePath("Lantern"), NodePath("Echoes from the Dark")]
 
 [node name="Light" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0jreg")
@@ -32,8 +33,13 @@ stream = ExtResource("6_fgh4p")
 volume_db = -20.0
 bus = &"Music"
 
+[node name="Echoes from the Dark" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_a6lfj")
+bus = &"Music"
+
 [connection signal="finished" from="Light" to="." method="_on_light_finished"]
 [connection signal="finished" from="A New Color" to="." method="_on_a_new_color_finished"]
 [connection signal="finished" from="Gravity" to="." method="_on_gravity_finished"]
 [connection signal="finished" from="A Moth in Light" to="." method="_on_a_moth_in_light_finished"]
 [connection signal="finished" from="Lantern" to="." method="_on_lantern_finished"]
+[connection signal="finished" from="Echoes from the Dark" to="." method="_on_echoes_from_the_dark_finished"]

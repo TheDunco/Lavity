@@ -18,6 +18,8 @@ animations = [{
 }]
 
 [node name="Firefly" type="CharacterBody2D" node_paths=PackedStringArray("impulseTimer", "lightTimer")]
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_pi4ac")
 impulseTimer = NodePath("ImpulseTimer")
 lightTimer = NodePath("LightTimer")
