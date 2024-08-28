@@ -115,6 +115,7 @@ auto_flip={
 2d_physics/layer_3="Damage"
 2d_physics/layer_4="ColorPassable"
 2d_physics/layer_5="Player"
+2d_physics/layer_6="NPC"
 
 [physics]
 
