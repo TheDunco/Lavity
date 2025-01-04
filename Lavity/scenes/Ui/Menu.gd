@@ -24,6 +24,24 @@ class_name Menu
 @export_category("Other References")
 @export var mainMenuButton: Button = null
 
+@onready var Buttons = find_children("", "Button", true)
+@onready var Sliders = find_children("", "Slider", true)
+
+@export var buttonTweenIntensity := 1.07
+@export var buttonTweenDuration := 0.01
+
+func startButtonTween(object: Object, property: String, finalVal: Variant, duration: float) -> void:
+	var tween = create_tween()
+	tween.tween_property(object, property, finalVal, duration)
+
+func buttonMouseEntered(button: Button) -> void:
+	button.pivot_offset = button.size / 2
+	GlobalSfx.playButtonHover() 
+	startButtonTween(button, "scale", Vector2.ONE * buttonTweenIntensity, buttonTweenDuration)
+
+func buttonMouseExited(button: Button) -> void:
+	startButtonTween(button, "scale", Vector2.ONE, buttonTweenDuration)
+
 func loadOptions():
 	var brightness = GLOBAL.getSetting("BRIGHTNESS")
 	if brightness and brightness > 0:
@@ -46,13 +64,24 @@ func loadOptions():
 		volumeSlider.value = volume
 		_on_volume_slider_value_changed(volume)
 
-
 func _ready():
 	loadOptions()
 	$AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
 	MusicComponent.connect("songChanged", _on_song_changed)
 	mainMenuButton.visible = showMainMenuButton
 	visible = visibleByDefault
+	
+	for button: Button in Buttons:
+		if button:
+			button.connect("mouse_entered", func(): buttonMouseEntered(button))
+			button.connect("mouse_exited", func(): buttonMouseExited(button))
+			button.connect("pressed", GlobalSfx.playButtonClick)
+
+	for slider: Slider in Sliders:
+		if slider:
+			slider.connect("drag_started", GlobalSfx.playButtonHover)
+			slider.connect("drag_ended", GlobalSfx.playButtonHover)
+			
 	
 func switchToDynamicMusic():
 	GlobalDynamicMusicComponent.enable()
@@ -115,6 +144,7 @@ func _on_bloom_slider_value_changed(value: float) -> void:
 
 func _on_volume_slider_value_changed(value):
 	GLOBAL.setSetting("VOLUME", value)
+	GlobalSfx.playButtonHover()
 	var masterBusIndex := AudioServer.get_bus_index("Master")
 	if value == $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.min_value:
 		AudioServer.set_bus_mute(masterBusIndex, true)

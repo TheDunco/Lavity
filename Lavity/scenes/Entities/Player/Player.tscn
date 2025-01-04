@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=30 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -17,7 +17,9 @@
 [ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="11_c7gky"]
 [ext_resource type="AudioStream" uid="uid://bqismph8dboi" path="res://assets/audio/sfx/wing_flap2.wav" id="11_cty4c"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/PlayerSprites.gd" id="11_w31v0"]
+[ext_resource type="AudioStream" uid="uid://ccanbsn3s1v6w" path="res://assets/audio/sfx/wing_flap3.wav" id="15_pjqcf"]
 [ext_resource type="Texture2D" uid="uid://prgsy2vimnga" path="res://assets/Moth Flying/without-legs/individual-leg_0001.png" id="15_ybomp"]
+[ext_resource type="AudioStream" uid="uid://bibdynmbha2o5" path="res://assets/audio/sfx/wing_flap4.wav" id="16_k171i"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
 [ext_resource type="Texture2D" uid="uid://dj7donbsc648h" path="res://assets/Point Lights/PointLight.png" id="21_7vffy"]
@@ -134,6 +136,16 @@ bus = &"WingFlap"
 
 [node name="WingFlap2" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
 stream = ExtResource("11_cty4c")
+volume_db = -10.0
+bus = &"WingFlap"
+
+[node name="WingFlap3" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
+stream = ExtResource("15_pjqcf")
+volume_db = -10.0
+bus = &"WingFlap"
+
+[node name="WingFlap4" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
+stream = ExtResource("16_k171i")
 volume_db = -10.0
 bus = &"WingFlap"
 

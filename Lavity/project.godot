@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lavity"
-config/version="0.0.26"
+config/version="0.0.27"
 run/main_scene="res://scenes/Ui/Menu2D.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://assets/cosmo.png"
@@ -29,6 +29,7 @@ GameFlow="*res://scenes/Utils/GameFlow.tscn"
 MusicComponent="*res://scenes/Music/MusicComponent.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 GlobalDynamicMusicComponent="*res://scenes/Music/Dynamic/DynamicMusicComponent.tscn"
+GlobalSfx="*res://scenes/Audio/SfxComponent.tscn"
 
 [display]
 
