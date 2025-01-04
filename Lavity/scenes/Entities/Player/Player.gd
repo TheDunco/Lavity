@@ -10,6 +10,9 @@ class_name Player
 @export var lookThreshold := 50
 @export var cameraBaseZoom := 1.35
 @export var deathTimerBaseSeconds := 7
+@export var hueRotationSpeed := 2.0
+
+var colorRotate = GLOBAL_UTILS.RGBRotate.new()
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
@@ -38,15 +41,16 @@ var isTrackableByEnemy: bool = true
 var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
-	$PlayerLight.color = Color(0.5, 0.5, 0.5)
+	$PlayerLight.color = Color.RED
 
 func handleInput():
 	var isLocked = Input.is_action_pressed("lock")
 	var isOnCeiling = is_on_ceiling()
 	var isOnFloor = is_on_floor()
 	var isOnWall = is_on_wall()
-	
+
 	var isHandlingVelocityInput := false
+
 	if Input.is_action_pressed("move_right") and not (isLocked and isOnWall):
 		isHandlingVelocityInput = true
 		velocity.x += playerMovementSpeed
@@ -217,9 +221,9 @@ func _process(delta):
 	elif lowPassEffect.cutoff_hz > 1000:
 			lowPassEffect.cutoff_hz = 1000
 	
-	# Pulse the player light
-	if $PlayerLight.enabled:
-		$PlayerLight.energy += getPulseTime(delta) / 100
+	# # Pulse the player light
+	# if $PlayerLight.enabled:
+	# 	$PlayerLight.energy += getPulseTime(delta) / 100
 		
 	# Make the player visible if they are collecting color
 	if $GravityArea.isEntityInGravityArea:
@@ -242,3 +246,17 @@ func _on_damage_effects_timer_timeout() -> void:
 
 func _on_death_timer_timeout() -> void:
 	GameFlow.gameOver()
+
+func rotateColorHue(amount: float) -> void:
+	colorRotate.set_hue_rotation(amount)
+	var rotatedColor = colorRotate.apply($PlayerLight.color)
+	$PlayerLight.color = rotatedColor
+
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index ==  MOUSE_BUTTON_WHEEL_UP and event.pressed:
+			rotateColorHue(hueRotationSpeed)
+		if event.button_index ==  MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+			rotateColorHue(-hueRotationSpeed)
+		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
+			$PlayerLight.color = Color.RED

@@ -65,3 +65,45 @@ func getPlayerLikeLight(entity: CharacterBody2D) -> PointLight2D:
 	elif entity is Enemy:
 		return entity.find_child("LavityLightLight")
 	return null
+
+# Class that handles hue rotation for RGB values
+# Based on https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color
+class RGBRotate:
+	var matrix: Array
+
+	func _init():
+		# Initialize the rotation matrix as an identity matrix
+		matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+
+	# Helper function to colorClamp values between 0.0 and 1.0 for float-based RGB values
+	func colorClamp(v: float) -> float:
+		if v < 0.0:
+			return 0.0
+		if v > 1.0:
+			return 1.0
+		return v
+
+	# Method to set the hue rotation based on degrees
+	func set_hue_rotation(degrees: float) -> void:
+		var cosA = cos(deg_to_rad(degrees))  # Using deg_to_rad for converting degrees to radians
+		var sinA = sin(deg_to_rad(degrees))
+		
+		# Standard hue rotation matrix for RGB colors
+		matrix[0][0] = cosA + (1.0 - cosA) / 3.0
+		matrix[0][1] = (1.0 / 3.0) * (1.0 - cosA) - sqrt(1.0 / 3.0) * sinA
+		matrix[0][2] = (1.0 / 3.0) * (1.0 - cosA) + sqrt(1.0 / 3.0) * sinA
+		matrix[1][0] = (1.0 / 3.0) * (1.0 - cosA) + sqrt(1.0 / 3.0) * sinA
+		matrix[1][1] = cosA + (1.0 / 3.0) * (1.0 - cosA)
+		matrix[1][2] = (1.0 / 3.0) * (1.0 - cosA) - sqrt(1.0 / 3.0) * sinA
+		matrix[2][0] = (1.0 / 3.0) * (1.0 - cosA) - sqrt(1.0 / 3.0) * sinA
+		matrix[2][1] = (1.0 / 3.0) * (1.0 - cosA) + sqrt(1.0 / 3.0) * sinA
+		matrix[2][2] = cosA + (1.0 / 3.0) * (1.0 - cosA)
+
+	# Method to apply the hue rotation to RGB values
+	func apply(color: Color) -> Color:
+		var rx = color.r * matrix[0][0] + color.g * matrix[0][1] + color.b * matrix[0][2]
+		var gx = color.r * matrix[1][0] + color.g * matrix[1][1] + color.b * matrix[1][2]
+		var bx = color.r * matrix[2][0] + color.g * matrix[2][1] + color.b * matrix[2][2]
+
+		# Clamp the final RGB values to the range 0.0 to 1.0 and return them
+		return Color(colorClamp(rx), colorClamp(gx), colorClamp(bx))
