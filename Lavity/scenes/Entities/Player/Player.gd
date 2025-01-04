@@ -12,7 +12,7 @@ class_name Player
 @export var deathTimerBaseSeconds := 7
 @export var hueRotationSpeed := 2.0
 
-var colorRotate = GLOBAL_UTILS.RGBRotate.new()
+var colorRotate = COLOR_UTILS.RGBRotate.new()
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
@@ -70,7 +70,7 @@ func handleInput():
 		$VelocityComponent.bypassAutoOrientation = !$VelocityComponent.bypassAutoOrientation
 		
 	if Input.is_action_just_pressed("toggle_flashlight") :
-		if $PlayerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
+		if $PlayerLight.enabled:# and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
 			$PlayerLight.enabled = false
 			startDying()
 		else:
@@ -116,11 +116,11 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsPerColor := {}
 	
 	# Figure out how similar to each color we are
-	for colorName in GLOBAL_UTILS.colorNames:
-		statsPerColor[colorName] = GLOBAL_UTILS.scoreColorLikeness(currentColor, GLOBAL_UTILS.colors[colorName])
+	for colorName in COLOR_UTILS.colorNames:
+		statsPerColor[colorName] = COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors[colorName])
 	
-	var white = GLOBAL_UTILS.scoreColorLikeness(currentColor, Color.WHITE)
-	var black = GLOBAL_UTILS.scoreColorLikeness(currentColor, Color.BLACK)/2
+	var white = COLOR_UTILS.scoreColorLikeness(currentColor, Color.WHITE)
+	var black = COLOR_UTILS.scoreColorLikeness(currentColor, Color.BLACK)/2
 
 	# Map that to the stats
 	var statsToSet := {
@@ -202,7 +202,7 @@ func takeDamage(damage := 0.01) -> bool:
 		playerLightColor.b -= damage / numColorsThatCanTakeDamage
 		playerLightColor.b = max(playerLightColor.b, 0)
 	
-	if GLOBAL_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
+	if COLOR_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
 		$DeathTimer.start()
 		setSaturation(0.1)
 	
@@ -212,7 +212,7 @@ func takeDamage(damage := 0.01) -> bool:
 
 func _process(delta):
 	# handle death timer and effects
-	if GLOBAL_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
+	if COLOR_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
 		stopDying()
 	
 	if $DeathTimer.is_stopped():
@@ -235,6 +235,7 @@ func _process(delta):
 	_setAttributesFromStats()
 	
 	$CPUParticles2D.color = $PlayerLight.color
+	GlobalDynamicMusicComponent.setDynamicTrackVolume($PlayerLight.color)
 	
 func _physics_process(_delta):
 	handleInput()

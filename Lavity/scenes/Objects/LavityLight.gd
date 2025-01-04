@@ -2,7 +2,7 @@ extends Node2D
 class_name LavityLight
 
 @export var energy := 1.0
-@export var MaxRgb := GLOBAL_UTILS.MAX_RAND_RGB
+@export var MaxRgb := COLOR_UTILS.MAX_RAND_RGB
 @export var canChangeColor := false
 @export var randomizeColorOnReady := false
 @export_color_no_alpha var initColor: Color
@@ -11,7 +11,7 @@ class_name LavityLight
 func _ready():
 	$LavityLightLight.energy = energy
 	if randomizeColorOnReady:
-		$LavityLightLight.color = GLOBAL_UTILS.randColor(MaxRgb)
+		$LavityLightLight.color = COLOR_UTILS.randColor(MaxRgb)
 	else:
 		$LavityLightLight.color = initColor
  
@@ -20,4 +20,4 @@ func set_energy(val: float):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("change_color") and canChangeColor:
-		$LavityLightLight.color = GLOBAL_UTILS.randColor(MaxRgb)
+		$LavityLightLight.color = COLOR_UTILS.randColor(MaxRgb)

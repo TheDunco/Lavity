@@ -1,4 +1,4 @@
 extends PointLight2D
 
 func _ready():
-	color = GLOBAL_UTILS.randColor()
+	color = COLOR_UTILS.randColor()

@@ -53,6 +53,10 @@ func _ready():
 	MusicComponent.connect("songChanged", _on_song_changed)
 	mainMenuButton.visible = showMainMenuButton
 	visible = visibleByDefault
+	
+func switchToDynamicMusic():
+	GlobalDynamicMusicComponent.enable()
+	MusicComponent.pause()
 
 # Main Menu
 func _on_play_pressed():
@@ -61,6 +65,7 @@ func _on_play_pressed():
 	
 func _on_light_effects_world_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/EffectTestingWorld.tscn")
+	switchToDynamicMusic()
 
 func _on_options_pressed():
 	$Options.show()
@@ -68,6 +73,8 @@ func _on_options_pressed():
 	
 func _on_main_menu_button_pressed() -> void:
 	GameFlow.switchScene("res://scenes/Ui/Menu2D.tscn")
+	GlobalDynamicMusicComponent.disable()
+	MusicComponent.resume()
 
 func _on_quit_pressed():
 	GameFlow.quit()

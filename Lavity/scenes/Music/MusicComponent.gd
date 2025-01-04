@@ -26,6 +26,12 @@ func playSong(song: SongEnum, startOver: bool = false):
 
 func _ready():
 	musicRotation[currentIndex].play()
+	
+func pause():
+	musicRotation[currentIndex].stop()
+
+func resume():
+	musicRotation[currentIndex].play()
 
 func next():
 	musicRotation[currentIndex].stop()

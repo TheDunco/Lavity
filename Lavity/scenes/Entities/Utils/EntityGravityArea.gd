@@ -34,7 +34,7 @@ func _process(delta):
 				
 			if isPlayerLike:
 				# TODO: pass a reference to the light. Issue: Firefly has light defined elsewhere
-				var playerLikeLight = GLOBAL_UTILS.getPlayerLikeLight(Entity)
+				var playerLikeLight = COLOR_UTILS.getPlayerLikeLight(Entity)
 				
 				if playerLikeLight == null:
 					continue
