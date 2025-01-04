@@ -8,9 +8,11 @@ class_name LightDecayComponent
 
 func _process(delta):
 	if light.enabled:
+		var color = light.color
+
 		if light.color.r > decayThreshold:
-			light.color.r -= ligthDecayMult * delta
+			light.color.r -= ligthDecayMult * delta + color.r
 		if light.color.g > decayThreshold:
-			light.color.g -= ligthDecayMult * delta
+			light.color.g -= ligthDecayMult * delta + color.g
 		if light.color.b > decayThreshold:
-			light.color.b -= ligthDecayMult * delta
+			light.color.b -= ligthDecayMult * delta + color.b
