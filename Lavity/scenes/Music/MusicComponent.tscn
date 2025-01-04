@@ -9,7 +9,7 @@
 
 [node name="MusicComponent" type="AudioStreamPlayer" node_paths=PackedStringArray("musicRotation")]
 script = ExtResource("1_xm5us")
-musicRotation = [NodePath("Light"), NodePath("A New Color"), NodePath("Gravity"), NodePath("A Moth in Light"), NodePath("Lantern"), NodePath("")]
+musicRotation = [NodePath("Light"), NodePath("A New Color"), NodePath("Gravity"), NodePath("A Moth in Light"), NodePath("Lantern")]
 
 [node name="Light" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_0jreg")
