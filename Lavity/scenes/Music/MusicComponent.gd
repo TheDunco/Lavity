@@ -13,7 +13,6 @@ enum SongEnum {
 	GRAVITY,
 	A_MOTH_IN_LIGHT,
 	LANTERN,
-	ECHOES_FROM_THE_DARK
 }
 
 func playSong(song: SongEnum, startOver: bool = false):
@@ -59,9 +58,6 @@ func _on_a_moth_in_light_finished():
 func _on_lantern_finished() -> void:
 	next()
 
-func _on_echoes_from_the_dark_finished() -> void:
-	next()
-	
 func _input(event):
 	if event.is_action_pressed("next_song"):
 		next()
