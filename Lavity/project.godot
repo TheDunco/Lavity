@@ -30,6 +30,7 @@ MusicComponent="*res://scenes/Music/MusicComponent.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 GlobalDynamicMusicComponent="*res://scenes/Music/Dynamic/DynamicMusicComponent.tscn"
 GlobalSfx="*res://scenes/Audio/SfxComponent.tscn"
+SignalBus="*res://scenes/Utils/SignalBus.tscn"
 
 [display]
 

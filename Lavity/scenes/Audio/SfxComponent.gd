@@ -13,3 +13,6 @@ func playButtonClick():
 func playTonalClick(pitchScale: float):
 	$TonalClick.pitch_scale = pitchScale
 	$TonalClick.play()
+	
+func playRepulse():
+	$Repulse.play()

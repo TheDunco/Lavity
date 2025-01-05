@@ -54,7 +54,7 @@ Press \"Space\" to lock onto surfaces
 Press \"F\" to turn off your light
 Press \"N\" to skip to the next song
 Use \"Scroll Wheel\" to shift hue
-Use \"Middle Mouse\" to reset color to red"
+Click \"Right Mouse\" to repulse enemies"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2

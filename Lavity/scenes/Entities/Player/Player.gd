@@ -18,7 +18,7 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 @export var baseStatsMult := 1.0
 @export var baseMovementSpeed := 7
 @export var movementSpeedMult := 20
-@export var baseTrackableDistance := 2500.0
+@export var baseTrackableDistance := 3000.0
 
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
 @export var SUM_DAMAGE_CUTOFF := 0.03
@@ -30,6 +30,11 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 @onready var flippingSprite = $FlippingSprite
 @onready var velocityComponent = $VelocityComponent
 @onready var deathTimer = $DeathTimer
+@onready var cam: PhantomCamera2D = $"../PlayerFollowingPhantomCam"
+
+var repulseTime = 0.0
+const repulseActiveTime := 3.0 
+@onready var initEnergy = playerLight.energy
 
 var stats := {
 	"damageReduction": 0.5,
@@ -48,7 +53,7 @@ var trackableDistance := baseTrackableDistance
 func _ready() -> void:
 	playerLight.color = Color.RED
 
-func handleInput():
+func handleKeyboardInput():
 	var isLocked = Input.is_action_pressed("lock")
 	var isOnCeiling = is_on_ceiling()
 	var isOnFloor = is_on_floor()
@@ -134,7 +139,7 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 		"speed": (statsPerColor["green"] + white - black) * baseStatsMult,
 		"sonar": (statsPerColor["blue"] + white - black) * baseStatsMult,
 		"stealth": (statsPerColor["blue_purple"]) * baseStatsMult,
-		"vision": (statsPerColor["yellow"] + white/4 - black) * baseStatsMult,
+		"vision": (statsPerColor["yellow"] + white/3 - black) * baseStatsMult,
 		"regeneration": (statsPerColor["pink"] + white - black) * baseStatsMult,
 	}
 	
@@ -143,8 +148,8 @@ func _getStatsFromColor(currentColor: Color) -> Dictionary:
 func _setAttributesFromStats():
 	# yellow/vision
 	var zoomLevel: float = max(cameraBaseZoom - stats["vision"], maxZoom)
-	$"../PlayerFollowingPhantomCam".zoom.x = zoomLevel
-	$"../PlayerFollowingPhantomCam".zoom.y = zoomLevel
+	cam.zoom.x = zoomLevel
+	cam.zoom.y = zoomLevel
 	
 	# green/speed
 	playerMovementSpeed = (stats["speed"] * movementSpeedMult) + baseMovementSpeed
@@ -215,7 +220,7 @@ func takeDamage(damage := 0.01) -> bool:
 	
 	return didTakeDamage
 
-func _process(_delta):
+func _process(delta):
 	# handle death timer and effects
 	if COLOR_UTILS.sumColor(playerLight.color) > SUM_DAMAGE_CUTOFF and playerLight.enabled:
 		stopDying()
@@ -234,11 +239,16 @@ func _process(_delta):
 	
 	stats = _getStatsFromColor(playerLight.color)
 	_setAttributesFromStats()
+
+	if repulseTime > 0.0:
+		repulseTime -= delta
+	if repulseTime > initEnergy:
+		playerLight.energy = repulseTime + 0.3
 	
 	GlobalDynamicMusicComponent.setDynamicTrackVolume(playerLight.color)
 	
 func _physics_process(_delta):
-	handleInput()
+	handleKeyboardInput()
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	move_and_slide()
 
@@ -253,6 +263,7 @@ func rotateColorHue(amount: float) -> void:
 	var rotatedColor = colorRotate.apply(playerLight.color)
 	playerLight.color = rotatedColor
 
+
 func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index ==  MOUSE_BUTTON_WHEEL_UP and event.pressed:
@@ -260,4 +271,10 @@ func _input(event):
 		if event.button_index ==  MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			rotateColorHue(-hueRotationSpeed)
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-			playerLight.color = Color.RED
+			playerLight.color = COLOR_UTILS.YELLOW
+		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > 0.15 and repulseTime <= 0.0:
+				playerLight.color -= Color(0.05, 0.05, 0.05, 0.0)
+				GlobalSfx.playRepulse()
+				SignalBus.playerRepulsed.emit()
+				repulseTime = 3.0

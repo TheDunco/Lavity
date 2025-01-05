@@ -1,7 +1,7 @@
 extends Node2D
 class_name LightDecayComponent
 
-@export var lightDecaySlowDown := 5.0
+@export var lightDecaySlowDown := 50.0
 @export var decayThreshold := 0.05
 
 @onready var light: Light2D = get_parent()
