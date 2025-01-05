@@ -7,7 +7,6 @@ class_name LavityLight
 @export var randomizeColorOnReady := false
 @export_color_no_alpha var initColor: Color
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	$LavityLightLight.energy = energy
 	if randomizeColorOnReady:

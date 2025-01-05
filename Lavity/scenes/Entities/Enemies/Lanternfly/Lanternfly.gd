@@ -2,13 +2,18 @@ extends Enemy
 
 var vampiricBoost := 0.1
 
-func _process(delta):
-	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(self.velocity)
+@onready var flippingSprite := $FlippingSprite
+@onready var velocityComponent = $VelocityComponent
+@onready var damageArea = $DamageArea
+@onready var lanternlight = $Lanternlight
 
-	var areas = $DamageArea.get_overlapping_areas()
+func _process(delta):
+	flippingSprite.speed_scale = velocityComponent.VelocityComponent.getAnimationSpeed(self.velocity)
+
+	var areas = damageArea.get_overlapping_areas()
 	if vampiricBoost > 0.1:
 		vampiricBoost -= 0.08 * delta
-	$Lanternlight.scale = Vector2(vampiricBoost, vampiricBoost)
+	lanternlight.scale = Vector2(vampiricBoost, vampiricBoost)
 		
 	for area in areas:
 		if area.name == "DamageableArea":

@@ -9,3 +9,7 @@ func playButtonHover():
 func playButtonClick():
 	$ButtonClick.pitch_scale = randf_range(1.1, 1.3)
 	$ButtonClick.play()
+	
+func playTonalClick(pitchScale: float):
+	$TonalClick.pitch_scale = pitchScale
+	$TonalClick.play()

@@ -26,6 +26,11 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
 @onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
 
+@onready var playerLight = $PlayerLight
+@onready var flippingSprite = $FlippingSprite
+@onready var velocityComponent = $VelocityComponent
+@onready var deathTimer = $DeathTimer
+
 var stats := {
 	"damageReduction": 0.5,
 	"damage" : 0.5,
@@ -41,7 +46,7 @@ var isTrackableByEnemy: bool = true
 var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
-	$PlayerLight.color = Color.RED
+	playerLight.color = Color.RED
 
 func handleInput():
 	var isLocked = Input.is_action_pressed("lock")
@@ -67,50 +72,50 @@ func handleInput():
 	if Input.is_action_just_pressed("flip"):
 		scale.x = -scale.x
 	if Input.is_action_just_pressed("auto_flip"):
-		$VelocityComponent.bypassAutoOrientation = !$VelocityComponent.bypassAutoOrientation
+		velocityComponent.bypassAutoOrientation = !velocityComponent.bypassAutoOrientation
 		
 	if Input.is_action_just_pressed("toggle_flashlight") :
-		if $PlayerLight.enabled:# and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
-			$PlayerLight.enabled = false
+		if playerLight.enabled:# and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
+			playerLight.enabled = false
 			startDying()
 		else:
-			$PlayerLight.enabled = true
+			playerLight.enabled = true
 			stopDying()
 
-		isTrackableByEnemy = $PlayerLight.enabled
+		isTrackableByEnemy = playerLight.enabled
 	
 	if isLocked:
-		#$VelocityComponent.bypassAutoOrientation = true
+		#velocityComponent.bypassAutoOrientation = true
 		if isOnCeiling or isOnFloor:
 			velocity.y = 0
 	else:
-		#$VelocityComponent.bypassAutoOrientation = false
+		#velocityComponent.bypassAutoOrientation = false
 		# Look towards the direction of travel
 		if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
 			look_at(velocity.normalized() + position)
 			
 	if isHandlingVelocityInput:
-		$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(self.velocity)
-	elif $FlippingSprite.speed_scale < 0:
-		$FlippingSprite.speed_scale -= 1
+		flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(self.velocity)
+	elif flippingSprite.speed_scale < 0:
+		flippingSprite.speed_scale -= 1
 	else:
-		$FlippingSprite.speed_scale = 0
-		var currentFrame = $FlippingSprite.frame
+		flippingSprite.speed_scale = 0
+		var currentFrame = flippingSprite.frame
 		if currentFrame != spriteBasePosition:
 			if currentFrame > spriteBasePosition:
-				$FlippingSprite.frame -= 1
+				flippingSprite.frame -= 1
 			else:
-				$FlippingSprite.frame += 1
+				flippingSprite.frame += 1
 
 var time := 0.0
 func getPulseTime(delta):
-	time += max($FlippingSprite.speed_scale, 3) * delta
+	time += max(flippingSprite.speed_scale, 3) * delta
 	if time > 1.0e30:
 		time = 0.0
 	return sin(time)
 	
 func getLightColor() -> Color:
-	return $PlayerLight.color
+	return playerLight.color
 
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsPerColor := {}
@@ -148,18 +153,18 @@ func _setAttributesFromStats():
 	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance
 
 func setChromaticAbberration(on: bool) -> void:
-	$FlippingSprite.use_parent_material = !on
+	flippingSprite.use_parent_material = !on
 	
 func setSaturation(val: float) -> void:
 	worldEnvironment.environment.adjustment_saturation = val
 
 func startDying():
-	$DeathTimer.paused = false
-	$DeathTimer.start(deathTimerBaseSeconds)
+	deathTimer.paused = false
+	deathTimer.start(deathTimerBaseSeconds)
 	setSaturation(0.1)
 
 func stopDying():
-	$DeathTimer.stop()
+	deathTimer.stop()
 	setSaturation(defaultSaturation)
 	
 func takeDamage(damage := 0.01) -> bool:
@@ -173,7 +178,7 @@ func takeDamage(damage := 0.01) -> bool:
 	setChromaticAbberration(true)
 	$DamageEffectsTimer.start()
 	
-	var playerLightColor = $PlayerLight.color
+	var playerLightColor = playerLight.color
 
 	var numColorsThatCanTakeDamage := 0
 	var rCanTakeDamage = playerLightColor.r > 0
@@ -203,43 +208,38 @@ func takeDamage(damage := 0.01) -> bool:
 		playerLightColor.b = max(playerLightColor.b, 0)
 	
 	if COLOR_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
-		$DeathTimer.start()
+		deathTimer.start()
 		setSaturation(0.1)
 	
-	$PlayerLight.color = playerLightColor
+	playerLight.color = playerLightColor
 	
 	return didTakeDamage
 
-func _process(delta):
+func _process(_delta):
 	# handle death timer and effects
-	if COLOR_UTILS.sumColor($PlayerLight.color) > SUM_DAMAGE_CUTOFF and $PlayerLight.enabled:
+	if COLOR_UTILS.sumColor(playerLight.color) > SUM_DAMAGE_CUTOFF and playerLight.enabled:
 		stopDying()
 	
-	if $DeathTimer.is_stopped():
+	if deathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:
 			lowPassEffect.cutoff_hz += 90
 	elif lowPassEffect.cutoff_hz > 1000:
 			lowPassEffect.cutoff_hz = 1000
-	
-	# # Pulse the player light
-	# if $PlayerLight.enabled:
-	# 	$PlayerLight.energy += getPulseTime(delta) / 100
 		
 	# Make the player visible if they are collecting color
 	if $GravityArea.isEntityInGravityArea:
 		isTrackableByEnemy = true
 	else:
-		isTrackableByEnemy = $PlayerLight.enabled
+		isTrackableByEnemy = playerLight.enabled
 	
-	stats = _getStatsFromColor($PlayerLight.color)
+	stats = _getStatsFromColor(playerLight.color)
 	_setAttributesFromStats()
 	
-	$CPUParticles2D.color = $PlayerLight.color
-	GlobalDynamicMusicComponent.setDynamicTrackVolume($PlayerLight.color)
+	GlobalDynamicMusicComponent.setDynamicTrackVolume(playerLight.color)
 	
 func _physics_process(_delta):
 	handleInput()
-	velocity = $VelocityComponent.handleExistingVelocity(self.velocity)
+	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	move_and_slide()
 
 func _on_damage_effects_timer_timeout() -> void:
@@ -250,8 +250,8 @@ func _on_death_timer_timeout() -> void:
 
 func rotateColorHue(amount: float) -> void:
 	colorRotate.set_hue_rotation(amount)
-	var rotatedColor = colorRotate.apply($PlayerLight.color)
-	$PlayerLight.color = rotatedColor
+	var rotatedColor = colorRotate.apply(playerLight.color)
+	playerLight.color = rotatedColor
 
 func _input(event):
 	if event is InputEventMouseButton:
@@ -260,4 +260,4 @@ func _input(event):
 		if event.button_index ==  MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			rotateColorHue(-hueRotationSpeed)
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-			$PlayerLight.color = Color.RED
+			playerLight.color = Color.RED

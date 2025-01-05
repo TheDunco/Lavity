@@ -104,6 +104,6 @@ class RGBRotate:
 		var rx = color.r * matrix[0][0] + color.g * matrix[0][1] + color.b * matrix[0][2]
 		var gx = color.r * matrix[1][0] + color.g * matrix[1][1] + color.b * matrix[1][2]
 		var bx = color.r * matrix[2][0] + color.g * matrix[2][1] + color.b * matrix[2][2]
-
+		GlobalSfx.playTonalClick(remap(rx, 0.0, 1.0, 0.5, 1.5))
 		# Clamp the final RGB values to the range 0.0 to 1.0 and return them
 		return Color(colorClamp(rx), colorClamp(gx), colorClamp(bx))

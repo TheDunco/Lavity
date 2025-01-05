@@ -220,9 +220,7 @@ texture = SubResource("GradientTexture2D_rtjsw")
 metadata/_edit_lock_ = true
 
 [node name="LightDecayComponent" parent="PlayerLight" instance=ExtResource("11_c7gky")]
-process_mode = 4
 scale = Vector2(5.88235, 6.66667)
-ligthDecayMult = 0.03
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 visible = false

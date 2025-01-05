@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://85pp5fdytht4"]
+[gd_scene load_steps=5 format=3 uid="uid://85pp5fdytht4"]
 
 [ext_resource type="AudioStream" uid="uid://ceopx2r6dgrr8" path="res://assets/audio/sfx/ButtonHover.wav" id="1_7v4p8"]
 [ext_resource type="Script" path="res://scenes/Audio/SfxComponent.gd" id="1_g4d17"]
 [ext_resource type="AudioStream" uid="uid://dh402pnf46dnd" path="res://assets/audio/sfx/ButtonClick.wav" id="2_ilh70"]
+[ext_resource type="AudioStream" uid="uid://cefv7cbb3ya07" path="res://assets/audio/sfx/TonalClick.wav" id="4_2gmv8"]
 
 [node name="SfxComponent" type="AudioStreamPlayer"]
 script = ExtResource("1_g4d17")
@@ -15,4 +16,9 @@ bus = &"SFX"
 [node name="ButtonClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ilh70")
 volume_db = -12.84
+pitch_scale = 1.42
 bus = &"SFX"
+
+[node name="TonalClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2gmv8")
+volume_db = -38.946
