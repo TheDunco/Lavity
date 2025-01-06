@@ -9,6 +9,9 @@ class_name Menu
 @export var showMainMenuButton := true
 @export var visibleByDefault := false
 
+@export var buttonTweenIntensity := 1.07
+@export var buttonTweenDuration := 0.01
+
 @export_category("Effect Implementaitons")
 @export var _canvasModulateDarkness: CanvasModulate
 @export var _worldEnvironment: WorldEnvironment
@@ -27,8 +30,6 @@ class_name Menu
 @onready var Buttons = find_children("", "Button", true)
 @onready var Sliders = find_children("", "Slider", true)
 
-@export var buttonTweenIntensity := 1.07
-@export var buttonTweenDuration := 0.01
 
 func startButtonTween(object: Object, property: String, finalVal: Variant, duration: float) -> void:
 	var tween = create_tween()

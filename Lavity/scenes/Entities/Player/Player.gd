@@ -18,7 +18,7 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 @export var baseStatsMult := 1.0
 @export var baseMovementSpeed := 7
 @export var movementSpeedMult := 20
-@export var baseTrackableDistance := 3000.0
+@export var baseTrackableDistance := 5000.0
 
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
 @export var SUM_DAMAGE_CUTOFF := 0.03
@@ -123,24 +123,14 @@ func getLightColor() -> Color:
 	return playerLight.color
 
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
-	var statsPerColor := {}
-	
-	# Figure out how similar to each color we are
-	for colorName in COLOR_UTILS.colorNames:
-		statsPerColor[colorName] = COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors[colorName])
-	
-	var white = COLOR_UTILS.scoreColorLikeness(currentColor, Color.WHITE)
-	var black = COLOR_UTILS.scoreColorLikeness(currentColor, Color.BLACK)/2
-
-	# Map that to the stats
 	var statsToSet := {
-		"damageReduction": (statsPerColor["red"] + white - black) * baseStatsMult,
-		"damage" : (statsPerColor["orange"] + white - black) * baseStatsMult,
-		"speed": (statsPerColor["green"] + white - black) * baseStatsMult,
-		"sonar": (statsPerColor["blue"] + white - black) * baseStatsMult,
-		"stealth": (statsPerColor["blue_purple"]) * baseStatsMult,
-		"vision": (statsPerColor["yellow"] + white/3 - black) * baseStatsMult,
-		"regeneration": (statsPerColor["pink"] + white - black) * baseStatsMult,
+		"damageReduction": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["red"]) * baseStatsMult,
+		"damage" : COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["orange"]) * baseStatsMult,
+		"speed": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["green"]) * baseStatsMult,
+		"sonar": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["blue"]) * baseStatsMult,
+		"stealth": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["blue_purple"]) * baseStatsMult,
+		"vision": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["yellow"]) * baseStatsMult,
+		"regeneration": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["pink"]) * baseStatsMult,
 	}
 	
 	return statsToSet
@@ -155,7 +145,7 @@ func _setAttributesFromStats():
 	playerMovementSpeed = (stats["speed"] * movementSpeedMult) + baseMovementSpeed
 
 	# blue purple/stealth
-	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance
+	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance 
 
 func setChromaticAbberration(on: bool) -> void:
 	flippingSprite.use_parent_material = !on

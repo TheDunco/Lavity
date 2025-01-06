@@ -127,27 +127,22 @@ worldEnvironment = NodePath("../WorldEnvironment")
 [node name="Lanternfly" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_86taj")]
 position = Vector2(-9170, -63)
 player = NodePath("../../Player")
-Acceleration = 6.0
 
 [node name="Lanternfly2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_86taj")]
 position = Vector2(-8922, 311)
 player = NodePath("../../Player")
-Acceleration = 6.0
 
 [node name="Lanternfly3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_86taj")]
 position = Vector2(-8684, -480)
 player = NodePath("../../Player")
-Acceleration = 6.0
 
 [node name="Lanternfly4" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_86taj")]
 position = Vector2(-9341, -518)
 player = NodePath("../../Player")
-Acceleration = 6.0
 
 [node name="Lanternfly5" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_86taj")]
 position = Vector2(-9709, 149)
 player = NodePath("../../Player")
-Acceleration = 6.0
 
 [node name="Lanternfly6" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_86taj")]
 position = Vector2(2165, 123)
