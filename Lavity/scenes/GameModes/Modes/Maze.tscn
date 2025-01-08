@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://cjwa6fkr6s1om"]
+
+[ext_resource type="PackedScene" uid="uid://cw21s1mqjep2n" path="res://scenes/GameModes/ProceduralMaze.tscn" id="1_25b5f"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="2_sxk1g"]
+[ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="3_o0i8p"]
+[ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="4_gc4o6"]
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="5_g543d"]
+[ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="6_p8m8n"]
+
+[sub_resource type="Gradient" id="Gradient_5t22n"]
+offsets = PackedFloat32Array(0.00464037, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_thamv"]
+gradient = SubResource("Gradient_5t22n")
+width = 5120
+height = 5120
+
+[node name="Maze" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2561, 2559)
+texture = SubResource("GradientTexture2D_thamv")
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("3_o0i8p")]
+
+[node name="CanvasModulateDarkness" parent="." instance=ExtResource("4_gc4o6")]
+position = Vector2(375, -218)
+
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("5_g543d")]
+position = Vector2(78, 80)
+follow_target = NodePath("../Player")
+
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sxk1g")]
+position = Vector2(78, 80)
+worldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="ProceduralMazeTilemap" parent="." instance=ExtResource("1_25b5f")]
+z_index = 2
+width = 10
+height = 10
+
+[node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "snake", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("6_p8m8n")]
+offset_left = -3.0
+offset_top = -6.0
+offset_right = -3.0
+offset_bottom = -6.0
+player = NodePath("")
+snake = NodePath("")
+showMainMenuButton = false
+visibleByDefault = true
+_canvasModulateDarkness = NodePath("")
+_worldEnvironment = NodePath("")
+metadata/_edit_use_anchors_ = true

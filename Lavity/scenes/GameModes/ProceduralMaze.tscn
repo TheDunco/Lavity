@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://cw21s1mqjep2n"]
+
+[ext_resource type="Texture2D" uid="uid://b2a4qq7vkp54m" path="res://assets/tilesets/MazeAtlas.png" id="1_07k5s"]
+[ext_resource type="Script" path="res://scenes/GameModes/ProceduralMaze.gd" id="2_01wu8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7jvwx"]
+texture = ExtResource("1_07k5s")
+texture_region_size = Vector2i(512, 512)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, -221.867, -256, -221.867)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(221.867, -256, 256, -256, 256, 256, 221.867, 256)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, 221.867, 256, 221.867, -221.867, -256, -221.867)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, 221.867, 256, 221.867, 256, 256, -256, 256)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, -221.867, -256, -221.867)
+1:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(-256, 221.867, 256, 221.867, 256, 256, -256, 256)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(221.867, -256, 256, -256, 256, 256, -256, 256, -256, 221.867, 221.867, 221.867)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, -256, 256, -256, 221.867, 221.867, 221.867, 221.867, -221.867, -256, -224.506)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, -221.867, -256, -221.867, 256, -256, 256)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, -221.867, -221.867, -221.867, -221.867, 256, -256, 256)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, -221.867, -256, -221.867, 256, -256, 256)
+2:2/0/physics_layer_0/polygon_1/points = PackedVector2Array(221.867, -256, 256, -256, 256, 256, 221.867, 256)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, -221.867, 256, 256, 221.867, 256, 221.867, -221.867, -221.867, -221.867, -221.867, 256, -256, 256)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, -221.867, -256, -221.867, 221.867, 256, 221.867, 256, 256, -256, 256)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, 256, -256, 256, -256, 221.867, 221.867, 221.867, 221.867, -221.867, -256, -224.506)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, -226.274, -256, -221.867, 221.867, 221.867, 221.867, 221.867, -256, 256, -256, 256, 256, -256, 256)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-256, -256, 256, -256, 256, -221.867, 256, 256, 221.867, 256, -256, 256, -256, 221.867, -256, -221.867, -221.867, -221.867, -221.867, 221.867, 221.867, 221.867, 221.867, -221.867, -256, -221.867)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_2b7t3"]
+tile_size = Vector2i(512, 512)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_7jvwx")
+
+[node name="ProceduralMazeTilemap" type="TileMap"]
+tile_set = SubResource("TileSet_2b7t3")
+format = 2
+script = ExtResource("2_01wu8")

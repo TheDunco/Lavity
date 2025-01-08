@@ -93,6 +93,10 @@ func _on_play_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/Tutorial.tscn")
 	switchToDynamicMusic()
 	
+func _on_maze_pressed():
+	GameFlow.switchScene("res://scenes/GameModes/Modes/Maze.tscn")
+	switchToDynamicMusic()
+	
 func _on_light_effects_world_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/EffectTestingWorld.tscn")
 	switchToDynamicMusic()

@@ -85,6 +85,12 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_83hcn")
 text = "Play"
 
+[node name="Maze" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_83hcn")
+text = "Maze
+"
+
 [node name="LightEffectsWorld" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Light Effects Testing"
@@ -288,6 +294,7 @@ theme_override_fonts/font = SubResource("SystemFont_w1wen")
 text = "Back"
 
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Maze" to="." method="_on_maze_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
