@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://gcao2h68fauk"]
 
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="1_k6842"]
-[ext_resource type="Script" path="res://scenes/Ui/Menu2D.gd" id="1_li1tr"]
+[ext_resource type="Script" path="res://scenes/Ui/MouseLight.gd" id="1_li1tr"]
 [ext_resource type="Script" path="res://scenes/Utils/SetWorldEnvironmentSettings.gd" id="3_cm6sv"]
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="3_l8kwu"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="6_8h01j"]

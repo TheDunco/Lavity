@@ -1,6 +1,7 @@
 extends Node2D
 class_name MouseLight
 
+# TODO: Move to signal bus
 signal mouse_light_visible_change
 
 func _process(_delta):

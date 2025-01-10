@@ -196,4 +196,5 @@ func _on_reset_to_default_pressed() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_esc"):
+		GlobalSfx.playTonalClick(0.5)
 		visible = not visible

@@ -3,6 +3,8 @@ extends TileMap
 @export var width := 20
 @export var height := 20
 
+@export var atlasIndex := 0
+
 func _ready():
 	generate(self)
 
@@ -76,7 +78,7 @@ func generate(tile_map: TileMap):
 		# We need to convert the binary number to a Vector2i representing the atlas coordinates in the tileset as opposed to the tilset integer index.
 		# The original implementation used the bitmask as the index to the tileset, but the tileset is now a 2D array of tiles.
 		var atlas_coords = bitmaskToVector(conns)
-		tile_map.set_cell(0, point, 0, atlas_coords)
+		tile_map.set_cell(0, point, atlasIndex, atlas_coords)
 		
 
 func bitmaskToVector(bitmask: int) -> Vector2i:
