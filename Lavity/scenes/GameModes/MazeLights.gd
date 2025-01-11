@@ -17,14 +17,18 @@ func _ready():
 			mazeIntersections.append(Vector2(x * maze.tile_set.tile_size.x, y * maze.tile_set.tile_size.y))
 			mazeMiddlePoints.append(Vector2(x * maze.tile_set.tile_size.x + maze.tile_set.tile_size.x / 2, y * maze.tile_set.tile_size.y + maze.tile_set.tile_size.y / 2))
 
+	var moteCount = 0
+	var lightCount = 0
+
 	# Spawn a LavityLights
 	for intersection in mazeIntersections:
 		if randf() < staticLightSpawnChance:
 			var lightInstance = lavityLightScene.instantiate()
 			lightInstance.global_position = intersection
-			lightInstance.initColor = COLOR_UTILS.randColor()
+			lightInstance.randomizeColorOnReady = true
 			lightInstance.energy = 0.5
 			add_child(lightInstance)
+			lightCount += 1
 
 	for middlePoint in mazeMiddlePoints:
 		if randf() < dynamicMoteSpawnChance:
@@ -32,3 +36,8 @@ func _ready():
 			moteInstance.global_position = middlePoint
 			#moteInstance.initColor = COLOR_UTILS.randColor()
 			add_child(moteInstance)
+			moteCount += 1
+	print ("Spawned " + str(lightCount) + " LavityLights and " + str(moteCount) + " Motes")
+	
+
+	

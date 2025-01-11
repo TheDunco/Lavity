@@ -174,16 +174,16 @@ func stopDying():
 	setSaturation(defaultSaturation)
 	GlobalSfx.stopImminentDeath()
 	
-func takeDamage(damage := 0.01) -> bool:
-	var reduction = stats["damageReduction"]/500
-	damage = damage - reduction
+func takeDamage(damage := 0.01, ambientDamage: bool = false) -> bool:
+	if not ambientDamage:
+		var reduction = stats["damageReduction"]/500
+		damage = damage - reduction
+		setChromaticAbberration(true)
+		$DamageEffectsTimer.start()
 	
 	var didTakeDamage = false
 	if damage <= 0:
 		return didTakeDamage
-	
-	setChromaticAbberration(true)
-	$DamageEffectsTimer.start()
 	
 	var newPlayerLightColor = playerLight.color
 
@@ -229,7 +229,7 @@ func _process(delta):
 	elif deathTimer.is_stopped():
 		startDying(true)
 
-	takeDamage(0.0001)
+	takeDamage(0.0001, true)
 	
 	
 	if deathTimer.is_stopped():
