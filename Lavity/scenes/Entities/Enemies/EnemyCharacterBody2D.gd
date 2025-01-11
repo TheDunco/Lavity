@@ -12,7 +12,6 @@ var prevDistanceToPlayer := 0.0
 
 func handlePlayerRepulsed():
 	var distanceFromPlayer = global_position.distance_to(player.global_position)
-	print("Distance from player: ", distanceFromPlayer)
 	if distanceFromPlayer < 1000:
 		var directionToPlayer = global_position.direction_to(player.global_position)
 		velocity += -directionToPlayer * Acceleration * 100

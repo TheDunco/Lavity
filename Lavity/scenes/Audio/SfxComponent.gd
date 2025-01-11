@@ -3,22 +3,25 @@ class_name SfxComponent
 
 @onready var drain = $Drain
 @onready var imminentDeath = $ImminentDeath
+@onready var buttonHover = $ButtonHover
+@onready var buttonClick = $ButtonClick
+@onready var tonalClick = $TonalClick
+@onready var repulse = $Repulse
 
 func playButtonHover():
-	print("button hover sound play")
-	$ButtonHover.pitch_scale = randf_range(1.1, 1.3)
-	$ButtonHover.play()
+	buttonHover.pitch_scale = randf_range(1.1, 1.3)
+	buttonHover.play()
 
 func playButtonClick():
-	$ButtonClick.pitch_scale = randf_range(1.1, 1.3)
-	$ButtonClick.play()
+	buttonClick.pitch_scale = randf_range(1.1, 1.3)
+	buttonClick.play()
 	
 func playTonalClick(pitchScale: float):
-	$TonalClick.pitch_scale = pitchScale
-	$TonalClick.play()
+	tonalClick.pitch_scale = pitchScale
+	tonalClick.play()
 	
 func playRepulse():
-	$Repulse.play()
+	repulse.play()
 	
 func playImminentDeath():
 	imminentDeath.volume_db = 0
