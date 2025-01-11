@@ -26,7 +26,7 @@ func _ready():
 			var lightInstance = lavityLightScene.instantiate()
 			lightInstance.global_position = intersection
 			lightInstance.randomizeColorOnReady = true
-			lightInstance.energy = 0.5
+			lightInstance.energy = 0.75
 			add_child(lightInstance)
 			lightCount += 1
 

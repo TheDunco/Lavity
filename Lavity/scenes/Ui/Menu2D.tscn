@@ -82,7 +82,6 @@ z_index = 5
 position = Vector2(576, 292)
 scale = Vector2(0.2, 0.2)
 energy = 0.5
-canChangeColor = true
 randomizeColorOnReady = true
 
 [node name="Snake" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_4dcco")]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=26 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://bc6nx8vj8tv2r" path="res://assets/Moth Flying/flying-moth_0001.png" id="6_xqfgo"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="7_0mjfq"]
 [ext_resource type="Texture2D" uid="uid://6kgmynju76tm" path="res://assets/Moth Flying/flying-moth_0004.png" id="7_h0at1"]
-[ext_resource type="Shape2D" uid="uid://bycfjqp6ee4mx" path="res://scenes/Entities/Player/PlayerCapsulShape.tres" id="7_vlmlf"]
 [ext_resource type="Texture2D" uid="uid://gfofvv7tpa5w" path="res://assets/Moth Flying/without-legs/Timeline 1_0001.png" id="8_cfyrq"]
 [ext_resource type="Texture2D" uid="uid://drrcgu7apxg1j" path="res://assets/Moth Flying/flying-moth_0006.png" id="8_nx7p7"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/WingFlap.gd" id="9_5eh2y"]
@@ -21,10 +20,6 @@
 [ext_resource type="AudioStream" uid="uid://bibdynmbha2o5" path="res://assets/audio/sfx/wing_flap4.wav" id="16_k171i"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 28.0
-height = 70.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -57,6 +52,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_5lwxg"]
+radius = 47.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jw6a"]
 radius = 29.0
 height = 92.0
@@ -84,13 +82,8 @@ collision_priority = 2.0
 floor_snap_length = 2.0
 script = ExtResource("1_jm2c2")
 
-[node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
-z_index = 2
-position = Vector2(3, 11)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_uyvyt")
-debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
-metadata/_edit_lock_ = true
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-26, 18, -19, 26, -8, 30, 3, 30, 15, 27, 24, 24, 32, 20, 35, 16, 37, 10, 37, 4, 36, 0, 32, -8, 30, -17, 27, -11, 21, -18, 19, -21, 17, -15, -6, -21, -26, -13, -29, 1)
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
@@ -187,10 +180,11 @@ collision_layer = 2
 Entity = NodePath("..")
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(4, 7)
+[node name="GravityShape2D" type="CollisionShape2D" parent="GravityArea"]
+position = Vector2(6, 3)
 rotation = 1.5708
-shape = ExtResource("7_vlmlf")
+shape = SubResource("CircleShape2D_5lwxg")
+debug_color = Color(0.7, 0.671169, 0, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="DamageableArea" type="Area2D" parent="."]
@@ -198,10 +192,11 @@ collision_layer = 4
 collision_mask = 0
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageableArea"]
+[node name="DamageableShape2D" type="CollisionShape2D" parent="DamageableArea"]
 position = Vector2(2, 4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1jw6a")
+debug_color = Color(0.7, 0, 0.00591536, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
