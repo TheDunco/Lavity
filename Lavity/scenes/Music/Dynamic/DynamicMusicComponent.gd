@@ -7,9 +7,8 @@ func loop(song: AudioStreamPlayer):
 	song.stop()
 	song.play()
 	
-	
-
 func _ready():
+	# Autoplay everything but the death track
 	for i in range(ColorTracks.size()):
 		ColorTracks[i].volume_db = -80
 		ColorTracks[i].connect("finished", func(): loop(ColorTracks[i]))

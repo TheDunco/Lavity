@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=27 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://caud5smw21i2q" path="res://assets/Moth Flying/without-legs/Timeline 1_0002.png" id="9_n3tn3"]
 [ext_resource type="AudioStream" uid="uid://6eb7c0r4ygr4" path="res://assets/audio/sfx/wing_flap1.wav" id="10_0jq3m"]
 [ext_resource type="Texture2D" uid="uid://m6u3vex6jp5s" path="res://assets/Moth Flying/without-legs/Timeline 1_0003.png" id="10_tnmfl"]
-[ext_resource type="PackedScene" uid="uid://c3qn2hllt3wn7" path="res://scenes/Entities/Utils/LightDecayComponent.tscn" id="11_c7gky"]
 [ext_resource type="AudioStream" uid="uid://bqismph8dboi" path="res://assets/audio/sfx/wing_flap2.wav" id="11_cty4c"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/PlayerSprites.gd" id="11_w31v0"]
 [ext_resource type="AudioStream" uid="uid://ccanbsn3s1v6w" path="res://assets/audio/sfx/wing_flap3.wav" id="15_pjqcf"]
@@ -22,6 +21,10 @@
 [ext_resource type="AudioStream" uid="uid://bibdynmbha2o5" path="res://assets/audio/sfx/wing_flap4.wav" id="16_k171i"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
+radius = 28.0
+height = 70.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -54,10 +57,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uyvyt"]
-radius = 28.0
-height = 70.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jw6a"]
 radius = 29.0
 height = 92.0
@@ -80,10 +79,18 @@ metadata/_snap_enabled = true
 physics_interpolation_mode = 1
 position = Vector2(0, 1)
 collision_layer = 24
-collision_mask = 7
+collision_mask = 263
 collision_priority = 2.0
 floor_snap_length = 2.0
 script = ExtResource("1_jm2c2")
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
+z_index = 2
+position = Vector2(3, 11)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_uyvyt")
+debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
+metadata/_edit_lock_ = true
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
@@ -175,14 +182,6 @@ position = Vector2(87.5, 0)
 texture = ExtResource("18_0slyg")
 offset = Vector2(-88, -7)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 2
-position = Vector2(3, 11)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_uyvyt")
-debug_color = Color(0.720929, 0.349771, 0.830467, 0.42)
-metadata/_edit_lock_ = true
-
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
 collision_layer = 2
 Entity = NodePath("..")
@@ -213,9 +212,6 @@ blend_mode = 2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_rtjsw")
 metadata/_edit_lock_ = true
-
-[node name="LightDecayComponent" parent="PlayerLight" instance=ExtResource("11_c7gky")]
-scale = Vector2(5.88235, 6.66667)
 
 [connection signal="timeout" from="DamageEffectsTimer" to="." method="_on_damage_effects_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]

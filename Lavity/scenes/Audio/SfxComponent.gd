@@ -16,3 +16,6 @@ func playTonalClick(pitchScale: float):
 	
 func playRepulse():
 	$Repulse.play()
+	
+func playImminentDeath():
+	$ImminentDeath.play()

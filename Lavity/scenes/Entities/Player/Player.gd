@@ -153,9 +153,11 @@ func setChromaticAbberration(on: bool) -> void:
 func setSaturation(val: float) -> void:
 	worldEnvironment.environment.adjustment_saturation = val
 
-func startDying():
+func startDying(shouldPlaySfx: bool = false):
 	deathTimer.paused = false
 	deathTimer.start(deathTimerBaseSeconds)
+	if shouldPlaySfx:
+		GlobalSfx.playImminentDeath()
 	setSaturation(0.1)
 
 func stopDying():
@@ -173,12 +175,12 @@ func takeDamage(damage := 0.01) -> bool:
 	setChromaticAbberration(true)
 	$DamageEffectsTimer.start()
 	
-	var playerLightColor = playerLight.color
+	var newPlayerLightColor = playerLight.color
 
 	var numColorsThatCanTakeDamage := 0
-	var rCanTakeDamage = playerLightColor.r > 0
-	var gCanTakeDamage = playerLightColor.g > 0
-	var bCanTakeDamage = playerLightColor.b > 0
+	var rCanTakeDamage = newPlayerLightColor.r > 0
+	var gCanTakeDamage = newPlayerLightColor.g > 0
+	var bCanTakeDamage = newPlayerLightColor.b > 0
 
 	if rCanTakeDamage:
 		numColorsThatCanTakeDamage += 1
@@ -191,29 +193,31 @@ func takeDamage(damage := 0.01) -> bool:
 		didTakeDamage = true
 	
 	if rCanTakeDamage:
-		playerLightColor.r -= damage / numColorsThatCanTakeDamage
-		playerLightColor.r = max(playerLightColor.r, 0)
+		newPlayerLightColor.r -= damage / numColorsThatCanTakeDamage
+		newPlayerLightColor.r = max(newPlayerLightColor.r, 0)
 	
 	if gCanTakeDamage:
-		playerLightColor.g -= damage / numColorsThatCanTakeDamage
-		playerLightColor.g = max(playerLightColor.g, 0)
+		newPlayerLightColor.g -= damage / numColorsThatCanTakeDamage
+		newPlayerLightColor.g = max(newPlayerLightColor.g, 0)
 
 	if bCanTakeDamage:
-		playerLightColor.b -= damage / numColorsThatCanTakeDamage
-		playerLightColor.b = max(playerLightColor.b, 0)
+		newPlayerLightColor.b -= damage / numColorsThatCanTakeDamage
+		newPlayerLightColor.b = max(newPlayerLightColor.b, 0)
 	
-	if COLOR_UTILS.sumColor(playerLightColor) < SUM_DAMAGE_CUTOFF:
-		deathTimer.start()
-		setSaturation(0.1)
-	
-	playerLight.color = playerLightColor
+	playerLight.color = newPlayerLightColor
 	
 	return didTakeDamage
 
 func _process(delta):
 	# handle death timer and effects
-	if COLOR_UTILS.sumColor(playerLight.color) > SUM_DAMAGE_CUTOFF and playerLight.enabled:
+	var playerDying = COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF or not playerLight.enabled
+	if not playerDying:
 		stopDying()
+	elif deathTimer.is_stopped():
+		startDying(true)
+
+	takeDamage(0.0001)
+	
 	
 	if deathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:
@@ -240,6 +244,8 @@ func _process(delta):
 func _physics_process(_delta):
 	handleKeyboardInput()
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
+	# TODO: Mote impulse
+	# var overlappingAreas = get_overlapping_areas()
 	move_and_slide()
 
 func _on_damage_effects_timer_timeout() -> void:
@@ -264,7 +270,7 @@ func _input(event):
 			playerLight.color = COLOR_UTILS.YELLOW
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > 0.15 and repulseTime <= 0.0:
-				playerLight.color -= Color(0.05, 0.05, 0.05, 0.0)
+				playerLight.color -= Color(0.07, 0.07, 0.07, 0.0)
 				GlobalSfx.playRepulse()
 				SignalBus.playerRepulsed.emit()
-				repulseTime = 3.0
+				repulseTime = 2.5

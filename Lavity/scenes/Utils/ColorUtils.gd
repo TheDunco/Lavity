@@ -17,8 +17,8 @@ const BLUE_PURPLE = Color(0.5, 0, 1, 1) # Stealth
 const PURPLE = Color(0.8, 0, 0.8, 1) 
 const PINK = Color(0.8, 0, 0.65, 1) # Regeneration
 
-const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK]
-const colorNames := ["red", "red_orange", "orange", "yellow_orange", "yellow", "yellow_green", "green", "blue_green", "blue", "blue_purple", "purple", "pink"]
+const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK, Color.BLACK]
+const colorNames := ["red", "red_orange", "orange", "yellow_orange", "yellow", "yellow_green", "green", "blue_green", "blue", "blue_purple", "purple", "pink", "black"]
 
 const colors = {
 	"red": RED,

@@ -1,6 +1,8 @@
 extends Node2D
 class_name LightDecayComponent
 
+# Deprecated in favor of the takeDamage() function in the player script
+
 @export var lightDecaySlowDown := 50.0
 @export var decayThreshold := 0.05
 
