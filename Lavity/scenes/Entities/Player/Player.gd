@@ -32,8 +32,10 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 @onready var deathTimer = $DeathTimer
 @onready var cam: PhantomCamera2D = $"../PlayerFollowingPhantomCam"
 
+const repulseActiveTime := 2.5 
 var repulseTime = 0.0
-const repulseActiveTime := 3.0 
+const bleed := 0.07
+
 @onready var initEnergy = playerLight.energy
 
 var stats := {
@@ -53,13 +55,20 @@ var trackableDistance := baseTrackableDistance
 func _ready() -> void:
 	playerLight.color = Color.RED
 
-func handleKeyboardInput():
+func handleContinuousInput(delta):
 	var isLocked = Input.is_action_pressed("lock")
 	var isOnCeiling = is_on_ceiling()
 	var isOnFloor = is_on_floor()
 	var isOnWall = is_on_wall()
 
 	var isHandlingVelocityInput := false
+
+	if Input.is_action_pressed("right_mouse") and not isBelowDamageThreshold():
+		var bleedAmount = bleed * delta
+		playerLight.color -= Color(bleedAmount, bleedAmount, bleedAmount, 0.0)
+		GlobalSfx.playDrain(remap(COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE), 0.0, 1.0, 0.45, 1.2))
+	elif Input.is_action_just_released("right_mouse"):
+		GlobalSfx.stopDrain()
 
 	if Input.is_action_pressed("move_right") and not (isLocked and isOnWall):
 		isHandlingVelocityInput = true
@@ -163,6 +172,7 @@ func startDying(shouldPlaySfx: bool = false):
 func stopDying():
 	deathTimer.stop()
 	setSaturation(defaultSaturation)
+	GlobalSfx.stopImminentDeath()
 	
 func takeDamage(damage := 0.01) -> bool:
 	var reduction = stats["damageReduction"]/500
@@ -208,9 +218,12 @@ func takeDamage(damage := 0.01) -> bool:
 	
 	return didTakeDamage
 
+func isBelowDamageThreshold() -> bool:
+	return COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF
+
 func _process(delta):
 	# handle death timer and effects
-	var playerDying = COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF or not playerLight.enabled
+	var playerDying = isBelowDamageThreshold() or not playerLight.enabled
 	if not playerDying:
 		stopDying()
 	elif deathTimer.is_stopped():
@@ -241,8 +254,8 @@ func _process(delta):
 	
 	GlobalDynamicMusicComponent.setDynamicTrackVolume(playerLight.color)
 	
-func _physics_process(_delta):
-	handleKeyboardInput()
+func _physics_process(delta):
+	handleContinuousInput(delta)
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	# TODO: Mote impulse
 	# var overlappingAreas = get_overlapping_areas()
@@ -270,7 +283,7 @@ func _input(event):
 			playerLight.color = COLOR_UTILS.YELLOW
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > 0.15 and repulseTime <= 0.0:
-				playerLight.color -= Color(0.07, 0.07, 0.07, 0.0)
+				playerLight.color -= Color(bleed, bleed, bleed, 0.0)
 				GlobalSfx.playRepulse()
 				SignalBus.playerRepulsed.emit()
 				repulseTime = 2.5
