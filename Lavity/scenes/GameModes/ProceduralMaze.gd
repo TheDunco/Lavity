@@ -1,4 +1,5 @@
 extends TileMap
+class_name ProceduralMaze
 
 # Reference/source for this algorithm and most of the code
 # I had to edit and adapt it (with help from the comment section) to fit into Godot 4.3
@@ -13,7 +14,6 @@ const tilemapSizeY := 4
 @export var source_id := 0
 
 const start := Vector2.ZERO
-var end: Vector2
 
 const N := 0b0001
 const E := 0b0010
@@ -65,3 +65,4 @@ func makeMaze():
 			unvisited.erase(current)
 		elif stack:
 			current = stack.pop_back()
+	set_cell(0, start, source_id, Vector2i(1, 2))

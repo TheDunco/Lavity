@@ -1,7 +1,7 @@
 extends Node
 class_name GlobalUtils
 
-const MAX_RAND_RGB := 7.0
+const MAX_RAND_RGB := 4.0
 const MIN_RAND_RGB := 0.0
 
 const RED = Color(1, 0, 0, 1) # Health

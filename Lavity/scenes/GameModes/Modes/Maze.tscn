@@ -1,13 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjwa6fkr6s1om"]
+[gd_scene load_steps=10 format=3 uid="uid://cjwa6fkr6s1om"]
 
 [ext_resource type="PackedScene" uid="uid://cw21s1mqjep2n" path="res://scenes/GameModes/ProceduralMaze.tscn" id="1_25b5f"]
-[ext_resource type="Script" path="res://scenes/Ui/MouseLight.gd" id="1_xb7e8"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="2_sxk1g"]
 [ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="3_o0i8p"]
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="4_gc4o6"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="5_g543d"]
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="6_p8m8n"]
-[ext_resource type="Texture2D" uid="uid://dj7donbsc648h" path="res://assets/Point Lights/PointLight.png" id="8_loejl"]
+[ext_resource type="PackedScene" uid="uid://d4g85muavqukb" path="res://scenes/GameModes/Modes/MazeLights.tscn" id="7_jm1jq"]
 
 [sub_resource type="Gradient" id="Gradient_5t22n"]
 offsets = PackedFloat32Array(0.00464037, 1)
@@ -19,7 +18,6 @@ width = 5120
 height = 5120
 
 [node name="Maze" type="Node2D"]
-script = ExtResource("1_xb7e8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(2561, 2559)
@@ -43,6 +41,8 @@ z_index = 2
 width = 10
 height = 10
 
+[node name="MazeLights" parent="ProceduralMazeTilemap" instance=ExtResource("7_jm1jq")]
+
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("6_p8m8n")]
@@ -53,10 +53,3 @@ offset_bottom = -6.0
 player = NodePath("../../Player")
 showMainMenuButton = false
 metadata/_edit_use_anchors_ = true
-
-[node name="MouseLight" type="PointLight2D" parent="."]
-position = Vector2(2128, 911)
-energy = 0.75
-blend_mode = 2
-texture = ExtResource("8_loejl")
-texture_scale = 2.23

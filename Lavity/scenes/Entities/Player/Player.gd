@@ -16,7 +16,7 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
-@export var baseMovementSpeed := 7
+@export var baseMovementSpeed := 10
 @export var movementSpeedMult := 20
 @export var baseTrackableDistance := 5000.0
 

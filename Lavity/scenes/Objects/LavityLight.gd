@@ -7,16 +7,18 @@ class_name LavityLight
 @export var randomizeColorOnReady := false
 @export_color_no_alpha var initColor: Color
 
+@onready var light = $LavityLightLight
+
 func _ready():
-	$LavityLightLight.energy = energy
+	light.energy = energy
 	if randomizeColorOnReady:
-		$LavityLightLight.color = COLOR_UTILS.randColor(MaxRgb)
+		light.color = COLOR_UTILS.randColor(MaxRgb)
 	else:
-		$LavityLightLight.color = initColor
+		light.color = initColor
  
 func set_energy(val: float):
-	$LavityLightLight.energy = val
+	light.energy = val
 
 func _unhandled_input(event):
 	if event.is_action_pressed("change_color") and canChangeColor:
-		$LavityLightLight.color = COLOR_UTILS.randColor(MaxRgb)
+		light.color = COLOR_UTILS.randColor(MaxRgb)
