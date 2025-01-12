@@ -3,18 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="1_5cqr6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtnc"]
-radius = 52.0096
+radius = 51.0098
 
 [node name="Mote" type="Node2D"]
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 256
 collision_mask = 307
-mass = 0.001
-gravity_scale = 0.0
-linear_velocity = Vector2(10, 0)
+mass = 0.03
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="FindAWayToRemoveMeInFavorOfPlayerGravity" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_mqtnc")
 
 [node name="LavityLight" parent="RigidBody2D" instance=ExtResource("1_5cqr6")]

@@ -75,7 +75,6 @@ metadata/_snap_enabled = true
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
-position = Vector2(0, 1)
 collision_layer = 24
 collision_mask = 7
 collision_priority = 2.0
@@ -177,6 +176,7 @@ offset = Vector2(-88, -7)
 
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
 collision_layer = 2
+collision_mask = 258
 Entity = NodePath("..")
 metadata/_edit_lock_ = true
 

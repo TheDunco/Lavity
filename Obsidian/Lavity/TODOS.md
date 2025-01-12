@@ -1,10 +1,10 @@
 Todos
 - [ ] Android builds
-- [ ] Host web builds
-- [ ] Light Field mode
-	- [ ] Infinite tilemap generation
-	- [ ] Random light placement
-	- [ ] Random light params (energy, scale)
+- [x] Host web builds
+- [x] Light Field mode
+	- [x] Infinite tilemap generation
+	- [x] Random light placement
+	- [x] Random light params (energy, scale)
 - [ ] Items: **The mechanics of the items should be that they're floating Lavity lights that you slowly have to push around to absorb their powers and that affects the color of your player light. Certain enemies could be attracted to certain types of light! THIS IS THE GAME!**
 	- [ ] Flowers
 		- [ ] Light/bioluminescence meter
@@ -16,10 +16,7 @@ Todos
 	- [x] Affix a LavityLight to the mouse
 	- [x] Put moving lights and doppelgangers on the main screen/page
 	- [x] Ensure the LavityLight on the mouse is able to interact with the doppelgangers
-- [ ] Fix menu issues
-	- [ ] song doesn't keep playing on scene transitions. Need to reparent? ([SEE LINK](https://www.youtube.com/watch?v=lILnUD3xph8&ab_channel=SomaAnimus))
-	- [ ] Font
-	- [ ] Spacing
-- [ ] Menu new features
-	- [ ] Allow player to select their color
-	- [x] Master Volume
+
+- [ ] Mote
+	- [ ] Make player able to repulse the motes
+	- [ ] Make player gravity push motes instead of relying on collisions
