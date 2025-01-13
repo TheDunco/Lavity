@@ -285,5 +285,5 @@ func _input(event):
 			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > 0.15 and repulseTime <= 0.0:
 				playerLight.color -= Color(bleed, bleed, bleed, 0.0)
 				GlobalSfx.playRepulse()
-				SignalBus.playerRepulsed.emit()
+				SignalBus.playerRepulsed.emit(global_position)
 				repulseTime = 2.5

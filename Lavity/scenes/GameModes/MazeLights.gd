@@ -34,7 +34,6 @@ func _ready():
 		if randf() < dynamicMoteSpawnChance:
 			var moteInstance = moteScene.instantiate()
 			moteInstance.global_position = middlePoint
-			#moteInstance.initColor = COLOR_UTILS.randColor()
 			add_child(moteInstance)
 			moteCount += 1
 	print ("Spawned " + str(lightCount) + " LavityLights and " + str(moteCount) + " Motes")

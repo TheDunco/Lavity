@@ -1,11 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5smq740x8ncq"]
+[gd_scene load_steps=4 format=3 uid="uid://c5smq740x8ncq"]
 
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="1_5cqr6"]
+[ext_resource type="Script" path="res://scenes/Objects/Mote.gd" id="1_dckhx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtnc"]
 radius = 51.0098
 
 [node name="Mote" type="Node2D"]
+script = ExtResource("1_dckhx")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 256

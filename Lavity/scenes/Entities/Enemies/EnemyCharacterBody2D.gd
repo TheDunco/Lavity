@@ -10,10 +10,10 @@ class_name Enemy
 
 var prevDistanceToPlayer := 0.0
 
-func handlePlayerRepulsed():
-	var distanceFromPlayer = global_position.distance_to(player.global_position)
+func handlePlayerRepulsed(playerGlobalPosition: Vector2):
+	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)
 	if distanceFromPlayer < 1000:
-		var directionToPlayer = global_position.direction_to(player.global_position)
+		var directionToPlayer = global_position.direction_to(playerGlobalPosition)
 		velocity += -directionToPlayer * Acceleration * 100
 
 func _ready():
@@ -42,5 +42,5 @@ func _physics_process(_delta):
 	if player.isTrackableByEnemy and distanceToPlayer < player.trackableDistance:
 		moveTowardPlayer(distanceToPlayer)
 	
-	move_and_slide()
 	prevDistanceToPlayer = distanceToPlayer
+	move_and_slide()

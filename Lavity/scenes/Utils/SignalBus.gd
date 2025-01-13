@@ -1,3 +1,3 @@
 extends Node
 
-signal playerRepulsed()
+signal playerRepulsed(playerGlobalPosition: Vector2)
