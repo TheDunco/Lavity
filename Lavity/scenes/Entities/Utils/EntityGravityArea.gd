@@ -17,10 +17,19 @@ var isPlayerLike := false
 func _ready():
 	isPlayerLike = Entity is Player or Entity is Roamer or Entity is Enemy
 	assert(Entity != null)
+	connect("area_entered", handleAreaEntered)
+	connect("area_exited", handleAreaExited)
+
+var areas: Array[Area2D] = []
+
+func handleAreaEntered(area: Area2D):
+	areas.append(area)
+
+
+func handleAreaExited(area: Area2D):
+	areas.remove_at(areas.find(area))
 
 func _process(delta):
-	var areas = get_overlapping_areas()
-	
 	if areas.size() > 0:
 		isEntityInGravityArea = true
 
@@ -33,7 +42,6 @@ func _process(delta):
 
 				
 			if isPlayerLike:
-				# TODO: pass a reference to the light. Issue: Firefly has light defined elsewhere
 				var playerLikeLight = COLOR_UTILS.getPlayerLikeLight(Entity)
 				
 				if playerLikeLight == null:
