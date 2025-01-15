@@ -43,6 +43,7 @@ width = 10
 height = 10
 
 [node name="MazeLights" parent="ProceduralMazeTilemap" instance=ExtResource("7_jm1jq")]
+dynamicMoteSpawnChance = 0.35
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 

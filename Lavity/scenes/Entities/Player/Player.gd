@@ -11,6 +11,7 @@ class_name Player
 @export var cameraBaseZoom := 1.35
 @export var deathTimerBaseSeconds := 7
 @export var hueRotationSpeed := 2.0
+@export var decayRate := 0.0001
 
 var colorRotate = COLOR_UTILS.RGBRotate.new()
 
@@ -229,8 +230,8 @@ func _process(delta):
 	elif deathTimer.is_stopped():
 		startDying(true)
 
-	takeDamage(0.0001, true)
-	
+	if playerLight.enabled:
+		takeDamage(decayRate, true)
 	
 	if deathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:
@@ -238,12 +239,6 @@ func _process(delta):
 	elif lowPassEffect.cutoff_hz > 1000:
 			lowPassEffect.cutoff_hz = 1000
 		
-	# Make the player visible if they are collecting color
-	if $GravityArea.isEntityInGravityArea:
-		isTrackableByEnemy = true
-	else:
-		isTrackableByEnemy = playerLight.enabled
-	
 	stats = _getStatsFromColor(playerLight.color)
 	_setAttributesFromStats()
 
@@ -257,8 +252,6 @@ func _process(delta):
 func _physics_process(delta):
 	handleContinuousInput(delta)
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
-	# TODO: Mote impulse
-	# var overlappingAreas = get_overlapping_areas()
 	move_and_slide()
 
 func _on_damage_effects_timer_timeout() -> void:
