@@ -57,12 +57,14 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 func sumColor(color: Color) -> float:
 	return color.r + color.g + color.b
 	
-func getPlayerLikeLight(entity: CharacterBody2D) -> PointLight2D:
+func getLavityLightEmitter(entity) -> PointLight2D:
 	if entity is Player:
 		return entity.find_child("PlayerLight", false)
 	elif entity is Roamer:
 		return entity.find_child("RandColorLight", false)
 	elif entity is Enemy:
+		return entity.find_child("LavityLightLight")
+	elif entity is Mote:
 		return entity.find_child("LavityLightLight")
 	return null
 

@@ -1,7 +1,7 @@
 extends Node2D
 class_name Mote
 
-@onready var rigidBody = $RigidBody2D
+@onready var rigidBody = $OppositeForceBody
 @export var repulseableDistance := 1000
 
 func _ready() -> void:

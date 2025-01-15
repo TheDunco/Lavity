@@ -4,20 +4,20 @@
 [ext_resource type="Script" path="res://scenes/Objects/Mote.gd" id="1_dckhx"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtnc"]
-radius = 51.0098
+radius = 50.0
 
 [node name="Mote" type="Node2D"]
 script = ExtResource("1_dckhx")
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="OppositeForceBody" type="RigidBody2D" parent="."]
 collision_layer = 256
-collision_mask = 307
+collision_mask = 259
 mass = 0.03
 
-[node name="FindAWayToRemoveMeInFavorOfPlayerGravity" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="FindAWayToRemoveMeInFavorOfPlayerGravity" type="CollisionShape2D" parent="OppositeForceBody"]
 shape = SubResource("CircleShape2D_mqtnc")
 
-[node name="LavityLight" parent="RigidBody2D" instance=ExtResource("1_5cqr6")]
+[node name="LavityLight" parent="OppositeForceBody" instance=ExtResource("1_5cqr6")]
 scale = Vector2(0.25, 0.25)
 energy = 0.25
 randomizeColorOnReady = true
