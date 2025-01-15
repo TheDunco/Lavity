@@ -24,9 +24,15 @@ Made using
 - [Obsidian.md](https://obsidian.md/)
   - Planning/idea board
   - Free for personal use
-- [Stable Diffusion](https://github.com/AUTOMATIC1111/stable-diffusion-webui)
-  - Used only for difficult to see background art
 
+## Code Style
+
+I_mixed_cases. iKnow.
+
+I like the fact that GDScript/Godot is consistent with snake_case, but I despise typing underscores; I find it slow, cumbersome, and it takes my Colemak-typing fingers off of the home row too much.
+
+So, I decided that anything I write that's not directly interacting with the engine will be in camelCase so I can differentiate at-a-glance.
+Gotta love it when laziness meets utility.
 
 ## Community
 
