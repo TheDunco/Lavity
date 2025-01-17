@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://85pp5fdytht4"]
+[gd_scene load_steps=9 format=3 uid="uid://85pp5fdytht4"]
 
 [ext_resource type="AudioStream" uid="uid://ceopx2r6dgrr8" path="res://assets/audio/sfx/ButtonHover.wav" id="1_7v4p8"]
 [ext_resource type="Script" path="res://scenes/Audio/SfxComponent.gd" id="1_g4d17"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://ddbdeagsxlayl" path="res://assets/audio/sfx/repulse.wav" id="5_pnbou"]
 [ext_resource type="AudioStream" uid="uid://rrw5klg1rx8n" path="res://assets/audio/sfx/imminent_death.wav" id="6_47t00"]
 [ext_resource type="AudioStream" uid="uid://cj1gxa1fqyphh" path="res://assets/audio/sfx/drain.wav" id="7_hvplu"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="8_0t0qk"]
 
 [node name="SfxComponent" type="AudioStreamPlayer"]
 script = ExtResource("1_g4d17")
@@ -39,4 +40,9 @@ bus = &"SFX"
 [node name="Drain" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_hvplu")
 volume_db = -8.285
+bus = &"SFX"
+
+[node name="Pop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_0t0qk")
+volume_db = -30.191
 bus = &"SFX"

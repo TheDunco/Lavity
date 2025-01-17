@@ -4,18 +4,18 @@ class_name GlobalUtils
 const MAX_RAND_RGB := 4.0
 const MIN_RAND_RGB := 0.0
 
-const RED = Color(1, 0, 0, 1) # Health
-const RED_ORANGE = Color(1, 0.35, 0, 1)
-const ORANGE = Color(1, 0.65, 0, 1) # Damage?
-const YELLOW_ORANGE = Color(1, 0.8, 0, 1)
+const RED = Color(1, 0, 0) # Health
+const RED_ORANGE = Color(1, 0.35, 0)
+const ORANGE = Color(1, 0.65, 0) # Damage?
+const YELLOW_ORANGE = Color(1, 0.8, 0)
 const YELLOW = Color(1, 1, 0, 1) # Vision
-const YELLOW_GREEN = Color(0.65, 1, 0, 1)
+const YELLOW_GREEN = Color(0.65, 1, 0)
 const GREEN = Color(0, 1, 0, 1) # Speed
-const BLUE_GREEN = Color(0, 0.65, 0.65, 1)
-const BLUE = Color(0, 0, 1, 1) # Sonar
-const BLUE_PURPLE = Color(0.5, 0, 1, 1) # Stealth
-const PURPLE = Color(0.8, 0, 0.8, 1) 
-const PINK = Color(0.8, 0, 0.65, 1) # Regeneration
+const BLUE_GREEN = Color(0, 0.65, 0.65)
+const BLUE = Color(0, 0, 1) # Sonar
+const BLUE_PURPLE = Color(0.5, 0, 1) # Stealth
+const PURPLE = Color(0.8, 0, 0.8) 
+const PINK = Color(0.8, 0, 0.65) # Regeneration
 
 const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK, Color.BLACK]
 const colorNames := ["red", "red_orange", "orange", "yellow_orange", "yellow", "yellow_green", "green", "blue_green", "blue", "blue_purple", "purple", "pink", "black"]
@@ -109,3 +109,33 @@ class RGBRotate:
 		GlobalSfx.playTonalClick(remap(rx, 0.0, 1.0, 0.5, 1.5))
 		# Clamp the final RGB values to the range 0.0 to 1.0 and return them
 		return Color(colorClamp(rx), colorClamp(gx), colorClamp(bx))
+
+func takeGeneralColorDamage(color: Color, damage: float) -> Color:
+	var newColor = color
+	newColor.a = 1.0
+
+	var numColorsThatCanTakeDamage := 0
+	var rCanTakeDamage = newColor.r > 0
+	var gCanTakeDamage = newColor.g > 0
+	var bCanTakeDamage = newColor.b > 0
+
+	if rCanTakeDamage:
+		numColorsThatCanTakeDamage += 1
+	if gCanTakeDamage:
+		numColorsThatCanTakeDamage += 1
+	if bCanTakeDamage:
+		numColorsThatCanTakeDamage += 1
+	
+	if rCanTakeDamage:
+		newColor.r -= damage / numColorsThatCanTakeDamage
+		newColor.r = max(newColor.r, 0)
+	
+	if gCanTakeDamage:
+		newColor.g -= damage / numColorsThatCanTakeDamage
+		newColor.g = max(newColor.g, 0)
+
+	if bCanTakeDamage:
+		newColor.b -= damage / numColorsThatCanTakeDamage
+		newColor.b = max(newColor.b, 0)
+
+	return newColor

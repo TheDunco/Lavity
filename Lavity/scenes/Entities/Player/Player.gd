@@ -3,6 +3,7 @@ class_name Player
 
 @export var worldEnvironment: WorldEnvironment
 @onready var defaultSaturation = worldEnvironment.environment.adjustment_saturation
+@onready var moteScene := preload("res://scenes/Objects/Mote.tscn")
 
 @export_category("Player Config")
 @export_range(0, 2) var spriteBasePosition = 0
@@ -12,6 +13,7 @@ class_name Player
 @export var deathTimerBaseSeconds := 7
 @export var hueRotationSpeed := 2.0
 @export var decayRate := 0.0001
+@export var abilityCutoff := 0.15
 
 var colorRotate = COLOR_UTILS.RGBRotate.new()
 
@@ -54,7 +56,7 @@ var isTrackableByEnemy: bool = true
 var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
-	playerLight.color = Color.RED
+	playerLight.color = COLOR_UTILS.RED
 
 func handleContinuousInput(delta):
 	var isLocked = Input.is_action_pressed("lock")
@@ -66,8 +68,9 @@ func handleContinuousInput(delta):
 
 	if Input.is_action_pressed("right_mouse") and not isBelowDamageThreshold():
 		var bleedAmount = bleed * delta
-		playerLight.color -= Color(bleedAmount, bleedAmount, bleedAmount, 0.0)
+		playerLight.color -= Color(bleedAmount, bleedAmount, bleedAmount)
 		GlobalSfx.playDrain(remap(COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE), 0.0, 1.0, 0.45, 1.2))
+		# TODO: increase the trackable distance when draining
 	elif Input.is_action_just_released("right_mouse"):
 		GlobalSfx.stopDrain()
 
@@ -134,13 +137,14 @@ func getLightColor() -> Color:
 
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsToSet := {
-		"damageReduction": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["red"]) * baseStatsMult,
-		"damage" : COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["orange"]) * baseStatsMult,
-		"speed": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["green"]) * baseStatsMult,
-		"sonar": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["blue"]) * baseStatsMult,
-		"stealth": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["blue_purple"]) * baseStatsMult,
-		"vision": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["yellow"]) * baseStatsMult,
-		"regeneration": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.colors["pink"]) * baseStatsMult,
+		"damageReduction": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.RED) * baseStatsMult,
+		"damage" : COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.ORANGE) * baseStatsMult,
+		"speed": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.GREEN) * baseStatsMult,
+		"sonar": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.BLUE) * baseStatsMult,
+		"stealth": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.BLUE_PURPLE) * baseStatsMult,
+		"vision": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.YELLOW) * baseStatsMult,
+		"regeneration": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.PINK) * baseStatsMult,
+		"repulse": COLOR_UTILS.scoreColorLikeness(currentColor, Color.WHITE) * baseStatsMult,
 	}
 	
 	return statsToSet
@@ -186,38 +190,16 @@ func takeDamage(damage := 0.01, ambientDamage: bool = false) -> bool:
 	if damage <= 0:
 		return didTakeDamage
 	
-	var newPlayerLightColor = playerLight.color
+	var newColor = COLOR_UTILS.takeGeneralColorDamage(playerLight.color, damage)
+	didTakeDamage = newColor != playerLight.color
 
-	var numColorsThatCanTakeDamage := 0
-	var rCanTakeDamage = newPlayerLightColor.r > 0
-	var gCanTakeDamage = newPlayerLightColor.g > 0
-	var bCanTakeDamage = newPlayerLightColor.b > 0
-
-	if rCanTakeDamage:
-		numColorsThatCanTakeDamage += 1
-		didTakeDamage = true
-	if gCanTakeDamage:
-		numColorsThatCanTakeDamage += 1
-		didTakeDamage = true
-	if bCanTakeDamage:
-		numColorsThatCanTakeDamage += 1
-		didTakeDamage = true
-	
-	if rCanTakeDamage:
-		newPlayerLightColor.r -= damage / numColorsThatCanTakeDamage
-		newPlayerLightColor.r = max(newPlayerLightColor.r, 0)
-	
-	if gCanTakeDamage:
-		newPlayerLightColor.g -= damage / numColorsThatCanTakeDamage
-		newPlayerLightColor.g = max(newPlayerLightColor.g, 0)
-
-	if bCanTakeDamage:
-		newPlayerLightColor.b -= damage / numColorsThatCanTakeDamage
-		newPlayerLightColor.b = max(newPlayerLightColor.b, 0)
-	
-	playerLight.color = newPlayerLightColor
+	playerLight.color = newColor
 	
 	return didTakeDamage
+
+
+func takeColorDamage(color: Color) -> void:
+	playerLight.color -= color
 
 func isBelowDamageThreshold() -> bool:
 	return COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF
@@ -275,8 +257,19 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			playerLight.color = COLOR_UTILS.YELLOW
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > 0.15 and repulseTime <= 0.0:
-				playerLight.color -= Color(bleed, bleed, bleed, 0.0)
+			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > abilityCutoff and repulseTime <= 0.0:
+				playerLight.color -= Color(bleed * 2, bleed * 2 , bleed * 2, 0.0)
 				GlobalSfx.playRepulse()
 				SignalBus.playerRepulsed.emit(global_position)
 				repulseTime = 2.5
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			# if stats["damage"] > abilityCutoff:
+			var damagingMote = moteScene.instantiate()
+			var velocityNormal = velocity.normalized()
+			damagingMote.global_position = global_position + (velocityNormal * 100)
+			get_tree().root.add_child(damagingMote)
+			damagingMote.decayRate = 0.05
+			damagingMote.changeColor(playerLight.color)
+			damagingMote.applyImpulse(velocityNormal, stats["speed"] * 2000)
+			takeColorDamage(playerLight.color / 10)
+			GlobalSfx.playPop(stats["speed"])

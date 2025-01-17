@@ -6,7 +6,7 @@ class_name EntityGravityArea
 @export_category("Gravity")
 # The force of gravity emitted by the light
 @export var lavity := 9.8
-@export var distanceMult := 75
+@export var distanceMult := 500
 
 @export_category("Color Absorbption")
 @export var absorbtionMult := 0.2
@@ -55,7 +55,7 @@ func absorbLight(emitting: PointLight2D, absorbing: PointLight2D, delta: float =
 	if absorbing.color.b  + bComponent < 1.0:
 		absorbing.color.b += bComponent
 
-func _process(delta):
+func _physics_process(delta: float) -> void:
 	if areasWithLavityEmitter.size() > 0:
 		for a in areasWithLavityEmitter:
 			var area: Area2D = a.area
@@ -63,7 +63,8 @@ func _process(delta):
 			var oppositeForceBody: RigidBody2D = a.oppositeForceBody
 				
 			# Entities absorbing color become visible
-			absorbingLight.enabled = true
-
-			absorbLight(lavityEmitter, absorbingLight, delta)
+			if absorbingLight:
+				absorbingLight.enabled = true
+				absorbLight(lavityEmitter, absorbingLight, delta)
+				
 			applyGravityToEntity(area, oppositeForceBody, lavityEmitter.energy)
