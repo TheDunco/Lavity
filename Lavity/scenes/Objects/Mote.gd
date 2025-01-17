@@ -6,8 +6,6 @@ class_name Mote
 @export var repulseableDistance := 1000
 @export var decayRate := 0.0
 
-@onready var motePop = $MotePop
-
 func _ready() -> void:
 	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)
 	assert(decayRate < 1.0)
@@ -29,6 +27,5 @@ func _process(delta: float) -> void:
 	var blackLikeness = COLOR_UTILS.scoreColorLikeness(lavityLight.light.color, Color.BLACK)
 	if decayRate > 0.0:
 		lavityLight.light.color = COLOR_UTILS.takeGeneralColorDamage(lavityLight.light.color, decayRate * delta)
-	if blackLikeness > 0.85:
-		motePop.play()
+	if blackLikeness > 0.80:
 		queue_free()

@@ -50,10 +50,13 @@ func absorbLight(emitting: PointLight2D, absorbing: PointLight2D, delta: float =
 	
 	if absorbing.color.r  + rComponent < 1.0:
 		absorbing.color.r += rComponent
+		emitting.color.r -= rComponent
 	if absorbing.color.g + gComponent < 1.0:
 		absorbing.color.g += gComponent
+		emitting.color.g -= gComponent
 	if absorbing.color.b  + bComponent < 1.0:
 		absorbing.color.b += bComponent
+		emitting.color.b -= bComponent
 
 func _physics_process(delta: float) -> void:
 	if areasWithLavityEmitter.size() > 0:
@@ -67,4 +70,4 @@ func _physics_process(delta: float) -> void:
 				absorbingLight.enabled = true
 				absorbLight(lavityEmitter, absorbingLight, delta)
 				
-			applyGravityToEntity(area, oppositeForceBody, lavityEmitter.energy)
+			applyGravityToEntity(area, oppositeForceBody, COLOR_UTILS.sumColor(lavityEmitter.color) / 3.0)
