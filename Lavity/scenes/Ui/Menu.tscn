@@ -76,6 +76,7 @@ theme = ExtResource("1_pq815")
 text = "Options"
 
 [node name="Next Song" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_pq815")
 text = "Next Song"

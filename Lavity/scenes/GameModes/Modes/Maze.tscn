@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjwa6fkr6s1om"]
+[gd_scene load_steps=12 format=3 uid="uid://cjwa6fkr6s1om"]
 
 [ext_resource type="PackedScene" uid="uid://cw21s1mqjep2n" path="res://scenes/GameModes/ProceduralMaze.tscn" id="1_25b5f"]
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze.gd" id="1_bibwa"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="4_gc4o6"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="5_g543d"]
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="6_p8m8n"]
+[ext_resource type="PackedScene" uid="uid://wv5ejff7mrr3" path="res://scenes/GameModes/Modes/MazeDoor.tscn" id="7_f88ju"]
 [ext_resource type="PackedScene" uid="uid://d4g85muavqukb" path="res://scenes/GameModes/Modes/MazeLights.tscn" id="7_jm1jq"]
 
 [sub_resource type="Gradient" id="Gradient_at51c"]
@@ -35,10 +36,10 @@ follow_target = NodePath("../Player")
 
 [node name="ProceduralMazeTilemap" parent="." instance=ExtResource("1_25b5f")]
 z_index = 2
-width = 10
-height = 10
 
 [node name="MazeLights" parent="ProceduralMazeTilemap" instance=ExtResource("7_jm1jq")]
+
+[node name="MazeDoor" parent="ProceduralMazeTilemap" instance=ExtResource("7_f88ju")]
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 

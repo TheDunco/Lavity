@@ -66,3 +66,10 @@ func makeMaze():
 		elif stack:
 			current = stack.pop_back()
 	set_cell(0, start, source_id, Vector2i(1, 2))
+
+func getTileCenters() -> Array[Vector2]:
+	var centers: Array[Vector2] = []
+	for x in range(width):
+		for y in range(height):
+			centers.append(Vector2(x * tile_set.tile_size.x + tile_set.tile_size.x / 2, y * tile_set.tile_size.y + tile_set.tile_size.y / 2))
+	return centers

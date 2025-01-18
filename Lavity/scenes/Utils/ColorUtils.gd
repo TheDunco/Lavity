@@ -40,6 +40,9 @@ func randColorInRange(maxRgb := MAX_RAND_RGB) -> float:
 	
 func randColor(maxRgb := MAX_RAND_RGB) -> Color:
 	return Color(randColorInRange(maxRgb), randColorInRange(maxRgb), randColorInRange(maxRgb))
+	
+func randColorFromSet() -> Color:
+	return colorsArray.pick_random()
 
 # Given two colors, return a score of how similar they are
 func scoreColorLikeness(color1: Color, color2: Color) -> float:

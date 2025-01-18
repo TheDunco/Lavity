@@ -1,0 +1,15 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://i32xfuna2ybh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qo46y"]
+frequency = 0.0776
+offset = Vector3(-15.15, 82.76, 0)
+fractal_type = 2
+fractal_weighted_strength = 1.0
+domain_warp_enabled = true
+domain_warp_type = 2
+domain_warp_amplitude = 10.0
+domain_warp_frequency = 0.1
+domain_warp_fractal_octaves = 1
+
+[resource]
+noise = SubResource("FastNoiseLite_qo46y")

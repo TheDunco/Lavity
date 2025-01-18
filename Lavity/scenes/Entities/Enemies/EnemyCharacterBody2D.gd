@@ -14,7 +14,7 @@ class_name Enemy
 var prevDistanceToPlayer := 0.0
 
 # TODO: Should be static per enemy type, random for testing
-var preferredMoteColor = COLOR_UTILS.colorsArray[randi() % COLOR_UTILS.colorsArray.size()]
+var preferredMoteColor = COLOR_UTILS.randColorFromSet()
 
 func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)

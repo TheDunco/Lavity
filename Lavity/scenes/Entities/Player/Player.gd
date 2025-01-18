@@ -248,6 +248,9 @@ func _on_damage_effects_timer_timeout() -> void:
 func _on_death_timer_timeout() -> void:
 	GameFlow.gameOver()
 
+func getLightColor() -> Color:
+	return playerLight.color
+
 func rotateColorHue(amount: float) -> void:
 	colorRotate.set_hue_rotation(amount)
 	var rotatedColor = colorRotate.apply(playerLight.color)
