@@ -8,6 +8,9 @@ class_name Mote
 @export var repulseableDistance := 1000
 @export var decayRate := 0.0
 
+func setScale(newScale: Vector2) -> void:
+	lavityLight.scale = newScale
+
 func _ready() -> void:
 	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)
 	assert(decayRate < 1.0)
@@ -16,8 +19,8 @@ func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var directionToPlayer = global_position.direction_to(playerGlobalPosition)
 	var distanceToPlayer = global_position.distance_to(playerGlobalPosition)
 	if distanceToPlayer < repulseableDistance:
-		#TODO: Not sure if this is working properly. Expected behavior: closer to the player you are the more force
-		var force = abs(repulseableDistance - distanceToPlayer) / 10
+		#TODO: Expected behavior: closer to the player you are the more force
+		var force = repulseableDistance / 10
 		applyImpulse(-directionToPlayer, force)
 
 func applyImpulse(direction: Vector2, speed: float) -> void:

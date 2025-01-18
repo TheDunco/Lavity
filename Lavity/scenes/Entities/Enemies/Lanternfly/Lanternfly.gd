@@ -5,9 +5,6 @@ var vampiricBoost := 0.1
 @onready var damageArea := $DamageArea
 @onready var lanternlight := $Lanternlight
 
-# TODO: Should be static per enemy type, random for testing
-var preferredMoteColor = COLOR_UTILS.colors[COLOR_UTILS.colorNames[randi() % COLOR_UTILS.colorNames.size()]]
-
 var states = {
 	"IDLE": 0,
 	"SEARCHING_FOR_PLAYER": 1,

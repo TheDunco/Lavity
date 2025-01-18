@@ -30,12 +30,8 @@ centered = false
 position = Vector2(375, -218)
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("5_g543d")]
-position = Vector2(78, 80)
+position = Vector2(371, 248)
 follow_target = NodePath("../Player")
-
-[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sxk1g")]
-position = Vector2(78, 80)
-worldEnvironment = NodePath("../WorldEnvironment")
 
 [node name="ProceduralMazeTilemap" parent="." instance=ExtResource("1_25b5f")]
 z_index = 2
@@ -43,7 +39,6 @@ width = 10
 height = 10
 
 [node name="MazeLights" parent="ProceduralMazeTilemap" instance=ExtResource("7_jm1jq")]
-dynamicMoteSpawnChance = 0.35
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
@@ -57,3 +52,7 @@ showMainMenuButton = false
 _canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")
 _worldEnvironment = NodePath("../../WorldEnvironment")
 metadata/_edit_use_anchors_ = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sxk1g")]
+position = Vector2(371, 248)
+worldEnvironment = NodePath("../WorldEnvironment")

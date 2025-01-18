@@ -11,8 +11,8 @@ class_name Player
 @export var abilityCutoff := 0.15
 @export var moteDrainPercentage := 10
 @export var repulseActiveTime := 2.5 
-@export var decayRate := 0.0002
-@export var longevityEffectiveness := 0.00019
+@export var decayRate := 0.00015
+@export var longevityEffectiveness := 0.00016
 @export var damageReductionEffectiveness := 0.001
 @export var hungerEffectiveness := 1.75
 @export var bleed := 0.25
@@ -64,7 +64,7 @@ var isTrackableByEnemy: bool = true
 var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
-	playerLight.color = COLOR_UTILS.RED
+	playerLight.color = COLOR_UTILS.PINK
 
 func handleContinuousInput(delta):
 	var isLocked = Input.is_action_pressed("lock")
@@ -132,15 +132,6 @@ func handleContinuousInput(delta):
 			else:
 				flippingSprite.frame += 1
 
-var time := 0.0
-func getPulseTime(delta):
-	time += max(flippingSprite.speed_scale, 3) * delta
-	if time > 1.0e30:
-		time = 0.0
-	return sin(time)
-	
-func getLightColor() -> Color:
-	return playerLight.color
 
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsToSet := {
