@@ -14,6 +14,7 @@ class_name Player
 @export var hueRotationSpeed := 2.0
 @export var decayRate := 0.0001
 @export var abilityCutoff := 0.15
+@export var moteDrainPercentage := 10
 
 var colorRotate = COLOR_UTILS.RGBRotate.new()
 
@@ -249,7 +250,6 @@ func rotateColorHue(amount: float) -> void:
 	var rotatedColor = colorRotate.apply(playerLight.color)
 	playerLight.color = rotatedColor
 
-
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index ==  MOUSE_BUTTON_WHEEL_UP and event.pressed:
@@ -265,12 +265,12 @@ func _unhandled_input(event):
 				SignalBus.playerRepulsed.emit(global_position)
 				repulseTime = 2.5
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			var damagingMote = moteScene.instantiate()
+			var distractingMote = moteScene.instantiate()
 			var velocityNormal = velocity.normalized()
-			damagingMote.global_position = global_position + (velocityNormal * 100)
-			get_tree().root.add_child(damagingMote)
-			damagingMote.decayRate = 0.05
-			damagingMote.changeColor(playerLight.color)
-			damagingMote.applyImpulse(velocityNormal, stats["speed"] * 2000)
-			takeColorDamage(playerLight.color / 10)
+			distractingMote.global_position = global_position + (velocityNormal * 100)
+			get_tree().root.add_child(distractingMote)
+			distractingMote.decayRate = 0.05
+			distractingMote.changeColor(playerLight.color)
+			distractingMote.applyImpulse(velocityNormal, stats["speed"] * 2000)
+			takeColorDamage(playerLight.color / moteDrainPercentage)
 			GlobalSfx.playPop(stats["speed"])
