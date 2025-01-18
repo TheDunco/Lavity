@@ -5,8 +5,8 @@ const MAX_RAND_RGB := 4.0
 const MIN_RAND_RGB := 0.0
 
 const RED = Color(1, 0, 0) # Health
-const RED_ORANGE = Color(1, 0.35, 0)
-const ORANGE = Color(1, 0.65, 0) # Damage?
+const RED_ORANGE = Color(1, 0.65, 0)
+const ORANGE = Color(1, 0.65, 0) # Hunger (player light radius)
 const YELLOW_ORANGE = Color(1, 0.8, 0)
 const YELLOW = Color(1, 1, 0, 1) # Vision
 const YELLOW_GREEN = Color(0.65, 1, 0)
@@ -15,7 +15,7 @@ const BLUE_GREEN = Color(0, 0.65, 0.65)
 const BLUE = Color(0, 0, 1) # Sonar
 const BLUE_PURPLE = Color(0.5, 0, 1) # Stealth
 const PURPLE = Color(0.8, 0, 0.8) 
-const PINK = Color(0.8, 0, 0.65) # Regeneration
+const PINK = Color(0.8, 0, 0.65) # Longevity
 
 const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK, Color.BLACK]
 const colorNames := ["red", "red_orange", "orange", "yellow_orange", "yellow", "yellow_green", "green", "blue_green", "blue", "blue_purple", "purple", "pink", "black"]

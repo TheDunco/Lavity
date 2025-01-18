@@ -31,7 +31,6 @@ class_name Menu
 @onready var version: Label = find_child("Version")
 @onready var song: Label = find_child("Song")
 
-# AspectRationContainer
 @onready var topLevelMenu = $TopLevelMenu
 @onready var options = $Options
 @onready var controls = $Controls

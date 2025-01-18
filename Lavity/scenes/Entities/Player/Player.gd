@@ -43,12 +43,12 @@ const bleed := 0.07
 
 var stats := {
 	"damageReduction": 0.5,
-	"damage" : 0.5,
+	"hunger" : 0.5,
 	"speed": 0.5,
 	"sonar": 0.5,
 	"stealth": 0.5,
 	"vision": 0.5,
-	"regeneration": 0.5,
+	"longevity": 0.5,
 }
 
 var playerMovementSpeed := movementSpeedMult
@@ -68,8 +68,8 @@ func handleContinuousInput(delta):
 
 	if Input.is_action_pressed("right_mouse") and not isBelowDamageThreshold():
 		var bleedAmount = bleed * delta
-		playerLight.color -= Color(bleedAmount, bleedAmount, bleedAmount)
-		GlobalSfx.playDrain(remap(COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE), 0.0, 1.0, 0.45, 1.2))
+		takeDamage(bleedAmount)
+		GlobalSfx.playDrain(remap(stats["repulse"], 0.0, 1.0, 0.45, 1.2))
 		# TODO: increase the trackable distance when draining
 	elif Input.is_action_just_released("right_mouse"):
 		GlobalSfx.stopDrain()
@@ -103,11 +103,9 @@ func handleContinuousInput(delta):
 		isTrackableByEnemy = playerLight.enabled
 	
 	if isLocked:
-		#velocityComponent.bypassAutoOrientation = true
 		if isOnCeiling or isOnFloor:
 			velocity.y = 0
 	else:
-		#velocityComponent.bypassAutoOrientation = false
 		# Look towards the direction of travel
 		if abs(velocity.x) > lookThreshold or abs(velocity.y) > lookThreshold:
 			look_at(velocity.normalized() + position)
@@ -138,12 +136,12 @@ func getLightColor() -> Color:
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsToSet := {
 		"damageReduction": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.RED) * baseStatsMult,
-		"damage" : COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.ORANGE) * baseStatsMult,
+		"hunger" : COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.ORANGE) * baseStatsMult,
 		"speed": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.GREEN) * baseStatsMult,
 		"sonar": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.BLUE) * baseStatsMult,
 		"stealth": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.BLUE_PURPLE) * baseStatsMult,
 		"vision": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.YELLOW) * baseStatsMult,
-		"regeneration": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.PINK) * baseStatsMult,
+		"longevity": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.PINK) * baseStatsMult,
 		"repulse": COLOR_UTILS.scoreColorLikeness(currentColor, Color.WHITE) * baseStatsMult,
 	}
 	
@@ -185,6 +183,9 @@ func takeDamage(damage := 0.01, ambientDamage: bool = false) -> bool:
 		damage = damage - reduction
 		setChromaticAbberration(true)
 		$DamageEffectsTimer.start()
+	else:
+		var reduction = stats["longevity"]/500
+		damage = damage - reduction
 	
 	var didTakeDamage = false
 	if damage <= 0:
@@ -200,6 +201,7 @@ func takeDamage(damage := 0.01, ambientDamage: bool = false) -> bool:
 
 func takeColorDamage(color: Color) -> void:
 	playerLight.color -= color
+	playerLight.color.a = 1.0
 
 func isBelowDamageThreshold() -> bool:
 	return COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF
@@ -257,13 +259,12 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			playerLight.color = COLOR_UTILS.YELLOW
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			if COLOR_UTILS.scoreColorLikeness(playerLight.color, Color.WHITE) > abilityCutoff and repulseTime <= 0.0:
-				playerLight.color -= Color(bleed * 2, bleed * 2 , bleed * 2, 0.0)
+			if stats["repulse"] > abilityCutoff and repulseTime <= 0.0:
+				takeDamage(bleed * 2)
 				GlobalSfx.playRepulse()
 				SignalBus.playerRepulsed.emit(global_position)
 				repulseTime = 2.5
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			# if stats["damage"] > abilityCutoff:
 			var damagingMote = moteScene.instantiate()
 			var velocityNormal = velocity.normalized()
 			damagingMote.global_position = global_position + (velocityNormal * 100)
