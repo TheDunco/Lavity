@@ -3,8 +3,11 @@ class_name Enemy
 
 # A reference to the player so we know where to look/move
 @export var player: Player = null
-@export var Acceleration := 25.0
+@export var acceleration := 25.0
 @export var playAnimatedSprite := true
+
+@onready var flippingSprite := $FlippingSprite
+@onready var velocityComponent := $VelocityComponent
 
 @export var damageMult := 0.01
 
@@ -14,11 +17,11 @@ func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)
 	if distanceFromPlayer < 1000:
 		var directionToPlayer = global_position.direction_to(playerGlobalPosition)
-		velocity += -directionToPlayer * Acceleration * 100
+		velocity += -directionToPlayer * acceleration * 100
 
 func _ready():
 	if playAnimatedSprite:
-		$FlippingSprite.play()
+		flippingSprite.play()
 	assert(player != null)
 	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)
 	
@@ -29,13 +32,13 @@ func moveTowardPlayer(distanceToPlayer: float):
 	var contextualAccelerationSlowdown = 0
 
 	if prevDistanceToPlayer < distanceToPlayer:
-		contextualAccelerationSlowdown = Acceleration * 0.5
+		contextualAccelerationSlowdown = acceleration * 0.5
 
-	velocity += directionToPlayer * (Acceleration - contextualAccelerationSlowdown)
-	velocity = $VelocityComponent.handleExistingVelocity(self.velocity)
+	velocity += directionToPlayer * (acceleration - contextualAccelerationSlowdown)
+	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	
 func _process(_delta):
-	$FlippingSprite.speed_scale = $VelocityComponent.getAnimationSpeed(velocity)
+	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity)
 
 func _physics_process(_delta):
 	var distanceToPlayer: float = global_position.distance_to(player.global_position)

@@ -47,7 +47,6 @@ var repulseTime = 0.0
 @onready var cam: PhantomCamera2D = $"../PlayerFollowingPhantomCam"
 @onready var deathTimer = $DeathTimer
 
-
 @onready var initEnergy = playerLight.energy
 
 var stats := {
@@ -195,14 +194,10 @@ func takeDamage(damage: float, ambientDamage: bool = false) -> bool:
 	if not ambientDamage:
 		var reduction = stats["damageReduction"] * damageReductionEffectiveness
 		damage = damage - reduction
-		if tick % 60 == 0:
-			print("damage: ", damage, " reduction: ", reduction)
 		setChromaticAbberration(true)
 		$DamageEffectsTimer.start()
 	else:
 		var reduction = stats["longevity"] * longevityEffectiveness
-		if tick % 60 == 0:
-			print("ambient damage: ", damage, " reduction: ", reduction)
 		damage = damage - reduction
 	
 	var didTakeDamage = false
@@ -224,9 +219,7 @@ func takeColorDamage(color: Color) -> void:
 func isBelowDamageThreshold() -> bool:
 	return COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF
 
-var tick = 0
 func _process(delta):
-	tick += 1
 	# handle death timer and effects
 	var playerDying = isBelowDamageThreshold() or not playerLight.enabled
 	if not playerDying:
