@@ -187,7 +187,7 @@ position = Vector2(677, 214)
 scale = Vector2(0.5, 0.5)
 worldEnvironment = NodePath("../WorldEnvironment")
 maxZoom = 0.1
-cameraBaseZoom = 2.0
 baseStatsMult = 0.5
+cameraBaseZoom = 2.0
 
 [connection signal="mouse_light_visible_change" from="." to="Roamers/Roamer" method="_on_menu_2d_mouse_light_visible_change"]

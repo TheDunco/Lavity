@@ -200,7 +200,6 @@ debug_color = Color(0.7, 0, 0.00591536, 0.42)
 metadata/_edit_lock_ = true
 
 [node name="PlayerLight" type="PointLight2D" parent="."]
-position = Vector2(-2.28882e-05, -0.999992)
 scale = Vector2(0.2, 0.2)
 color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2

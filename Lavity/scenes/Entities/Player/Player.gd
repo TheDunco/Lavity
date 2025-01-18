@@ -2,27 +2,29 @@ extends CharacterBody2D
 class_name Player
 
 @export var worldEnvironment: WorldEnvironment
-@onready var defaultSaturation = worldEnvironment.environment.adjustment_saturation
-@onready var moteScene := preload("res://scenes/Objects/Mote.tscn")
 
 @export_category("Player Config")
 @export_range(0, 2) var spriteBasePosition = 0
 @export var maxZoom := 0.3
 @export var lookThreshold := 50
-@export var cameraBaseZoom := 1.35
-@export var deathTimerBaseSeconds := 7
 @export var hueRotationSpeed := 2.0
-@export var decayRate := 0.0001
 @export var abilityCutoff := 0.15
 @export var moteDrainPercentage := 10
-
-var colorRotate = COLOR_UTILS.RGBRotate.new()
+@export var repulseActiveTime := 2.5 
+@export var decayRate := 0.0002
+@export var longevityEffectiveness := 0.00019
+@export var damageReductionEffectiveness := 0.001
+@export var hungerEffectiveness := 1.75
+@export var bleed := 0.25
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
 @export var baseMovementSpeed := 10
 @export var movementSpeedMult := 20
 @export var baseTrackableDistance := 5000.0
+@export var cameraBaseZoom := 1.35
+@export var deathTimerBaseSeconds := 7
+var repulseTime = 0.0
 
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
 @export var SUM_DAMAGE_CUTOFF := 0.03
@@ -30,15 +32,21 @@ var colorRotate = COLOR_UTILS.RGBRotate.new()
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
 @onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
 
+@onready var moteScene := preload("res://scenes/Objects/Mote.tscn")
+@onready var colorRotate = COLOR_UTILS.RGBRotate.new()
 @onready var playerLight = $PlayerLight
+@onready var playerLightInitScale = playerLight.scale
+@onready var defaultSaturation = worldEnvironment.environment.adjustment_saturation
+
+@onready var gravityShape = $GravityArea/GravityShape2D
+@onready var gravityShapeInitScale = gravityShape.scale
+
 @onready var flippingSprite = $FlippingSprite
 @onready var velocityComponent = $VelocityComponent
-@onready var deathTimer = $DeathTimer
-@onready var cam: PhantomCamera2D = $"../PlayerFollowingPhantomCam"
 
-const repulseActiveTime := 2.5 
-var repulseTime = 0.0
-const bleed := 0.07
+@onready var cam: PhantomCamera2D = $"../PlayerFollowingPhantomCam"
+@onready var deathTimer = $DeathTimer
+
 
 @onready var initEnergy = playerLight.energy
 
@@ -72,6 +80,7 @@ func handleContinuousInput(delta):
 		takeDamage(bleedAmount)
 		GlobalSfx.playDrain(remap(stats["repulse"], 0.0, 1.0, 0.45, 1.2))
 		# TODO: increase the trackable distance when draining
+		# TODO: implement sonar when bleeding!
 	elif Input.is_action_just_released("right_mouse"):
 		GlobalSfx.stopDrain()
 
@@ -158,7 +167,11 @@ func _setAttributesFromStats():
 	playerMovementSpeed = (stats["speed"] * movementSpeedMult) + baseMovementSpeed
 
 	# blue purple/stealth
-	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance 
+	trackableDistance = (1 - stats["stealth"]) * baseTrackableDistance
+
+	# orange/hunger
+	gravityShape.scale = gravityShapeInitScale * (stats["hunger"] * hungerEffectiveness + 0.5)
+	playerLight.scale = playerLightInitScale * (stats["hunger"] * hungerEffectiveness + 0.5)
 
 func setChromaticAbberration(on: bool) -> void:
 	flippingSprite.use_parent_material = !on
@@ -178,14 +191,18 @@ func stopDying():
 	setSaturation(defaultSaturation)
 	GlobalSfx.stopImminentDeath()
 	
-func takeDamage(damage := 0.01, ambientDamage: bool = false) -> bool:
+func takeDamage(damage: float, ambientDamage: bool = false) -> bool:
 	if not ambientDamage:
-		var reduction = stats["damageReduction"]/500
+		var reduction = stats["damageReduction"] * damageReductionEffectiveness
 		damage = damage - reduction
+		if tick % 60 == 0:
+			print("damage: ", damage, " reduction: ", reduction)
 		setChromaticAbberration(true)
 		$DamageEffectsTimer.start()
 	else:
-		var reduction = stats["longevity"]/500
+		var reduction = stats["longevity"] * longevityEffectiveness
+		if tick % 60 == 0:
+			print("ambient damage: ", damage, " reduction: ", reduction)
 		damage = damage - reduction
 	
 	var didTakeDamage = false
@@ -207,7 +224,9 @@ func takeColorDamage(color: Color) -> void:
 func isBelowDamageThreshold() -> bool:
 	return COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF
 
+var tick = 0
 func _process(delta):
+	tick += 1
 	# handle death timer and effects
 	var playerDying = isBelowDamageThreshold() or not playerLight.enabled
 	if not playerDying:
