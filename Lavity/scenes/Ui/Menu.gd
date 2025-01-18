@@ -87,12 +87,9 @@ func _ready():
 func switchToDynamicMusic():
 	GlobalDynamicMusicComponent.enable()
 	MusicComponent.pause()
+	# TODO: Move song changed signal to bus and emit that song changed to Polychrome
 
 # Main Menu
-func _on_play_pressed():
-	GameFlow.switchScene("res://scenes/Worlds/Tutorial.tscn")
-	switchToDynamicMusic()
-	
 func _on_maze_pressed():
 	GameFlow.switchScene("res://scenes/GameModes/Modes/Maze.tscn")
 	switchToDynamicMusic()
@@ -119,6 +116,8 @@ func _on_next_song_pressed():
 # Options
 func _on_options_back_pressed():
 	$Options.hide()
+	$Controls.hide()
+	$Play.hide()
 	$AspectRatioContainer.show()
 	GLOBAL._saveSettings()
 
@@ -198,3 +197,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_esc"):
 		GlobalSfx.playTonalClick(0.5)
 		visible = not visible
+
+
+func _on_play_pressed() -> void:
+	$AspectRatioContainer.hide()
+	$Play.show()

@@ -13,7 +13,7 @@
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_epqi8"]
 gradient = SubResource("Gradient_at51c")
-fill_from = Vector2(1, 1)
+fill_from = Vector2(0.222222, 0.226496)
 fill_to = Vector2(0, 0)
 
 [node name="Maze" type="Node2D"]

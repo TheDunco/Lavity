@@ -248,7 +248,7 @@ func rotateColorHue(amount: float) -> void:
 	playerLight.color = rotatedColor
 
 
-func _input(event):
+func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index ==  MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			rotateColorHue(hueRotationSpeed)
