@@ -13,16 +13,15 @@ class_name Menu
 @export var buttonTweenDuration := 0.01
 
 @export_category("Effect Implementaitons")
-@export var _canvasModulateDarkness: CanvasModulate
-@export var _worldEnvironment: WorldEnvironment
+@onready var _canvasModulateDarkness: CanvasModulate
+@onready var _worldEnvironment: WorldEnvironment
 
-@export_category("Sliders")
-@export var brightnessSlider: HSlider = null
-@export var darknessSlider: HSlider = null
-@export var glowIntensitySlider: HSlider = null
-@export var glowStrengthSlider: HSlider = null
-@export var bloomSlider: HSlider = null
-@export var volumeSlider: HSlider = null
+@onready var brightnessSlider: HSlider = find_child("BrightnessSlider")
+@onready var darknessSlider: HSlider = find_child("DarknessSlider")
+@onready var glowIntensitySlider: HSlider = find_child("GlowSlider")
+@onready var glowStrengthSlider: HSlider  = find_child("GlowStrengthSlider")
+@onready var bloomSlider: HSlider  = find_child("BloomSlider")
+@onready var volumeSlider: HSlider  = find_child("VolumeSlider")
 
 @export_category("Other References")
 @export var mainMenuButton: Button = null

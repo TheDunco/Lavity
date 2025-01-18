@@ -8,7 +8,7 @@
 shader = ExtResource("1_a310j")
 shader_parameter/displacement = 3.0
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("brightnessSlider", "darknessSlider", "glowIntensitySlider", "glowStrengthSlider", "bloomSlider", "volumeSlider", "mainMenuButton")]
+[node name="Menu" type="Control" node_paths=PackedStringArray("mainMenuButton")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,12 +17,6 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pq815")
 script = ExtResource("1_aei6w")
-brightnessSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider")
-darknessSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider")
-glowIntensitySlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider")
-glowStrengthSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer/GlowStrengthSlider")
-bloomSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer/BloomSlider")
-volumeSlider = NodePath("Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider")
 mainMenuButton = NodePath("AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
