@@ -3,7 +3,6 @@ class_name Menu
 
 @export_category("Player Config")
 @export var player: Player = null
-@export var snake: CharacterBody2D = null
 
 @export_category("Menu Behavior")
 @export var showMainMenuButton := true
@@ -13,8 +12,11 @@ class_name Menu
 @export var buttonTweenDuration := 0.01
 
 @export_category("Effect Implementaitons")
-@onready var _canvasModulateDarkness: CanvasModulate
-@onready var _worldEnvironment: WorldEnvironment
+@export var _canvasModulateDarkness: CanvasModulate
+@export var _worldEnvironment: WorldEnvironment
+
+@export_category("Other References")
+@export var mainMenuButton: Button = null
 
 @onready var brightnessSlider: HSlider = find_child("BrightnessSlider")
 @onready var darknessSlider: HSlider = find_child("DarknessSlider")
@@ -23,11 +25,17 @@ class_name Menu
 @onready var bloomSlider: HSlider  = find_child("BloomSlider")
 @onready var volumeSlider: HSlider  = find_child("VolumeSlider")
 
-@export_category("Other References")
-@export var mainMenuButton: Button = null
-
 @onready var Buttons = find_children("", "Button", true)
 @onready var Sliders = find_children("", "Slider", true)
+
+@onready var version: Label = find_child("Version")
+@onready var song: Label = find_child("Song")
+
+# AspectRationContainer
+@onready var topLevelMenu = $TopLevelMenu
+@onready var options = $Options
+@onready var controls = $Controls
+@onready var play = $Play
 
 
 func startButtonTween(object: Object, property: String, finalVal: Variant, duration: float) -> void:
@@ -66,7 +74,7 @@ func loadOptions():
 
 func _ready():
 	loadOptions()
-	$AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Version.text = ProjectSettings.get_setting("application/config/version")
+	version.text = ProjectSettings.get_setting("application/config/version")
 	MusicComponent.connect("songChanged", _on_song_changed)
 	mainMenuButton.visible = showMainMenuButton
 	visible = visibleByDefault
@@ -86,7 +94,7 @@ func _ready():
 func switchToDynamicMusic():
 	GlobalDynamicMusicComponent.enable()
 	MusicComponent.pause()
-	# TODO: Move song changed signal to bus and emit that song changed to Polychrome
+	MusicComponent.emit_signal("songChanged", "Polychrome")
 
 # Main Menu
 func _on_maze_pressed():
@@ -98,8 +106,8 @@ func _on_light_effects_world_pressed():
 	switchToDynamicMusic()
 
 func _on_options_pressed():
-	$Options.show()
-	$AspectRatioContainer.hide()
+	options.show()
+	topLevelMenu.hide()
 	
 func _on_main_menu_button_pressed() -> void:
 	GameFlow.switchScene("res://scenes/Ui/Menu2D.tscn")
@@ -114,10 +122,10 @@ func _on_next_song_pressed():
 	
 # Options
 func _on_options_back_pressed():
-	$Options.hide()
-	$Controls.hide()
-	$Play.hide()
-	$AspectRatioContainer.show()
+	options.hide()
+	controls.hide()
+	play.hide()
+	topLevelMenu.show()
 	GLOBAL._saveSettings()
 
 func _on_brightness_slider_value_changed(value):
@@ -149,14 +157,11 @@ func _on_volume_slider_value_changed(value):
 	GLOBAL.setSetting("VOLUME", value)
 	GlobalSfx.playButtonHover()
 	var masterBusIndex := AudioServer.get_bus_index("Master")
-	if value == $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider.min_value:
+	if value == volumeSlider.min_value:
 		AudioServer.set_bus_mute(masterBusIndex, true)
 	else:
 		AudioServer.set_bus_mute(masterBusIndex, false)
 		AudioServer.set_bus_volume_db(masterBusIndex, value)
-
-func _on_procedural_snake_pressed():
-	snake.visible = not snake.visible
 
 func _on_fullscreen_pressed() -> void:
 	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
@@ -166,9 +171,9 @@ func _on_fullscreen_pressed() -> void:
 
 func _on_song_changed(to: String) -> void:
 	var labelFormat = "Dunco - %s"
-	$AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer/Song.text = labelFormat % to
+	song.text = labelFormat % to
 
-var DEFAULTS := {
+const DEFAULTS := {
 	"brightness": 1.24,
 	"darkness": 0.941,
 	"glow_intensity": 2.77,
@@ -197,7 +202,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		GlobalSfx.playTonalClick(0.5)
 		visible = not visible
 
-
 func _on_play_pressed() -> void:
-	$AspectRatioContainer.hide()
-	$Play.show()
+	topLevelMenu.hide()
+	play.show()

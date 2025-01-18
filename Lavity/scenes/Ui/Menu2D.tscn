@@ -63,13 +63,12 @@ script = ExtResource("3_cm6sv")
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "snake", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
+[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
 offset_left = 27.0
 offset_top = 5.0
 offset_right = 27.0
 offset_bottom = 5.0
 player = NodePath("../../Player")
-snake = NodePath("../../Snake")
 showMainMenuButton = false
 visibleByDefault = true
 _canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")

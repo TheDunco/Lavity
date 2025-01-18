@@ -17,9 +17,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_pq815")
 script = ExtResource("1_aei6w")
-mainMenuButton = NodePath("AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton")
+mainMenuButton = NodePath("TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+[node name="TopLevelMenu" type="AspectRatioContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,32 +27,32 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TopLevelMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="TopLevelMenu/MarginContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/MarginContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopLevelMenu/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="TopLevelMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 200
 theme_override_constants/margin_right = 200
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/MarginContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TopLevelMenu/MarginContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Lavity" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Lavity" type="Label" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 material = SubResource("ShaderMaterial_wsqbv")
 layout_mode = 2
 theme = ExtResource("1_pq815")
@@ -61,48 +61,43 @@ text = "Lavity
 "
 horizontal_alignment = 1
 
-[node name="Play" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play"
 
-[node name="MainMenuButton" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="MainMenuButton" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_pq815")
 text = "Main Menu"
 
-[node name="Options" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_pq815")
 text = "Options"
 
-[node name="Procedural Snake" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Show Procedural Snake"
-
-[node name="Next Song" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Next Song" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_pq815")
 text = "Next Song"
 
-[node name="Quit" type="Button" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_pq815")
 text = "Quit
 "
 
-[node name="HBoxContainer" type="HSplitContainer" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HSplitContainer" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 split_offset = 20
 dragger_visibility = 2
 
-[node name="Version" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Version" type="Label" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_pq815")
 theme_override_colors/font_color = Color(0.517184, 0.517184, 0.517184, 1)
 text = "version"
 
-[node name="Song" type="Label" parent="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Song" type="Label" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme = ExtResource("1_pq815")
 theme_override_colors/font_color = Color(0.517647, 0.517647, 0.517647, 1)
@@ -332,12 +327,11 @@ text = "Light Effects Testing"
 layout_mode = 2
 text = "Back"
 
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Procedural Snake" to="." method="_on_procedural_snake_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Next Song" to="." method="_on_next_song_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Next Song" to="." method="_on_next_song_pressed"]
+[connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_darkness_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider" to="." method="_on_glow_slider_value_changed"]

@@ -47,11 +47,13 @@ dynamicMoteSpawnChance = 0.35
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player") instance=ExtResource("6_p8m8n")]
+[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("6_p8m8n")]
 offset_left = -3.0
 offset_top = -6.0
 offset_right = -3.0
 offset_bottom = -6.0
 player = NodePath("../../Player")
 showMainMenuButton = false
+_canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")
+_worldEnvironment = NodePath("../../WorldEnvironment")
 metadata/_edit_use_anchors_ = true
