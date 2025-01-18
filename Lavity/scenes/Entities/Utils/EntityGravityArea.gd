@@ -9,7 +9,7 @@ class_name EntityGravityArea
 @export var distanceMult := 500
 
 @export_category("Color Absorbption")
-@export var absorbtionMult := 0.2
+@export var absorbtionMult := 0.25
 
 var isEntityInGravityArea := false
 

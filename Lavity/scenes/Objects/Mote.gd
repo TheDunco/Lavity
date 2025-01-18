@@ -1,6 +1,8 @@
 extends Node2D
 class_name Mote
 
+#TODO: Make enemies be attracted to light so the player can distract them with motes!
+
 @onready var rigidBody: RigidBody2D = $OppositeForceBody
 @onready var lavityLight: LavityLight = $OppositeForceBody/LavityLight
 @export var repulseableDistance := 1000
@@ -12,9 +14,10 @@ func _ready() -> void:
 
 func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var directionToPlayer = global_position.direction_to(playerGlobalPosition)
-	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)
-	if distanceFromPlayer < repulseableDistance:
-		var force = (repulseableDistance - distanceFromPlayer) / 10
+	var distanceToPlayer = global_position.distance_to(playerGlobalPosition)
+	if distanceToPlayer < repulseableDistance:
+		#TODO: Not sure if this is working properly. Expected behavior: closer to the player you are the more force
+		var force = abs(repulseableDistance - distanceToPlayer) / 10
 		applyImpulse(-directionToPlayer, force)
 
 func applyImpulse(direction: Vector2, speed: float) -> void:
