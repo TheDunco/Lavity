@@ -1,22 +1,8 @@
-Todos
-- [ ] Android builds
-- [x] Host web builds
-- [x] Light Field mode
-	- [x] Infinite tilemap generation
-	- [x] Random light placement
-	- [x] Random light params (energy, scale)
-- [ ] Items: **The mechanics of the items should be that they're floating Lavity lights that you slowly have to push around to absorb their powers and that affects the color of your player light. Certain enemies could be attracted to certain types of light! THIS IS THE GAME!**
-	- [ ] Flowers
-		- [ ] Light/bioluminescence meter
-		- [ ] Health
-	- [ ] Floating bioluminescent grass
-- [x] Make menu a 2D node with 2D buttons
-	- [x] Apply WorldEnvironment
-	- [x] Apply CanvasModulateDarkness (a bit brighter than usual)
-	- [x] Affix a LavityLight to the mouse
-	- [x] Put moving lights and doppelgangers on the main screen/page
-	- [x] Ensure the LavityLight on the mouse is able to interact with the doppelgangers
-
-- [ ] Mote
-	- [ ] Make player able to repulse the motes
-	- [ ] Make player gravity push motes instead of relying on collisions
+- [ ] Mobile builds
+	- [ ] Need to consider mobile control scheme
+	- [ ] A11y work in general
+- [x] Items: **The mechanics of the items should be that they're floating Lavity lights that you slowly have to push around to absorb their powers and that affects the color of your player light. Certain enemies could be attracted to certain types of light! THIS IS THE GAME!**
+- [ ] Make a Hero Text system to display objectives, goals, challenges, and messages like winning
+- [ ] Make ColorPassableArea work for motes instead of the player light now that we have scrolling
+- [ ] Add enemies to maze that try to fight you for the limited light available
+- [ ] Build and release Lavity v0.1.0 Demo 1

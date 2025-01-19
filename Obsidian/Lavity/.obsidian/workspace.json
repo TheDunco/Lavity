@@ -13,15 +13,15 @@
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Main Board.canvas",
+                "file": "Color Effect Mapping.canvas",
                 "viewState": {
-                  "x": 63.440454928025815,
-                  "y": -338.80476546478866,
-                  "zoom": 0.26986296217598
+                  "x": 2488.5,
+                  "y": 782.2396039603962,
+                  "zoom": -0.9222355368468687
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Main Board"
+              "title": "Color Effect Mapping"
             }
           }
         ]
@@ -167,10 +167,10 @@
   },
   "active": "58ac3cb4587ee91a",
   "lastOpenFiles": [
+    "Main Board.canvas",
     "Color Effect Mapping.canvas",
     "good-boyo-chibi.png",
     "color-wheels-RYB-RGB.webp",
-    "Main Board.canvas",
     "basic-colors.webp",
     "Pasted image 20240731215944.jpg",
     "Pasted image 20240731220031.jpg",
