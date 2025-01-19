@@ -12,6 +12,8 @@ var doorPoint: Vector2
 
 func onPass(player: Player) -> void:
 	print("MazeDoor onPass ", player.name)
+	# TODO: Incrementally ramp up maze difficulty by increasing size, decreasing mote spawn chance, increasing enemies
+	GameFlow.switchScene("res://scenes/Ui/Menu2D.tscn")
 
 
 func setDoorPoint():

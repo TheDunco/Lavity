@@ -7,7 +7,6 @@ extends Node2D
 const moteScene = preload('res://scenes/Objects/Mote.tscn')
 
 func _ready():
-	# We need an array of all of the points in the maze where we can spawn a LavityLight
 	var mazeMiddlePoints: Array[Vector2] = maze.getTileCenters()
 	var moteCount = 0
 

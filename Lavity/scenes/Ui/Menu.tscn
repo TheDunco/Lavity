@@ -52,31 +52,37 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Lavity" type="Label" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
+[node name="Lavity" type="RichTextLabel" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 material = SubResource("ShaderMaterial_wsqbv")
 layout_mode = 2
+tooltip_text = "A blend word of Light and Gravity"
 theme = ExtResource("1_pq815")
-theme_override_font_sizes/font_size = 70
-text = "Lavity
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center][wave]Lavity[/wave][/center]
 "
-horizontal_alignment = 1
+fit_content = true
 
 [node name="Play" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Play one of the various game modes"
 text = "Play"
 
 [node name="MainMenuButton" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Return to the main menu"
 theme = ExtResource("1_pq815")
 text = "Main Menu"
 
 [node name="Options" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Options to fine tune volume and graphical settings"
 theme = ExtResource("1_pq815")
 text = "Options"
 
 [node name="Controls" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "How to play the game"
 theme = ExtResource("1_pq815")
 text = "Controls"
 
@@ -88,6 +94,7 @@ text = "Next Song"
 
 [node name="Quit" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+tooltip_text = "Quit the game"
 theme = ExtResource("1_pq815")
 text = "Quit
 "

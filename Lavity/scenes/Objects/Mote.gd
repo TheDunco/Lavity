@@ -10,6 +10,9 @@ class_name Mote
 
 func setScale(newScale: Vector2) -> void:
 	lavityLight.scale = newScale
+	
+func getLightColor() -> Color:
+	return lavityLight.light.color
 
 func _ready() -> void:
 	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)

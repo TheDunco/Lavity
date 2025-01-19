@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://wv5ejff7mrr3"]
 
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/MazeDoor.gd" id="1_15426"]
-[ext_resource type="PackedScene" uid="uid://clcj4utj8emgk" path="res://assets/objects/ColorPassableArea.tscn" id="1_ggn33"]
+[ext_resource type="PackedScene" uid="uid://clcj4utj8emgk" path="res://scenes/GameModes/Modes/ColorPassableArea.tscn" id="1_ggn33"]
 [ext_resource type="Texture2D" uid="uid://i32xfuna2ybh" path="res://scenes/GameModes/Modes/MazeDoorNoiseTexture.tres" id="2_oum8k"]
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="4_d8f67"]
 

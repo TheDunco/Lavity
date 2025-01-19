@@ -5,8 +5,8 @@ class_name ProceduralMaze
 # I had to edit and adapt it (with help from the comment section) to fit into Godot 4.3
 # https://youtu.be/YShYWaGF3Nc?si=CV3igxyfiqNGA_77
 
-@export var width := 20
-@export var height := 20
+@export var width := 10
+@export var height := 10
 
 const tilemapSizeX := 4
 const tilemapSizeY := 4

@@ -1,15 +1,17 @@
 extends Node2D
 class_name MazeMode
 
-@onready var background := $Background
-@onready var tilemap := $ProceduralMazeTilemap
+@onready var background: Sprite2D = $Background
+@onready var tilemap: ProceduralMaze = $ProceduralMazeTilemap
 @onready var cam := $PlayerFollowingPhantomCam
 
-@export var margins = 100
-
 func _ready() -> void:
-	background.texture.width = tilemap.width * tilemap.tile_set.tile_size.x + margins
-	background.texture.height = tilemap.height * tilemap.tile_set.tile_size.y + margins
+	var width = tilemap.width * tilemap.tile_set.tile_size.x
+	var height = tilemap.height * tilemap.tile_set.tile_size.y
+
+	background.texture.width = tilemap.tile_set.tile_size.x
+	background.texture.height = tilemap.tile_set.tile_size.y
+	background.scale = Vector2(width, height)
 
 	cam.limit_left = 0
 	cam.limit_right = tilemap.width * tilemap.tile_set.tile_size.x
