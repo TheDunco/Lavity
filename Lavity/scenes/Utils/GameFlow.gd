@@ -4,7 +4,8 @@ extends Node2D
 # https://www.youtube.com/watch?v=RMdf60IAxY0
 
 var current_scene: Node = null
-var toastText := ""
+var heroText := "[center]\n\n\nWelcome to...[/center]"
+const gameOverText := "[center][wave]Game Over![/wave] You need light to survive![/center]"
 
 func _ready():
 	var root = get_tree().root
@@ -26,3 +27,5 @@ func quit():
 
 func gameOver():
 	switchScene("res://scenes/Ui/Menu2D.tscn")
+	heroText = gameOverText
+	SignalBus.emit_signal("displayHeroText", gameOverText)

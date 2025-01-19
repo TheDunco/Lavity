@@ -8,6 +8,7 @@ class_name SfxComponent
 @onready var tonalClick = $TonalClick
 @onready var repulse = $Repulse
 @onready var pop = $Pop
+@onready var impulse = $Impulse
 
 func playButtonHover():
 	buttonHover.pitch_scale = randf_range(1.1, 1.3)
@@ -40,3 +41,6 @@ func stopDrain():
 func playPop(pitch = 1.0):
 	pop.pitch_scale = pitch
 	pop.play()
+	
+func playImpulse():
+	impulse.play()

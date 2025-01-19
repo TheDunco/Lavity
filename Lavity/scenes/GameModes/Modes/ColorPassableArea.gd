@@ -33,11 +33,14 @@ func onBodyEntered(body: Node) -> void:
 			if sumMoteLikeness() > passThreshold:
 				scoringMotes.clear()
 				SignalBus.emit_signal("playerPassedMaze", player)
-	if body is Player:
+				SignalBus.emit_signal("displayHeroText", "[center][wave]\n\n\nYOU WIN![/wave][/center]")
+				GlobalSfx.playImpulse()
+	if body is Player and not player:
 		player = body as Player
+		SignalBus.emit_signal("displayHeroText", "[center]\n[wave]Objective[/wave]: Fill the portal with motes of similar color to win![/center]")
 
 func onBodyExited(body: Node) -> void:
-	if body is Mote:
-		var mote = body as Mote
+	if body is RigidBody2D:
+		var mote = body.get_parent() as Mote
 		scoringMotes.erase(mote)
 				

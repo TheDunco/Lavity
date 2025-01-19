@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://gcao2h68fauk"]
+[gd_scene load_steps=18 format=3 uid="uid://gcao2h68fauk"]
 
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="1_k6842"]
 [ext_resource type="Script" path="res://scenes/Ui/MouseLight.gd" id="1_li1tr"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bv6grq3e8ay6" path="res://scenes/Entities/Enemies/Roamer/Roamer.tscn" id="7_j0bbl"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="8_pgiwv"]
 [ext_resource type="PackedScene" uid="uid://ckegvnp5qckrb" path="res://scenes/Entities/Enemies/Snake/Snake.tscn" id="9_4dcco"]
+[ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="10_ddlvg"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="10_smu23"]
 
 [sub_resource type="Gradient" id="Gradient_edh43"]
@@ -189,5 +190,7 @@ worldEnvironment = NodePath("../WorldEnvironment")
 maxZoom = 0.1
 baseStatsMult = 0.5
 cameraBaseZoom = 2.0
+
+[node name="Message" parent="." instance=ExtResource("10_ddlvg")]
 
 [connection signal="mouse_light_visible_change" from="." to="Roamers/Roamer" method="_on_menu_2d_mouse_light_visible_change"]

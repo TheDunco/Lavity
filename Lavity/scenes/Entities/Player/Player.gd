@@ -264,6 +264,7 @@ func _unhandled_input(event):
 			rotateColorHue(-hueRotationSpeed)
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			playerLight.color = COLOR_UTILS.YELLOW
+			SignalBus.emit_signal("displayHeroText", "[center][wave]Cheat[/wave]: Set color to yellow[/center]")
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if stats["repulse"] > abilityCutoff and repulseTime <= 0.0:
 				takeDamage(bleed * 2)
