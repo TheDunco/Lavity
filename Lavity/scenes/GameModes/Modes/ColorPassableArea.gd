@@ -1,7 +1,7 @@
 extends Area2D 
 
 @export var color: Color = GlobalUtils.colors["yellow"]
-@export var passThreshold := 6.0
+@export var passThreshold := 5.5
 @onready var shape: CollisionShape2D = get_child(0)
 
 var player: Player = null
@@ -33,11 +33,10 @@ func onBodyEntered(body: Node) -> void:
 			if sumMoteLikeness() > passThreshold:
 				scoringMotes.clear()
 				SignalBus.emit_signal("playerPassedMaze", player)
-				SignalBus.emit_signal("displayHeroText", "[center][wave]\n\n\nYOU WIN![/wave][/center]")
-				GlobalSfx.playImpulse()
+
 	if body is Player and not player:
 		player = body as Player
-		SignalBus.emit_signal("displayHeroText", "[center]\n[wave]Objective[/wave]: Fill the portal with motes of similar color to win![/center]")
+		SignalBus.emit_signal("displayHeroText", "[center]\n[wave]Objective[/wave]: Fill the portal with motes of its color to win![/center]")
 
 func onBodyExited(body: Node) -> void:
 	if body is RigidBody2D:

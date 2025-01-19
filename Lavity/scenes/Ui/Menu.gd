@@ -90,19 +90,16 @@ func _ready():
 			slider.connect("drag_ended", GlobalSfx.playButtonHover)
 			
 	
-func switchToDynamicMusic():
-	GlobalDynamicMusicComponent.enable()
-	MusicComponent.pause()
-	MusicComponent.emit_signal("songChanged", "Polychrome")
+
 
 # Main Menu
 func _on_maze_pressed():
 	GameFlow.switchScene("res://scenes/GameModes/Modes/Maze.tscn")
-	switchToDynamicMusic()
+	GameFlow.switchToDynamicMusic()
 	
 func _on_light_effects_world_pressed():
 	GameFlow.switchScene("res://scenes/Worlds/EffectTestingWorld.tscn")
-	switchToDynamicMusic()
+	GameFlow.switchToDynamicMusic()
 
 func _on_options_pressed():
 	options.show()
@@ -110,8 +107,7 @@ func _on_options_pressed():
 	
 func _on_main_menu_button_pressed() -> void:
 	GameFlow.switchScene("res://scenes/Ui/Menu2D.tscn")
-	GlobalDynamicMusicComponent.disable()
-	MusicComponent.resume()
+	GameFlow.switchToMenuMusic()
 
 func _on_quit_pressed():
 	GameFlow.quit()

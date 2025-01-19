@@ -29,3 +29,13 @@ func gameOver():
 	switchScene("res://scenes/Ui/Menu2D.tscn")
 	heroText = gameOverText
 	SignalBus.emit_signal("displayHeroText", gameOverText)
+
+func switchToDynamicMusic():
+	GlobalDynamicMusicComponent.enable()
+	MusicComponent.pause()
+	MusicComponent.emit_signal("songChanged", "Polychrome")
+
+func switchToMenuMusic():
+	GlobalDynamicMusicComponent.disable()
+	MusicComponent.resume()
+	MusicComponent.emit_signal("songChanged", MusicComponent.musicRotation[MusicComponent.currentIndex].name)

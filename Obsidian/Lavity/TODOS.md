@@ -2,7 +2,7 @@
 	- [ ] Need to consider mobile control scheme
 	- [ ] A11y work in general
 - [x] Items: **The mechanics of the items should be that they're floating Lavity lights that you slowly have to push around to absorb their powers and that affects the color of your player light. Certain enemies could be attracted to certain types of light! THIS IS THE GAME!**
-- [ ] Make a Hero Text system to display objectives, goals, challenges, and messages like winning
-- [ ] Make ColorPassableArea work for motes instead of the player light now that we have scrolling
+- [x] Make a Hero Text system to display objectives, goals, challenges, and messages like winning
+- [x] Make ColorPassableArea work for motes instead of the player light now that we have scrolling
 - [ ] Add enemies to maze that try to fight you for the limited light available
-- [ ] Build and release Lavity v0.1.0 Demo 1
+
