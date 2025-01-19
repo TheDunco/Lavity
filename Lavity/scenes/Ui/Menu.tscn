@@ -75,6 +75,11 @@ layout_mode = 2
 theme = ExtResource("1_pq815")
 text = "Options"
 
+[node name="Controls" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_pq815")
+text = "Controls"
+
 [node name="Next Song" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -263,12 +268,12 @@ layout_mode = 2
 text = "Back"
 
 [node name="Controls" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Controls"]
-visible = false
 layout_mode = 2
 offset_right = 1281.0
 offset_bottom = 720.0
@@ -290,7 +295,7 @@ Mouse
 - \"Scroll Wheel\" to shift color hue
 - \"Left Mouse\" to fire a mote
 - \"Right Mouse\" to repulse enemies
-    - Hold to "
+    - Hold to bleed extra color"
 
 [node name="Back" type="Button" parent="Controls/CenterContainer/VSplitContainer"]
 layout_mode = 2
@@ -331,6 +336,7 @@ text = "Back"
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Next Song" to="." method="_on_next_song_pressed"]
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]

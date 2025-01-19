@@ -204,3 +204,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_play_pressed() -> void:
 	topLevelMenu.hide()
 	play.show()
+
+func _on_controls_pressed() -> void:
+	topLevelMenu.hide()
+	controls.show()
