@@ -7,4 +7,6 @@ FL/Dynamic/LavityDynamicColorMusic/Backup/
 FL/SFX/SFX/Backup/
 Obsidian/Lavity/.obsidian/workspace.json
 
+*.DS_STORE
+
 .vscode/*
