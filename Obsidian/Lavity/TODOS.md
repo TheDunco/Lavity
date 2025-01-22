@@ -5,4 +5,8 @@
 - [x] Make a Hero Text system to display objectives, goals, challenges, and messages like winning
 - [x] Make ColorPassableArea work for motes instead of the player light now that we have scrolling
 - [ ] Add enemies to maze that try to fight you for the limited light available
+	- [ ] Lanternfly
+	- [ ] Frog/Toad (eats all bug types)
+	- [ ] Spider (w/ web)
+- [ ] When enemies die, they pop and release motes of the color they were
 

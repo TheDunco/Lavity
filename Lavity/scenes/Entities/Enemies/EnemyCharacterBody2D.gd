@@ -13,7 +13,12 @@ class_name Enemy
 
 var prevDistanceToPlayer := 0.0
 
+enum EnemyType {
+	BUG,
+	AMPHIBIAN
+}
 # TODO: Should be static per enemy type, random for testing
+var type := EnemyType.BUG
 var preferredMoteColor = COLOR_UTILS.randColorFromSet()
 
 func handlePlayerRepulsed(playerGlobalPosition: Vector2):
