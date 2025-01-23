@@ -79,7 +79,7 @@ func changeState(newState: States) -> void:
 
 var lastKnownPlayerPosition: Vector2 = Vector2.ZERO
 var distanceToPlayer := 0.0
-var timeStuck := 0.0
+var timeNotMovingTowardPlayer := 0.0
 func moveTowardPlayer(delta: float) -> void:
 	if percievedPlayer:
 		lastKnownPlayerPosition = percievedPlayer.global_position
@@ -87,21 +87,18 @@ func moveTowardPlayer(delta: float) -> void:
 		var currentDistanceToPlayer = global_position.distance_to(lastKnownPlayerPosition)
 		moveToward(lastKnownPlayerPosition)
 		if currentDistanceToPlayer < distanceToPlayer:
-			# We know that we are getting closer to the player
-			timeStuck = 0.0
+			timeNotMovingTowardPlayer = 0.0
 		else:
-			if timeStuck < timeToStuck:
-				timeStuck += delta
+			if timeNotMovingTowardPlayer < timeToStuck:
+				timeNotMovingTowardPlayer += delta
 			else:
 				changeState(States.STUCK)
-				timeStuck = 0.0
+				timeNotMovingTowardPlayer = 0.0
 			
 		distanceToPlayer = currentDistanceToPlayer
 
-
 func _process(delta: float):
 	super._process(delta)
-	
 	
 
 func _physics_process(delta: float) -> void:
