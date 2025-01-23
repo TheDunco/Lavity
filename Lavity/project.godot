@@ -126,6 +126,7 @@ auto_flip={
 2d_physics/layer_5="Player"
 2d_physics/layer_6="NPC"
 2d_physics/layer_9="Mote"
+2d_physics/layer_10="Perception"
 
 [physics]
 

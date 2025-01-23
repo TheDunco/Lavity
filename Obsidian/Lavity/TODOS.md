@@ -9,4 +9,5 @@
 	- [ ] Frog/Toad (eats all bug types)
 	- [ ] Spider (w/ web)
 - [ ] When enemies die, they pop and release motes of the color they were
+- [ ] Make the edges of the maze light up for easier visibility
 
