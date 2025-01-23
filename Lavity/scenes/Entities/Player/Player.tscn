@@ -161,9 +161,10 @@ position = Vector2(87.5, 0)
 texture = ExtResource("18_0slyg")
 offset = Vector2(-88, -7)
 
-[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
+[node name="GravityArea" parent="." node_paths=PackedStringArray("entity", "absorbingLight") groups=["Player"] instance=ExtResource("6_bki26")]
 collision_layer = 2
-Entity = NodePath("..")
+entity = NodePath("..")
+absorbingLight = NodePath("../PlayerLight")
 metadata/_edit_lock_ = true
 
 [node name="GravityShape2D" type="CollisionShape2D" parent="GravityArea"]

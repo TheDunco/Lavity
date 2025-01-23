@@ -39,7 +39,6 @@ radius = 1870.0
 collision_layer = 41
 collision_mask = 49
 script = ExtResource("1_h7r8b")
-damageMult = 0.005
 
 [node name="LanternflyCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(15, 5)
@@ -75,9 +74,10 @@ shadow_enabled = true
 texture = ExtResource("9_lv5ek")
 metadata/_edit_lock_ = true
 
-[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("10_w4khb")]
+[node name="GravityArea" parent="." node_paths=PackedStringArray("entity", "absorbingLight") instance=ExtResource("10_w4khb")]
 collision_layer = 2
-Entity = NodePath("..")
+entity = NodePath("..")
+absorbingLight = NodePath("../Lanternlight")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
 shape = SubResource("CircleShape2D_mavcd")

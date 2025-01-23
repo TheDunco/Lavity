@@ -83,8 +83,9 @@ script = ExtResource("8_td20j")
 [node name="WingFlap" type="AudioStreamPlayer2D" parent="FlippingSprite"]
 stream = ExtResource("9_v2v3t")
 
-[node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("10_txlik")]
-Entity = NodePath("..")
+[node name="GravityArea" parent="." node_paths=PackedStringArray("entity", "absorbingLight") instance=ExtResource("10_txlik")]
+entity = NodePath("..")
+absorbingLight = NodePath("../RandColorLight")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
 position = Vector2(3, 6)

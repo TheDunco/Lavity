@@ -1,4 +1,5 @@
 extends Enemy
+class_name Lanternfly
 
 @export var timeToStuck := 5
 @export var lanternflyAcceleration := 10.0
