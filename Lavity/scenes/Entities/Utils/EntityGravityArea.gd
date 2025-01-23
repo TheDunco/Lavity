@@ -18,21 +18,25 @@ func _ready():
 	connect("area_entered", handleAreaEntered)
 	connect("area_exited", handleAreaExited)
 
-# { "area": Area2D, "light": PointLight2D, "oppositeForceBody": RigidBody2D | null }
+# { "area": Area2D, "light": PointLight2D, "oppositeForceBody": RigidBody2D | null, characterForceBody: CharacterBody2d | null }
 var areasWithLavityEmitter = []
 
 @onready var absorbingLight = COLOR_UTILS.getLavityLightEmitter(Entity)
 
 func handleAreaEntered(area: Area2D):
-	var lavityPointLight: PointLight2D = area.find_parent("LavityLightLight")
-	var oppositeForceBody: RigidBody2D = area.find_parent("OppositeForceBody")
-	if lavityPointLight:
-		areasWithLavityEmitter.append({ "area": area, "light": lavityPointLight, "oppositeForceBody": oppositeForceBody })
+	var parent = area.get_parent()
+	if parent is CharacterBody2D:
+		var lavityPointLight: PointLight2D = parent.find_children("*", "PointLight2D")[0]
+		areasWithLavityEmitter.append({ "area": area, "light": lavityPointLight, "characterForceBody": parent, "oppositeForceBody": null })
+	else:
+		var lavityPointLight: PointLight2D = area.find_parent("LavityLightLight")
+		var oppositeForceBody: RigidBody2D = area.find_parent("OppositeForceBody")
+		areasWithLavityEmitter.append({ "area": area, "light": lavityPointLight, "oppositeForceBody": oppositeForceBody, "characterForceBody": null })
 
 func handleAreaExited(area: Area2D):
 	areasWithLavityEmitter = areasWithLavityEmitter.filter(func(it): return it.area != area)
 
-func applyGravityToEntity(area: Area2D, oppositeForceBody: RigidBody2D = null, energy: float = 1.0):
+func applyGravityToEntity(area: Area2D, oppositeForceBody: RigidBody2D = null, characterForceBody: CharacterBody2D = null, energy: float = 1.0):
 	var magnitude = (energy * lavity) / (area.global_position.distance_to(Entity.global_position) / distanceMult)
 	var directionToEntity: Vector2 = area.global_position.direction_to(Entity.global_position)
 	
@@ -41,6 +45,8 @@ func applyGravityToEntity(area: Area2D, oppositeForceBody: RigidBody2D = null, e
 	# Apply opposite force to the oppositeForceBody
 	if oppositeForceBody:
 		oppositeForceBody.apply_central_force(-directionToEntity * magnitude)
+	if characterForceBody:
+		characterForceBody.velocity += -directionToEntity * magnitude
 
 
 func absorbLight(emitting: PointLight2D, absorbing: PointLight2D, delta: float = 1.0):
@@ -64,10 +70,12 @@ func _physics_process(delta: float) -> void:
 			var area: Area2D = a.area
 			var lavityEmitter: PointLight2D = a.light
 			var oppositeForceBody: RigidBody2D = a.oppositeForceBody
+			var characterForceBody: CharacterBody2D = a.characterForceBody
 				
 			# Entities absorbing color become visible
-			if absorbingLight:
+			if absorbingLight and lavityEmitter:
 				absorbingLight.enabled = true
+				# TODO: Somehow character on character absorbption isn't working properly -- make the lanternfly have a higher absorbption rate
 				absorbLight(lavityEmitter, absorbingLight, delta)
 				
-			applyGravityToEntity(area, oppositeForceBody, COLOR_UTILS.sumColor(lavityEmitter.color) / 3.0)
+			applyGravityToEntity(area, oppositeForceBody, characterForceBody, COLOR_UTILS.sumColor(lavityEmitter.color) / 3.0)

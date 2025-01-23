@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=25 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -20,6 +20,7 @@
 [ext_resource type="AudioStream" uid="uid://bibdynmbha2o5" path="res://assets/audio/sfx/wing_flap4.wav" id="16_k171i"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
+[ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="21_jrgmx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -58,20 +59,6 @@ radius = 47.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1jw6a"]
 radius = 29.0
 height = 92.0
-
-[sub_resource type="Gradient" id="Gradient_gjhgk"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.00333333, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.513233, 0.513233, 0.513233, 1, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rtjsw"]
-gradient = SubResource("Gradient_gjhgk")
-width = 1000
-height = 1000
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.5, 0)
-metadata/_snap_enabled = true
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 physics_interpolation_mode = 1
@@ -176,7 +163,6 @@ offset = Vector2(-88, -7)
 
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") groups=["Player"] instance=ExtResource("6_bki26")]
 collision_layer = 2
-collision_mask = 258
 Entity = NodePath("..")
 metadata/_edit_lock_ = true
 
@@ -204,7 +190,7 @@ scale = Vector2(0.2, 0.2)
 color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2
 shadow_enabled = true
-texture = SubResource("GradientTexture2D_rtjsw")
+texture = ExtResource("21_jrgmx")
 metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="DamageEffectsTimer" to="." method="_on_damage_effects_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cikbfevvqein8"]
+[gd_scene load_steps=15 format=3 uid="uid://cikbfevvqein8"]
 
 [ext_resource type="Texture2D" uid="uid://waqjud1jctcg" path="res://assets/Laternfly/full-lanternfly_0001.png" id="1_5xslm"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.gd" id="1_h7r8b"]
@@ -7,8 +7,8 @@
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="2_siton"]
 [ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="3_0io61"]
 [ext_resource type="Texture2D" uid="uid://ckyq2uk3wmcaw" path="res://assets/Laternfly/full-lanternfly_0003.png" id="3_bulcg"]
-[ext_resource type="Texture2D" uid="uid://dj7donbsc648h" path="res://assets/Point Lights/PointLight.png" id="8_o8dp4"]
 [ext_resource type="Shape2D" uid="uid://bgbwmoum5xag2" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyCollisionShape.tres" id="8_puo3w"]
+[ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="9_lv5ek"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="10_w4khb"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="11_2qfmd"]
 
@@ -29,6 +29,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mavcd"]
+radius = 97.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_6scuy"]
 radius = 1870.0
 
@@ -43,6 +46,7 @@ position = Vector2(15, 5)
 scale = Vector2(12.1167, 3.25052)
 shape = ExtResource("8_puo3w")
 debug_color = Color(0.917647, 0.309804, 0.160784, 0.0196078)
+metadata/_edit_lock_ = true
 
 [node name="TileMap" type="TileMap" parent="."]
 visible = false
@@ -64,24 +68,20 @@ offset = Vector2(0, -19)
 metadata/_edit_lock_ = true
 
 [node name="Lanternlight" type="PointLight2D" parent="."]
-position = Vector2(40, 0)
-scale = Vector2(0.2, 0.2)
-color = Color(0.917647, 0.309804, 0.160784, 0.419608)
-energy = 0.5
+scale = Vector2(0.22, 0.22)
+color = Color(0.669716, 0.0142493, 0, 1)
 blend_mode = 2
 shadow_enabled = true
-texture = ExtResource("8_o8dp4")
+texture = ExtResource("9_lv5ek")
 metadata/_edit_lock_ = true
 
 [node name="GravityArea" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("10_w4khb")]
 collision_layer = 2
 Entity = NodePath("..")
 
-[node name="LanternflyCollisionShape" type="CollisionShape2D" parent="GravityArea"]
-position = Vector2(15, 5)
-scale = Vector2(12.1167, 3.25052)
-shape = ExtResource("8_puo3w")
-debug_color = Color(0.917647, 0.309804, 0.160784, 0.0196078)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GravityArea"]
+shape = SubResource("CircleShape2D_mavcd")
+debug_color = Color(0.7, 0, 0.047, 0.185)
 
 [node name="PerceptionArea" type="Area2D" parent="."]
 collision_layer = 512
@@ -92,6 +92,7 @@ shape = SubResource("CircleShape2D_6scuy")
 debug_color = Color(0.633, 0.7, 0, 0.007)
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -119.0
 offset_top = 6.0
 offset_right = 145.0

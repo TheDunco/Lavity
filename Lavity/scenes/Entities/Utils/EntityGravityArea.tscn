@@ -5,7 +5,7 @@
 [node name="GravityArea" type="Area2D"]
 z_index = 3
 collision_layer = 0
-collision_mask = 2
+collision_mask = 258
 gravity_point = true
 gravity_point_unit_distance = 0.01
 gravity_point_center = Vector2(0, 0)

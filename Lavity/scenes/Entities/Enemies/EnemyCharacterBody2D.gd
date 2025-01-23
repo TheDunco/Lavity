@@ -7,8 +7,6 @@ class_name Enemy
 @onready var flippingSprite := $FlippingSprite
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 
-@export var damageMult := 0.01
-
 var prevDistanceToPlayer := 0.0
 
 enum EnemyType {
@@ -23,7 +21,7 @@ func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)
 	if distanceFromPlayer < 1000:
 		var directionToPlayer = global_position.direction_to(playerGlobalPosition)
-		velocity += -directionToPlayer * 1000
+		velocity += -directionToPlayer * 1500
 
 func _ready():
 	if playAnimatedSprite:
