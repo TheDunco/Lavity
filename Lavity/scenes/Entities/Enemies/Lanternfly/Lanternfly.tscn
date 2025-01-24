@@ -92,7 +92,6 @@ shape = SubResource("CircleShape2D_6scuy")
 debug_color = Color(0.633, 0.7, 0, 0.007)
 
 [node name="StateLabel" type="Label" parent="."]
-visible = false
 offset_left = -119.0
 offset_top = 6.0
 offset_right = 145.0
