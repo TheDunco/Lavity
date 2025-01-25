@@ -37,7 +37,7 @@ animations = [{
 radius = 97.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6scuy"]
-radius = 1870.0
+radius = 1091.34
 
 [node name="Lanternfly" type="CharacterBody2D"]
 collision_layer = 41
@@ -96,7 +96,6 @@ shape = SubResource("CircleShape2D_6scuy")
 debug_color = Color(0.633, 0.7, 0, 0.007)
 
 [node name="StateLabel" type="Label" parent="."]
-visible = false
 offset_left = -119.0
 offset_top = 6.0
 offset_right = 145.0

@@ -2,25 +2,40 @@ extends State
 class_name LanternflySearchingForMoteState
 
 @export var lanternfly: Lanternfly
-var preferredMote: Mote = null
+@export var maxStuckTime: float = 5.0
+var timeStuck := 0.0
 
-func setPreferredMote():
+func getPreferredMote() -> Mote:
+	var ret = null
 	for mote in lanternfly.percievedMotes:
-		if lanternfly.scoreMote(mote) > lanternfly.scoreMote(preferredMote):
-			preferredMote = mote
+		if lanternfly.scoreMote(mote) > lanternfly.scoreMote(ret):
+			ret = mote
+	return ret
+
 
 func enter():
 	SignalBus.emit_signal("displayHeroText", "[wave]Lanternfly:[/wave] Searching for mote")
 	lanternfly.stateLabel.text = "Searching for mote"
-	setPreferredMote()
 
-func update(_delta: float):
+func exit():
+	timeStuck = 0.0
+
+func update(delta: float):
 	if lanternfly.percievedMotes.is_empty():
-		if lanternfly.percievedPlayer:
-			transition.emit(self, "searchingForPlayer")
-		else:
-			transition.emit(self, "idle")
+		transition.emit(self, "idle")
+		return
+
+	if timeStuck > maxStuckTime:
+		lanternfly.percievedMotes.erase(getPreferredMote())
+		transition.emit(self, "idle")
+		return
+
+	if lanternfly.velocity.x + lanternfly.velocity.y < 5:
+		timeStuck += delta
+	else:
+		timeStuck = 0.0
 
 func physicsUpdate(_delta: float):
+	var preferredMote = getPreferredMote()
 	if preferredMote:
 		lanternfly.moveToward(preferredMote.rigidBody.global_position)

@@ -16,9 +16,12 @@ offset_bottom = 69.0
 mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MessageBox"]
-layout_mode = 0
-offset_right = 1283.0
-offset_bottom = 397.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 7.088
+anchor_bottom = 5.797
+offset_right = 0.0718994
+offset_bottom = -2.99304
 mouse_filter = 2
 
 [node name="HeroText" type="RichTextLabel" parent="CanvasLayer/MessageBox/CenterContainer"]

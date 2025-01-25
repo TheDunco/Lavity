@@ -7,7 +7,7 @@ class_name Lanternfly
 # It also makes the player have to fight for the motes with the Lanternflies as well as fight them which is fun
 
 @export var timeToStuck := 5
-@export var lanternflyAcceleration := 10.0
+@export var lanternflyAcceleration := 15.0
 @export var wingFlapSpeedMult := 1.3
 
 @onready var damageArea := $DamageArea
@@ -29,8 +29,8 @@ func onPerceptionAreaEntered(body: Node2D) -> void:
 			percievedPlayer = body
 
 func onPerceptionAreaExited(body: Node2D) -> void:
-	if body is Mote:
-		percievedMotes.erase(body)
+	if body is RigidBody2D:
+		percievedMotes.erase(body.get_parent())
 	elif body is Player:
 		percievedPlayer = null
 
@@ -41,12 +41,11 @@ func _ready() -> void:
 	acceleration = lanternflyAcceleration
 	preferredMoteColor = COLOR_UTILS.RED
 
-func moveToward(pos: Vector2) -> void:
-	look_at(pos)
-	velocity += global_position.direction_to(pos) * (acceleration + (global_position.distance_to(pos) * (1/100)))
+	SignalBus.connect("moteFreeing", func(mote): percievedMotes.erase(mote))
+
 
 func scoreMote(mote) -> float:
-	if not mote:
+	if not mote or not mote is Mote:
 		return 0.0
 	var moteColorScore = COLOR_UTILS.scoreColorLikeness(mote.getLightColor(), preferredMoteColor)
 	# var moteDistanceScore = global_position.distance_to(mote.global_position)
@@ -55,14 +54,12 @@ func scoreMote(mote) -> float:
 
 func checkMote(mote) -> bool:
 	if not mote or mote.is_queued_for_deletion():
-		percievedMotes.erase(mote)
 		return false
 	return true
 
 func _process(_delta: float):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult
-	for mote in percievedMotes:
-		checkMote(mote)
+	lanternlight.color = COLOR_UTILS.takeGeneralColorDamage(lanternlight.color, 0.00001)
 
 func _physics_process(_delta: float) -> void:
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
