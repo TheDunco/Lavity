@@ -31,8 +31,6 @@ func onPerceptionAreaEntered(body: Node2D) -> void:
 func onPerceptionAreaExited(body: Node2D) -> void:
 	if body is RigidBody2D:
 		percievedMotes.erase(body.get_parent())
-	elif body is Player:
-		percievedPlayer = null
 
 func _ready() -> void:
 	super._ready()

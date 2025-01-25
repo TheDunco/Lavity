@@ -10,6 +10,8 @@ func getPreferredMote() -> Mote:
 	for mote in lanternfly.percievedMotes:
 		if lanternfly.scoreMote(mote) > lanternfly.scoreMote(ret):
 			ret = mote
+	if ret == null and not shouldTransition():
+		return lanternfly.percievedMotes[0]
 	return ret
 
 
@@ -20,13 +22,20 @@ func enter():
 func exit():
 	timeStuck = 0.0
 
-func update(delta: float):
+func shouldTransition() -> bool:
 	if lanternfly.percievedMotes.is_empty():
 		transition.emit(self, "idle")
+		return true
+	return false
+
+func update(delta: float):
+	if shouldTransition():
 		return
 
 	if timeStuck > maxStuckTime:
-		lanternfly.percievedMotes.erase(getPreferredMote())
+		var preferredMote = getPreferredMote()
+		if preferredMote:
+			lanternfly.percievedMotes.erase(getPreferredMote())
 		transition.emit(self, "idle")
 		return
 
@@ -37,5 +46,6 @@ func update(delta: float):
 
 func physicsUpdate(_delta: float):
 	var preferredMote = getPreferredMote()
+	print_debug(preferredMote)
 	if preferredMote:
 		lanternfly.moveToward(preferredMote.rigidBody.global_position)

@@ -8,9 +8,13 @@ func enter():
 	lanternfly.stateLabel.text = "Searching for player"
 
 func update(_delta: float):
-	if lanternfly.percievedMotes.size() > 0:
+
+	if lanternfly.global_position.distance_to(lanternfly.percievedPlayer.global_position) > lanternfly.percievedPlayer.trackableDistance:
+		lanternfly.percievedPlayer = null
+
+	if not lanternfly.percievedMotes.is_empty():
 		transition.emit(self, "searchingForMote")
-	elif !lanternfly.percievedPlayer:
+	elif not lanternfly.percievedPlayer:
 		transition.emit(self, "idle")
 
 func physicsUpdate(_delta: float):
