@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cikbfevvqein8"]
+[gd_scene load_steps=19 format=3 uid="uid://cikbfevvqein8"]
 
 [ext_resource type="Texture2D" uid="uid://waqjud1jctcg" path="res://assets/Laternfly/full-lanternfly_0001.png" id="1_5xslm"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.gd" id="1_h7r8b"]
@@ -11,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="9_lv5ek"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="10_w4khb"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="11_2qfmd"]
+[ext_resource type="Script" path="res://helpers/FSM/StateMachine.gd" id="12_nuwdc"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyIdleState.gd" id="13_glu8v"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForMoteState.gd" id="14_7adte"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForPlayerState.gd" id="15_edsqd"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kevsd"]
 animations = [{
@@ -92,6 +96,7 @@ shape = SubResource("CircleShape2D_6scuy")
 debug_color = Color(0.633, 0.7, 0, 0.007)
 
 [node name="StateLabel" type="Label" parent="."]
+visible = false
 offset_left = -119.0
 offset_top = 6.0
 offset_right = 145.0
@@ -99,3 +104,19 @@ offset_bottom = 106.0
 theme = ExtResource("11_2qfmd")
 theme_override_font_sizes/font_size = 70
 text = "State"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
+script = ExtResource("12_nuwdc")
+initialState = NodePath("idle")
+
+[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("lanternfly")]
+script = ExtResource("13_glu8v")
+lanternfly = NodePath("../..")
+
+[node name="searchingForMote" type="Node" parent="StateMachine" node_paths=PackedStringArray("lanternfly")]
+script = ExtResource("14_7adte")
+lanternfly = NodePath("../..")
+
+[node name="searchingForPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("lanternfly")]
+script = ExtResource("15_edsqd")
+lanternfly = NodePath("../..")
