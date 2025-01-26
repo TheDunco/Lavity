@@ -1,11 +1,6 @@
 extends Enemy
 class_name Lanternfly
 
-# State priority
-# The Lanternfly will prioritize motes over the player if it sees both
-# This is because, evolutionarily, it would prioritize the low hanging fruit vs something that will fight back or run away
-# It also makes the player have to fight for the motes with the Lanternflies as well as fight them which is fun
-
 @export var timeToStuck := 5
 @export var lanternflyBaseAcceleration := 15.0
 @export var wingFlapSpeedMult := 1.3
@@ -69,7 +64,7 @@ func getPreferredMote() -> Mote:
 	
 func getBuzzVolumeFromVelocity() -> float:
 	var veloScore = abs(velocity.x) + abs(velocity.y)
-	return remap(veloScore, 0, 2*velocityComponent.maxVelocity, -20.0, -11.0)
+	return max(remap(veloScore, 0, 2*velocityComponent.maxVelocity, -20.0, -11.0), -11.0)
 
 func setAccelerationFromLightColor() -> void:
 	var lightSum = COLOR_UTILS.sumColor(lanternlight.color)
@@ -85,7 +80,6 @@ func _process(delta: float):
 			queue_free()
 	else:
 		ttl = initTimeToLive
-
 
 func _physics_process(_delta: float) -> void:
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult

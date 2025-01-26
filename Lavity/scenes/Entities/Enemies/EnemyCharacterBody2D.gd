@@ -14,7 +14,7 @@ enum EnemyType {
 	AMPHIBIAN
 }
 var type: EnemyType = EnemyType.BUG
-# TODO: Should be static per enemy type?, random for testing
+# Should be static per enemy type. random for base class
 var preferredMoteColor = COLOR_UTILS.randColorFromSet()
 
 func handlePlayerRepulsed(playerGlobalPosition: Vector2):
