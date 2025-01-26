@@ -1,7 +1,5 @@
-extends State
+extends LanternflyState
 class_name LanternflySearchingForPlayerState
-
-@export var lanternfly: Lanternfly
 
 func enter():
 	SignalBus.emit_signal("displayHeroText", "[wave]Lanternfly:[/wave] Searching for player")

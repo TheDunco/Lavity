@@ -1,7 +1,5 @@
-extends State
+extends LanternflyState
 class_name LanternflyIdleState
-
-@export var lanternfly: Lanternfly
 
 var moveDirection: Vector2 = Vector2.ZERO
 var wanderTime: float = 0.0

@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="9_lv5ek"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="10_w4khb"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="11_2qfmd"]
-[ext_resource type="Script" path="res://helpers/FSM/StateMachine.gd" id="12_nuwdc"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyStateMachine.gd" id="12_ca0ae"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyIdleState.gd" id="13_glu8v"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForMoteState.gd" id="14_7adte"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForPlayerState.gd" id="15_edsqd"]
@@ -106,17 +106,14 @@ theme_override_font_sizes/font_size = 70
 text = "State"
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
-script = ExtResource("12_nuwdc")
+script = ExtResource("12_ca0ae")
 initialState = NodePath("idle")
 
-[node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("lanternfly")]
+[node name="idle" type="Node" parent="StateMachine"]
 script = ExtResource("13_glu8v")
-lanternfly = NodePath("../..")
 
-[node name="searchingForMote" type="Node" parent="StateMachine" node_paths=PackedStringArray("lanternfly")]
+[node name="searchingForMote" type="Node" parent="StateMachine"]
 script = ExtResource("14_7adte")
-lanternfly = NodePath("../..")
 
-[node name="searchingForPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("lanternfly")]
+[node name="searchingForPlayer" type="Node" parent="StateMachine"]
 script = ExtResource("15_edsqd")
-lanternfly = NodePath("../..")

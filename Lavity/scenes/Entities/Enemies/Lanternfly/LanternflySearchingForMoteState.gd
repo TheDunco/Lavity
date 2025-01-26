@@ -1,7 +1,6 @@
-extends State
+extends LanternflyState
 class_name LanternflySearchingForMoteState
 
-@export var lanternfly: Lanternfly
 @export var maxStuckTime: float = 5.0
 var timeStuck := 0.0
 
