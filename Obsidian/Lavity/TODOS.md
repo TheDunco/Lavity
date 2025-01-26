@@ -6,8 +6,10 @@
 - [x] Make ColorPassableArea work for motes instead of the player light now that we have scrolling
 - [ ] Add enemies to maze that try to fight you for the limited light available
 	- [ ] Lanternfly
-	- [ ] Frog/Toad (eats all bug types)
+	- [ ] Frog/Toad/Lizard (eats all bug types)
 	- [ ] Spider (w/ web)
+	- [ ] Venus Fly Trap that spawns motes to lure bug types in
+	- [ ] Rhino beetle (maze boss that crawls in/on the walls)
 - [ ] When enemies die, they pop and release motes of the color they were
 - [ ] Make the edges of the maze light up for easier visibility
 

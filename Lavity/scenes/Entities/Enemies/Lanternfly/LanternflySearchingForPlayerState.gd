@@ -2,7 +2,6 @@ extends LanternflyState
 class_name LanternflySearchingForPlayerState
 
 func enter():
-	SignalBus.emit_signal("displayHeroText", "[wave]Lanternfly:[/wave] Searching for player")
 	lanternfly.stateLabel.text = "Searching for player"
 
 func update(_delta: float):

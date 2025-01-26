@@ -9,7 +9,6 @@ func randomizeWander():
 	wanderTime = randf_range(1, 3)
 
 func enter():
-	SignalBus.emit_signal("displayHeroText", "[wave]Lanternfly:[/wave] Idle")
 	randomizeWander()
 
 func update(delta: float):

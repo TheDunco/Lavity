@@ -9,30 +9,30 @@ func getPreferredMote() -> Mote:
 	for mote in lanternfly.percievedMotes:
 		if lanternfly.scoreMote(mote) > lanternfly.scoreMote(ret):
 			ret = mote
-	if ret == null and not shouldTransition():
+	if ret == null and not shouldTransitionToIdle():
 		return lanternfly.percievedMotes[0]
 	return ret
 
 
 func enter():
-	SignalBus.emit_signal("displayHeroText", "[wave]Lanternfly:[/wave] Searching for mote")
 	lanternfly.stateLabel.text = "Searching for mote"
 
 func exit():
 	timeStuck = 0.0
 
-func shouldTransition() -> bool:
+func shouldTransitionToIdle() -> bool:
 	if lanternfly.percievedMotes.is_empty():
 		transition.emit(self, "idle")
 		return true
 	return false
 
 func update(delta: float):
-	if shouldTransition():
+	if shouldTransitionToIdle():
 		return
 
 	if timeStuck > maxStuckTime:
 		var preferredMote = getPreferredMote()
+		# If we can't get at the mote, we should forget about it and move on
 		if preferredMote:
 			lanternfly.percievedMotes.erase(getPreferredMote())
 		transition.emit(self, "idle")
@@ -45,6 +45,5 @@ func update(delta: float):
 
 func physicsUpdate(_delta: float):
 	var preferredMote = getPreferredMote()
-	print_debug(preferredMote)
 	if preferredMote:
 		lanternfly.moveToward(preferredMote.rigidBody.global_position)
