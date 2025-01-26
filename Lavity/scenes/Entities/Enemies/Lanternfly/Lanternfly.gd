@@ -9,6 +9,7 @@ class_name Lanternfly
 @export var timeToStuck := 5
 @export var lanternflyAcceleration := 15.0
 @export var wingFlapSpeedMult := 1.3
+@export var lanternLightDecayRate := 0.00002
 
 @onready var damageArea := $DamageArea
 @onready var lanternlight := $Lanternlight
@@ -42,11 +43,10 @@ func _ready() -> void:
 	SignalBus.connect("moteFreeing", func(mote): percievedMotes.erase(mote))
 
 
-func scoreMote(mote) -> float:
-	if not mote or not mote is Mote:
+func scoreLightDesire(lightEmitter) -> float:
+	if not lightEmitter or not lightEmitter.has_method("getLightColor"):
 		return 0.0
-	var moteColorScore = COLOR_UTILS.scoreColorLikeness(mote.getLightColor(), preferredMoteColor)
-	# var moteDistanceScore = global_position.distance_to(mote.global_position)
+	var moteColorScore = COLOR_UTILS.scoreColorLikeness(lightEmitter.getLightColor(), preferredMoteColor)
 
 	return moteColorScore
 
@@ -55,9 +55,18 @@ func checkMote(mote) -> bool:
 		return false
 	return true
 
+func getPreferredMote() -> Mote:
+	var ret = null
+	for mote in percievedMotes:
+		if scoreLightDesire(mote) > scoreLightDesire(ret):
+			ret = mote
+	if ret == null and not percievedMotes.is_empty():
+		return percievedMotes[0]
+	return ret
+
 func _process(_delta: float):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult
-	lanternlight.color = COLOR_UTILS.takeGeneralColorDamage(lanternlight.color, 0.00001)
+	lanternlight.color = COLOR_UTILS.takeGeneralColorDamage(lanternlight.color, lanternLightDecayRate)
 
 func _physics_process(_delta: float) -> void:
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)

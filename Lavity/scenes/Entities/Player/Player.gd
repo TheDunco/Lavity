@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends CharacterBody2D 
 class_name Player
 
 @export var worldEnvironment: WorldEnvironment

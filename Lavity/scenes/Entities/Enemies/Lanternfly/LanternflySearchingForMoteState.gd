@@ -4,37 +4,38 @@ class_name LanternflySearchingForMoteState
 @export var maxStuckTime: float = 5.0
 var timeStuck := 0.0
 
-func getPreferredMote() -> Mote:
-	var ret = null
-	for mote in lanternfly.percievedMotes:
-		if lanternfly.scoreMote(mote) > lanternfly.scoreMote(ret):
-			ret = mote
-	if ret == null and not shouldTransitionToIdle():
-		return lanternfly.percievedMotes[0]
-	return ret
-
-
 func enter():
 	lanternfly.stateLabel.text = "Searching for mote"
 
 func exit():
 	timeStuck = 0.0
 
-func shouldTransitionToIdle() -> bool:
+func transitionToIdle() -> bool:
 	if lanternfly.percievedMotes.is_empty():
 		transition.emit(self, "idle")
 		return true
 	return false
 
+# Only transition to the player if the player's light color is more desireable than the most preferred mote
+func transitionToPlayer(preferredMote: Mote) -> bool:
+	if lanternfly.percievedPlayer:
+		if lanternfly.scoreLightDesire(lanternfly.percievedPlayer) > lanternfly.scoreLightDesire(preferredMote):
+			transition.emit(self, "searchingForPlayer")
+			return true
+	return false
+
 func update(delta: float):
-	if shouldTransitionToIdle():
+	if transitionToIdle():
+		return
+
+	var preferredMote = lanternfly.getPreferredMote()
+	if transitionToPlayer(preferredMote):
 		return
 
 	if timeStuck > maxStuckTime:
-		var preferredMote = getPreferredMote()
 		# If we can't get at the mote, we should forget about it and move on
 		if preferredMote:
-			lanternfly.percievedMotes.erase(getPreferredMote())
+			lanternfly.percievedMotes.erase(preferredMote)
 		transition.emit(self, "idle")
 		return
 
@@ -44,6 +45,6 @@ func update(delta: float):
 		timeStuck = 0.0
 
 func physicsUpdate(_delta: float):
-	var preferredMote = getPreferredMote()
+	var preferredMote = lanternfly.getPreferredMote()
 	if preferredMote:
 		lanternfly.moveToward(preferredMote.rigidBody.global_position)
