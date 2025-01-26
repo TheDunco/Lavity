@@ -27,7 +27,6 @@ class_name Player
 var repulseTime = 0.0
 
 @export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
-@export var SUM_DAMAGE_CUTOFF := 0.03
 
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
 @onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
@@ -74,7 +73,7 @@ func handleContinuousInput(delta):
 
 	var isHandlingVelocityInput := false
 
-	if Input.is_action_pressed("right_mouse") and not isBelowDamageThreshold():
+	if Input.is_action_pressed("right_mouse") and not COLOR_UTILS.isColorDying(playerLight.color):
 		var bleedAmount = bleed * delta
 		takeDamage(bleedAmount)
 		GlobalSfx.playDrain(remap(stats["repulse"], 0.0, 1.0, 0.45, 1.2))
@@ -102,7 +101,7 @@ func handleContinuousInput(delta):
 		velocityComponent.bypassAutoOrientation = !velocityComponent.bypassAutoOrientation
 		
 	if Input.is_action_just_pressed("toggle_flashlight") :
-		if playerLight.enabled:# and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
+		if playerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
 			playerLight.enabled = false
 			startDying()
 		else:
@@ -207,12 +206,10 @@ func takeColorDamage(color: Color) -> void:
 	playerLight.color -= color
 	playerLight.color.a = 1.0
 
-func isBelowDamageThreshold() -> bool:
-	return COLOR_UTILS.sumColor(playerLight.color) < SUM_DAMAGE_CUTOFF
 
 func _process(delta):
 	# handle death timer and effects
-	var playerDying = isBelowDamageThreshold() or not playerLight.enabled
+	var playerDying = COLOR_UTILS.isColorDying(playerLight.color) or not playerLight.enabled
 	if not playerDying:
 		stopDying()
 	elif deathTimer.is_stopped():

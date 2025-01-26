@@ -3,7 +3,7 @@ extends Node2D
 @onready var maze: ProceduralMaze = get_parent()
 @export var maxMoteSize := 1.0
 
-@export var moteSpawnChance := 0.33
+@export var moteSpawnChance := 0.25
 
 const moteScene = preload('res://scenes/Objects/Mote.tscn')
 

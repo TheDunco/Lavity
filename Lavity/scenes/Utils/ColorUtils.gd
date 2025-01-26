@@ -35,6 +35,11 @@ const colors = {
 	"pink": PINK
 }
 
+const LIGHT_SUM_DEATH_CUTOFF := 0.03
+
+func isColorDying(color: Color) -> bool:
+	return sumColor(color) < LIGHT_SUM_DEATH_CUTOFF
+
 func randColorInRange(maxRgb := MAX_RAND_RGB) -> float:
 	return randf_range(MIN_RAND_RGB, maxRgb)
 	
