@@ -23,13 +23,9 @@ func sumMoteLikeness() -> float:
 	return sum
 
 func onBodyEntered(body: Node) -> void:
-	print("ColorPassableArea onBodyEntered ", body)
 	if body is RigidBody2D:
 			var mote = body.get_parent() as Mote
-			var likeness = COLOR_UTILS.scoreColorLikeness(mote.getLightColor(), color)
-			print("ColorPassableArea var likeness = ", likeness)
 			scoringMotes.append(mote)
-			print("sum: ", sumMoteLikeness(), "required: ", passThreshold)
 			if sumMoteLikeness() > passThreshold:
 				scoringMotes.clear()
 				SignalBus.emit_signal("playerPassedMaze", player)

@@ -7,7 +7,7 @@ class_name Lanternfly
 # It also makes the player have to fight for the motes with the Lanternflies as well as fight them which is fun
 
 @export var timeToStuck := 5
-@export var lanternflyAcceleration := 15.0
+@export var lanternflyAcceleration := 17.0
 @export var wingFlapSpeedMult := 1.3
 @export var lanternLightDecayRate := 0.00002
 
@@ -15,7 +15,8 @@ class_name Lanternfly
 @onready var lanternlight := $Lanternlight
 @onready var perceptionArea := $PerceptionArea
 @onready var stateLabel := $StateLabel
-
+@onready var buzzSound := $Buzz
+ 
 var percievedMotes: Array[Mote] = []
 var percievedPlayer: Player = null
 
@@ -23,7 +24,6 @@ func onPerceptionAreaEntered(body: Node2D) -> void:
 	if body is RigidBody2D:
 		var parent = body.get_parent()
 		if parent is Mote:
-			print("Lanternfly percieved mote", parent)
 			percievedMotes.append(parent)
 	elif body is Player:
 		if percievedPlayer == null:
@@ -41,6 +41,7 @@ func _ready() -> void:
 	preferredMoteColor = COLOR_UTILS.RED
 
 	SignalBus.connect("moteFreeing", func(mote): percievedMotes.erase(mote))
+	buzzSound.pitch_scale = randf_range(0.8, 1.2)
 
 
 func scoreLightDesire(lightEmitter) -> float:
@@ -63,10 +64,15 @@ func getPreferredMote() -> Mote:
 	if ret == null and not percievedMotes.is_empty():
 		return percievedMotes[0]
 	return ret
+	
+func getBuzzVolumeFromVelocity() -> float:
+	var veloScore = abs(velocity.x) + abs(velocity.y)
+	return remap(veloScore, 0, 2*velocityComponent.maxVelocity, -20.0, -11.0)
 
 func _process(_delta: float):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult
 	lanternlight.color = COLOR_UTILS.takeGeneralColorDamage(lanternlight.color, lanternLightDecayRate)
+	buzzSound.volume_db = getBuzzVolumeFromVelocity()
 
 func _physics_process(_delta: float) -> void:
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)

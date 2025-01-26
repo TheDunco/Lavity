@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=23 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="TileSet" uid="uid://dfv51u57k1rem" path="res://tilesets/TestWorld.tres" id="1_ib5u3"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
@@ -15,9 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://m6u3vex6jp5s" path="res://assets/Moth Flying/without-legs/Timeline 1_0003.png" id="10_tnmfl"]
 [ext_resource type="AudioStream" uid="uid://bqismph8dboi" path="res://assets/audio/sfx/wing_flap2.wav" id="11_cty4c"]
 [ext_resource type="Script" path="res://scenes/Entities/Player/PlayerSprites.gd" id="11_w31v0"]
-[ext_resource type="AudioStream" uid="uid://ccanbsn3s1v6w" path="res://assets/audio/sfx/wing_flap3.wav" id="15_pjqcf"]
 [ext_resource type="Texture2D" uid="uid://prgsy2vimnga" path="res://assets/Moth Flying/without-legs/individual-leg_0001.png" id="15_ybomp"]
-[ext_resource type="AudioStream" uid="uid://bibdynmbha2o5" path="res://assets/audio/sfx/wing_flap4.wav" id="16_k171i"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
 [ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="21_jrgmx"]
@@ -71,6 +69,8 @@ script = ExtResource("1_jm2c2")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-26, 18, -19, 26, -8, 30, 3, 30, 15, 27, 24, 24, 32, 20, 35, 16, 37, 10, 37, 4, 36, 0, 32, -8, 30, -17, 27, -11, 21, -18, 19, -21, 17, -15, -6, -21, -26, -13, -29, 1)
 
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
 airResistance = 4
@@ -117,16 +117,6 @@ bus = &"WingFlap"
 
 [node name="WingFlap2" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
 stream = ExtResource("11_cty4c")
-volume_db = -10.0
-bus = &"WingFlap"
-
-[node name="WingFlap3" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
-stream = ExtResource("15_pjqcf")
-volume_db = -10.0
-bus = &"WingFlap"
-
-[node name="WingFlap4" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
-stream = ExtResource("16_k171i")
 volume_db = -10.0
 bus = &"WingFlap"
 
@@ -191,8 +181,8 @@ scale = Vector2(0.2, 0.2)
 color = Color(0.5, 0.5, 0.5, 1)
 blend_mode = 2
 shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("21_jrgmx")
-metadata/_edit_lock_ = true
 
 [connection signal="timeout" from="DamageEffectsTimer" to="." method="_on_damage_effects_timer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
