@@ -15,7 +15,7 @@ enum EnemyType {
 }
 var type: EnemyType = EnemyType.BUG
 # Should be static per enemy type. random for base class
-var preferredMoteColor = COLOR_UTILS.randColorFromSet()
+var preferredMoteColor = ColorUtils.randColorFromSet()
 
 func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)

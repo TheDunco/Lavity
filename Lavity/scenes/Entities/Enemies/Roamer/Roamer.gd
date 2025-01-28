@@ -13,7 +13,7 @@ func chaseMouse():
 	velocity += direction * (acceleration + distanceToMouse * distanceMult)
 	
 func randomizeColor():
-	$RandColorLight.color = COLOR_UTILS.randColor()
+	$RandColorLight.color = ColorUtils.randColor()
 
 func _physics_process(_delta):
 	if shouldChaseMouse:

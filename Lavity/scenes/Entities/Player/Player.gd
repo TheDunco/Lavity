@@ -32,7 +32,7 @@ var repulseTime = 0.0
 @onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
 
 @onready var moteScene := preload("res://scenes/Objects/Mote.tscn")
-@onready var colorRotate = COLOR_UTILS.RGBRotate.new()
+@onready var colorRotate = ColorUtils.RGBRotate.new()
 @onready var playerLight = $PlayerLight
 @onready var playerLightInitScale = playerLight.scale
 @onready var defaultSaturation = worldEnvironment.environment.adjustment_saturation
@@ -63,7 +63,7 @@ var isTrackableByEnemy: bool = true
 var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
-	playerLight.color = COLOR_UTILS.PINK
+	playerLight.color = ColorUtils.PINK
 
 func handleContinuousInput(delta):
 	var isLocked = Input.is_action_pressed("lock")
@@ -73,7 +73,7 @@ func handleContinuousInput(delta):
 
 	var isHandlingVelocityInput := false
 
-	if Input.is_action_pressed("right_mouse") and not COLOR_UTILS.isColorDying(playerLight.color):
+	if Input.is_action_pressed("right_mouse") and not ColorUtils.isColorDying(playerLight.color):
 		var bleedAmount = bleed * delta
 		takeDamage(bleedAmount)
 		GlobalSfx.playDrain(remap(stats["repulse"], 0.0, 1.0, 0.45, 1.2))
@@ -134,14 +134,14 @@ func handleContinuousInput(delta):
 
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsToSet := {
-		"damageReduction": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.RED) * baseStatsMult,
-		"hunger" : COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.ORANGE) * baseStatsMult,
-		"speed": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.GREEN) * baseStatsMult,
-		"sonar": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.BLUE) * baseStatsMult,
-		"stealth": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.BLUE_PURPLE) * baseStatsMult,
-		"vision": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.YELLOW) * baseStatsMult,
-		"longevity": COLOR_UTILS.scoreColorLikeness(currentColor, COLOR_UTILS.PINK) * baseStatsMult,
-		"repulse": COLOR_UTILS.scoreColorLikeness(currentColor, Color.WHITE) * baseStatsMult,
+		"damageReduction": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.RED) * baseStatsMult,
+		"hunger" : ColorUtils.scoreColorLikeness(currentColor, ColorUtils.ORANGE) * baseStatsMult,
+		"speed": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.GREEN) * baseStatsMult,
+		"sonar": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.BLUE) * baseStatsMult,
+		"stealth": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.BLUE_PURPLE) * baseStatsMult,
+		"vision": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.YELLOW) * baseStatsMult,
+		"longevity": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.PINK) * baseStatsMult,
+		"repulse": ColorUtils.scoreColorLikeness(currentColor, Color.WHITE) * baseStatsMult,
 	}
 	
 	return statsToSet
@@ -194,7 +194,7 @@ func takeDamage(damage: float, ambientDamage: bool = false) -> bool:
 	if damage <= 0:
 		return didTakeDamage
 	
-	var newColor = COLOR_UTILS.takeGeneralColorDamage(playerLight.color, damage)
+	var newColor = ColorUtils.takeGeneralColorDamage(playerLight.color, damage)
 	didTakeDamage = newColor != playerLight.color
 
 	playerLight.color = newColor
@@ -209,7 +209,7 @@ func takeColorDamage(color: Color) -> void:
 
 func _process(delta):
 	# handle death timer and effects
-	var playerDying = COLOR_UTILS.isColorDying(playerLight.color) or not playerLight.enabled
+	var playerDying = ColorUtils.isColorDying(playerLight.color) or not playerLight.enabled
 	if not playerDying:
 		stopDying()
 	elif deathTimer.is_stopped():
@@ -260,7 +260,7 @@ func _unhandled_input(event):
 		if event.button_index ==  MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			rotateColorHue(-hueRotationSpeed)
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-			playerLight.color = COLOR_UTILS.YELLOW
+			playerLight.color = ColorUtils.YELLOW
 			SignalBus.emit_signal("displayHeroText", "[center][wave]Cheat[/wave]: Set color to yellow[/center]")
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if stats["repulse"] > abilityCutoff and repulseTime <= 0.0:

@@ -33,9 +33,9 @@ func changeColor(color: Color) -> void:
 	lavityLight.light.color = color
 
 func _process(delta: float) -> void:
-	var blackLikeness = COLOR_UTILS.scoreColorLikeness(lavityLight.light.color, Color.BLACK)
+	var blackLikeness = ColorUtils.scoreColorLikeness(lavityLight.light.color, Color.BLACK)
 	if decayRate > 0.0:
-		lavityLight.light.color = COLOR_UTILS.takeGeneralColorDamage(lavityLight.light.color, decayRate * delta)
+		lavityLight.light.color = ColorUtils.takeGeneralColorDamage(lavityLight.light.color, decayRate * delta)
 	if blackLikeness > 0.80:
 		SignalBus.emit_signal("moteFreeing", self)
 		queue_free()

@@ -9,7 +9,7 @@ var player: Player = null
 func _ready() -> void:
 	assert(shape)
 	connect("body_entered", onBodyEntered)
-	color = COLOR_UTILS.randColorFromSet()
+	color = ColorUtils.randColorFromSet()
 
 var scoringMotes: Array[Mote] = []
 
@@ -19,7 +19,7 @@ func sumMoteLikeness() -> float:
 		if !mote:
 			scoringMotes.erase(mote)
 			continue
-		sum += COLOR_UTILS.scoreColorLikeness(mote.getLightColor(), color)
+		sum += ColorUtils.scoreColorLikeness(mote.getLightColor(), color)
 	return sum
 
 func onBodyEntered(body: Node) -> void:

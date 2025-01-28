@@ -27,4 +27,4 @@ func scoreToVolume(score: float, trackIndex: int):
 # Synisthesia
 func setDynamicTrackVolume(color: Color):
 	for i in range(ColorTracks.size()):
-		scoreToVolume(COLOR_UTILS.scoreColorLikeness(color, COLOR_UTILS.colorsArray[i]), i)
+		scoreToVolume(ColorUtils.scoreColorLikeness(color, ColorUtils.colorsArray[i]), i)

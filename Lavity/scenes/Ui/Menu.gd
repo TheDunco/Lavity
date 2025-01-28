@@ -67,7 +67,6 @@ func loadOptions():
 		glowStrengthSlider.value = glowStrength
 		
 	var volume = GLOBAL.getSetting("VOLUME")
-	print_debug(volume)
 	if volume and volume > volumeSlider.min_value:
 		volumeSlider.value = volume
 		_on_volume_slider_value_changed(volume)

@@ -25,7 +25,7 @@ buses/default_bus_layout="res://mixer/default_bus_layout.tres"
 [autoload]
 
 GLOBAL="*res://scenes/Utils/Global.gd"
-COLOR_UTILS="*res://scenes/Utils/ColorUtils.gd"
+ColorUtils="*res://scenes/Utils/ColorUtils.gd"
 GameFlow="*res://scenes/Utils/GameFlow.tscn"
 MusicComponent="*res://scenes/Music/MusicComponent.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"

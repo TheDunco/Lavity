@@ -35,7 +35,7 @@ func _ready() -> void:
 	textureLight.texture.height = doorHeight
 	collisionShape.shape.size = doorSize
 	
-	var passColor = COLOR_UTILS.randColorFromSet()
+	var passColor = ColorUtils.randColorFromSet()
 	colorPassableArea.color = passColor
 	textureLight.color = passColor
 

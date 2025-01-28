@@ -35,7 +35,7 @@ func _ready() -> void:
 	perceptionArea.connect("body_entered", onPerceptionAreaEntered)
 	perceptionArea.connect("body_exited", onPerceptionAreaExited)
 	acceleration = lanternflyBaseAcceleration
-	preferredMoteColor = COLOR_UTILS.RED
+	preferredMoteColor = ColorUtils.RED
 
 	SignalBus.connect("moteFreeing", func(mote): percievedMotes.erase(mote))
 	buzzSound.pitch_scale = randf_range(0.8, 1.2)
@@ -44,7 +44,7 @@ func _ready() -> void:
 func scoreLightDesire(lightEmitter) -> float:
 	if not lightEmitter or not lightEmitter.has_method("getLightColor"):
 		return 0.0
-	var moteColorScore = COLOR_UTILS.scoreColorLikeness(lightEmitter.getLightColor(), preferredMoteColor)
+	var moteColorScore = ColorUtils.scoreColorLikeness(lightEmitter.getLightColor(), preferredMoteColor)
 
 	return moteColorScore
 
@@ -67,14 +67,14 @@ func getBuzzVolumeFromVelocity() -> float:
 	return max(remap(veloScore, 0, 2*velocityComponent.maxVelocity, -20.0, -11.0), -11.0)
 
 func setAccelerationFromLightColor() -> void:
-	var lightSum = COLOR_UTILS.sumColor(lanternlight.color)
+	var lightSum = ColorUtils.sumColor(lanternlight.color)
 	acceleration = remap(lightSum, 0.0, 3.0, lanternflyBaseAcceleration, lanternflyBaseAcceleration * 2.0)
 
 func _process(delta: float):
-	lanternlight.color = COLOR_UTILS.takeGeneralColorDamage(lanternlight.color, lanternLightDecayRate)
+	lanternlight.color = ColorUtils.takeGeneralColorDamage(lanternlight.color, lanternLightDecayRate)
 	buzzSound.volume_db = getBuzzVolumeFromVelocity()
 	setAccelerationFromLightColor()
-	if COLOR_UTILS.isColorDying(lanternlight.color):
+	if ColorUtils.isColorDying(lanternlight.color):
 		ttl -= delta
 		if ttl < 0.0:
 			queue_free()
