@@ -67,7 +67,8 @@ func loadOptions():
 		glowStrengthSlider.value = glowStrength
 		
 	var volume = GLOBAL.getSetting("VOLUME")
-	if volume and volume > 0:
+	print_debug(volume)
+	if volume and volume > volumeSlider.min_value:
 		volumeSlider.value = volume
 		_on_volume_slider_value_changed(volume)
 
@@ -90,8 +91,6 @@ func _ready():
 			slider.connect("drag_ended", GlobalSfx.playButtonHover)
 			
 	
-
-
 # Main Menu
 func _on_maze_pressed():
 	GameFlow.switchScene("res://scenes/GameModes/Modes/Maze.tscn")
