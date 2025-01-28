@@ -76,7 +76,7 @@ scale = Vector2(0.22, 0.22)
 color = Color(0.669716, 0.0142493, 0, 1)
 blend_mode = 2
 shadow_enabled = true
-shadow_color = Color(0, 0, 0, 0.557)
+shadow_color = Color(0, 0, 0, 1)
 texture = ExtResource("9_lv5ek")
 metadata/_edit_lock_ = true
 
