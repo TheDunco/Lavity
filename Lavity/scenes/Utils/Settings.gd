@@ -1,5 +1,5 @@
 extends Node
-class_name Global
+class_name GlobalSettings
 
 const SETTINGS_SAVE_PATH = "user://settings.save"
 const _SETTINGS_SECTION = "SETTINGS"

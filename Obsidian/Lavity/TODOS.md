@@ -12,4 +12,8 @@
 	- [ ] Rhino beetle (maze boss that crawls in/on the walls)
 - [ ] When enemies die, they pop and release motes of the color they were
 - [ ] Make the edges of the maze light up for easier visibility
+- [ ] Items/Power Ups/Rewards for progression
+	- [ ] Something that lets you set you color so it doesn't change unless you scroll
+	- [ ] Something that lets you avoid the stealth cutoff
+	- [ ] 
 
