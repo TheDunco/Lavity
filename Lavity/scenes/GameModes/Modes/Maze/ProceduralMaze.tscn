@@ -1,6 +1,6 @@
 [gd_scene load_steps=41 format=3 uid="uid://cw21s1mqjep2n"]
 
-[ext_resource type="Script" path="res://scenes/GameModes/ProceduralMaze.gd" id="2_01wu8"]
+[ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/ProceduralMaze.gd" id="2_01wu8"]
 [ext_resource type="Texture2D" uid="uid://dxbqmlav5vfg2" path="res://assets/tilesets/MazeAtlasSolid2x.png" id="4_05558"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_k2eiy"]

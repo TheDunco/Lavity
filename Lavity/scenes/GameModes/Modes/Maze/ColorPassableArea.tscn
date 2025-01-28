@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://clcj4utj8emgk"]
 
-[ext_resource type="Script" path="res://scenes/GameModes/Modes/ColorPassableArea.gd" id="1_5q4hf"]
+[ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/ColorPassableArea.gd" id="1_5q4hf"]
 
 [node name="ColorPassableArea" type="Area2D"]
 collision_layer = 8

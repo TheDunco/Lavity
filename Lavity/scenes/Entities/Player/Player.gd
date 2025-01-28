@@ -166,6 +166,7 @@ func setChromaticAbberration(on: bool) -> void:
 	flippingSprite.use_parent_material = !on
 	
 func setSaturation(val: float) -> void:
+	# TODO: Make this a signal in signal bus that the world env responds to
 	worldEnvironment.environment.adjustment_saturation = val
 
 func startDying(shouldPlaySfx: bool = false):

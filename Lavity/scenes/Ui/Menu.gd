@@ -92,7 +92,7 @@ func _ready():
 	
 # Main Menu
 func _on_maze_pressed():
-	GameFlow.switchScene("res://scenes/GameModes/Modes/Maze.tscn")
+	GameFlow.switchScene("res://scenes/GameModes/Modes/Maze/Maze.tscn")
 	GameFlow.switchToDynamicMusic()
 	
 func _on_light_effects_world_pressed():
