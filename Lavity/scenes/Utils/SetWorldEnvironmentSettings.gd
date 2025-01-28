@@ -1,7 +1,7 @@
 extends WorldEnvironment
 
 func setBrightness() -> void:
-	var brightness = GLOBAL.getSetting("BRIGHTNESS")
+	var brightness = Settings.getSetting("BRIGHTNESS")
 	if brightness:
 		print("setting brightness to ", brightness)
 		environment.adjustment_enabled = true
@@ -10,8 +10,8 @@ func setBrightness() -> void:
 		print("no brightness")
 		
 func setGlow() -> void:
-	var glowIntensity = GLOBAL.getSetting("GLOW")
-	var glowStrength = GLOBAL.getSetting("GLOW_STRENGTH")
+	var glowIntensity = Settings.getSetting("GLOW")
+	var glowStrength = Settings.getSetting("GLOW_STRENGTH")
 	if glowIntensity:
 		print("setting glowIntensity to ", glowIntensity)
 		environment.glow_enabled = true
@@ -28,7 +28,7 @@ func setGlow() -> void:
 
 
 func setBloom() -> void:
-	var bloom = GLOBAL.getSetting("BLOOM")
+	var bloom = Settings.getSetting("BLOOM")
 	if bloom:
 		print("setting bloom to ", bloom)
 		environment.glow_bloom = bloom

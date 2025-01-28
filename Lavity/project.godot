@@ -24,7 +24,7 @@ buses/default_bus_layout="res://mixer/default_bus_layout.tres"
 
 [autoload]
 
-GLOBAL="*res://scenes/Utils/Global.gd"
+Settings="*res://scenes/Utils/Settings.gd"
 ColorUtils="*res://scenes/Utils/ColorUtils.gd"
 GameFlow="*res://scenes/Utils/GameFlow.tscn"
 MusicComponent="*res://scenes/Music/MusicComponent.tscn"

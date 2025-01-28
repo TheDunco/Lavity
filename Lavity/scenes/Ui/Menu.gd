@@ -50,23 +50,23 @@ func buttonMouseExited(button: Button) -> void:
 	startButtonTween(button, "scale", Vector2.ONE, buttonTweenDuration)
 
 func loadOptions():
-	var brightness = GLOBAL.getSetting("BRIGHTNESS")
+	var brightness = Settings.getSetting("BRIGHTNESS")
 	if brightness and brightness > 0:
 		brightnessSlider.value = brightness
 
-	var darkness = GLOBAL.getSetting("DARKNESS")
+	var darkness = Settings.getSetting("DARKNESS")
 	if darkness and darkness > 0:
 		darknessSlider.value = darkness
 		
-	var glow = GLOBAL.getSetting("GLOW")
+	var glow = Settings.getSetting("GLOW")
 	if glow and glow > 0:
 		glowIntensitySlider.value = glow
 		
-	var glowStrength = GLOBAL.getSetting("GLOW_STRENGTH")
+	var glowStrength = Settings.getSetting("GLOW_STRENGTH")
 	if glowStrength and glowStrength > 0:
 		glowStrengthSlider.value = glowStrength
 		
-	var volume = GLOBAL.getSetting("VOLUME")
+	var volume = Settings.getSetting("VOLUME")
 	if volume and volume > volumeSlider.min_value:
 		volumeSlider.value = volume
 		_on_volume_slider_value_changed(volume)
@@ -119,35 +119,35 @@ func _on_options_back_pressed():
 	controls.hide()
 	play.hide()
 	topLevelMenu.show()
-	GLOBAL._saveSettings()
+	Settings._saveSettings()
 
 func _on_brightness_slider_value_changed(value):
-	GLOBAL.setSetting("BRIGHTNESS", value)
+	Settings.setSetting("BRIGHTNESS", value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.adjustment_brightness = value
 		
 func _on_darkness_slider_value_changed(value: float) -> void:
-	GLOBAL.setSetting("DARKNESS", value)
+	Settings.setSetting("DARKNESS", value)
 	if _canvasModulateDarkness:
 		_canvasModulateDarkness.color.a = value
 	
 func _on_glow_slider_value_changed(value: float) -> void:
-	GLOBAL.setSetting("GLOW", value)
+	Settings.setSetting("GLOW", value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_intensity = value
 		
 func _on_glow_strength_slider_value_changed(value: float) -> void:
-	GLOBAL.setSetting("GLOW_STRENGTH", value)
+	Settings.setSetting("GLOW_STRENGTH", value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_strength = value
 		
 func _on_bloom_slider_value_changed(value: float) -> void:
-	GLOBAL.setSetting("BLOOM", value)
+	Settings.setSetting("BLOOM", value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_bloom = value
 
 func _on_volume_slider_value_changed(value):
-	GLOBAL.setSetting("VOLUME", value)
+	Settings.setSetting("VOLUME", value)
 	GlobalSfx.playButtonHover()
 	var masterBusIndex := AudioServer.get_bus_index("Master")
 	if value == volumeSlider.min_value:
