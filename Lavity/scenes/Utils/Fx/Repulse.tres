@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dynkxbi4w32wj"]
+
+[ext_resource type="Shader" path="res://shaders/Tutorial2.gdshader" id="1_l6u0y"]
+
+[sub_resource type="Gradient" id="Gradient_d30uj"]
+interpolation_mode = 2
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_j7kkf"]
+gradient = SubResource("Gradient_d30uj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0.5)
+
+[resource]
+shader = ExtResource("1_l6u0y")
+shader_parameter/distortionTexture = SubResource("GradientTexture2D_j7kkf")

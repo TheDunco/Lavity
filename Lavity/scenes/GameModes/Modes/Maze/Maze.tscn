@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjwa6fkr6s1om"]
+[gd_scene load_steps=15 format=3 uid="uid://cjwa6fkr6s1om"]
 
 [ext_resource type="PackedScene" uid="uid://cw21s1mqjep2n" path="res://scenes/GameModes/Modes/Maze/ProceduralMaze.tscn" id="1_25b5f"]
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/Maze.gd" id="1_bibwa"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://d4g85muavqukb" path="res://scenes/GameModes/Modes/Maze/MazeLights.tscn" id="7_jm1jq"]
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/MazeEnemies.gd" id="8_f3tsw"]
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="10_hg4w5"]
+[ext_resource type="PackedScene" uid="uid://dnfuqcmupofui" path="res://scenes/Utils/Fx/ScreenFx.tscn" id="11_4g033"]
 
 [sub_resource type="Gradient" id="Gradient_at51c"]
 
@@ -48,6 +49,12 @@ script = ExtResource("8_f3tsw")
 
 [node name="Message" parent="." instance=ExtResource("10_hg4w5")]
 
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sxk1g")]
+position = Vector2(371, 248)
+worldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="ScreenFx" parent="." instance=ExtResource("11_4g033")]
+
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("6_p8m8n")]
@@ -59,7 +66,3 @@ player = NodePath("../../Player")
 _canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")
 _worldEnvironment = NodePath("../../WorldEnvironment")
 metadata/_edit_use_anchors_ = true
-
-[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sxk1g")]
-position = Vector2(371, 248)
-worldEnvironment = NodePath("../WorldEnvironment")
