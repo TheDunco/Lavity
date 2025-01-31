@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2270agfvuxg"]
+
+[ext_resource type="Script" path="res://scenes/Utils/DirectionalDarkness.gd" id="1_oskx6"]
+
+[node name="DirectionalDarkness" type="DirectionalLight2D"]
+light_mask = 2
+visibility_layer = 2
+position = Vector2(1179, -131)
+color = Color(0.989, 0.989, 0.989, 0.908)
+blend_mode = 1
+max_distance = 1e+06
+script = ExtResource("1_oskx6")

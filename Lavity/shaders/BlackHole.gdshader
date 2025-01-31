@@ -10,4 +10,3 @@ void fragment() {
 	vec2 diff = normalize(vecToCenter) * 0.6 * curveVal;
 	COLOR = texture(SCREEN_TEXTURE, SCREEN_UV - diff);
 }
-

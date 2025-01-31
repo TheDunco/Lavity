@@ -3,21 +3,21 @@
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="1_k6842"]
 [ext_resource type="Script" path="res://scenes/Ui/MouseLight.gd" id="1_li1tr"]
 [ext_resource type="Script" path="res://scenes/Utils/SetWorldEnvironmentSettings.gd" id="3_cm6sv"]
-[ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="3_l8kwu"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="6_8h01j"]
 [ext_resource type="PackedScene" uid="uid://bv6grq3e8ay6" path="res://scenes/Entities/Enemies/Roamer/Roamer.tscn" id="7_j0bbl"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="8_pgiwv"]
 [ext_resource type="PackedScene" uid="uid://ckegvnp5qckrb" path="res://scenes/Entities/Enemies/Snake/Snake.tscn" id="9_4dcco"]
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="10_ddlvg"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="10_smu23"]
+[ext_resource type="PackedScene" uid="uid://d2270agfvuxg" path="res://scenes/Utils/DirectionalDarkness.tscn" id="10_wkeht"]
 
 [sub_resource type="Gradient" id="Gradient_edh43"]
 colors = PackedColorArray(0.683294, 0.683294, 0.683294, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ejiog"]
 gradient = SubResource("Gradient_edh43")
-fill_from = Vector2(0.568376, 1)
-fill_to = Vector2(0.470085, 0.0555556)
+fill_from = Vector2(0.512821, 1)
+fill_to = Vector2(0.491453, 0)
 
 [sub_resource type="Environment" id="Environment_vdcqo"]
 background_mode = 3
@@ -49,14 +49,13 @@ distance = -3100.0
 [node name="Menu2D" type="Node2D"]
 script = ExtResource("1_li1tr")
 
+[node name="DirectionalDarkness" parent="." instance=ExtResource("10_wkeht")]
+position = Vector2(349, -135)
+
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(2644, 3182)
 scale = Vector2(274.469, 220.387)
 texture = SubResource("GradientTexture2D_ejiog")
-
-[node name="CanvasModulateDarkness" parent="." instance=ExtResource("3_l8kwu")]
-position = Vector2(6.10352e-05, 6.10352e-05)
-color = Color(0.0937951, 0.0817919, 0.0785522, 1)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vdcqo")
@@ -64,7 +63,7 @@ script = ExtResource("3_cm6sv")
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "_canvasModulateDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
+[node name="Menu" parent="MenuCanvasLayer" node_paths=PackedStringArray("player", "_directionalDarkness", "_worldEnvironment") instance=ExtResource("1_k6842")]
 offset_left = 27.0
 offset_top = 5.0
 offset_right = 27.0
@@ -72,7 +71,7 @@ offset_bottom = 5.0
 player = NodePath("../../Player")
 showMainMenuButton = false
 visibleByDefault = true
-_canvasModulateDarkness = NodePath("../../CanvasModulateDarkness")
+_directionalDarkness = NodePath("../../DirectionalDarkness")
 _worldEnvironment = NodePath("../../WorldEnvironment")
 metadata/_edit_use_anchors_ = true
 

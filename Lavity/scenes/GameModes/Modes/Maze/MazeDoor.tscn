@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://wv5ejff7mrr3"]
+[gd_scene load_steps=5 format=3 uid="uid://wv5ejff7mrr3"]
 
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/MazeDoor.gd" id="1_15426"]
 [ext_resource type="PackedScene" uid="uid://clcj4utj8emgk" path="res://scenes/GameModes/Modes/Maze/ColorPassableArea.tscn" id="1_ggn33"]
 [ext_resource type="Texture2D" uid="uid://i32xfuna2ybh" path="res://scenes/GameModes/Modes/Maze/MazeDoorNoiseTexture.tres" id="2_oum8k"]
-[ext_resource type="PackedScene" uid="uid://bkue2rlje5opm" path="res://scenes/Utils/CanvasModulateDarkness.tscn" id="4_d8f67"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtker"]
 size = Vector2(512, 512)
@@ -18,10 +17,6 @@ texture = ExtResource("2_oum8k")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorPassableArea"]
 shape = SubResource("RectangleShape2D_dtker")
-
-[node name="CanvasModulateDarkness" parent="." instance=ExtResource("4_d8f67")]
-visible = false
-position = Vector2(-425, -175)
 
 [node name="TextureLight" type="PointLight2D" parent="."]
 energy = 0.08

@@ -33,7 +33,6 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_1tws0"]
 resource_name = "Repulse"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -41,8 +40,8 @@ tracks/0/path = NodePath("Repulse:material:shader_parameter/distortionTexture:fi
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.267943, 1),
 "update": 0,
 "values": [Vector2(0.5, 0.5), Vector2(1, 0.5)]
 }
@@ -53,7 +52,7 @@ tracks/1/path = NodePath("Repulse:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5),
+"times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -80,7 +79,10 @@ material = ExtResource("3_2n8rw")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1.0
+offset_left = -8.0
+offset_top = -281.0
+offset_right = 12.0
+offset_bottom = 299.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2

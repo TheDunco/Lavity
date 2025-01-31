@@ -8,11 +8,11 @@ class_name Menu
 @export var showMainMenuButton := true
 @export var visibleByDefault := false
 
-@export var buttonTweenIntensity := 1.07
-@export var buttonTweenDuration := 0.01
+@export var buttonTweenIntensity := 1.1
+@export var buttonTweenDuration := 0.1
 
 @export_category("Effect Implementaitons")
-@export var _canvasModulateDarkness: CanvasModulate
+@export var _directionalDarkness: DirectonalDarkness
 @export var _worldEnvironment: WorldEnvironment
 
 @export_category("Other References")
@@ -44,7 +44,7 @@ func startButtonTween(object: Object, property: String, finalVal: Variant, durat
 func buttonMouseEntered(button: Button) -> void:
 	button.pivot_offset = button.size / 2
 	GlobalSfx.playButtonHover() 
-	startButtonTween(button, "scale", Vector2.ONE * buttonTweenIntensity, buttonTweenDuration)
+	startButtonTween(button, "scale", Vector2(1, 1.2) * buttonTweenIntensity, buttonTweenDuration)
 
 func buttonMouseExited(button: Button) -> void:
 	startButtonTween(button, "scale", Vector2.ONE, buttonTweenDuration)
@@ -128,8 +128,8 @@ func _on_brightness_slider_value_changed(value):
 		
 func _on_darkness_slider_value_changed(value: float) -> void:
 	Settings.setSetting("DARKNESS", value)
-	if _canvasModulateDarkness:
-		_canvasModulateDarkness.color.a = value
+	if _directionalDarkness:
+		_directionalDarkness.color.a = value
 	
 func _on_glow_slider_value_changed(value: float) -> void:
 	Settings.setSetting("GLOW", value)
@@ -167,8 +167,8 @@ func _on_song_changed(to: String) -> void:
 	song.text = labelFormat % to
 
 const DEFAULTS := {
-	"brightness": 1.24,
-	"darkness": 0.941,
+	"brightness": 1.208,
+	"darkness": 1.0,
 	"glow_intensity": 2.77,
 	"glow_strength": 1.4,
 	"bloom": 0.02

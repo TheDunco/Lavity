@@ -19,7 +19,7 @@ class_name Player
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
-@export var baseMovementSpeed := 10
+@export var baseMovementSpeed := 12
 @export var movementSpeedMult := 20
 @export var baseTrackableDistance := 5000.0
 @export var cameraBaseZoom := 1.35
@@ -48,6 +48,10 @@ var repulseTime = 0.0
 
 @onready var initEnergy = playerLight.energy
 
+# Effects
+@onready var particles: CPUParticles2D = $CPUParticles2D
+@onready var repulseAnimation: AnimationPlayer = $RepulseDistortion/RepulseAnimation
+
 var stats := {
 	"damageReduction": 0.5,
 	"hunger" : 0.5,
@@ -64,6 +68,8 @@ var trackableDistance := baseTrackableDistance
 
 func _ready() -> void:
 	playerLight.color = ColorUtils.PINK
+	SignalBus.connect("playerRepulsed", func(_pos): repulseAnimation.play("repulse"))
+	$RepulseDistortion.visible = false
 
 func handleContinuousInput(delta):
 	var isLocked = Input.is_action_pressed("lock")
@@ -103,6 +109,7 @@ func handleContinuousInput(delta):
 	if Input.is_action_just_pressed("toggle_flashlight") :
 		if playerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
 			playerLight.enabled = false
+			particles.process_mode = Node.PROCESS_MODE_DISABLED
 			startDying()
 		else:
 			playerLight.enabled = true
@@ -218,6 +225,10 @@ func _process(delta):
 
 	if playerLight.enabled:
 		takeDamage(decayRate, true)
+		particles.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	particles.color = playerLight.color
+	particles.color.a = 0.25;
 	
 	if deathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:

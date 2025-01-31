@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkue2rlje5opm"]
-
-[ext_resource type="Script" path="res://scenes/Utils/CanvasModulateDarknessSetDarkness.gd" id="1_md767"]
-
-[node name="CanvasModulateDarkness" type="CanvasModulate"]
-color = Color(0.00392157, 0.00392157, 0.00392157, 0.941176)
-script = ExtResource("1_md767")

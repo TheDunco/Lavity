@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://cjjaaagbuky2e"]
+[gd_scene load_steps=33 format=3 uid="uid://cjjaaagbuky2e"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Player/Player.gd" id="1_jm2c2"]
+[ext_resource type="Shader" path="res://shaders/Tutorial2.gdshader" id="2_7bvfq"]
 [ext_resource type="Material" uid="uid://clyiv5dbfapk2" path="res://scenes/Entities/Player/PlayerChromAbbShader.tres" id="4_d520f"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="6_bki26"]
 [ext_resource type="Texture2D" uid="uid://bc6nx8vj8tv2r" path="res://assets/Moth Flying/flying-moth_0001.png" id="6_xqfgo"]
@@ -17,7 +18,93 @@
 [ext_resource type="Texture2D" uid="uid://prgsy2vimnga" path="res://assets/Moth Flying/without-legs/individual-leg_0001.png" id="15_ybomp"]
 [ext_resource type="Texture2D" uid="uid://bgxyo0hk0s8vo" path="res://assets/Moth Flying/without-legs/individual-leg_0003.png" id="17_fk10i"]
 [ext_resource type="Texture2D" uid="uid://cc4meseuagvxr" path="res://assets/Moth Flying/without-legs/antenna_0001.png" id="18_0slyg"]
+[ext_resource type="Texture2D" uid="uid://dh0fqjyfychh0" path="res://assets/fx/Repulse.png" id="19_v6178"]
 [ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="21_jrgmx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1knjk"]
+shader = ExtResource("2_7bvfq")
+shader_parameter/distortionTexture = ExtResource("19_v6178")
+
+[sub_resource type="Gradient" id="Gradient_tdyss"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i3gpr"]
+gradient = SubResource("Gradient_tdyss")
+
+[sub_resource type="Animation" id="Animation_45lo8"]
+resource_name = "repulse"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.31864, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(25, 25)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_rsehp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8q15b"]
+_data = {
+"RESET": SubResource("Animation_rsehp"),
+"repulse": SubResource("Animation_45lo8")
+}
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e4444"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_dkeon"]
+interpolation_mode = 2
+colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o1elf"]
+gradient = SubResource("Gradient_dkeon")
+width = 10
+height = 10
+fill = 1
+fill_from = Vector2(0.5, 0.525641)
+fill_to = Vector2(0.777778, 0.213675)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_yn8d8"]
 animations = [{
@@ -65,6 +152,15 @@ collision_priority = 2.0
 floor_snap_length = 2.0
 script = ExtResource("1_jm2c2")
 
+[node name="RepulseDistortion" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1knjk")
+texture = SubResource("GradientTexture2D_i3gpr")
+
+[node name="RepulseAnimation" type="AnimationPlayer" parent="RepulseDistortion"]
+libraries = {
+"": SubResource("AnimationLibrary_8q15b")
+}
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-26, 18, -19, 26, -8, 30, 3, 30, 15, 27, 24, 24, 32, 20, 35, 16, 37, 10, 37, 4, 36, 0, 32, -8, 30, -17, 27, -11, 21, -18, 19, -21, 17, -15, -6, -21, -26, -13, -29, 1)
 
@@ -81,6 +177,20 @@ one_shot = true
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_e4444")
+lifetime = 3.0
+speed_scale = 7.36
+explosiveness = 0.06
+randomness = 0.09
+texture = SubResource("GradientTexture2D_o1elf")
+emission_shape = 1
+emission_sphere_radius = 33.59
+direction = Vector2(-1, 0)
+spread = 4.47
+gravity = Vector2(0, 0)
+initial_velocity_max = 37.27
 
 [node name="FlippingSprite" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("legs", "antenna")]
 z_index = 2
