@@ -1,4 +1,5 @@
 extends Area2D 
+class_name ColorPassableArea
 
 @export var color: Color = GlobalUtils.colors["yellow"]
 @export var passThreshold := 5.5

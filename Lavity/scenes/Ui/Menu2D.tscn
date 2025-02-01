@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://gcao2h68fauk"]
+[gd_scene load_steps=17 format=3 uid="uid://gcao2h68fauk"]
 
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="1_k6842"]
 [ext_resource type="Script" path="res://scenes/Ui/MouseLight.gd" id="1_li1tr"]
+[ext_resource type="Texture2D" uid="uid://7w3qr5smbhwh" path="res://scenes/GameModes/Modes/Maze/MazeBackgroundGradient.tres" id="3_8brix"]
 [ext_resource type="Script" path="res://scenes/Utils/SetWorldEnvironmentSettings.gd" id="3_cm6sv"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="6_8h01j"]
 [ext_resource type="PackedScene" uid="uid://bv6grq3e8ay6" path="res://scenes/Entities/Enemies/Roamer/Roamer.tscn" id="7_j0bbl"]
@@ -10,14 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="10_ddlvg"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="10_smu23"]
 [ext_resource type="PackedScene" uid="uid://d2270agfvuxg" path="res://scenes/Utils/DirectionalDarkness.tscn" id="10_wkeht"]
-
-[sub_resource type="Gradient" id="Gradient_edh43"]
-colors = PackedColorArray(0.683294, 0.683294, 0.683294, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ejiog"]
-gradient = SubResource("Gradient_edh43")
-fill_from = Vector2(0.512821, 1)
-fill_to = Vector2(0.491453, 0)
 
 [sub_resource type="Environment" id="Environment_vdcqo"]
 background_mode = 3
@@ -55,7 +48,7 @@ position = Vector2(349, -135)
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(2644, 3182)
 scale = Vector2(274.469, 220.387)
-texture = SubResource("GradientTexture2D_ejiog")
+texture = ExtResource("3_8brix")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_vdcqo")

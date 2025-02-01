@@ -5,7 +5,7 @@ class_name MazeDoor
 @onready var distortion: Sprite2D = $Distortion
 @onready var colorSprite: Sprite2D = $Color
 @onready var collisionShape: CollisionShape2D = $ColorPassableArea/CollisionShape2D
-@onready var colorPassableArea = $ColorPassableArea
+@onready var colorPassableArea: ColorPassableArea = $ColorPassableArea
 @onready var distortionMovement: AnimationPlayer = $Distortion/DistortionMovement
 
 var doorPoint: Vector2
