@@ -12,26 +12,37 @@
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/MazeEnemies.gd" id="8_f3tsw"]
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="10_hg4w5"]
 
-[sub_resource type="Gradient" id="Gradient_at51c"]
+[sub_resource type="Gradient" id="Gradient_hi1ld"]
+offsets = PackedFloat32Array(0.00719424, 1)
+colors = PackedColorArray(0.44, 0.44, 0.44, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_epqi8"]
-gradient = SubResource("Gradient_at51c")
-fill_from = Vector2(0.5, 1)
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kvuot"]
+gradient = SubResource("Gradient_hi1ld")
+width = 4096
+height = 4096
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.5, 0)
 
 [node name="Maze" type="Node2D"]
 script = ExtResource("1_bibwa")
 
-[node name="DirectionalDarkness" parent="." instance=ExtResource("2_sh5i1")]
-color = Color(1, 1, 1, 1)
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -10
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(4, -59)
-scale = Vector2(43.2969, 21.3594)
-texture = SubResource("GradientTexture2D_epqi8")
-centered = false
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(4096, 4096)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(1779, 908)
+texture = SubResource("GradientTexture2D_kvuot")
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("3_o0i8p")]
+
+[node name="DirectionalDarkness" parent="." instance=ExtResource("2_sh5i1")]
+color = Color(1, 1, 1, 1)
+range_layer_min = -10
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("5_g543d")]
 position = Vector2(371, 248)

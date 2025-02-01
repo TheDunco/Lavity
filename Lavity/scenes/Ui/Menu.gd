@@ -168,7 +168,7 @@ func _on_song_changed(to: String) -> void:
 
 const DEFAULTS := {
 	"brightness": 1.208,
-	"darkness": 1.0,
+	"darkness": 0.98,
 	"glow_intensity": 2.77,
 	"glow_strength": 1.4,
 	"bloom": 0.02

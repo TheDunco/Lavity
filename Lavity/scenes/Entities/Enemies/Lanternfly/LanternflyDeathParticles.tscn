@@ -28,6 +28,7 @@ fill_to = Vector2(0.649573, 0.358974)
 
 [node name="LanternflyDeathParticles" type="GPUParticles2D"]
 material = SubResource("CanvasItemMaterial_m46sa")
+emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_xn0ca")
 texture = SubResource("GradientTexture2D_bk656")
