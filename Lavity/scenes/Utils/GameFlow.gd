@@ -33,9 +33,9 @@ func gameOver():
 func switchToDynamicMusic():
 	GlobalDynamicMusicComponent.enable()
 	MusicComponent.pause()
-	MusicComponent.emit_signal("songChanged", "Polychrome")
+	MusicComponent.songChanged.emit("Polychrome")
 
 func switchToMenuMusic():
 	GlobalDynamicMusicComponent.disable()
 	MusicComponent.resume()
-	MusicComponent.emit_signal("songChanged", MusicComponent.musicRotation[MusicComponent.currentIndex].name)
+	MusicComponent.songChanged.emit(MusicComponent.musicRotation[MusicComponent.currentIndex].name)

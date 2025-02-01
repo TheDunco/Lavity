@@ -21,7 +21,7 @@ func playSong(song: SongEnum, startOver: bool = false):
 	musicRotation[currentIndex].stop()
 	currentIndex = song
 	musicRotation[currentIndex].play()
-	emit_signal("songChanged", musicRotation[currentIndex].name)
+	songChanged.emit(musicRotation[currentIndex].name)
 
 func _ready():
 	musicRotation[currentIndex].play()
