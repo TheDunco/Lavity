@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5smq740x8ncq"]
+[gd_scene load_steps=5 format=3 uid="uid://c5smq740x8ncq"]
 
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="1_5cqr6"]
 [ext_resource type="Script" path="res://scenes/Objects/Mote.gd" id="1_dckhx"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="3_wwi4m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtnc"]
 radius = 50.0
@@ -21,3 +22,9 @@ shape = SubResource("CircleShape2D_mqtnc")
 scale = Vector2(0.25, 0.25)
 energy = 0.25
 randomizeColorOnReady = true
+
+[node name="Pop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wwi4m")
+volume_db = -19.237
+panning_strength = 1.5
+bus = &"SFX"

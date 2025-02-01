@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddxv6blsuvb3k"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m46sa"]
+light_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xn0ca"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 30.0
+angle_min = -720.0
+angle_max = 720.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
+gravity = Vector3(0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_830o0"]
+offsets = PackedFloat32Array(0, 0.845324)
+colors = PackedColorArray(0.64, 0, 0, 0.556863, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bk656"]
+gradient = SubResource("Gradient_830o0")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.521368, 0.482906)
+fill_to = Vector2(0.649573, 0.358974)
+
+[node name="LanternflyDeathParticles" type="GPUParticles2D"]
+material = SubResource("CanvasItemMaterial_m46sa")
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_xn0ca")
+texture = SubResource("GradientTexture2D_bk656")
+lifetime = 8.0
+one_shot = true
+speed_scale = 6.17
+explosiveness = 0.32
+randomness = 1.0
+trail_lifetime = 0.5

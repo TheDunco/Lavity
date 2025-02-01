@@ -7,6 +7,7 @@ class_name Mote
 @onready var lavityLight: LavityLight = $OppositeForceBody/LavityLight
 @export var repulseableDistance := 1000
 @export var decayRate := 0.0
+@onready var pop: AudioStreamPlayer2D = $Pop
 
 func setScale(newScale: Vector2) -> void:
 	lavityLight.scale = newScale

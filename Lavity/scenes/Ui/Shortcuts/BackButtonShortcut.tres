@@ -1,4 +1,4 @@
-[gd_resource type="Shortcut" load_steps=3 format=3 uid="uid://o5p3cdpvh85c"]
+[gd_resource type="Shortcut" load_steps=4 format=3 uid="uid://o5p3cdpvh85c"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_nrt3b"]
 device = -1
@@ -10,5 +10,10 @@ unicode = 32
 device = -1
 keycode = 4194308
 
+[sub_resource type="InputEventKey" id="InputEventKey_wpk80"]
+device = -1
+keycode = 66
+unicode = 98
+
 [resource]
-events = [SubResource("InputEventKey_nrt3b"), SubResource("InputEventKey_g0q6k")]
+events = [SubResource("InputEventKey_nrt3b"), SubResource("InputEventKey_g0q6k"), SubResource("InputEventKey_wpk80")]

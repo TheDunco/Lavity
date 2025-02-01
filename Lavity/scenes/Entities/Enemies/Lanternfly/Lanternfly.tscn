@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cikbfevvqein8"]
+[gd_scene load_steps=21 format=3 uid="uid://cikbfevvqein8"]
 
 [ext_resource type="Texture2D" uid="uid://waqjud1jctcg" path="res://assets/Laternfly/full-lanternfly_0001.png" id="1_5xslm"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.gd" id="1_h7r8b"]
@@ -14,6 +14,21 @@
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForMoteState.gd" id="14_7adte"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForPlayerState.gd" id="15_edsqd"]
 [ext_resource type="AudioStream" uid="uid://dramu25offpyw" path="res://assets/audio/sfx/lanternfly_buzz.wav" id="16_4g3op"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7b4g4"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_dkeon"]
+interpolation_mode = 2
+colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_go1et"]
+gradient = SubResource("Gradient_dkeon")
+width = 10
+height = 10
+fill = 1
+fill_from = Vector2(0.5, 0.525641)
+fill_to = Vector2(0.777778, 0.213675)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kevsd"]
 animations = [{
@@ -42,6 +57,20 @@ radius = 517.0
 collision_layer = 41
 collision_mask = 49
 script = ExtResource("1_h7r8b")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_7b4g4")
+lifetime = 3.0
+speed_scale = 7.36
+explosiveness = 0.06
+randomness = 0.09
+texture = SubResource("GradientTexture2D_go1et")
+emission_shape = 1
+emission_sphere_radius = 33.59
+direction = Vector2(-1, 0)
+spread = 4.47
+gravity = Vector2(0, 0)
+initial_velocity_max = 37.27
 
 [node name="LanternflyCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(15, 5)

@@ -1,6 +1,9 @@
 extends Enemy
 class_name Lanternfly
 
+const moteScene = preload("res://scenes/Objects/Mote.tscn")
+const particlesScene = preload("res://scenes/Entities/Enemies/Lanternfly/LanternflyDeathParticles.tscn")
+
 @export var timeToStuck := 5
 @export var lanternflyBaseAcceleration := 15.0
 @export var wingFlapSpeedMult := 1.3
@@ -13,7 +16,8 @@ var ttl := initTimeToLive
 @onready var perceptionArea := $PerceptionArea
 @onready var stateLabel := $StateLabel
 @onready var buzzSound := $Buzz
- 
+@onready var cpuParticles: CPUParticles2D = $CPUParticles2D
+
 var percievedMotes: Array[Mote] = []
 var percievedPlayer: Player = null
 
@@ -70,13 +74,36 @@ func setAccelerationFromLightColor() -> void:
 	var lightSum = ColorUtils.sumColor(lanternlight.color)
 	acceleration = remap(lightSum, 0.0, 3.0, lanternflyBaseAcceleration, lanternflyBaseAcceleration * 2.0)
 
+const DEATH_MOTE_IMPULSE := 2000
+func spawnDeathMotes():
+	# This is causing issues: https://github.com/godotengine/godot/issues/52112 
+	# Maybe CPU particles would work better?
+	var particles = particlesScene.instantiate()
+	particles.global_position = global_position
+	get_tree().root.add_child(particles)
+	particles.emitting = true
+
+	for i in randi_range(1, 5):
+		var deathMote = moteScene.instantiate()
+		deathMote.global_position = global_position
+		get_tree().root.add_child(deathMote)
+		deathMote.changeColor(preferredMoteColor)
+		deathMote.rigidBody.apply_central_impulse(Vector2(i * randi_range(-DEATH_MOTE_IMPULSE, DEATH_MOTE_IMPULSE), i * randi_range(-DEATH_MOTE_IMPULSE, 200)))
+		deathMote.pop.pitch_scale = remap(i, 1, 5, 0.7, 1.2)
+		deathMote.pop.play()
+
+
+
 func _process(delta: float):
 	lanternlight.color = ColorUtils.takeGeneralColorDamage(lanternlight.color, lanternLightDecayRate)
 	buzzSound.volume_db = getBuzzVolumeFromVelocity()
 	setAccelerationFromLightColor()
+	cpuParticles.color = lanternlight.color
+	cpuParticles.color.a = 0.25;
 	if ColorUtils.isColorDying(lanternlight.color):
 		ttl -= delta
 		if ttl < 0.0:
+			spawnDeathMotes()
 			queue_free()
 	else:
 		ttl = initTimeToLive

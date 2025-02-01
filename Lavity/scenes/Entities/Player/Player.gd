@@ -288,5 +288,6 @@ func _unhandled_input(event):
 			distractingMote.decayRate = 0.05
 			distractingMote.changeColor(playerLight.color)
 			distractingMote.applyImpulse(velocityNormal, stats["speed"] * 2000)
+			distractingMote.pop.pitch_scale = stats["speed"]
+			distractingMote.pop.play()
 			takeColorDamage(playerLight.color / moteDrainPercentage)
-			GlobalSfx.playPop(stats["speed"])

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://br4oisj0kpf2q"]
+[gd_scene load_steps=16 format=3 uid="uid://br4oisj0kpf2q"]
 
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
@@ -16,6 +16,30 @@ unicode = 32
 
 [sub_resource type="Shortcut" id="Shortcut_e3cs7"]
 events = [SubResource("InputEventKey_i2ndd")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_72t1d"]
+device = -1
+keycode = 79
+unicode = 111
+
+[sub_resource type="Shortcut" id="Shortcut_d84pg"]
+events = [SubResource("InputEventKey_72t1d")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_y4uup"]
+device = -1
+keycode = 81
+unicode = 113
+
+[sub_resource type="Shortcut" id="Shortcut_3ulya"]
+events = [SubResource("InputEventKey_y4uup")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kd3sd"]
+device = -1
+keycode = 70
+unicode = 102
+
+[sub_resource type="Shortcut" id="Shortcut_tnhjs"]
+events = [SubResource("InputEventKey_kd3sd")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_14bgr"]
 device = -1
@@ -97,6 +121,7 @@ text = "Main Menu"
 layout_mode = 2
 tooltip_text = "Options to fine tune volume and graphical settings"
 theme = ExtResource("1_pq815")
+shortcut = SubResource("Shortcut_d84pg")
 text = "Options"
 
 [node name="Controls" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
@@ -115,6 +140,7 @@ text = "Next Song"
 layout_mode = 2
 tooltip_text = "Quit the game"
 theme = ExtResource("1_pq815")
+shortcut = SubResource("Shortcut_3ulya")
 text = "Quit
 "
 
@@ -287,6 +313,7 @@ text = "Reset To Default"
 
 [node name="Fullscreen" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+shortcut = SubResource("Shortcut_tnhjs")
 text = "Fullscreen"
 
 [node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
@@ -359,7 +386,6 @@ text = "Maze
 "
 
 [node name="LightEffectsWorld" type="Button" parent="Play/CenterContainer/VBoxContainer"]
-visible = false
 layout_mode = 2
 tooltip_text = "Used to test the effects different colors of light give you"
 theme = ExtResource("1_pq815")

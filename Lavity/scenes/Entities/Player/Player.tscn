@@ -94,12 +94,12 @@ _data = {
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_e4444"]
 light_mode = 1
 
-[sub_resource type="Gradient" id="Gradient_dkeon"]
+[sub_resource type="Gradient" id="Gradient_b561y"]
 interpolation_mode = 2
 colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o1elf"]
-gradient = SubResource("Gradient_dkeon")
+gradient = SubResource("Gradient_b561y")
 width = 10
 height = 10
 fill = 1
