@@ -2,10 +2,11 @@ extends Node2D
 class_name MazeDoor
 
 @onready var maze: ProceduralMaze = get_parent()
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var distortion: Sprite2D = $Distortion
+@onready var colorSprite: Sprite2D = $Color
 @onready var collisionShape: CollisionShape2D = $ColorPassableArea/CollisionShape2D
-@onready var textureLight: PointLight2D = $TextureLight
 @onready var colorPassableArea = $ColorPassableArea
+@onready var distortionMovement: AnimationPlayer = $Distortion/DistortionMovement
 
 var doorPoint: Vector2
 @onready var middlePoints = maze.getTileCenters()
@@ -29,26 +30,21 @@ func _ready() -> void:
 	var doorHeight = maze.tile_set.tile_size.y / 2
 	var doorSize = Vector2(doorWidth, doorHeight)
 	
-	sprite.texture.width = doorWidth
-	sprite.texture.height = doorHeight
-	textureLight.texture.width = doorWidth
-	textureLight.texture.height = doorHeight
+	distortion.texture.width = doorWidth
+	distortion.texture.height = doorHeight
+	colorSprite.texture.width = doorWidth
+	colorSprite.texture.height = doorHeight
+
 	collisionShape.shape.size = doorSize
 	
 	var passColor = ColorUtils.randColorFromSet()
 	colorPassableArea.color = passColor
-	textureLight.color = passColor
+	
+	colorSprite.texture.gradient.set_color(0, passColor)
 
 	setDoorPoint()
-	
 	global_position = doorPoint
-	SignalBus.connect("playerPassedMaze", onPass)
-	
-func rand() -> float:
-	return randf_range(-1.0, 1.0)
 
-func _process(delta: float) -> void:
-	sprite.texture.noise.offset.x += rand()
-	sprite.texture.noise.offset.y += rand()
-	textureLight.texture.noise.offset.x += rand()
-	textureLight.texture.noise.offset.y += rand()
+	SignalBus.connect("playerPassedMaze", onPass)
+	distortionMovement.play("move_distortion")
+	

@@ -26,6 +26,7 @@ script = ExtResource("1_bibwa")
 color = Color(1, 1, 1, 1)
 
 [node name="Background" type="Sprite2D" parent="."]
+position = Vector2(4, -59)
 scale = Vector2(43.2969, 21.3594)
 texture = SubResource("GradientTexture2D_epqi8")
 centered = false

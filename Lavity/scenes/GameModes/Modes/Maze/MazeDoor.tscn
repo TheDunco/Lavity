@@ -1,8 +1,69 @@
-[gd_scene load_steps=5 format=3 uid="uid://wv5ejff7mrr3"]
+[gd_scene load_steps=15 format=3 uid="uid://wv5ejff7mrr3"]
 
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/MazeDoor.gd" id="1_15426"]
 [ext_resource type="PackedScene" uid="uid://clcj4utj8emgk" path="res://scenes/GameModes/Modes/Maze/ColorPassableArea.tscn" id="1_ggn33"]
-[ext_resource type="Texture2D" uid="uid://i32xfuna2ybh" path="res://scenes/GameModes/Modes/Maze/MazeDoorNoiseTexture.tres" id="2_oum8k"]
+[ext_resource type="Texture2D" uid="uid://uj0ky60r4pxg" path="res://scenes/Utils/Fx/WhiteGradientTexture.tres" id="2_cctht"]
+[ext_resource type="Shader" path="res://shaders/Tutorial2.gdshader" id="3_odqav"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_w2vl7"]
+light_mode = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vswkr"]
+frequency = 0.0157
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a5rp3"]
+noise = SubResource("FastNoiseLite_vswkr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vlw13"]
+shader = ExtResource("3_odqav")
+shader_parameter/distortionTexture = SubResource("NoiseTexture2D_a5rp3")
+
+[sub_resource type="Gradient" id="Gradient_gjkfd"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d8wy0"]
+gradient = SubResource("Gradient_gjkfd")
+width = 512
+height = 512
+
+[sub_resource type="Animation" id="Animation_84qkc"]
+resource_name = "move_distortion"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/distortionTexture:noise:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.966667, 2.03333, 3.33333, 5),
+"transitions": PackedFloat32Array(1, 0.732043, 1.86607, 1.41421, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(300, 0, 0), Vector3(300, 300, 0), Vector3(-300, 300, 0), Vector3(300, -300, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_n6ixm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/distortionTexture:noise:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kccid"]
+_data = {
+"RESET": SubResource("Animation_n6ixm"),
+"move_distortion": SubResource("Animation_84qkc")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtker"]
 size = Vector2(512, 512)
@@ -10,15 +71,27 @@ size = Vector2(512, 512)
 [node name="MazeDoor" type="Node2D"]
 script = ExtResource("1_15426")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_oum8k")
+[node name="Color" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_w2vl7")
+texture = ExtResource("2_cctht")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+color = Color(0.988783, 0.988783, 0.988783, 1)
+energy = 0.05
+blend_mode = 1
+texture = ExtResource("2_cctht")
+
+[node name="Distortion" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vlw13")
+texture = SubResource("GradientTexture2D_d8wy0")
+
+[node name="DistortionMovement" type="AnimationPlayer" parent="Distortion"]
+libraries = {
+"": SubResource("AnimationLibrary_kccid")
+}
 
 [node name="ColorPassableArea" parent="." instance=ExtResource("1_ggn33")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ColorPassableArea"]
 shape = SubResource("RectangleShape2D_dtker")
-
-[node name="TextureLight" type="PointLight2D" parent="."]
-energy = 0.08
-blend_mode = 2
-texture = ExtResource("2_oum8k")
