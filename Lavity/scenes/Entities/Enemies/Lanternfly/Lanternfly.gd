@@ -45,7 +45,6 @@ func _ready() -> void:
 	SignalBus.connect("moteFreeing", func(mote): percievedMotes.erase(mote))
 	buzzSound.pitch_scale = randf_range(0.8, 1.2)
 
-
 func scoreLightDesire(lightEmitter) -> float:
 	if not lightEmitter or not lightEmitter.has_method("getLightColor"):
 		return 0.0
@@ -107,11 +106,13 @@ func _process(delta: float):
 		ttl -= delta
 		if ttl < 0.0:
 			spawnDeathMotes()
+			SignalBus.emit_signal("lanternflyFreeing", self)
 			queue_free()
 	else:
 		ttl = initTimeToLive
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	super._physics_process(delta)
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	move_and_slide()

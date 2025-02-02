@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://blju55g0a8qbd"]
+
+[ext_resource type="PackedScene" uid="uid://cw21s1mqjep2n" path="res://scenes/GameModes/Modes/Maze/ProceduralMaze.tscn" id="1_twmfe"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="2_sx228"]
+[ext_resource type="PackedScene" uid="uid://b1x6e0bi4gjo0" path="res://scenes/Entities/Passive/Firefly/Firefly.tscn" id="3_q8liu"]
+[ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="4_h3asf"]
+[ext_resource type="PackedScene" uid="uid://d2270agfvuxg" path="res://scenes/Utils/DirectionalDarkness.tscn" id="5_3yjgv"]
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="6_wha4l"]
+[ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="7_a7c53"]
+
+[node name="MazeTest" type="Node2D"]
+
+[node name="ProceduralMazeTilemap" parent="." instance=ExtResource("1_twmfe")]
+width = 2
+height = 2
+
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sx228")]
+position = Vector2(300, 300)
+worldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="Firefly" parent="." instance=ExtResource("3_q8liu")]
+position = Vector2(270, 270)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("4_h3asf")]
+
+[node name="DirectionalDarkness" parent="." instance=ExtResource("5_3yjgv")]
+
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("6_wha4l")]
+position = Vector2(300, 300)
+follow_target = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="CanvasLayer" instance=ExtResource("7_a7c53")]

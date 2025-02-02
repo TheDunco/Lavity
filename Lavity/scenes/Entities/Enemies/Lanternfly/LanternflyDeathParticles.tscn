@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddxv6blsuvb3k"]
+[gd_scene load_steps=6 format=3 uid="uid://ddxv6blsuvb3k"]
+
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyDeathParticles.gd" id="1_gc7ee"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_m46sa"]
 light_mode = 1
@@ -38,3 +40,4 @@ speed_scale = 6.17
 explosiveness = 0.32
 randomness = 1.0
 trail_lifetime = 0.5
+script = ExtResource("1_gc7ee")

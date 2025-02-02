@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RepulsableBody
 class_name Enemy
 
 @export var acceleration := 25.0
@@ -17,21 +17,17 @@ var type: EnemyType = EnemyType.BUG
 # Should be static per enemy type. random for base class
 var preferredMoteColor = ColorUtils.randColorFromSet()
 
-func handlePlayerRepulsed(playerGlobalPosition: Vector2):
-	var distanceFromPlayer = global_position.distance_to(playerGlobalPosition)
-	if distanceFromPlayer < 1000:
-		var directionToPlayer = global_position.direction_to(playerGlobalPosition)
-		velocity += -directionToPlayer * 1500
-
 func moveToward(pos: Vector2) -> void:
-	look_at(pos)
 	velocity += global_position.direction_to(pos) * (acceleration + (global_position.distance_to(pos) * (1/100)))
 
 func _ready():
+	super._ready()
 	if playAnimatedSprite:
 		flippingSprite.play()
-	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)
 	
 	
 func _process(_delta):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity)
+
+func _physics_process(_delta: float) -> void:
+	look_at(velocity.normalized() + position)

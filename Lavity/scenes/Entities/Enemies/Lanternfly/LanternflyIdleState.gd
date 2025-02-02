@@ -23,5 +23,4 @@ func update(delta: float):
 		randomizeWander()
 
 func physicsUpdate(_delta: float):
-	lanternfly.look_at(lanternfly.global_position + moveDirection)
 	lanternfly.velocity += moveDirection * lanternfly.acceleration

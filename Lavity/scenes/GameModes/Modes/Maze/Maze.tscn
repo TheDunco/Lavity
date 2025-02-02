@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="6_p8m8n"]
 [ext_resource type="PackedScene" uid="uid://wv5ejff7mrr3" path="res://scenes/GameModes/Modes/Maze/MazeDoor.tscn" id="7_f88ju"]
 [ext_resource type="PackedScene" uid="uid://d4g85muavqukb" path="res://scenes/GameModes/Modes/Maze/MazeLights.tscn" id="7_jm1jq"]
-[ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/MazeEnemies.gd" id="8_f3tsw"]
+[ext_resource type="Script" path="res://scenes/GameModes/Modes/Maze/MazeCreatures.gd" id="8_f3tsw"]
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="10_hg4w5"]
 
 [node name="Maze" type="Node2D"]

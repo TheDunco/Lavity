@@ -136,3 +136,33 @@ func takeGeneralColorDamage(color: Color, damage: float) -> Color:
 		newColor.b = max(newColor.b, 0)
 
 	return newColor
+
+func healTowardsTarget(color: Color, targetColor: Color) -> Color:
+	var newColor = color
+	newColor.a = 1.0
+
+	var numColorsThatCanHeal := 1
+	var rCanHeal = newColor.r < targetColor.r
+	var gCanHeal = newColor.g < targetColor.g
+	var bCanHeal = newColor.b < targetColor.b
+
+	if rCanHeal:
+		numColorsThatCanHeal += 1
+	if gCanHeal:
+		numColorsThatCanHeal += 1
+	if bCanHeal:
+		numColorsThatCanHeal += 1
+	
+	if rCanHeal:
+		newColor.r += targetColor.r / numColorsThatCanHeal
+		newColor.r = max(newColor.r, 0)
+	
+	if gCanHeal:
+		newColor.g += targetColor.g / numColorsThatCanHeal
+		newColor.g = max(newColor.g, 0)
+
+	if bCanHeal:
+		newColor.b += targetColor.b / numColorsThatCanHeal
+		newColor.b = max(newColor.b, 0)
+
+	return newColor
