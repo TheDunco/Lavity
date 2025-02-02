@@ -27,8 +27,9 @@ resource_name = "StereoEnhance"
 
 [sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_5oami"]
 resource_name = "Compressor"
-threshold = -7.8
-gain = 1.2
+threshold = -8.6
+ratio = 5.0
+gain = 0.5
 attack_us = 60.0
 release_ms = 485.0
 
@@ -87,10 +88,10 @@ bus/5/name = &"Polychrome"
 bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
-bus/5/volume_db = -6.57885
+bus/5/volume_db = -10.9863
 bus/5/send = &"Master"
 bus/5/effect/0/effect = SubResource("AudioEffectCompressor_5oami")
-bus/5/effect/0/enabled = false
+bus/5/effect/0/enabled = true
 bus/5/effect/1/effect = SubResource("AudioEffectReverb_vxe8h")
 bus/5/effect/1/enabled = true
 bus/5/effect/2/effect = SubResource("AudioEffectLimiter_daqq6")
@@ -108,4 +109,10 @@ bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
 bus/7/volume_db = -4.003
-bus/7/send = &"Master"
+bus/7/send = &"Polychrome"
+bus/8/name = &"Orange"
+bus/8/solo = false
+bus/8/mute = false
+bus/8/bypass_fx = false
+bus/8/volume_db = 4.43127
+bus/8/send = &"Polychrome"

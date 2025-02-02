@@ -2,6 +2,7 @@ extends RepulsableBody
 class_name Firefly
 
 @export var acceleration := 16
+@export var healRate := 0.00015
 
 @onready var stateLabel: Label = $StateLabel
 @onready var velocityComponent = $VelocityComponent
@@ -26,7 +27,8 @@ func _ready() -> void:
 	super._ready()
 	perceptionArea.connect("body_entered", bodyEnteredPerceptionArea)
 	perceptionArea.connect("body_exited", bodyExitedPerceptionArea)
-	SignalBus.connect("lanternflyFeering", func(fly): percievedBodies.erase(fly))
+	SignalBus.connect("lanternflyFreeing", func(fly): percievedBodies.erase(fly))
+	lavityLight.light.color = targetColor
 	
 func _physics_process(_delta):
 	_prevPosition = global_position
@@ -35,10 +37,18 @@ func _physics_process(_delta):
 	move_and_slide()
 	distanceMoved = _prevPosition.distance_to(global_position)
 	
-func _process(_delta):
+var lightVisibleTime := 2.0
+
+func _process(delta):
+	if lightVisibleTime > 0:
+		lightVisibleTime -= delta
+	else:
+		lavityLight.light.visible = !lavityLight.light.visible
+		lightVisibleTime = 2.0
+	
 	var blackLikeness = ColorUtils.scoreColorLikeness(lavityLight.light.color, Color.BLACK)
-	if blackLikeness > 0.80:
+	if blackLikeness > 0.80 and lavityLight.light.visible:
 		SignalBus.emit_signal("fireflyFreeing", self)
 		queue_free()
 	if ColorUtils.scoreColorLikeness(lavityLight.light.color, targetColor) < 0.9:
-		lavityLight.light.color = ColorUtils.healTowardsTarget(lavityLight.light.color, targetColor)
+		lavityLight.light.color = ColorUtils.healTowardsTarget(lavityLight.light.color, targetColor, healRate)

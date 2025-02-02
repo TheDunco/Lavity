@@ -36,4 +36,4 @@ func scoreToVolume(score: float, trackIndex: int):
 func setDynamicTrackVolume(color: Color):
 	for i in range(numDynamicTracks):
 		var whiteScore = ColorUtils.scoreColorLikeness(color, Color.WHITE)
-		scoreToVolume(whiteScore + ColorUtils.scoreColorLikeness(color, ColorUtils.colorsArray[i]), i)	
+		scoreToVolume(whiteScore + ColorUtils.scoreColorLikeness(color, ColorUtils.colorsArray[i]), i)

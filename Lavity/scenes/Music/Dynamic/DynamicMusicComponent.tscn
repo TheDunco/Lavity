@@ -29,7 +29,7 @@ bus = &"Polychrome"
 
 [node name="Orange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_75seg")
-bus = &"Polychrome"
+bus = &"Orange"
 
 [node name="YellowOrange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_gvi1l")

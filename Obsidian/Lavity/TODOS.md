@@ -7,7 +7,7 @@
 - [ ] Add enemies to maze that try to fight you for the limited light available
 	- [x] Lanternfly
 	- [ ] Doppelganger: looks like and follows the player, must repulse to get it further away (always goes to the minimum distance to the player and when the player moves away that gets closer. Resets on repulse).
-	- [ ] Lightning bug: gains light instead of losing it, food for maze
+	- [x] Lightning bug: gains light instead of losing it, food for maze
 	- [ ] Frog/Toad/Lizard (eats all bug types)
 	- [ ] Spider (w/ web)
 	- [ ] Venus Fly Trap that spawns motes to lure bug types in
@@ -19,3 +19,4 @@
 	- [ ] Something that lets you avoid the stealth cutoff
 	- [ ] 
 
+- [ ] Fix velocity and decay such that it's all based on _delta

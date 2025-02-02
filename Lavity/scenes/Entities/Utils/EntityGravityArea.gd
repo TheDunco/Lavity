@@ -27,11 +27,11 @@ func handleAreaEntered(area: Area2D):
 	var parent = area.get_parent()
 	if parent is CharacterBody2D:
 		var characterLight: PointLight2D = parent.find_children("*", "PointLight2D")[0]
-		areasWithLavityEmitter.append({ "area": area, "light": characterLight, "characterForceBody": parent, "oppositeForceBody": null })
+		areasWithLavityEmitter.append({"area": area, "light": characterLight, "characterForceBody": parent, "oppositeForceBody": null})
 	else:
 		var lavityPointLight: PointLight2D = area.find_parent("LavityLightLight")
 		var oppositeForceBody: RigidBody2D = area.find_parent("OppositeForceBody")
-		areasWithLavityEmitter.append({ "area": area, "light": lavityPointLight, "oppositeForceBody": oppositeForceBody, "characterForceBody": null })
+		areasWithLavityEmitter.append({"area": area, "light": lavityPointLight, "oppositeForceBody": oppositeForceBody, "characterForceBody": null})
 
 func handleAreaExited(area: Area2D):
 	areasWithLavityEmitter = areasWithLavityEmitter.filter(func(it): return it.area != area)
@@ -50,17 +50,19 @@ func applyGravityToEntity(area: Area2D, oppositeForceBody: RigidBody2D = null, c
 
 
 func absorbLight(emitting: PointLight2D, absorbing: PointLight2D, delta: float = 1.0):
+	if not emitting.visible or not absorbing.visible:
+		return
 	var rComponent = emitting.color.r * absorbtionMult * delta
 	var gComponent = emitting.color.g * absorbtionMult * delta
 	var bComponent = emitting.color.b * absorbtionMult * delta
 	
-	if absorbing.color.r  + rComponent < 1.0:
+	if absorbing.color.r + rComponent < 1.0:
 		absorbing.color.r += rComponent
 		emitting.color.r -= rComponent
 	if absorbing.color.g + gComponent < 1.0:
 		absorbing.color.g += gComponent
 		emitting.color.g -= gComponent
-	if absorbing.color.b  + bComponent < 1.0:
+	if absorbing.color.b + bComponent < 1.0:
 		absorbing.color.b += bComponent
 		emitting.color.b -= bComponent
 
@@ -73,7 +75,7 @@ func _physics_process(delta: float) -> void:
 			var characterForceBody: CharacterBody2D = a.characterForceBody
 				
 			# Entities absorbing color become visible
-			if absorbingLight and lavityEmitter:
+			if absorbingLight and lavityEmitter and absorbingLight.visible and lavityEmitter.visible:
 				absorbingLight.enabled = true
 				absorbLight(lavityEmitter, absorbingLight, delta)
 				
