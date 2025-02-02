@@ -16,6 +16,7 @@ var ttl := initTimeToLive
 @onready var perceptionArea := $PerceptionArea
 @onready var stateLabel := $StateLabel
 @onready var buzzSound := $Buzz
+@onready var popSound := $Pop
 @onready var cpuParticles: CPUParticles2D = $CPUParticles2D
 
 var percievedMotes: Array[Mote] = []
@@ -68,7 +69,7 @@ func getPreferredMote() -> Mote:
 	
 func getBuzzVolumeFromVelocity() -> float:
 	var veloScore = abs(velocity.x) + abs(velocity.y)
-	return max(remap(veloScore, 0, 2*velocityComponent.maxVelocity, -20.0, -11.0), -11.0)
+	return max(remap(veloScore, 0, 2 * velocityComponent.maxVelocity, -25.0, -10.0), -10.0)
 
 func setAccelerationFromLightColor() -> void:
 	var lightSum = ColorUtils.sumColor(lanternlight.color)
@@ -89,8 +90,10 @@ func spawnDeathMotes():
 		get_tree().root.add_child(deathMote)
 		deathMote.changeColor(preferredMoteColor)
 		deathMote.rigidBody.apply_central_impulse(Vector2(i * randi_range(-DEATH_MOTE_IMPULSE, DEATH_MOTE_IMPULSE), i * randi_range(-DEATH_MOTE_IMPULSE, 200)))
-		deathMote.pop.pitch_scale = remap(i, 1, 5, 0.7, 1.2)
-		deathMote.pop.play()
+		# TODO: Why is this not playing a sound?
+
+		popSound.pitch_scale = remap(i, 1, 5, 0.5, 1.5)
+		popSound.playing = true
 
 
 

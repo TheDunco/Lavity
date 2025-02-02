@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://cikbfevvqein8"]
+[gd_scene load_steps=22 format=3 uid="uid://cikbfevvqein8"]
 
 [ext_resource type="Texture2D" uid="uid://waqjud1jctcg" path="res://assets/Laternfly/full-lanternfly_0001.png" id="1_5xslm"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.gd" id="1_h7r8b"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyStateMachine.gd" id="12_ca0ae"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyIdleState.gd" id="13_glu8v"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForMoteState.gd" id="14_7adte"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="15_cvib8"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForPlayerState.gd" id="15_edsqd"]
 [ext_resource type="AudioStream" uid="uid://dramu25offpyw" path="res://assets/audio/sfx/lanternfly_buzz.wav" id="16_4g3op"]
 
@@ -144,4 +145,10 @@ script = ExtResource("15_edsqd")
 stream = ExtResource("16_4g3op")
 autoplay = true
 panning_strength = 1.5
+bus = &"SFX"
+
+[node name="Pop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_cvib8")
+volume_db = -12.496
+panning_strength = 1.2
 bus = &"SFX"
