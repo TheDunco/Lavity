@@ -1,4 +1,4 @@
-[gd_resource type="AudioBusLayout" load_steps=5 format=3 uid="uid://bxyufkdtat7v8"]
+[gd_resource type="AudioBusLayout" load_steps=9 format=3 uid="uid://bxyufkdtat7v8"]
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_rnqm0"]
 resource_name = "Reverb"
@@ -15,12 +15,31 @@ cutoff_hz = 20000.0
 resonance = 0.25
 db = 2
 
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_dl0ce"]
+resource_name = "Limiter"
+
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_f667w"]
 resource_name = "LowPassFilter"
 cutoff_hz = 2077.0
 
 [sub_resource type="AudioEffectStereoEnhance" id="AudioEffectStereoEnhance_qtsgn"]
 resource_name = "StereoEnhance"
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_5oami"]
+resource_name = "Compressor"
+threshold = -7.5
+gain = 4.4
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_vxe8h"]
+resource_name = "Reverb"
+room_size = 1.0
+damping = 0.49
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_daqq6"]
+resource_name = "Limiter"
+threshold_db = -0.5
+soft_clip_db = 1.6
+soft_clip_ratio = 7.6
 
 [resource]
 bus/1/name = &"ReverbBus"
@@ -45,6 +64,8 @@ bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = &"ReverbBus"
+bus/3/effect/0/effect = SubResource("AudioEffectLimiter_dl0ce")
+bus/3/effect/0/enabled = true
 bus/4/name = &"WingFlap"
 bus/4/solo = false
 bus/4/mute = false
@@ -55,3 +76,15 @@ bus/4/effect/0/effect = SubResource("AudioEffectLowPassFilter_f667w")
 bus/4/effect/0/enabled = true
 bus/4/effect/1/effect = SubResource("AudioEffectStereoEnhance_qtsgn")
 bus/4/effect/1/enabled = false
+bus/5/name = &"Polychrome"
+bus/5/solo = false
+bus/5/mute = false
+bus/5/bypass_fx = false
+bus/5/volume_db = 0.0
+bus/5/send = &"Master"
+bus/5/effect/0/effect = SubResource("AudioEffectCompressor_5oami")
+bus/5/effect/0/enabled = true
+bus/5/effect/1/effect = SubResource("AudioEffectReverb_vxe8h")
+bus/5/effect/1/enabled = true
+bus/5/effect/2/effect = SubResource("AudioEffectLimiter_daqq6")
+bus/5/effect/2/enabled = true

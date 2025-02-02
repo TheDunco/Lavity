@@ -1,67 +1,72 @@
-[gd_scene load_steps=14 format=3 uid="uid://dodqn52rhxmtd"]
+[gd_scene load_steps=15 format=3 uid="uid://dodqn52rhxmtd"]
 
 [ext_resource type="Script" path="res://scenes/Music/Dynamic/DynamicMusicComponent.gd" id="1_5jkix"]
-[ext_resource type="AudioStream" uid="uid://kqju7twg6op0" path="res://assets/audio/music/Polychrome/Polychrome_Red.wav" id="2_lngrj"]
-[ext_resource type="AudioStream" uid="uid://doilskn0oei27" path="res://assets/audio/music/Polychrome/Polychrome_RedOrange.wav" id="3_ve2hx"]
-[ext_resource type="AudioStream" uid="uid://cdxns3o65d6il" path="res://assets/audio/music/Polychrome/Polychrome_Orange.wav" id="4_tksik"]
-[ext_resource type="AudioStream" uid="uid://67exihlv45xv" path="res://assets/audio/music/Polychrome/Polychrome_YellowOrange.wav" id="5_03d6c"]
-[ext_resource type="AudioStream" uid="uid://oy3y4wyj324e" path="res://assets/audio/music/Polychrome/Polychrome_Yellow.wav" id="6_ivmbd"]
-[ext_resource type="AudioStream" uid="uid://d30yro1gq06fa" path="res://assets/audio/music/Polychrome/Polychrome_YellowGreen.wav" id="7_ga7c2"]
-[ext_resource type="AudioStream" uid="uid://bmw2cq1hxkw36" path="res://assets/audio/music/Polychrome/Polychrome_Green.wav" id="8_om2bp"]
-[ext_resource type="AudioStream" uid="uid://b4d3jdqfdctji" path="res://assets/audio/music/Polychrome/Polychrome_BlueGreen.wav" id="9_3wjts"]
-[ext_resource type="AudioStream" uid="uid://c7wrvf3ds4op6" path="res://assets/audio/music/Polychrome/Polychrome_Blue.wav" id="10_ci62a"]
-[ext_resource type="AudioStream" uid="uid://dl5ykiinxqmju" path="res://assets/audio/music/Polychrome/Polychrome_BluePurple.wav" id="11_ykfux"]
-[ext_resource type="AudioStream" uid="uid://bj3dfwrf7jtrs" path="res://assets/audio/music/Polychrome/Polychrome_Purple.wav" id="12_nhf2x"]
-[ext_resource type="AudioStream" uid="uid://c1ei5wq5u8kj5" path="res://assets/audio/music/Polychrome/Polychrome_Pink.wav" id="13_y5kcw"]
+[ext_resource type="AudioStream" uid="uid://b5ikw3vieb683" path="res://assets/audio/music/Polychrome/v2/Polychrome_Red.wav" id="2_mo8w8"]
+[ext_resource type="AudioStream" uid="uid://lawdbcxarx2o" path="res://assets/audio/music/Polychrome/v2/Polychrome_RedOrange.wav" id="3_12i7g"]
+[ext_resource type="AudioStream" uid="uid://chmhh8u2grcxk" path="res://assets/audio/music/Polychrome/v2/Polychrome_Orange.wav" id="4_75seg"]
+[ext_resource type="AudioStream" uid="uid://ddm4kvi6nvsld" path="res://assets/audio/music/Polychrome/v2/Polychrome_YellowOrange.wav" id="5_gvi1l"]
+[ext_resource type="AudioStream" uid="uid://cvf18yabpvusw" path="res://assets/audio/music/Polychrome/v2/Polychrome_Yellow.wav" id="6_vsvcy"]
+[ext_resource type="AudioStream" uid="uid://bpd0rfa2b1u2p" path="res://assets/audio/music/Polychrome/v2/Polychrome_YellowGreen.wav" id="7_fhrth"]
+[ext_resource type="AudioStream" uid="uid://bwr4cgpween7r" path="res://assets/audio/music/Polychrome/v2/Polychrome_Green.wav" id="8_j01sv"]
+[ext_resource type="AudioStream" uid="uid://cbuk6kumnqeeo" path="res://assets/audio/music/Polychrome/v2/Polychrome_GreenBlue.wav" id="9_54mqp"]
+[ext_resource type="AudioStream" uid="uid://w57iuqyg3nw3" path="res://assets/audio/music/Polychrome/v2/Polychrome_Blue.wav" id="10_8pbao"]
+[ext_resource type="AudioStream" uid="uid://cuq0xpbrjnmfp" path="res://assets/audio/music/Polychrome/v2/Polychrome_BluePurple.wav" id="11_d1in1"]
+[ext_resource type="AudioStream" uid="uid://hqf6pm8vx5e4" path="res://assets/audio/music/Polychrome/v2/Polychrome_Purple.wav" id="12_va45e"]
+[ext_resource type="AudioStream" uid="uid://p3wnffkqcj7m" path="res://assets/audio/music/Polychrome/v2/Polychrome_Pink.wav" id="13_u78ot"]
+[ext_resource type="AudioStream" uid="uid://ni42ylurrwkp" path="res://assets/audio/music/Polychrome/v2/Swell.wav" id="14_ef3nk"]
 
 [node name="DynamicMusicComponent" type="AudioStreamPlayer" node_paths=PackedStringArray("ColorTracks")]
 script = ExtResource("1_5jkix")
 ColorTracks = [NodePath("Red"), NodePath("RedOrange"), NodePath("Orange"), NodePath("YellowOrange"), NodePath("Yellow"), NodePath("YellowGreen"), NodePath("Green"), NodePath("BlueGreen"), NodePath("Blue"), NodePath("BluePurple"), NodePath("Purple"), NodePath("Pink")]
 
 [node name="Red" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_lngrj")
-bus = &"Music"
+stream = ExtResource("2_mo8w8")
+bus = &"Polychrome"
 
 [node name="RedOrange" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ve2hx")
-bus = &"Music"
+stream = ExtResource("3_12i7g")
+bus = &"Polychrome"
 
 [node name="Orange" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_tksik")
-bus = &"Music"
+stream = ExtResource("4_75seg")
+bus = &"Polychrome"
 
 [node name="YellowOrange" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_03d6c")
-bus = &"Music"
+stream = ExtResource("5_gvi1l")
+bus = &"Polychrome"
 
 [node name="Yellow" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_ivmbd")
-bus = &"Music"
+stream = ExtResource("6_vsvcy")
+bus = &"Polychrome"
 
 [node name="YellowGreen" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_ga7c2")
-bus = &"Music"
+stream = ExtResource("7_fhrth")
+bus = &"Polychrome"
 
 [node name="Green" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_om2bp")
-bus = &"Music"
+stream = ExtResource("8_j01sv")
+bus = &"Polychrome"
 
 [node name="BlueGreen" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_3wjts")
-bus = &"Music"
+stream = ExtResource("9_54mqp")
+bus = &"Polychrome"
 
 [node name="Blue" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_ci62a")
-bus = &"Music"
+stream = ExtResource("10_8pbao")
+bus = &"Polychrome"
 
 [node name="BluePurple" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_ykfux")
-bus = &"Music"
+stream = ExtResource("11_d1in1")
+bus = &"Polychrome"
 
 [node name="Purple" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_nhf2x")
-bus = &"Music"
+stream = ExtResource("12_va45e")
+bus = &"Polychrome"
 
 [node name="Pink" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_y5kcw")
-bus = &"Music"
+stream = ExtResource("13_u78ot")
+bus = &"Polychrome"
+
+[node name="Swell" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_ef3nk")
+bus = &"Polychrome"
