@@ -11,7 +11,7 @@ class_name VelocityComponent
 
 @export_category("Sprite Effect Config")
 @export var animationSpeedVeloMult := 100.0
-@export var animationSpeedVeloTamingConst := 7.0
+@export var animationSpeedVeloTamingConst := 6.2
 @export var bypassAutoOrientation := false
 
 func _ready():

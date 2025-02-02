@@ -37,7 +37,7 @@ bus = &"Polychrome"
 
 [node name="Yellow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_vsvcy")
-bus = &"Polychrome"
+bus = &"Yellow"
 
 [node name="YellowGreen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_fhrth")
@@ -45,7 +45,7 @@ bus = &"Polychrome"
 
 [node name="Green" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_j01sv")
-bus = &"Polychrome"
+bus = &"Green"
 
 [node name="BlueGreen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_54mqp")
@@ -69,4 +69,5 @@ bus = &"Polychrome"
 
 [node name="Swell" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_ef3nk")
+volume_db = -19.838
 bus = &"Polychrome"

@@ -212,12 +212,12 @@ spriteFrameToPlaySound = 2
 [node name="WingFlap1" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
 scale = Vector2(2.5, 2.5)
 stream = ExtResource("10_0jq3m")
-volume_db = -10.0
+volume_db = -5.0
 bus = &"WingFlap"
 
 [node name="WingFlap2" type="AudioStreamPlayer2D" parent="FlippingSprite/WingFlapSounds"]
 stream = ExtResource("11_cty4c")
-volume_db = -10.0
+volume_db = -5.0
 bus = &"WingFlap"
 
 [node name="Individual-leg0001" type="Sprite2D" parent="FlippingSprite"]

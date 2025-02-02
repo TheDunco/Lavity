@@ -5,7 +5,9 @@
 - [x] Make a Hero Text system to display objectives, goals, challenges, and messages like winning
 - [x] Make ColorPassableArea work for motes instead of the player light now that we have scrolling
 - [ ] Add enemies to maze that try to fight you for the limited light available
-	- [ ] Lanternfly
+	- [x] Lanternfly
+	- [ ] Doppelganger: looks like and follows the player, must repulse to get it further away (always goes to the minimum distance to the player and when the player moves away that gets closer. Resets on repulse).
+	- [ ] Lightning bug: gains light instead of losing it, food for maze
 	- [ ] Frog/Toad/Lizard (eats all bug types)
 	- [ ] Spider (w/ web)
 	- [ ] Venus Fly Trap that spawns motes to lure bug types in
