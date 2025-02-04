@@ -5,10 +5,11 @@ class_name Firefly
 @export var healRate := 0.00015
 
 @onready var stateLabel: Label = $StateLabel
-@onready var velocityComponent = $VelocityComponent
+@onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var perceptionArea: Area2D = $PerceptionArea
 @onready var lavityLight: LavityLight = $LavityLight
 @onready var targetColor := ColorUtils.randColorFromSet()
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 var percievedBodies: Array[CharacterBody2D] = []
 var _prevPosition := global_position
@@ -29,6 +30,8 @@ func _ready() -> void:
 	perceptionArea.connect("body_exited", bodyExitedPerceptionArea)
 	SignalBus.connect("lanternflyFreeing", func(fly): percievedBodies.erase(fly))
 	lavityLight.light.color = targetColor
+	particles.color = targetColor
+	particles.color.a = GlobalConfig.ENTITY_PARTICLES_ALPHA
 	
 func _physics_process(_delta):
 	_prevPosition = global_position
@@ -44,6 +47,7 @@ func _process(delta):
 		lightVisibleTime -= delta
 	else:
 		lavityLight.light.visible = !lavityLight.light.visible
+		particles.emitting = !particles.emitting
 		lightVisibleTime = 2.0
 	
 	var blackLikeness = ColorUtils.scoreColorLikeness(lavityLight.light.color, Color.BLACK)

@@ -5,7 +5,7 @@ class_name LanternflySearchingForMoteState
 var timeStuck := 0.0
 
 func enter():
-	lanternfly.stateLabel.text = "Searching for mote"
+	lanternfly.stateLabel.text = "Mote"
 
 func exit():
 	timeStuck = 0.0

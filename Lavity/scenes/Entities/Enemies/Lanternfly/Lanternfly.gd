@@ -90,8 +90,6 @@ func setAccelerationFromLightColor() -> void:
 
 const DEATH_MOTE_IMPULSE := 2000
 func spawnDeathMotes():
-	# This is causing issues: https://github.com/godotengine/godot/issues/52112 
-	# Maybe CPU particles would work better?
 	var particles = particlesScene.instantiate()
 	particles.global_position = global_position
 	get_tree().root.add_child(particles)
@@ -114,7 +112,7 @@ func _process(delta: float):
 	buzzSound.volume_db = getBuzzVolumeFromVelocity()
 	setAccelerationFromLightColor()
 	cpuParticles.color = lanternlight.color
-	cpuParticles.color.a = 0.25;
+	cpuParticles.color.a = GlobalConfig.ENTITY_PARTICLES_ALPHA
 	if ColorUtils.isColorDying(lanternlight.color):
 		ttl -= delta
 		if ttl < 0.0:

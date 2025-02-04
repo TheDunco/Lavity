@@ -1,4 +1,4 @@
-extends CharacterBody2D 
+extends CharacterBody2D
 class_name Player
 
 @export var worldEnvironment: WorldEnvironment
@@ -10,7 +10,7 @@ class_name Player
 @export var hueRotationSpeed := 2.0
 @export var abilityCutoff := 0.15
 @export var moteDrainPercentage := 10
-@export var repulseActiveTime := 2.5 
+@export var repulseActiveTime := 2.5
 @export var decayRate := 0.00015
 @export var longevityEffectiveness := 0.00016
 @export var damageReductionEffectiveness := 0.001
@@ -54,7 +54,7 @@ var repulseTime = 0.0
 
 var stats := {
 	"damageReduction": 0.5,
-	"hunger" : 0.5,
+	"hunger": 0.5,
 	"speed": 0.5,
 	"sonar": 0.5,
 	"stealth": 0.5,
@@ -106,7 +106,7 @@ func handleContinuousInput(delta):
 	if Input.is_action_just_pressed("auto_flip"):
 		velocityComponent.bypassAutoOrientation = !velocityComponent.bypassAutoOrientation
 		
-	if Input.is_action_just_pressed("toggle_flashlight") :
+	if Input.is_action_just_pressed("toggle_flashlight"):
 		if playerLight.enabled and stats["stealth"] > STEALTH_FLASHLIGHT_CUTOFF:
 			playerLight.enabled = false
 			particles.process_mode = Node.PROCESS_MODE_DISABLED
@@ -142,7 +142,7 @@ func handleContinuousInput(delta):
 func _getStatsFromColor(currentColor: Color) -> Dictionary:
 	var statsToSet := {
 		"damageReduction": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.RED) * baseStatsMult,
-		"hunger" : ColorUtils.scoreColorLikeness(currentColor, ColorUtils.ORANGE) * baseStatsMult,
+		"hunger": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.ORANGE) * baseStatsMult,
 		"speed": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.GREEN) * baseStatsMult,
 		"sonar": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.BLUE) * baseStatsMult,
 		"stealth": ColorUtils.scoreColorLikeness(currentColor, ColorUtils.BLUE_PURPLE) * baseStatsMult,
@@ -228,7 +228,7 @@ func _process(delta):
 		particles.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	particles.color = playerLight.color
-	particles.color.a = 0.25;
+	particles.color.a = GlobalConfig.ENTITY_PARTICLES_ALPHA
 	
 	if deathTimer.is_stopped():
 		if lowPassEffect.cutoff_hz <= 20000:
@@ -267,9 +267,9 @@ func rotateColorHue(amount: float) -> void:
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
-		if event.button_index ==  MOUSE_BUTTON_WHEEL_UP and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			rotateColorHue(hueRotationSpeed)
-		if event.button_index ==  MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			rotateColorHue(-hueRotationSpeed)
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
 			playerLight.color = ColorUtils.YELLOW

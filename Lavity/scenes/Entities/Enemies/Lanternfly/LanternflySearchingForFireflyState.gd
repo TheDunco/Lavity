@@ -2,7 +2,7 @@ extends LanternflyState
 class_name LanternflySearchingForFireflyState
 
 func enter():
-	lanternfly.stateLabel.text = "Searching for Firefly"
+	lanternfly.stateLabel.text = "Firefly"
 
 func transitionToPlayer() -> bool:
 	if lanternfly.percievedFireflies.is_empty() and lanternfly.percievedPlayer:

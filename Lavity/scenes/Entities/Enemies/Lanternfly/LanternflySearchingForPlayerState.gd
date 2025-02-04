@@ -2,7 +2,7 @@ extends LanternflyState
 class_name LanternflySearchingForPlayerState
 
 func enter():
-	lanternfly.stateLabel.text = "Searching for player"
+	lanternfly.stateLabel.text = "Player"
 
 func update(_delta: float):
 	if lanternfly.global_position.distance_to(lanternfly.percievedPlayer.global_position) > lanternfly.percievedPlayer.trackableDistance or not lanternfly.percievedPlayer.isTrackableByEnemy:

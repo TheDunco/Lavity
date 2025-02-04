@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1x6e0bi4gjo0"]
+[gd_scene load_steps=15 format=3 uid="uid://b1x6e0bi4gjo0"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/Firefly.gd" id="1_pi4ac"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_56n36"]
@@ -9,6 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="5_y4je2"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyStateMachine.gd" id="6_b7k3y"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="9_r8v3q"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_15xc2"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_dkeon"]
+interpolation_mode = 2
+colors = PackedColorArray(0.60183, 0.60183, 0.60183, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c02me"]
+gradient = SubResource("Gradient_dkeon")
+width = 10
+height = 10
+fill = 1
+fill_from = Vector2(0.5, 0.525641)
+fill_to = Vector2(0.777778, 0.213675)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_cab34"]
 animations = [{
@@ -28,6 +43,21 @@ radius = 481.067
 collision_layer = 41
 collision_mask = 49
 script = ExtResource("1_pi4ac")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_15xc2")
+amount = 4
+lifetime = 3.0
+speed_scale = 7.36
+explosiveness = 0.06
+randomness = 0.09
+texture = SubResource("GradientTexture2D_c02me")
+emission_shape = 1
+emission_sphere_radius = 33.59
+direction = Vector2(-1, 0)
+spread = 4.47
+gravity = Vector2(0, 0)
+initial_velocity_max = 37.27
 
 [node name="FireflyCollisionShape" type="CollisionShape2D" parent="."]
 rotation = 1.5708
