@@ -21,6 +21,7 @@ var ttl := initTimeToLive
 
 var percievedMotes: Array[Mote] = []
 var percievedPlayer: Player = null
+var percievedFireflies: Array[Firefly] = []
 
 func onPerceptionAreaEntered(body: Node2D) -> void:
 	if body is RigidBody2D:
@@ -30,10 +31,14 @@ func onPerceptionAreaEntered(body: Node2D) -> void:
 	elif body is Player:
 		if percievedPlayer == null:
 			percievedPlayer = body
+	elif body is Firefly:
+		percievedFireflies.append(body)
 
 func onPerceptionAreaExited(body: Node2D) -> void:
 	if body is RigidBody2D:
 		percievedMotes.erase(body.get_parent())
+	elif body is Firefly:
+		percievedFireflies.erase(body)
 
 func _ready() -> void:
 	super._ready()
@@ -65,6 +70,15 @@ func getPreferredMote() -> Mote:
 	if ret == null and not percievedMotes.is_empty():
 		return percievedMotes[0]
 	return ret
+
+func getPreferredFirefly() -> Firefly:
+	var ret = null
+	for firefly in percievedFireflies:
+		if scoreLightDesire(firefly.lavityLight.light) > scoreLightDesire(firefly.lavityLight.light):
+			ret = firefly
+	if ret == null and not percievedFireflies.is_empty():
+		return percievedFireflies[0]
+	return ret
 	
 func getBuzzVolumeFromVelocity() -> float:
 	var veloScore = abs(velocity.x) + abs(velocity.y)
@@ -95,7 +109,6 @@ func spawnDeathMotes():
 		popSound.playing = true
 
 
-
 func _process(delta: float):
 	lanternlight.color = ColorUtils.takeGeneralColorDamage(lanternlight.color, lanternLightDecayRate)
 	buzzSound.volume_db = getBuzzVolumeFromVelocity()
@@ -116,4 +129,3 @@ func _physics_process(delta: float) -> void:
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	move_and_slide()
-		

@@ -30,10 +30,10 @@ func disable():
 		ColorTracks[i].stop()
 
 func scoreToVolume(score: float, trackIndex: int):
-	ColorTracks[trackIndex].volume_db = remap(score, 0.0, 2.0, MIN_VOLUME , 0)
+	ColorTracks[trackIndex].volume_db = remap(score, 0.0, 2.0, MIN_VOLUME, 0)
 
 # Synisthesia
 func setDynamicTrackVolume(color: Color):
 	for i in range(numDynamicTracks):
 		var whiteScore = ColorUtils.scoreColorLikeness(color, Color.WHITE)
-		scoreToVolume(whiteScore + ColorUtils.scoreColorLikeness(color, ColorUtils.colorsArray[i]), i)
+		scoreToVolume(whiteScore / 2 + ColorUtils.scoreColorLikeness(color, ColorUtils.colorsArray[i]), i)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cikbfevvqein8"]
+[gd_scene load_steps=23 format=3 uid="uid://cikbfevvqein8"]
 
 [ext_resource type="Texture2D" uid="uid://waqjud1jctcg" path="res://assets/Laternfly/full-lanternfly_0001.png" id="1_5xslm"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.gd" id="1_h7r8b"]
@@ -11,6 +11,7 @@
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="11_2qfmd"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyStateMachine.gd" id="12_ca0ae"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyIdleState.gd" id="13_glu8v"]
+[ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForFireflyState.gd" id="14_2re5x"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForMoteState.gd" id="14_7adte"]
 [ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="15_cvib8"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForPlayerState.gd" id="15_edsqd"]
@@ -111,7 +112,7 @@ debug_color = Color(0.7, 0, 0.047, 0.185)
 
 [node name="PerceptionArea" type="Area2D" parent="."]
 collision_layer = 512
-collision_mask = 272
+collision_mask = 304
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PerceptionArea"]
 shape = SubResource("CircleShape2D_6scuy")
@@ -139,6 +140,9 @@ script = ExtResource("14_7adte")
 
 [node name="searchingForPlayer" type="Node" parent="StateMachine"]
 script = ExtResource("15_edsqd")
+
+[node name="searchingForFirefly" type="Node" parent="StateMachine"]
+script = ExtResource("14_2re5x")
 
 [node name="Buzz" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("16_4g3op")

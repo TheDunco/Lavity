@@ -16,6 +16,8 @@ func update(delta: float):
 		transition.emit(self, "searchingForMote")
 	elif lanternfly.percievedPlayer:
 		transition.emit(self, "searchingForPlayer")
+	elif not lanternfly.percievedFireflies.is_empty():
+		transition.emit(self, "searchingForFirefly")
 
 	if wanderTime > 0:
 		wanderTime -= delta
