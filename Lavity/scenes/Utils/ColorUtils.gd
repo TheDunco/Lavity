@@ -65,17 +65,17 @@ func randColor(maxRgb := MAX_RAND_RGB) -> Color:
 func randColorFromSet() -> Color:
 	return colorsArray.pick_random()
 
-# Given two colors, return a score of how similar they are
+## Given two colors, return a score of how similar they are
 func scoreColorLikeness(color1: Color, color2: Color) -> float:
-	# Calculate the difference between the RGB values of the two colors
+	# Calculate the difference (distance within the color space) between the RGB values of the two colors
 	var rDiff = abs(color1.r - color2.r)
 	var gDiff = abs(color1.g - color2.g)
 	var bDiff = abs(color1.b - color2.b)
 
-	# Calculate the average difference
+	# Calculate the average distance
 	var avgDiff: float = (rDiff + gDiff + bDiff) / 3.0
 
-	# Score is the inverse of the average difference
+	# Likeness score is the inverse of the average distance
 	return 1.0 - avgDiff
 
 func sumColor(color: Color) -> float:
