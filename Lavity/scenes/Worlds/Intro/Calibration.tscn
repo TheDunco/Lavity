@@ -1,20 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://d12q1vqxgheka"]
+[gd_scene load_steps=13 format=3 uid="uid://d12q1vqxgheka"]
 
 [ext_resource type="Script" path="res://scenes/Worlds/Intro/Calibration.gd" id="1_dusoh"]
+[ext_resource type="PackedScene" uid="uid://cr6aiu061ntkf" path="res://scenes/Utils/WhiteBackground.tscn" id="2_l8r8t"]
 [ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="2_of2qx"]
 [ext_resource type="PackedScene" uid="uid://d2270agfvuxg" path="res://scenes/Utils/DirectionalDarkness.tscn" id="3_qu6uu"]
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="4_32jju"]
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="5_h3ofl"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="6_sq42d"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="7_g2xrv"]
-
-[sub_resource type="Gradient" id="Gradient_k2uff"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5idfy"]
-gradient = SubResource("Gradient_k2uff")
-width = 2048
-height = 2048
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_sdmgg"]
 distance = -1000.0
@@ -34,14 +27,11 @@ distance = -1000.0
 [node name="Calibration" type="Node2D"]
 script = ExtResource("1_dusoh")
 
-[node name="WhiteBackground" type="Sprite2D" parent="."]
-scale = Vector2(10, 10)
-texture = SubResource("GradientTexture2D_5idfy")
+[node name="WhiteBackground" parent="." instance=ExtResource("2_l8r8t")]
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_of2qx")]
 
 [node name="DirectionalDarkness" parent="." instance=ExtResource("3_qu6uu")]
-position = Vector2(0, 0)
 
 [node name="Message" parent="." instance=ExtResource("4_32jju")]
 

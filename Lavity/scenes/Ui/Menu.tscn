@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://br4oisj0kpf2q"]
+[gd_scene load_steps=29 format=3 uid="uid://br4oisj0kpf2q"]
 
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
@@ -74,6 +74,20 @@ unicode = 102
 
 [sub_resource type="Shortcut" id="Shortcut_tnhjs"]
 events = [SubResource("InputEventKey_kd3sd")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_iaaaj"]
+device = -1
+keycode = 72
+unicode = 104
+
+[sub_resource type="InputEventKey" id="InputEventKey_55qtx"]
+device = -1
+shift_pressed = true
+keycode = 47
+unicode = 63
+
+[sub_resource type="Shortcut" id="Shortcut_5vkx3"]
+events = [SubResource("InputEventKey_iaaaj"), SubResource("InputEventKey_55qtx")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_14bgr"]
 device = -1
@@ -558,7 +572,16 @@ layout_mode = 2
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Maze" type="Button" parent="Play/CenterContainer/VBoxContainer/MarginContainer"]
+[node name="HowTo" type="Button" parent="Play/CenterContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+tooltip_text = "Play around in the maze"
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_pq815")
+shortcut = SubResource("Shortcut_5vkx3")
+text = "How To Play?"
+
+[node name="Maze" type="Button" parent="Play/CenterContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tooltip_text = "Play around in the maze"
@@ -569,6 +592,7 @@ text = "Maze
 "
 
 [node name="LightEffectsWorld" type="Button" parent="Play/CenterContainer/VBoxContainer"]
+visible = false
 layout_mode = 2
 tooltip_text = "Used to test the effects different colors of light give you"
 mouse_default_cursor_shape = 2
@@ -600,6 +624,7 @@ text = "Back"
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
 [connection signal="pressed" from="Controls/CenterContainer/VSplitContainer/Back" to="." method="_on_options_back_pressed"]
-[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/MarginContainer/Maze" to="." method="_on_maze_pressed"]
+[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/MarginContainer/HowTo" to="." method="_on_how_to_pressed"]
+[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Maze" to="." method="_on_maze_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]

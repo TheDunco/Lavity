@@ -47,13 +47,13 @@ func setShowCalibrationReference(shown: bool):
 	calibrationReference.visible = shown
 
 func startButtonTween(object: Object, property: String, finalVal: Variant, duration: float) -> void:
-	var tween = create_tween()
+	var tween = create_tween().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(object, property, finalVal, duration)
 
 func buttonMouseEntered(button: Button) -> void:
 	button.pivot_offset = button.size / 2
 	GlobalSfx.playButtonHover()
-	startButtonTween(button, "scale", Vector2(1, 1.2) * buttonTweenIntensity, buttonTweenDuration)
+	startButtonTween(button, "scale", Vector2(1.05, 1) * buttonTweenIntensity, buttonTweenDuration)
 
 func buttonMouseExited(button: Button) -> void:
 	startButtonTween(button, "scale", Vector2.ONE, buttonTweenDuration)
@@ -240,3 +240,7 @@ func _on_controls_pressed() -> void:
 func _on_calibration_pressed() -> void:
 	GameFlow.switchScene("res://scenes/Worlds/Intro/Calibration.tscn")
 	GameFlow.switchToMenuMusic()
+
+func _on_how_to_pressed() -> void:
+	GameFlow.switchScene("res://scenes/Worlds/Intro/HowTo.tscn")
+	GameFlow.switchToDynamicMusic()

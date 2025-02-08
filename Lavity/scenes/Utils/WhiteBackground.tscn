@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr6aiu061ntkf"]
+
+[sub_resource type="Gradient" id="Gradient_k2uff"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5idfy"]
+gradient = SubResource("Gradient_k2uff")
+width = 2048
+height = 2048
+
+[node name="WhiteBackground" type="Sprite2D"]
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_5idfy")

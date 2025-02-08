@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://vnrxp3syqqs3"]
+
+[ext_resource type="Script" path="res://scenes/Worlds/Intro/HowTo.gd" id="1_4c1j7"]
+[ext_resource type="PackedScene" uid="uid://cr6aiu061ntkf" path="res://scenes/Utils/WhiteBackground.tscn" id="1_jdma8"]
+[ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="2_mrsg8"]
+[ext_resource type="PackedScene" uid="uid://d2270agfvuxg" path="res://scenes/Utils/DirectionalDarkness.tscn" id="3_2yacn"]
+[ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="4_64636"]
+[ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="5_cvb36"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="6_alhue"]
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="7_4lfsv"]
+
+[sub_resource type="Gradient" id="Gradient_k2uff"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_csctq"]
+gradient = SubResource("Gradient_k2uff")
+width = 540
+height = 540
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="HowTo" type="Node2D"]
+script = ExtResource("1_4c1j7")
+
+[node name="Background" parent="." instance=ExtResource("1_jdma8")]
+texture = SubResource("GradientTexture2D_csctq")
+metadata/_edit_group_ = true
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("2_mrsg8")]
+
+[node name="DirectionalDarkness" parent="." instance=ExtResource("3_2yacn")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "_directionalDarkness", "_worldEnvironment") instance=ExtResource("4_64636")]
+player = NodePath("../../Player")
+_directionalDarkness = NodePath("../../DirectionalDarkness")
+_worldEnvironment = NodePath("../../WorldEnvironment")
+
+[node name="Message" parent="." instance=ExtResource("5_cvb36")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("6_alhue")]
+position = Vector2(199, 121)
+worldEnvironment = NodePath("../WorldEnvironment")
+
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("7_4lfsv")]
+position = Vector2(199, 121)
+follow_target = NodePath("../Player")
