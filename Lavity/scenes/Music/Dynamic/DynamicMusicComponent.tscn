@@ -21,11 +21,11 @@ ColorTracks = [NodePath("Red"), NodePath("RedOrange"), NodePath("Orange"), NodeP
 
 [node name="Red" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_mo8w8")
-bus = &"Polychrome"
+bus = &"Red"
 
 [node name="RedOrange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_12i7g")
-bus = &"Polychrome"
+bus = &"RedOrange"
 
 [node name="Orange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_75seg")
@@ -33,7 +33,7 @@ bus = &"Orange"
 
 [node name="YellowOrange" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_gvi1l")
-bus = &"Polychrome"
+bus = &"YellowOrange"
 
 [node name="Yellow" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_vsvcy")
@@ -41,7 +41,7 @@ bus = &"Yellow"
 
 [node name="YellowGreen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_fhrth")
-bus = &"Polychrome"
+bus = &"YellowGreen"
 
 [node name="Green" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_j01sv")
@@ -49,23 +49,23 @@ bus = &"Green"
 
 [node name="BlueGreen" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_54mqp")
-bus = &"Polychrome"
+bus = &"BlueGreen"
 
 [node name="Blue" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_8pbao")
-bus = &"Polychrome"
+bus = &"Blue"
 
 [node name="BluePurple" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_d1in1")
-bus = &"Polychrome"
+bus = &"BluePurple"
 
 [node name="Purple" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_va45e")
-bus = &"Polychrome"
+bus = &"Purple"
 
 [node name="Pink" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("13_u78ot")
-bus = &"Polychrome"
+bus = &"Pink"
 
 [node name="Swell" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_ef3nk")

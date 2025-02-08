@@ -26,7 +26,7 @@ class_name Player
 @export var deathTimerBaseSeconds := 7
 var repulseTime = 0.0
 
-@export var STEALTH_FLASHLIGHT_CUTOFF := 0.82
+@export var STEALTH_FLASHLIGHT_CUTOFF := 0.7
 
 @onready var reverbBusIndex := AudioServer.get_bus_index("ReverbBus")
 @onready var lowPassEffect: AudioEffectLowPassFilter = AudioServer.get_bus_effect(reverbBusIndex, 1)
@@ -272,8 +272,8 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
 			rotateColorHue(-hueRotationSpeed)
 		if event.button_index == MOUSE_BUTTON_MIDDLE and event.pressed:
-			playerLight.color = ColorUtils.YELLOW
-			SignalBus.emit_signal("displayHeroText", "[center][wave]Cheat[/wave]: Set color to yellow[/center]")
+			playerLight.color = ColorUtils.getMostSimilarColor(playerLight.color)
+			SignalBus.displayHeroText.emit("[center][wave]Cheat[/wave]: Set [rainbow]color[/rainbow] to full[/center]")
 		if event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
 			if stats["repulse"] > abilityCutoff and repulseTime <= 0.0:
 				takeDamage(bleed * 2)

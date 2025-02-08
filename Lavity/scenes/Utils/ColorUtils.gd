@@ -5,20 +5,34 @@ const MAX_RAND_RGB := 4.0
 const MIN_RAND_RGB := 0.0
 
 const RED = Color(1, 0, 0) # Health
-const RED_ORANGE = Color(1, 0.65, 0)
-const ORANGE = Color(1, 0.65, 0) # Hunger (player light radius)
+const RED_ORANGE = Color(1, 0.5, 0)
+const ORANGE = Color(1, 0.75, 0) # Hunger (player light radius)
 const YELLOW_ORANGE = Color(1, 0.8, 0)
 const YELLOW = Color(1, 1, 0, 1) # Vision
-const YELLOW_GREEN = Color(0.65, 1, 0)
-const GREEN = Color(0, 1, 0, 1) # Speed
-const BLUE_GREEN = Color(0, 0.65, 0.65)
+const YELLOW_GREEN = Color(0.75, 1, 0)
+const GREEN = Color(0, 1, 0) # Speed
+const BLUE_GREEN = Color(0, 0.75, 0.75)
 const BLUE = Color(0, 0, 1) # Sonar
 const BLUE_PURPLE = Color(0.5, 0, 1) # Stealth
-const PURPLE = Color(0.8, 0, 0.8)
-const PINK = Color(0.8, 0, 0.65) # Longevity
+const PURPLE = Color(0.5, 0, 0.5)
+const PINK = Color(1, 0, 1) # Longevity
 
 ## An array of all of the color constants
 const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK, Color.BLACK]
+const colorNames := [
+	"red",
+	"red_orange",
+	"orange",
+	"yellow_orange",
+	"yellow",
+	"yellow_green",
+	"green",
+	"blue_green",
+	"blue",
+	"blue_purple",
+	"purple",
+	"pink"
+]
 
 ## A dictionary of the colors mapped to their snake_case names
 const colors = {
@@ -69,7 +83,19 @@ func sumColor(color: Color) -> float:
 
 func sumVector2(vector2: Vector2) -> float:
 	return vector2.x + vector2.y
-	
+
+func getMostSimilarColor(color: Color) -> Color:
+	var mostCommon: Color = colorsArray[0]
+	for colorName in colorNames:
+		var comparisonColor = colors[colorName]
+		var currentScore = scoreColorLikeness(comparisonColor, mostCommon)
+		var newScore = scoreColorLikeness(comparisonColor, color)
+		print_debug(colorName, " score: ", newScore)
+		if newScore > currentScore:
+			mostCommon = comparisonColor
+	print_debug("\n===========================\n")
+	return mostCommon
+		
 # Class that handles hue rotation for RGB values
 # Based on https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color
 class RGBRotate:

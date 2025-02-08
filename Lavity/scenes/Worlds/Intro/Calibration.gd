@@ -14,7 +14,7 @@ const calibrationText: Array[String] = [
 	"[center]The glow settings are preference, but don't go overboard for the best experience[/center]",
 	"[center]Don't forget to match the darkness with the reference if you change the glow[/center]",
 	"\n[center]Take this time to adjust the volume to your liking",
-	"\n[center]When finished, you may return to the main menu"
+	"\n[center]When finished, return to the main menu or jump right in!"
 ]
 
 func instantiateCalibrationMote(color: Color) -> void:
