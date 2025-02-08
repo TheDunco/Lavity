@@ -6,7 +6,7 @@ func tweenHeroTextOpacity(outOnly := false) -> void:
 	var heroTextOpacityTween = create_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 	if not outOnly:
 		heroTextOpacityTween.tween_property(heroText, "modulate:a", 1.0, 1.0)
-	heroTextOpacityTween.tween_property(heroText, "modulate:a", 0.0, 10.0)
+	heroTextOpacityTween.tween_property(heroText, "modulate:a", 0.0, GlobalConfig.HERO_TEXT_TWEEN_TIME)
 
 func displayHeroText(text: String) -> void:
 	GameFlow.heroText = text
@@ -18,6 +18,5 @@ func displayLastText() -> void:
 
 func _ready() -> void:
 	heroText.text = GameFlow.heroText
-	SignalBus.connect("displayHeroText", displayHeroText)
+	SignalBus.displayHeroText.connect(displayHeroText)
 	tweenHeroTextOpacity(true)
-	

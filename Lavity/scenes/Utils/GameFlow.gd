@@ -30,6 +30,9 @@ func gameOver():
 	heroText = gameOverText
 	SignalBus.emit_signal("displayHeroText", gameOverText)
 
+
+# TODO: The current song somehow needs to be more global for this to work right 
+# Perhaps instead of signals, use a global var and just change it. Nothing else needs to know that the song changed
 func switchToDynamicMusic():
 	GlobalDynamicMusicComponent.enable()
 	MusicComponent.pause()

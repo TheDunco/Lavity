@@ -20,3 +20,4 @@
 	- [ ] 
 
 - [ ] Fix velocity and decay such that it's all based on _delta
+- [ ] Music-synced light energy on the main menu

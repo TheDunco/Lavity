@@ -26,5 +26,5 @@ randomizeColorOnReady = true
 [node name="Pop" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_wwi4m")
 volume_db = -19.237
-panning_strength = 1.5
+panning_strength = 1.75
 bus = &"SFX"

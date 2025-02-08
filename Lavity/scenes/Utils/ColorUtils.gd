@@ -14,12 +14,13 @@ const GREEN = Color(0, 1, 0, 1) # Speed
 const BLUE_GREEN = Color(0, 0.65, 0.65)
 const BLUE = Color(0, 0, 1) # Sonar
 const BLUE_PURPLE = Color(0.5, 0, 1) # Stealth
-const PURPLE = Color(0.8, 0, 0.8) 
+const PURPLE = Color(0.8, 0, 0.8)
 const PINK = Color(0.8, 0, 0.65) # Longevity
 
+## An array of all of the color constants
 const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK, Color.BLACK]
-const colorNames := ["red", "red_orange", "orange", "yellow_orange", "yellow", "yellow_green", "green", "blue_green", "blue", "blue_purple", "purple", "pink", "black"]
 
+## A dictionary of the colors mapped to their snake_case names
 const colors = {
 	"red": RED,
 	"red_orange": RED_ORANGE,
@@ -35,6 +36,7 @@ const colors = {
 	"pink": PINK
 }
 
+## The lowest sum of a light COLOR to be considered "alive"
 const LIGHT_SUM_DEATH_CUTOFF := 0.03
 
 func isColorDying(color: Color) -> bool:
@@ -64,6 +66,9 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 
 func sumColor(color: Color) -> float:
 	return color.r + color.g + color.b
+
+func sumVector2(vector2: Vector2) -> float:
+	return vector2.x + vector2.y
 	
 # Class that handles hue rotation for RGB values
 # Based on https://stackoverflow.com/questions/8507885/shift-hue-of-an-rgb-color
@@ -84,7 +89,7 @@ class RGBRotate:
 
 	# Method to set the hue rotation based on degrees
 	func set_hue_rotation(degrees: float) -> void:
-		var cosA = cos(deg_to_rad(degrees))  # Using deg_to_rad for converting degrees to radians
+		var cosA = cos(deg_to_rad(degrees)) # Using deg_to_rad for converting degrees to radians
 		var sinA = sin(deg_to_rad(degrees))
 		
 		# Standard hue rotation matrix for RGB colors

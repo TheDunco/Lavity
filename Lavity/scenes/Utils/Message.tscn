@@ -29,6 +29,7 @@ custom_minimum_size = Vector2(1000, 400)
 layout_mode = 2
 mouse_filter = 2
 theme = ExtResource("2_2ado6")
+theme_override_font_sizes/mono_font_size = 26
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "

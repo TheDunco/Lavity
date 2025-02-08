@@ -35,8 +35,10 @@ release_ms = 485.0
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_vxe8h"]
 resource_name = "Reverb"
-room_size = 0.85
-wet = 0.18
+room_size = 0.1
+damping = 0.0
+spread = 0.5
+wet = 0.4
 
 [sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_daqq6"]
 resource_name = "Limiter"
@@ -89,7 +91,7 @@ bus/5/solo = false
 bus/5/mute = false
 bus/5/bypass_fx = false
 bus/5/volume_db = -3.54298
-bus/5/send = &"Master"
+bus/5/send = &"Music"
 bus/5/effect/0/effect = SubResource("AudioEffectCompressor_5oami")
 bus/5/effect/0/enabled = true
 bus/5/effect/1/effect = SubResource("AudioEffectReverb_vxe8h")
@@ -108,7 +110,7 @@ bus/7/name = &"Yellow"
 bus/7/solo = false
 bus/7/mute = false
 bus/7/bypass_fx = false
-bus/7/volume_db = -2.91688
+bus/7/volume_db = -3.11736
 bus/7/send = &"Polychrome"
 bus/8/name = &"Orange"
 bus/8/solo = false

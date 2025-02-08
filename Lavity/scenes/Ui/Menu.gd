@@ -21,9 +21,9 @@ class_name Menu
 @onready var brightnessSlider: HSlider = find_child("BrightnessSlider")
 @onready var darknessSlider: HSlider = find_child("DarknessSlider")
 @onready var glowIntensitySlider: HSlider = find_child("GlowSlider")
-@onready var glowStrengthSlider: HSlider  = find_child("GlowStrengthSlider")
-@onready var bloomSlider: HSlider  = find_child("BloomSlider")
-@onready var volumeSlider: HSlider  = find_child("VolumeSlider")
+@onready var glowStrengthSlider: HSlider = find_child("GlowStrengthSlider")
+@onready var bloomSlider: HSlider = find_child("BloomSlider")
+@onready var volumeSlider: HSlider = find_child("VolumeSlider")
 
 @onready var Buttons = find_children("", "Button", true)
 @onready var Sliders = find_children("", "Slider", true)
@@ -43,7 +43,7 @@ func startButtonTween(object: Object, property: String, finalVal: Variant, durat
 
 func buttonMouseEntered(button: Button) -> void:
 	button.pivot_offset = button.size / 2
-	GlobalSfx.playButtonHover() 
+	GlobalSfx.playButtonHover()
 	startButtonTween(button, "scale", Vector2(1, 1.2) * buttonTweenIntensity, buttonTweenDuration)
 
 func buttonMouseExited(button: Button) -> void:
@@ -202,3 +202,6 @@ func _on_play_pressed() -> void:
 func _on_controls_pressed() -> void:
 	topLevelMenu.hide()
 	controls.show()
+
+func _on_intro_pressed() -> void:
+	GameFlow.switchScene("res://scenes/Worlds/Intro/Intro.tscn")

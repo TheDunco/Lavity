@@ -5,14 +5,18 @@ class_name State
 
 signal transition(state: State, newStateName: String)
 
+## Will be called on the leading edge when the state is entered
 func enter():
 	pass
 
+## Will be called when the state is exited
 func exit():
 	pass
 
+## Will be called for each CPU update (_process) cycle
 func update(_delta: float):
 	pass
 
+## Will be called for each GPU update (_physics_process) cycle
 func physicsUpdate(_delta: float):
 	pass
