@@ -1,6 +1,9 @@
 extends RepulsableBody
 class_name Firefly
 
+# TODO: Make fireflies tend to group together and sync up their blinks!
+# Perhaps with a FireflyCommunicatingWithFirefly state or the like
+
 @export var acceleration := 16
 @export var healRate := 0.00015
 

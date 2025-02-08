@@ -4,6 +4,7 @@ class_name LanternflyIdleState
 var moveDirection: Vector2 = Vector2.ZERO
 var wanderTime: float = 0.0
 
+# TODO: Make this slightly less random: make it go to the inverse normal of the wall with a little variation so it bounces around more instead of getting stuck so often
 func randomizeWander():
 	moveDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	wanderTime = randf_range(2, 3)
