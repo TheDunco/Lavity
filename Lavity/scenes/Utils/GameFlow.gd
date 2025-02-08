@@ -12,6 +12,8 @@ func _ready():
 	current_scene = root.get_child(root.get_child_count() - 1)
 	
 func switchScene(res_path: String) -> void:
+	for mote in get_tree().get_nodes_in_group("motes"):
+		mote.queue_free()
 	call_deferred("_deferred_switch_scene", res_path)
 
 func _deferred_switch_scene(res_path):

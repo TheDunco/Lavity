@@ -42,6 +42,7 @@ func onPerceptionAreaExited(body: Node2D) -> void:
 
 func _ready() -> void:
 	super._ready()
+	self.add_to_group("lanternflies")
 	perceptionArea.connect("body_entered", onPerceptionAreaEntered)
 	perceptionArea.connect("body_exited", onPerceptionAreaExited)
 	acceleration = lanternflyBaseAcceleration

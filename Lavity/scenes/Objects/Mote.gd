@@ -18,6 +18,7 @@ func getLightColor() -> Color:
 func _ready() -> void:
 	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)
 	assert(decayRate < 1.0)
+	self.add_to_group("motes")
 
 func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 	var directionToPlayer = global_position.direction_to(playerGlobalPosition)

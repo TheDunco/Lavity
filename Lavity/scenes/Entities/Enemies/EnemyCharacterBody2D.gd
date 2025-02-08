@@ -18,10 +18,11 @@ var type: EnemyType = EnemyType.BUG
 var preferredMoteColor = ColorUtils.randColorFromSet()
 
 func moveToward(pos: Vector2) -> void:
-	velocity += global_position.direction_to(pos) * (acceleration + (global_position.distance_to(pos) * (1/100)))
+	velocity += global_position.direction_to(pos) * (acceleration + (global_position.distance_to(pos) * (1 / 100)))
 
 func _ready():
 	super._ready()
+	self.add_to_group("enemies")
 	if playAnimatedSprite:
 		flippingSprite.play()
 	

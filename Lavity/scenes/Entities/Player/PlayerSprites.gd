@@ -17,8 +17,8 @@ func _process(_delta: float) -> void:
 	if velocitySum < VELOCITY_SUM_CUTOFF:
 		return
 
-	var legRotation := remap(velocitySum, 0, velocityComponent.maxVelocity/2, 0, 40)
-	var antennaRotation := remap(velocitySum, 0, velocityComponent.maxVelocity/2, 0, 30)
+	var legRotation := remap(velocitySum, 0, velocityComponent.maxVelocity, 0, 40)
+	var antennaRotation := remap(velocitySum, 0, velocityComponent.maxVelocity, 0, 30)
 
 	if legRotation > 20.0:
 		legRotation += randf_range(-2.5, 2.5)
