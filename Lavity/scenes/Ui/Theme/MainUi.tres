@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dkc02dgojmkxd"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://dkc02dgojmkxd"]
 
 [ext_resource type="StyleBox" uid="uid://dldp3dbs1imkr" path="res://scenes/Ui/Theme/ButtonHover.tres" id="1_3uqs2"]
 [ext_resource type="FontFile" uid="uid://d3aygyl05vyn7" path="res://assets/fonts/Michroma-Regular.ttf" id="1_v08xb"]
@@ -7,6 +7,35 @@
 [ext_resource type="FontFile" uid="uid://cr0qtjrbqt8cx" path="res://assets/fonts/Monofett-Regular.ttf" id="5_ywj8v"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ys1ie"]
+
+[sub_resource type="Gradient" id="Gradient_2fbo2"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.570447, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_svklj"]
+gradient = SubResource("Gradient_2fbo2")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.521368, 0.495726)
+fill_to = Vector2(0.880342, 0.111111)
+
+[sub_resource type="Gradient" id="Gradient_bh01f"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.459268, 0.459268, 0.459268, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nm8rd"]
+gradient = SubResource("Gradient_bh01f")
+width = 1
+height = 8
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_igtj0"]
+color = Color(0, 0, 0, 0.882353)
+grow_begin = -2.0
+grow_end = -2.0
+thickness = 8
 
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
@@ -17,6 +46,9 @@ Button/styles/focus = SubResource("StyleBoxEmpty_ys1ie")
 Button/styles/hover = ExtResource("1_3uqs2")
 Button/styles/normal = ExtResource("2_vjffh")
 Button/styles/pressed = ExtResource("3_cogmd")
+HSlider/icons/grabber = SubResource("GradientTexture2D_svklj")
+HSlider/icons/tick = SubResource("GradientTexture2D_nm8rd")
+HSlider/styles/slider = SubResource("StyleBoxLine_igtj0")
 Label/fonts/font = ExtResource("1_v08xb")
 RichTextLabel/fonts/mono_font = ExtResource("5_ywj8v")
 RichTextLabel/fonts/normal_font = ExtResource("1_v08xb")

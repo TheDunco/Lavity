@@ -237,139 +237,203 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="Brightness" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Audio_Visual_Split" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Visual" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split"]
+layout_mode = 2
+
+[node name="VisualLabel" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Visual"
+
+[node name="Brightness" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual"]
 layout_mode = 2
 tooltip_text = "Adjust until the inner brightest ring of your light is just gone"
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Brightness"]
 layout_mode = 2
 text = "Brightness"
 
-[node name="BrightnessSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness"]
+[node name="BrightnessSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Brightness"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_pq815")
 min_value = 0.01
 max_value = 15.0
 step = 0.001
 value = 1.0
 
-[node name="Darkness" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Darkness" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual"]
 layout_mode = 2
 tooltip_text = "Adjust until the the reference below matches the color of the calibration screen's background"
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Darkness"]
 layout_mode = 2
 text = "Darkness"
 
-[node name="DarknessSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
+[node name="DarknessSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Darkness"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_pq815")
 min_value = 0.9
 max_value = 1.1
 step = 0.001
 value = 0.98
 
-[node name="CalibrationReference" type="TextureButton" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
+[node name="CalibrationReference" type="TextureButton" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Darkness"]
 visible = false
 layout_mode = 2
 tooltip_text = "Calibration reference: Adjust the settings such that this bar dissappears into the background"
 texture_normal = SubResource("GradientTexture2D_uuluh")
 
-[node name="Glow" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Glow" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow"]
 layout_mode = 2
 text = "Glow"
 
-[node name="Sliders" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow"]
+[node name="Sliders" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow"]
 layout_mode = 2
 
-[node name="GlowIntensity" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders"]
+[node name="GlowIntensity" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowIntensity"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowIntensity/VBoxContainer"]
 layout_mode = 2
 text = "Intensity"
 
-[node name="GlowSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer"]
+[node name="GlowSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowIntensity/VBoxContainer"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_pq815")
 min_value = 0.5
 max_value = 5.0
 step = 0.001
 value = 1.0
 
-[node name="GlowStrength" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders"]
+[node name="GlowStrength" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowStrength"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label2" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer"]
+[node name="Label2" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowStrength/VBoxContainer"]
 layout_mode = 2
 text = "Strength"
 
-[node name="GlowStrengthSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer"]
+[node name="GlowStrengthSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowStrength/VBoxContainer"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_pq815")
 max_value = 2.0
 step = 0.001
 value = 1.4
 
-[node name="Bloom" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders"]
+[node name="Bloom" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/Bloom"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/Bloom/VBoxContainer"]
 layout_mode = 2
 text = "Bloom"
 
-[node name="BloomSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer"]
+[node name="BloomSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/Bloom/VBoxContainer"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_pq815")
 max_value = 0.2
 step = 0.001
 value = 0.02
 
-[node name="Volume_master" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Audio" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume_master"]
+[node name="AudioLabel" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "Volume
 "
 
-[node name="MasterVolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume_master"]
+[node name="Volume_Master" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Master"]
+layout_mode = 2
+text = "Master"
+
+[node name="MasterVolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Master"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme = ExtResource("1_pq815")
 min_value = -24.0
 max_value = 8.0
 tick_count = 32
 
-[node name="Reset to Default" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Volume_Music" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio"]
 layout_mode = 2
-mouse_default_cursor_shape = 2
-text = "Reset To Default"
 
-[node name="Calibrate" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Music"]
+layout_mode = 2
+text = "Music
+"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Music"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_pq815")
+min_value = -24.0
+max_value = 10.0
+tick_count = 32
+
+[node name="Volume_Sfx" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Sfx"]
+layout_mode = 2
+text = "SFX"
+
+[node name="SfxVolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Sfx"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_pq815")
+min_value = -18.0
+max_value = 10.0
+tick_count = 32
+
+[node name="ButtonsMargin" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin"]
+layout_mode = 2
+
+[node name="Calibrate_Reset" type="HBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer"]
+layout_mode = 2
+
+[node name="Calibrate" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset"]
 layout_mode = 2
 size_flags_horizontal = 3
 tooltip_text = "Play one of the various game modes"
@@ -377,13 +441,19 @@ mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_g2b4x")
 text = "Calibrate"
 
-[node name="Fullscreen" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Reset to Default" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+mouse_default_cursor_shape = 2
+text = "Reset To Default"
+
+[node name="Fullscreen" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_tnhjs")
 text = "Fullscreen"
 
-[node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer"]
 layout_mode = 2
 mouse_default_cursor_shape = 2
 shortcut = ExtResource("4_r8qa2")
@@ -517,16 +587,18 @@ text = "Back"
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Next Song" to="." method="_on_next_song_pressed"]
 [connection signal="pressed" from="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/DarknessSlider" to="." method="_on_darkness_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider" to="." method="_on_glow_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer/GlowStrengthSlider" to="." method="_on_glow_strength_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer/BloomSlider" to="." method="_on_bloom_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume_master/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
-[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Reset to Default" to="." method="_on_reset_to_default_pressed"]
-[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Calibrate" to="." method="_on_calibration_pressed"]
-[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
-[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Brightness/BrightnessSlider" to="." method="_on_brightness_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Darkness/DarknessSlider" to="." method="_on_darkness_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider" to="." method="_on_glow_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/GlowStrength/VBoxContainer/GlowStrengthSlider" to="." method="_on_glow_strength_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Visual/Glow/Sliders/Bloom/VBoxContainer/BloomSlider" to="." method="_on_bloom_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Master/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Music/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Sfx/SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset/Calibrate" to="." method="_on_calibration_pressed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset/Reset to Default" to="." method="_on_reset_to_default_pressed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
 [connection signal="pressed" from="Controls/CenterContainer/VSplitContainer/Back" to="." method="_on_options_back_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/MarginContainer/Maze" to="." method="_on_maze_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
