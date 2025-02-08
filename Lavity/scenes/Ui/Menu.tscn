@@ -57,7 +57,15 @@ colors = PackedColorArray(0.18, 0.18, 0.18, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_uuluh"]
 gradient = SubResource("Gradient_n4022")
 width = 500
-height = 20
+height = 40
+
+[sub_resource type="InputEventKey" id="InputEventKey_uv337"]
+device = -1
+keycode = 67
+unicode = 99
+
+[sub_resource type="Shortcut" id="Shortcut_g2b4x"]
+events = [SubResource("InputEventKey_uv337")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_kd3sd"]
 device = -1
@@ -66,14 +74,6 @@ unicode = 102
 
 [sub_resource type="Shortcut" id="Shortcut_tnhjs"]
 events = [SubResource("InputEventKey_kd3sd")]
-
-[sub_resource type="InputEventKey" id="InputEventKey_uv337"]
-device = -1
-keycode = 73
-unicode = 105
-
-[sub_resource type="Shortcut" id="Shortcut_g2b4x"]
-events = [SubResource("InputEventKey_uv337")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_14bgr"]
 device = -1
@@ -147,19 +147,24 @@ fit_content = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tooltip_text = "Play one of the various game modes"
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_pq815")
 shortcut = SubResource("Shortcut_e3cs7")
 text = "PLAY"
 
 [node name="MainMenuButton" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Return to the main menu"
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 shortcut = SubResource("Shortcut_hp4v3")
 text = "Main Menu"
 
 [node name="Options" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Options to fine tune volume and graphical settings"
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 shortcut = SubResource("Shortcut_d84pg")
 text = "Options"
@@ -167,6 +172,7 @@ text = "Options"
 [node name="Controls" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "How to play the game"
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 shortcut = SubResource("Shortcut_sxqe4")
 text = "Controls"
@@ -174,12 +180,14 @@ text = "Controls"
 [node name="Next Song" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 text = "Next Song"
 
 [node name="Quit" type="Button" parent="TopLevelMenu/MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Quit the game"
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 shortcut = SubResource("Shortcut_3ulya")
 text = "Quit
@@ -263,8 +271,10 @@ max_value = 1.1
 step = 0.001
 value = 0.98
 
-[node name="Reference" type="TextureButton" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
+[node name="CalibrationReference" type="TextureButton" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness"]
+visible = false
 layout_mode = 2
+tooltip_text = "Calibration reference: Adjust the settings such that this bar dissappears into the background"
 texture_normal = SubResource("GradientTexture2D_uuluh")
 
 [node name="Glow" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
@@ -338,15 +348,15 @@ max_value = 0.2
 step = 0.001
 value = 0.02
 
-[node name="Volume" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+[node name="Volume_master" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume"]
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume_master"]
 layout_mode = 2
 text = "Volume
 "
 
-[node name="VolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume"]
+[node name="MasterVolumeSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume_master"]
 custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -356,15 +366,26 @@ tick_count = 32
 
 [node name="Reset to Default" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 text = "Reset To Default"
+
+[node name="Calibrate" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Play one of the various game modes"
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_g2b4x")
+text = "Calibrate"
 
 [node name="Fullscreen" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_tnhjs")
 text = "Fullscreen"
 
 [node name="Back" type="Button" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 shortcut = ExtResource("4_r8qa2")
 text = "Back"
 
@@ -373,25 +394,31 @@ visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="Controls"]
 layout_mode = 2
 offset_right = 1281.0
 offset_bottom = 720.0
+mouse_filter = 2
 
 [node name="VSplitContainer" type="VSplitContainer" parent="Controls/CenterContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Controls/CenterContainer/VSplitContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Controls/CenterContainer/VSplitContainer/HBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 250
 
 [node name="Keybord_Mouse" type="RichTextLabel" parent="Controls/CenterContainer/VSplitContainer/HBoxContainer/MarginContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("1_pq815")
 theme_override_fonts/bold_font = ExtResource("5_wtnq4")
 theme_override_font_sizes/mono_font_size = 24
@@ -406,8 +433,8 @@ text = "[b]Keyboard[/b]
 
 [b]Mouse[/b]
   - [code]Scroll Wheel[/code] to shift color hue
-  - [code]Left Click[/code] to fire a [rainbow]mote[/rainbow]
-  - [code]Right Click[/code] to repulse enemies and [rainbow]motes[/rainbow]
+  - [code]Left Click[/code] to fire a [rainbow freq=0.2 sat=0.5]mote[/rainbow]
+  - [code]Right Click[/code] to [shake rate=10.0 level=5]repulse[/shake] enemies and [rainbow freq=0.2 sat=0.5]motes[/rainbow]
       - [i]Hold to bleed extra color[/i]
 "
 fit_content = true
@@ -416,6 +443,7 @@ tab_size = 8
 [node name="Shortcuts" type="RichTextLabel" parent="Controls/CenterContainer/VSplitContainer/HBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("1_pq815")
 theme_override_fonts/bold_font = ExtResource("5_wtnq4")
 theme_override_font_sizes/mono_font_size = 24
@@ -424,8 +452,8 @@ bbcode_enabled = true
 text = "[b]Shortcuts[/b] [i]From the main menu[/i]
   - [code]Escape[/code] to show/hide the menu
   - [code]Space Space[/code] to progress through the menu to the game
-  - [code]Space I[/code] to run through the intro
   -  [code]O F[/code] for fullscreen
+  -  [code]O C[/code] for calibrate settings
   - [code]B[/code] to go back from any menu
   - [code]Q[/code] to quit the game
   - [code]N[/code] for next menu song"
@@ -436,6 +464,7 @@ tab_size = 8
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_default_cursor_shape = 2
 shortcut = ExtResource("4_r8qa2")
 text = "Back"
 
@@ -454,13 +483,6 @@ offset_bottom = 717.0
 [node name="VBoxContainer" type="VBoxContainer" parent="Play/CenterContainer"]
 layout_mode = 2
 
-[node name="Intro" type="Button" parent="Play/CenterContainer/VBoxContainer"]
-custom_minimum_size = Vector2(300, 0)
-layout_mode = 2
-tooltip_text = "Play one of the various game modes"
-shortcut = SubResource("Shortcut_g2b4x")
-text = "Intro"
-
 [node name="MarginContainer" type="MarginContainer" parent="Play/CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 10
@@ -470,6 +492,7 @@ theme_override_constants/margin_bottom = 10
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 tooltip_text = "Play around in the maze"
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 shortcut = SubResource("Shortcut_7s2aa")
 text = "Maze
@@ -478,11 +501,13 @@ text = "Maze
 [node name="LightEffectsWorld" type="Button" parent="Play/CenterContainer/VBoxContainer"]
 layout_mode = 2
 tooltip_text = "Used to test the effects different colors of light give you"
+mouse_default_cursor_shape = 2
 theme = ExtResource("1_pq815")
 text = "Light Effects Testing"
 
 [node name="Back" type="Button" parent="Play/CenterContainer/VBoxContainer"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 shortcut = ExtResource("4_r8qa2")
 text = "Back"
 
@@ -497,12 +522,12 @@ text = "Back"
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowIntensity/VBoxContainer/GlowSlider" to="." method="_on_glow_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/GlowStrength/VBoxContainer/GlowStrengthSlider" to="." method="_on_glow_strength_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Glow/Sliders/Bloom/VBoxContainer/BloomSlider" to="." method="_on_bloom_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Volume_master/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Reset to Default" to="." method="_on_reset_to_default_pressed"]
+[connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Calibrate" to="." method="_on_calibration_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]
 [connection signal="pressed" from="Controls/CenterContainer/VSplitContainer/Back" to="." method="_on_options_back_pressed"]
-[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Intro" to="." method="_on_intro_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/MarginContainer/Maze" to="." method="_on_maze_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]

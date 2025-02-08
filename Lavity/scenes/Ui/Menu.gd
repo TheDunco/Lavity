@@ -23,7 +23,11 @@ class_name Menu
 @onready var glowIntensitySlider: HSlider = find_child("GlowSlider")
 @onready var glowStrengthSlider: HSlider = find_child("GlowStrengthSlider")
 @onready var bloomSlider: HSlider = find_child("BloomSlider")
-@onready var volumeSlider: HSlider = find_child("VolumeSlider")
+@onready var masterVolumeSlider: HSlider = find_child("MasterVolumeSlider")
+
+@onready var masterBusIndex := AudioServer.get_bus_index("Master")
+@onready var sfxBusIndex := AudioServer.get_bus_index("SFX")
+@onready var musicBusIndex := AudioServer.get_bus_index("Music")
 
 @onready var Buttons = find_children("", "Button", true)
 @onready var Sliders = find_children("", "Slider", true)
@@ -35,7 +39,10 @@ class_name Menu
 @onready var options = $Options
 @onready var controls = $Controls
 @onready var play = $Play
+@onready var calibrationReference: TextureButton = $Options/AspectRatioContainer/MarginContainer/VBoxContainer/Darkness/CalibrationReference
 
+func setShowCalibrationReference(shown: bool):
+	calibrationReference.visible = shown
 
 func startButtonTween(object: Object, property: String, finalVal: Variant, duration: float) -> void:
 	var tween = create_tween()
@@ -66,10 +73,10 @@ func loadOptions():
 	if glowStrength and glowStrength > 0:
 		glowStrengthSlider.value = glowStrength
 		
-	var volume = Settings.getSetting("VOLUME")
-	if volume and volume > volumeSlider.min_value:
-		volumeSlider.value = volume
-		_on_volume_slider_value_changed(volume)
+	var masterVolume = Settings.getSetting("MASTER_VOLUME")
+	if masterVolume and masterVolume > masterVolumeSlider.min_value:
+		masterVolumeSlider.value = masterVolume
+		_on_master_volume_slider_value_changed(masterVolume)
 
 func _ready():
 	loadOptions()
@@ -146,11 +153,10 @@ func _on_bloom_slider_value_changed(value: float) -> void:
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_bloom = value
 
-func _on_volume_slider_value_changed(value):
-	Settings.setSetting("VOLUME", value)
+func _on_master_volume_slider_value_changed(value: float):
+	Settings.setSetting("MASTER_VOLUME", value)
 	GlobalSfx.playButtonHover()
-	var masterBusIndex := AudioServer.get_bus_index("Master")
-	if value == volumeSlider.min_value:
+	if value == masterVolumeSlider.min_value:
 		AudioServer.set_bus_mute(masterBusIndex, true)
 	else:
 		AudioServer.set_bus_mute(masterBusIndex, false)
@@ -167,11 +173,11 @@ func _on_song_changed(to: String) -> void:
 	song.text = labelFormat % to
 
 const DEFAULTS := {
-	"brightness": 1.208,
+	"brightness": 1.358,
 	"darkness": 0.98,
-	"glow_intensity": 2.77,
-	"glow_strength": 1.4,
-	"bloom": 0.02
+	"glow_intensity": 1.942,
+	"glow_strength": 0.868,
+	"bloom": 0.04
 }
 
 func _on_reset_to_default_pressed() -> void:
@@ -203,5 +209,5 @@ func _on_controls_pressed() -> void:
 	topLevelMenu.hide()
 	controls.show()
 
-func _on_intro_pressed() -> void:
-	GameFlow.switchScene("res://scenes/Worlds/Intro/Intro.tscn")
+func _on_calibration_pressed() -> void:
+	GameFlow.switchScene("res://scenes/Worlds/Intro/Calibration.tscn")
