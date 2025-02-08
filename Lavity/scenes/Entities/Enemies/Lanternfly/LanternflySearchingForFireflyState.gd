@@ -6,13 +6,13 @@ func enter():
 
 func transitionToPlayer() -> bool:
 	if lanternfly.percievedFireflies.is_empty() and lanternfly.percievedPlayer:
-		transition.emit("searchingForPlayer")
+		transition.emit(self, "searchingForPlayer")
 		return true
 	return false
 
 func transitionToMote() -> bool:
 	if lanternfly.percievedFireflies.is_empty() and not lanternfly.percievedMotes.is_empty():
-		transition.emit("searchingForMote")
+		transition.emit(self, "searchingForMote")
 		return true
 	return false
 
