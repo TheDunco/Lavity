@@ -6,10 +6,12 @@ var wanderTime: float = 0.0
 
 func randomizeWander():
 	moveDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
-	wanderTime = randf_range(1, 3)
+	wanderTime = randf_range(2, 3)
 
 func enter():
 	randomizeWander()
+	if lanternfly:
+		lanternfly.stateLabel.text = "Idle"
 
 func update(delta: float):
 	if lanternfly.percievedMotes.size() > 0:

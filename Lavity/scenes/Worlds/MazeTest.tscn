@@ -11,8 +11,8 @@
 [node name="MazeTest" type="Node2D"]
 
 [node name="ProceduralMazeTilemap" parent="." instance=ExtResource("1_twmfe")]
-width = 2
-height = 2
+width = 3
+height = 3
 
 [node name="Firefly" parent="." instance=ExtResource("3_q8liu")]
 position = Vector2(270, 270)
