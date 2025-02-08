@@ -84,6 +84,9 @@ func sumColor(color: Color) -> float:
 func sumVector2(vector2: Vector2) -> float:
 	return vector2.x + vector2.y
 
+## This isn't working exactly as expected because the differences aren't normalized
+## Because each color has a slightly different total RGB value, this calculation can be somewhat innacturate
+## I tried calculating scores differently but it didn't work well
 func getMostSimilarColor(color: Color) -> Color:
 	var mostCommon: Color = colorsArray[0]
 	for colorName in colorNames:
@@ -93,7 +96,6 @@ func getMostSimilarColor(color: Color) -> Color:
 		print_debug(colorName, " score: ", newScore)
 		if newScore > currentScore:
 			mostCommon = comparisonColor
-	print_debug("\n===========================\n")
 	return mostCommon
 		
 # Class that handles hue rotation for RGB values
