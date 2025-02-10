@@ -31,6 +31,7 @@ _worldEnvironment = NodePath("../../WorldEnvironment")
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("6_alhue")]
 position = Vector2(199, 121)
 worldEnvironment = NodePath("../WorldEnvironment")
+invulnerable = true
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("7_4lfsv")]
 position = Vector2(199, 121)
