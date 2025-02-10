@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://vnrxp3syqqs3"]
+[gd_scene load_steps=9 format=3 uid="uid://vnrxp3syqqs3"]
 
 [ext_resource type="Script" path="res://scenes/Worlds/Intro/HowTo.gd" id="1_4c1j7"]
 [ext_resource type="PackedScene" uid="uid://cr6aiu061ntkf" path="res://scenes/Utils/WhiteBackground.tscn" id="1_jdma8"]
@@ -9,22 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="6_alhue"]
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="7_4lfsv"]
 
-[sub_resource type="Gradient" id="Gradient_k2uff"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_csctq"]
-gradient = SubResource("Gradient_k2uff")
-width = 540
-height = 540
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [node name="HowTo" type="Node2D"]
 script = ExtResource("1_4c1j7")
 
 [node name="Background" parent="." instance=ExtResource("1_jdma8")]
-texture = SubResource("GradientTexture2D_csctq")
 metadata/_edit_group_ = true
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("2_mrsg8")]

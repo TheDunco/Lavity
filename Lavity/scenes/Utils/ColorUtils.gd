@@ -81,8 +81,9 @@ func scoreColorLikeness(color1: Color, color2: Color) -> float:
 func sumColor(color: Color) -> float:
 	return color.r + color.g + color.b
 
+## Returns the absolute sum of the vector
 func sumVector2(vector2: Vector2) -> float:
-	return vector2.x + vector2.y
+	return abs(vector2.x) + abs(vector2.y)
 
 ## This isn't working exactly as expected because the differences aren't normalized
 ## Because each color has a slightly different total RGB value, this calculation can be somewhat innacturate
