@@ -13,7 +13,7 @@ const howToText: Array[String] = [
 	"\n\n\n\n\n[center]Different colors give you different effects...[/center]",
 	"\n\n\n\n\n[center][color=yellow]Yellow determines how far you can see[/color][/center]", # 4
 	"\n\n\n\n\n[center][color=orange]Orange determines the size of your light[/color][/center]", # 5
-	"\n\n\n\n\n[center][color=green]Green determines your speed[/color][/center]", # 6
+	"\n\n\n\n\n[center][color=green]Green determines your acceleration[/color][/center]", # 6
 	"\n\n\n\n\n[center][color=rebecca_purple]Bluish purple (and similar) allows you to press [code]F[/code] to temporarily turn off your light for stealth purposes or to conserve light[/color][/center]", # 7
 	"\n\n\n\n\n[center][color=pink]Pink reduces the rate at which you lose color[/color][/center]", # 8
 	"\n\n\n\n\n[center]You can use [code]SCROLL WHEEL[/code] to shift the hue of your color manually...[/center]", # 9
@@ -74,6 +74,7 @@ func nextHowToText():
 			for color in ColorUtils.colors:
 				instantiateMote(color)
 		15: tweenToColor(Color.DIM_GRAY)
+		16: player.invulnerable = false
 	
 
 func _ready() -> void:

@@ -16,7 +16,7 @@ func getLightColor() -> Color:
 	return lavityLight.light.color
 
 func _ready() -> void:
-	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)
+	SignalBus.playerRepulsed.connect(handlePlayerRepulsed)
 	assert(decayRate < 1.0)
 	self.add_to_group("motes")
 
@@ -28,8 +28,8 @@ func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 		var force = repulseableDistance / 10
 		applyImpulse(-directionToPlayer, force)
 
-func applyImpulse(direction: Vector2, speed: float) -> void:
-	rigidBody.apply_central_impulse(direction * speed)
+func applyImpulse(direction: Vector2, magnitude: float) -> void:
+	rigidBody.apply_central_impulse(direction * magnitude)
 
 func changeColor(color: Color) -> void:
 	lavityLight.light.color = color

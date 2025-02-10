@@ -11,7 +11,7 @@ class_name MazeDoor
 var doorPoint: Vector2
 @onready var middlePoints = maze.getTileCenters()
 
-func onPass(player: Player) -> void:
+func onPass(_player: Player) -> void:
 	# TODO: Incrementally ramp up maze difficulty by increasing size, decreasing mote spawn chance, increasing enemies
 	GameFlow.switchScene("res://scenes/Ui/Menu2D.tscn")
 	SignalBus.emit_signal("displayHeroText", "[center][wave]\n\n\n\tYOU WIN![/wave]\nMore progression coming soon...[/center]")
@@ -26,8 +26,8 @@ func setDoorPoint():
 		setDoorPoint()
 
 func _ready() -> void:
-	var doorWidth = maze.tile_set.tile_size.x / 2
-	var doorHeight = maze.tile_set.tile_size.y / 2
+	var doorWidth = maze.tile_set.tile_size.x / 2.0
+	var doorHeight = maze.tile_set.tile_size.y / 2.0
 	var doorSize = Vector2(doorWidth, doorHeight)
 	
 	distortion.texture.width = doorWidth
@@ -47,4 +47,3 @@ func _ready() -> void:
 
 	SignalBus.connect("playerPassedMaze", onPass)
 	distortionMovement.play("move_distortion")
-	

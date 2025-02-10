@@ -49,6 +49,7 @@ follow_target = NodePath("../Player")
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("7_g2xrv")]
 worldEnvironment = NodePath("../WorldEnvironment")
+invulnerable = true
 
 [node name="WorldBorder" type="StaticBody2D" parent="."]
 

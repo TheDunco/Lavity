@@ -16,6 +16,7 @@ class_name Player
 @export var damageReductionEffectiveness := 0.001
 @export var hungerEffectiveness := 1.75
 @export var bleed := 0.25
+@export var invulnerable := false
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
@@ -258,7 +259,8 @@ func _on_damage_effects_timer_timeout() -> void:
 	setChromaticAbberration(false)
 
 func _on_death_timer_timeout() -> void:
-	GameFlow.gameOver()
+	if not invulnerable:
+		GameFlow.gameOver()
 
 func getLightColor() -> Color:
 	return playerLight.color
