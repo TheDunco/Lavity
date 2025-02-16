@@ -52,6 +52,15 @@ func _process(delta):
 		lavityLight.light.visible = !lavityLight.light.visible
 		particles.emitting = !particles.emitting
 		lightVisibleTime = 2.0
+		# This is more or less what I want to replace the above but it isn't working as expected because it's repelling from the player at 0% when it should be at 50% (equal/opposite)
+		# match lavityLight.process_mode:
+		# 	PROCESS_MODE_DISABLED:
+		# 		lavityLight.process_mode = PROCESS_MODE_INHERIT
+		# 		lavityLight.light.enabled = true
+		# 	PROCESS_MODE_INHERIT:
+		# 		lavityLight.process_mode = PROCESS_MODE_DISABLED
+		# 		lavityLight.light.enabled = false
+
 	
 	var blackLikeness = ColorUtils.scoreColorLikeness(lavityLight.light.color, Color.BLACK)
 	if blackLikeness > 0.80 and lavityLight.light.visible:
