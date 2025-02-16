@@ -16,7 +16,7 @@ const howToText: Array[String] = [
 	"\n\n\n\n\n[center][color=green]Green determines your acceleration[/color][/center]", # 6
 	"\n\n\n\n\n[center][color=rebecca_purple]Bluish purple (and similar) allows you to press [code]F[/code] to temporarily turn off your light for stealth purposes or to conserve light[/color][/center]", # 7
 	"\n\n\n\n\n[center][color=pink]Pink reduces the rate at which you lose color[/color][/center]", # 8
-	"\n\n\n\n\n[center]You can use [code]SCROLL WHEEL[/code] to shift the hue of your color manually...[/center]", # 9
+	"\n\n\n\n\n[center]You can use [code]SCROLL WHEEL[/code] to shift the hue of your color manually. You can change the sensitivity in the settings[/center]", # 9
 	"\n\n\n\n\n[center]White gives you the benefits of all colors, but white does not have hue, so hue shifting won't work[/center]", # 10
 	"\n\n\n\n\n[center]However, there are two ways to bleed color faster so you can gain more of a specific color[/center]", # 11
 	"\n\n\n\n\n[center][code]RIGHT CLICK[/code] to spend some color to repulse away objects and enemies. Hold to bleed even more color.[/center]", # 12

@@ -4,6 +4,25 @@ class_name GlobalSettings
 const SETTINGS_SAVE_PATH = "user://settings.save"
 const _SETTINGS_SECTION = "SETTINGS"
 
+const BRIGHTNESS = "BRIGHTNESS"
+const DARKNESS = "DARKNESS"
+const GLOW = "GLOW"
+const GLOW_STRENGTH = "GLOW_STRENGTH"
+const BLOOM = "BLOOM"
+const MASTER_VOLUME = "MASTER_VOLUME"
+const MUSIC_VOLUME = "MUSIC_VOLUME"
+const SFX_VOLUME = "SFX_VOLUME"
+const HUE_ROTATION_SPEED = "HUE_ROTATION_SPEED"
+
+const DEFAULTS := {
+	"brightness": 1.358,
+	"darkness": 0.98,
+	"glow_intensity": 1.942,
+	"glow_strength": 0.868,
+	"bloom": 0.04,
+	"hue_rotation_speed": 2.0
+}
+
 var settingsConfig = ConfigFile.new()
 var _loadOk = settingsConfig.load(SETTINGS_SAVE_PATH)
 

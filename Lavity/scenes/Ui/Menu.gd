@@ -26,13 +26,14 @@ class_name Menu
 @onready var masterVolumeSlider: HSlider = find_child("MasterVolumeSlider")
 @onready var musicVolumeSlider: HSlider = find_child("MusicVolumeSlider")
 @onready var sfxVolumeSlider: HSlider = find_child("SfxVolumeSlider")
+@onready var hueRotationSpeedSlider: HSlider = find_child("HueRotationSpeedSlider")
 
 @onready var masterBusIndex: int = AudioServer.get_bus_index("Master")
 @onready var musicBusIndex: int = AudioServer.get_bus_index("Music")
 @onready var sfxBusIndex: int = AudioServer.get_bus_index("SFX")
 
-@onready var Buttons = find_children("", "Button", true)
-@onready var Sliders = find_children("", "Slider", true)
+@onready var buttons = find_children("", "Button", true)
+@onready var sliders = find_children("", "HSlider", true)
 
 @onready var version: Label = find_child("Version")
 @onready var song: Label = find_child("Song")
@@ -59,36 +60,41 @@ func buttonMouseExited(button: Button) -> void:
 	startButtonTween(button, "scale", Vector2.ONE, buttonTweenDuration)
 
 func loadOptions():
-	var brightness = Settings.getSetting("BRIGHTNESS")
+	var brightness = Settings.getSetting(Settings.BRIGHTNESS)
 	if brightness and brightness > 0:
 		brightnessSlider.value = brightness
 
-	var darkness = Settings.getSetting("DARKNESS")
+	var darkness = Settings.getSetting(Settings.DARKNESS)
 	if darkness and darkness > 0:
 		darknessSlider.value = darkness
 		
-	var glow = Settings.getSetting("GLOW")
+	var glow = Settings.getSetting(Settings.GLOW)
 	if glow and glow > 0:
 		glowIntensitySlider.value = glow
 		
-	var glowStrength = Settings.getSetting("GLOW_STRENGTH")
+	var glowStrength = Settings.getSetting(Settings.GLOW_STRENGTH)
 	if glowStrength and glowStrength > 0:
 		glowStrengthSlider.value = glowStrength
 		
-	var masterVolume = Settings.getSetting("MASTER_VOLUME")
+	var masterVolume = Settings.getSetting(Settings.MASTER_VOLUME)
 	if masterVolume and masterVolume > masterVolumeSlider.min_value:
 		masterVolumeSlider.value = masterVolume
 		_on_master_volume_slider_value_changed(masterVolume)
 
-	var musicVolume = Settings.getSetting("MUSIC_VOLUME")
+	var musicVolume = Settings.getSetting(Settings.MUSIC_VOLUME)
 	if musicVolume and musicVolume > musicVolumeSlider.min_value:
 		musicVolumeSlider.value = musicVolume
 		_on_music_volume_slider_value_changed(musicVolume)
 
-	var sfxVolume = Settings.getSetting("SFX_VOLUME")
+	var sfxVolume = Settings.getSetting(Settings.SFX_VOLUME)
 	if sfxVolume and sfxVolume > sfxVolumeSlider.min_value:
 		sfxVolumeSlider.value = sfxVolume
 		_on_sfx_volume_slider_value_changed(sfxVolume)
+
+	var hueRotationSpeed = Settings.getSetting(Settings.HUE_ROTATION_SPEED)
+	if hueRotationSpeed and hueRotationSpeed > hueRotationSpeedSlider.min_value:
+		hueRotationSpeedSlider.value = hueRotationSpeed
+		_on_hue_rotation_slider_value_changed(hueRotationSpeed)
 
 func _ready():
 	loadOptions()
@@ -97,17 +103,16 @@ func _ready():
 	mainMenuButton.visible = showMainMenuButton
 	visible = visibleByDefault
 	
-	for button: Button in Buttons:
+	for button: Button in buttons:
 		if button:
 			button.connect("mouse_entered", func(): buttonMouseEntered(button))
 			button.connect("mouse_exited", func(): buttonMouseExited(button))
 			button.connect("pressed", GlobalSfx.playButtonClick)
 
-	for slider: Slider in Sliders:
+	for slider: Slider in sliders:
 		if slider:
 			slider.connect("drag_started", GlobalSfx.playButtonHover)
 			slider.connect("drag_ended", GlobalSfx.playButtonHover)
-			
 	
 # Main Menu
 func _on_maze_pressed():
@@ -140,30 +145,39 @@ func _on_options_back_pressed():
 	topLevelMenu.show()
 	Settings._saveSettings()
 
+
+####################
+# Volume Visual #
+####################
+
 func _on_brightness_slider_value_changed(value):
-	Settings.setSetting("BRIGHTNESS", value)
+	Settings.setSetting(Settings.BRIGHTNESS, value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.adjustment_brightness = value
 		
 func _on_darkness_slider_value_changed(value: float) -> void:
-	Settings.setSetting("DARKNESS", value)
+	Settings.setSetting(Settings.DARKNESS, value)
 	if _directionalDarkness:
 		_directionalDarkness.color.a = value
 	
 func _on_glow_slider_value_changed(value: float) -> void:
-	Settings.setSetting("GLOW", value)
+	Settings.setSetting(Settings.GLOW, value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_intensity = value
 		
 func _on_glow_strength_slider_value_changed(value: float) -> void:
-	Settings.setSetting("GLOW_STRENGTH", value)
+	Settings.setSetting(Settings.GLOW_STRENGTH, value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_strength = value
 		
 func _on_bloom_slider_value_changed(value: float) -> void:
-	Settings.setSetting("BLOOM", value)
+	Settings.setSetting(Settings.BLOOM, value)
 	if _worldEnvironment:
 		_worldEnvironment.environment.glow_bloom = value
+
+####################
+# Volume sliders #
+####################
 
 func setVolume(value: float, slider: HSlider, busIndex: int, settingName: String):
 	Settings.setSetting(settingName, value)
@@ -183,46 +197,50 @@ func _on_sfx_volume_slider_value_changed(value: float) -> void:
 func _on_master_volume_slider_value_changed(value: float):
 	setVolume(value, masterVolumeSlider, masterBusIndex, "MASTER_VOLUME")
 
+func _on_song_changed(to: String) -> void:
+	var labelFormat = "Dunco - %s"
+	song.text = labelFormat % to
+
+####################
+# Gameplay sliders #
+####################
+
+func _on_hue_rotation_slider_value_changed(value: float):
+	Settings.setSetting(Settings.HUE_ROTATION_SPEED, value)
+
 func _on_fullscreen_pressed() -> void:
 	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-func _on_song_changed(to: String) -> void:
-	var labelFormat = "Dunco - %s"
-	song.text = labelFormat % to
-
-const DEFAULTS := {
-	"brightness": 1.358,
-	"darkness": 0.98,
-	"glow_intensity": 1.942,
-	"glow_strength": 0.868,
-	"bloom": 0.04
-}
-
 func _on_reset_to_default_pressed() -> void:
-	_on_brightness_slider_value_changed(DEFAULTS.brightness)
-	brightnessSlider.value = DEFAULTS.brightness
+	_on_brightness_slider_value_changed(Settings.DEFAULTS.brightness)
+	brightnessSlider.value = Settings.DEFAULTS.brightness
 	
-	_on_darkness_slider_value_changed(DEFAULTS.darkness)
-	darknessSlider.value = DEFAULTS.darkness
+	_on_darkness_slider_value_changed(Settings.DEFAULTS.darkness)
+	darknessSlider.value = Settings.DEFAULTS.darkness
 	
-	_on_glow_slider_value_changed(DEFAULTS.glow_intensity)
-	glowIntensitySlider.value = DEFAULTS.glow_intensity
+	_on_glow_slider_value_changed(Settings.DEFAULTS.glow_intensity)
+	glowIntensitySlider.value = Settings.DEFAULTS.glow_intensity
 	
-	_on_glow_strength_slider_value_changed(DEFAULTS.glow_strength)
-	glowStrengthSlider.value = DEFAULTS.glow_strength
+	_on_glow_strength_slider_value_changed(Settings.DEFAULTS.glow_strength)
+	glowStrengthSlider.value = Settings.DEFAULTS.glow_strength
 	
-	_on_bloom_slider_value_changed(DEFAULTS.bloom)
-	bloomSlider.value = DEFAULTS.bloom
+	_on_bloom_slider_value_changed(Settings.DEFAULTS.bloom)
+	bloomSlider.value = Settings.DEFAULTS.bloom
 
 	_on_master_volume_slider_value_changed(0)
 	masterVolumeSlider.value = 0
+
 	_on_sfx_volume_slider_value_changed(sfxVolumeSlider.max_value)
 	sfxVolumeSlider.value = sfxVolumeSlider.max_value
+
 	_on_music_volume_slider_value_changed(musicVolumeSlider.max_value)
 	musicVolumeSlider.value = musicVolumeSlider.max_value
+
+	_on_hue_rotation_slider_value_changed(Settings.DEFAULTS.hue_rotation_speed)
+	hueRotationSpeedSlider.value = Settings.DEFAULTS.hue_rotation_speed
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_esc"):
@@ -244,3 +262,4 @@ func _on_calibration_pressed() -> void:
 func _on_how_to_pressed() -> void:
 	GameFlow.switchScene("res://scenes/Worlds/Intro/HowTo.tscn")
 	GameFlow.switchToDynamicMusic()
+	pass # Replace with function body.

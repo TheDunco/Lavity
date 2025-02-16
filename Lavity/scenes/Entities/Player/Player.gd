@@ -7,7 +7,6 @@ class_name Player
 @export_range(0, 2) var spriteBasePosition = 0
 @export var maxZoom := 0.3
 @export var lookThreshold := 50
-@export var hueRotationSpeed := 2.0
 @export var abilityCutoff := 0.15
 @export var moteDrainPercentage := 10
 @export var repulseActiveTime := 2.5
@@ -63,6 +62,7 @@ var stats := {
 	"longevity": 0.5,
 }
 
+var hueRotationSpeed: float
 var playerMovementSpeed := movementSpeedMult
 var isTrackableByEnemy: bool = true
 var trackableDistance := baseTrackableDistance
@@ -71,6 +71,13 @@ func _ready() -> void:
 	playerLight.color = ColorUtils.PINK
 	SignalBus.connect("playerRepulsed", func(_pos): repulseAnimation.play("repulse"))
 	$RepulseDistortion.visible = false
+	var hrsSetting = Settings.getSetting(Settings.HUE_ROTATION_SPEED)
+	if hrsSetting and hrsSetting is float:
+		hueRotationSpeed = hrsSetting
+	elif hrsSetting:
+		hueRotationSpeed = hrsSetting.to_float()
+	else:
+		hrsSetting = Settings.DEFAULTS.hue_rotation_speed
 
 func handleContinuousInput(delta):
 	var isLocked = Input.is_action_pressed("lock")

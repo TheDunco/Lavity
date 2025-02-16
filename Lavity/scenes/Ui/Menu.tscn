@@ -436,6 +436,33 @@ min_value = -18.0
 max_value = 10.0
 tick_count = 32
 
+[node name="Gameplay" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split"]
+layout_mode = 2
+
+[node name="GameplayLabel" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Gameplay
+"
+
+[node name="HueRotationSpeed" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay/HueRotationSpeed"]
+layout_mode = 2
+text = "Hue Rotation Sensitivity"
+
+[node name="HueRotationSpeedSlider" type="HSlider" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay/HueRotationSpeed"]
+custom_minimum_size = Vector2(336, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("1_pq815")
+min_value = 1.0
+max_value = 3.0
+step = 0.01
+value = 2.0
+tick_count = 32
+
 [node name="ButtonsMargin" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 150
@@ -619,6 +646,7 @@ text = "Back"
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Master/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Music/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Sfx/SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay/HueRotationSpeed/HueRotationSpeedSlider" to="." method="_on_hue_rotation_speed_slider_value_changed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset/Calibrate" to="." method="_on_calibration_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset/Reset to Default" to="." method="_on_reset_to_default_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
