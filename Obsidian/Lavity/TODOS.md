@@ -21,3 +21,4 @@
 
 - [ ] Fix velocity and decay such that it's all based on _delta
 - [ ] Music-synced light energy on the main menu
+- [ ] Make entity gravity apply to the environment -- will have to use raycasting to get the normal/direction to the specific spot on the tilemap we're colliding with

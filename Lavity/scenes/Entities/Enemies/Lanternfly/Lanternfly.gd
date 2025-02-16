@@ -11,7 +11,6 @@ const particlesScene = preload("res://scenes/Entities/Enemies/Lanternfly/Lantern
 @export var initTimeToLive := 7.0
 var ttl := initTimeToLive
 
-@onready var damageArea := $DamageArea
 @onready var lanternlight := $Lanternlight
 @onready var perceptionArea := $PerceptionArea
 @onready var stateLabel := $StateLabel

@@ -20,7 +20,7 @@ height = 3
 [node name="DirectionalDarkness" parent="." instance=ExtResource("5_3yjgv")]
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("6_wha4l")]
-position = Vector2(81.4824, 459.823)
+position = Vector2(81, 460)
 follow_target = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
