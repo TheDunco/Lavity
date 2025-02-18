@@ -207,6 +207,8 @@ func _on_song_changed(to: String) -> void:
 
 func _on_hue_rotation_slider_value_changed(value: float):
 	Settings.setSetting(Settings.HUE_ROTATION_SPEED, value)
+	GlobalSfx.playButtonHover()
+	player.hueRotationSpeed = value
 
 func _on_fullscreen_pressed() -> void:
 	if DisplayServer.window_get_mode() != DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN:

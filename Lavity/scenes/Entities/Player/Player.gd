@@ -14,8 +14,12 @@ class_name Player
 @export var longevityEffectiveness := 0.00016
 @export var damageReductionEffectiveness := 0.001
 @export var hungerEffectiveness := 1.75
+## How much color gets bled when the player holds to bleed
 @export var bleed := 0.25
+## Can the player die if they don't have color
 @export var invulnerable := false
+## Can the player take damage
+@export var canTakeDamage := true
 
 @export_category("Player Stats")
 @export var baseStatsMult := 1.0
@@ -197,6 +201,8 @@ func stopDying():
 	GlobalSfx.stopImminentDeath()
 	
 func takeDamage(damage: float, ambientDamage: bool = false) -> bool:
+	if not canTakeDamage:
+		return false
 	if not ambientDamage:
 		var reduction = stats["damageReduction"] * damageReductionEffectiveness
 		damage = damage - reduction
@@ -273,6 +279,7 @@ func getLightColor() -> Color:
 	return playerLight.color
 
 func rotateColorHue(amount: float) -> void:
+	print_debug("hue rotation speed", amount)
 	colorRotate.set_hue_rotation(amount)
 	var rotatedColor = colorRotate.apply(playerLight.color)
 	playerLight.color = rotatedColor

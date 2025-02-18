@@ -457,7 +457,7 @@ custom_minimum_size = Vector2(336, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme = ExtResource("1_pq815")
-min_value = 1.0
+min_value = 0.1
 max_value = 3.0
 step = 0.01
 value = 2.0
@@ -465,8 +465,8 @@ tick_count = 32
 
 [node name="ButtonsMargin" type="MarginContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_right = 150
+theme_override_constants/margin_left = 300
+theme_override_constants/margin_right = 300
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin"]
 layout_mode = 2
@@ -646,7 +646,7 @@ text = "Back"
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Master/MasterVolumeSlider" to="." method="_on_master_volume_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Music/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
 [connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Audio/Volume_Sfx/SfxVolumeSlider" to="." method="_on_sfx_volume_slider_value_changed"]
-[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay/HueRotationSpeed/HueRotationSpeedSlider" to="." method="_on_hue_rotation_speed_slider_value_changed"]
+[connection signal="value_changed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/Audio_Visual_Split/Gameplay/HueRotationSpeed/HueRotationSpeedSlider" to="." method="_on_hue_rotation_slider_value_changed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset/Calibrate" to="." method="_on_calibration_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Calibrate_Reset/Reset to Default" to="." method="_on_reset_to_default_pressed"]
 [connection signal="pressed" from="Options/AspectRatioContainer/MarginContainer/VBoxContainer/ButtonsMargin/VBoxContainer/Fullscreen" to="." method="_on_fullscreen_pressed"]
