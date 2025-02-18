@@ -279,7 +279,6 @@ func getLightColor() -> Color:
 	return playerLight.color
 
 func rotateColorHue(amount: float) -> void:
-	print_debug("hue rotation speed", amount)
 	colorRotate.set_hue_rotation(amount)
 	var rotatedColor = colorRotate.apply(playerLight.color)
 	playerLight.color = rotatedColor
