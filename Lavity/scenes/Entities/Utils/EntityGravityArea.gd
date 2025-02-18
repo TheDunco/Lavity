@@ -6,7 +6,7 @@ class_name EntityGravityArea
 
 @export_category("Gravity")
 # The force of gravity emitted by the light
-@export var lavity := 9.8
+@export var lavity := GlobalConfig.LAVITY
 @export var distanceMult := 500
 
 @export_category("Color Absorbption")

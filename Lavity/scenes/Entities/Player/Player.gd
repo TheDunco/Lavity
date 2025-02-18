@@ -265,8 +265,13 @@ func _process(delta):
 	
 func _physics_process(delta):
 	handleContinuousInput(delta)
-	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	move_and_slide()
+	# var collision_info = move_and_collide(velocity * delta)
+	# if collision_info:
+	# 	var direction = collision_info.get_position().direction_to(global_position)
+	# 	velocity += direction * GlobalConfig.LAVITY * 100
+
+	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 
 func _on_damage_effects_timer_timeout() -> void:
 	setChromaticAbberration(false)

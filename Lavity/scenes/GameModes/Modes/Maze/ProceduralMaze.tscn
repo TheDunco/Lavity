@@ -216,4 +216,5 @@ sources/0 = SubResource("TileSetAtlasSource_63sco")
 [node name="ProceduralMazeTilemap" type="TileMap"]
 tile_set = SubResource("TileSet_2b7t3")
 format = 2
+layer_0/navigation_enabled = false
 script = ExtResource("2_01wu8")
