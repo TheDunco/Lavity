@@ -12,6 +12,7 @@ const tilemapSizeX := 4
 const tilemapSizeY := 4
 
 @export var source_id := 0
+@export var layer := 0
 
 const start := Vector2.ZERO
 
@@ -20,7 +21,7 @@ const E := 0b0010
 const S := 0b0100
 const W := 0b1000
 
-const cellWalls := {Vector2(0, -1): N, Vector2(1, 0): E, 
+const cellWalls := {Vector2(0, -1): N, Vector2(1, 0): E,
 					Vector2(0, 1): S, Vector2(-1, 0): W}
 
 func _bitmask_to_coords(bitmask):
@@ -47,7 +48,7 @@ func makeMaze():
 	for x in range(width):
 		for y in range(height):
 			unvisited.append(Vector2(x, y))
-			set_cell(0, Vector2i(x, y), source_id, _bitmask_to_coords(N|E|S|W))
+			set_cell(layer, Vector2i(x, y), source_id, _bitmask_to_coords(N | E | S | W))
 	var current = start
 	unvisited.erase(current)
 
@@ -57,19 +58,19 @@ func makeMaze():
 			var next = neighbors[randi() % neighbors.size()]
 			stack.append(current)
 			var direction = next - current
-			var currentWalls = get_cell_atlas_coords(0, current)
-			var nextWalls = get_cell_atlas_coords(0, next) 
-			set_cell(0, current, source_id, _bitmask_to_coords(_coords_to_bitmask(currentWalls) - cellWalls[direction]))
-			set_cell(0, next, source_id, _bitmask_to_coords(_coords_to_bitmask(nextWalls) - cellWalls[-direction]))
+			var currentWalls = get_cell_atlas_coords(layer, current)
+			var nextWalls = get_cell_atlas_coords(layer, next)
+			set_cell(layer, current, source_id, _bitmask_to_coords(_coords_to_bitmask(currentWalls) - cellWalls[direction]))
+			set_cell(layer, next, source_id, _bitmask_to_coords(_coords_to_bitmask(nextWalls) - cellWalls[-direction]))
 			current = next
 			unvisited.erase(current)
 		elif stack:
 			current = stack.pop_back()
-	set_cell(0, start, source_id, Vector2i(1, 2))
+	set_cell(layer, start, source_id, Vector2i(1, 2))
 
 func getTileCenters() -> Array[Vector2]:
 	var centers: Array[Vector2] = []
 	for x in range(width):
 		for y in range(height):
-			centers.append(Vector2(x * tile_set.tile_size.x + tile_set.tile_size.x / 2, y * tile_set.tile_size.y + tile_set.tile_size.y / 2))
+			centers.append(Vector2(x * tile_set.tile_size.x + tile_set.tile_size.x / 2.0, y * tile_set.tile_size.y + tile_set.tile_size.y / 2.0))
 	return centers
