@@ -213,7 +213,7 @@ occlusion_layer_3/light_mask = 1
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_63sco")
 
-[node name="ProceduralMazeTilemap" type="TileMap"]
+[node name="ProceduralMazeTilemap" type="TileMap" groups=["ProceduralMaze"]]
 tile_set = SubResource("TileSet_2b7t3")
 format = 2
 layer_0/navigation_enabled = false

@@ -51,6 +51,7 @@ script = ExtResource("8_f3tsw")
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sxk1g")]
 position = Vector2(371, 248)
+collision_mask = 6
 worldEnvironment = NodePath("../WorldEnvironment")
 
 [node name="MenuCanvasLayer" type="CanvasLayer" parent="."]

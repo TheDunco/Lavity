@@ -21,6 +21,11 @@ const E := 0b0010
 const S := 0b0100
 const W := 0b1000
 
+const nBitIndex = 3
+const eBitIndex = 2
+const sBitIndex = 1
+const wBitIndex = 0
+
 const cellWalls := {Vector2(0, -1): N, Vector2(1, 0): E,
 					Vector2(0, 1): S, Vector2(-1, 0): W}
 
@@ -55,7 +60,7 @@ func makeMaze():
 	while unvisited:
 		var neighbors = checkNeighbors(current, unvisited)
 		if neighbors.size() > 0:
-			var next = neighbors[randi() % neighbors.size()]
+			var next = neighbors.pick_random()
 			stack.append(current)
 			var direction = next - current
 			var currentWalls = get_cell_atlas_coords(layer, current)
@@ -68,9 +73,48 @@ func makeMaze():
 			current = stack.pop_back()
 	set_cell(layer, start, source_id, Vector2i(1, 2))
 
+var tileSizeX = tile_set.tile_size.x
+var tileSizeY = tile_set.tile_size.y
+
+func getCenterPoint(x: int, y: int) -> Vector2:
+	return Vector2(x * tileSizeX + tileSizeX / 2.0, y * tileSizeY + tileSizeY / 2.0)
+
+## Returns an array of global coordinates of the tile centers
 func getTileCenters() -> Array[Vector2]:
 	var centers: Array[Vector2] = []
 	for x in range(width):
 		for y in range(height):
-			centers.append(Vector2(x * tile_set.tile_size.x + tile_set.tile_size.x / 2.0, y * tile_set.tile_size.y + tile_set.tile_size.y / 2.0))
+			centers.append(getCenterPoint(x, y))
 	return centers
+
+## Returns a matrix of the top-left of each edge peice on the maze in local tilemap coordinates:
+## [north, east, south, west]
+func getEdges():
+	var northEdges: Array[Vector2] = []
+	var eastEdges: Array[Vector2] = []
+	var southEdges: Array[Vector2] = []
+	var westEdges: Array[Vector2] = []
+	for x in range(width):
+		for y in range(height):
+			if y == 0:
+				northEdges.append(Vector2(x, y))
+			if x == 0:
+				westEdges.append(Vector2(x, y))
+			if y == height - 1:
+				southEdges.append(Vector2(x, y))
+			if x == width - 1:
+				eastEdges.append(Vector2(x, y))
+				
+	return [northEdges, eastEdges, southEdges, westEdges]
+
+## Remove the wall of the cell at localCoords specified by the bitIndex
+## Use the n/e/s/wBitIndex ints defined in this class
+func bustDownWall(localCoords: Vector2i, bitIndex: int):
+	var atlasCoords = get_cell_atlas_coords(layer, localCoords)
+	var currentBitmask: int = _coords_to_bitmask(atlasCoords)
+
+	var mask = currentBitmask ^ bitIndex
+	var newBitmask = currentBitmask & mask
+	var newCoords = _bitmask_to_coords(newBitmask)
+
+	set_cell(layer, atlasCoords, source_id, newCoords)
