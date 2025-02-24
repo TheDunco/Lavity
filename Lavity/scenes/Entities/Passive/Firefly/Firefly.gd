@@ -4,9 +4,10 @@ class_name Firefly
 # TODO: Make fireflies tend to group together and sync up their blinks!
 # Perhaps with a FireflyCommunicatingWithFirefly state or the like
 
-@export var acceleration := 16
 @export var healRate := 0.00015
+@export var blinkTime := randf_range(0.5, 3.0)
 
+@onready var initialBlinkTime := blinkTime
 @onready var stateLabel: Label = $StateLabel
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
 @onready var flippingSprite: AnimatedSprite2D = $FlippingSprite
@@ -16,53 +17,67 @@ class_name Firefly
 @onready var particles: CPUParticles2D = $CPUParticles2D
 
 var percievedBodies: Array[CharacterBody2D] = []
-var _prevPosition := global_position
+var percievedFireflies: Array[Firefly] = []
 
-var distanceMoved: float = 0
 
 func bodyEnteredPerceptionArea(body: Node):
+	print_debug("entered", body)
 	if body is CharacterBody2D and body != self:
-		percievedBodies.append(body)
+		if body is Firefly:
+			print("adding firefly")
+			percievedFireflies.append(body)
+		else:
+			print("adding body")
+			percievedBodies.append(body)
 
 func bodyExitedPerceptionArea(body: Node):
+	print_debug("exited", body)
 	if body is CharacterBody2D:
-		percievedBodies.erase(body)
+		if body is Firefly:
+			print("removing firefly")
+			percievedFireflies.erase(body)
+		else:
+			print("removing body")
+			percievedBodies.erase(body)
 
 func _ready() -> void:
 	super._ready()
 	flippingSprite.play()
-	perceptionArea.connect("body_entered", bodyEnteredPerceptionArea)
-	perceptionArea.connect("body_exited", bodyExitedPerceptionArea)
-	SignalBus.connect("lanternflyFreeing", func(fly): percievedBodies.erase(fly))
+	perceptionArea.body_entered.connect(bodyEnteredPerceptionArea)
+	perceptionArea.body_exited.connect(bodyExitedPerceptionArea)
+	# SignalBus.lanternflyFreeing.connect(func(fly): percievedBodies.erase(fly))
+	# SignalBus.fireflyFreeing.connect(func(firefly): percievedFireflies.erase(firefly))
 	lavityLight.light.color = targetColor
 	particles.color = targetColor
 	particles.color.a = GlobalConfig.ENTITY_PARTICLES_ALPHA
 	
-func _physics_process(_delta):
-	_prevPosition = global_position
+func _physics_process(delta):
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 	look_at(velocity.normalized() + position)
-	move_and_slide()
-	distanceMoved = _prevPosition.distance_to(global_position)
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		var direction = collision_info.get_position().direction_to(global_position)
+		velocity += direction * GlobalConfig.LAVITY * bounceMult
 	
-var lightVisibleTime := 2.0
+func resetBlinkTime(time: float = initialBlinkTime):
+	blinkTime = time
 
 func _process(delta):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(self.velocity)
-	if lightVisibleTime > 0:
-		lightVisibleTime -= delta
+	if blinkTime > 0:
+		blinkTime -= delta
 	else:
 		lavityLight.light.visible = !lavityLight.light.visible
-		particles.emitting = !particles.emitting
-		lightVisibleTime = 2.0
-		# This is more or less what I want to replace the above but it isn't working as expected because it's repelling from the player at 0% when it should be at 50% (equal/opposite)
-		# match lavityLight.process_mode:
-		# 	PROCESS_MODE_DISABLED:
-		# 		lavityLight.process_mode = PROCESS_MODE_INHERIT
-		# 		lavityLight.light.enabled = true
-		# 	PROCESS_MODE_INHERIT:
-		# 		lavityLight.process_mode = PROCESS_MODE_DISABLED
-		# 		lavityLight.light.enabled = false
+		# particles.emitting = !particles.emitting
+		resetBlinkTime()
+		# # This is more or less what I want to replace the above but it isn't working as expected because it's repelling from the player at 0% when it should be at 50% (equal/opposite)
+		match lavityLight.process_mode:
+			PROCESS_MODE_DISABLED:
+				lavityLight.process_mode = PROCESS_MODE_INHERIT
+				lavityLight.light.enabled = true
+			PROCESS_MODE_INHERIT:
+				lavityLight.process_mode = PROCESS_MODE_DISABLED
+				lavityLight.light.enabled = false
 
 	
 	var blackLikeness = ColorUtils.scoreColorLikeness(lavityLight.light.color, Color.BLACK)

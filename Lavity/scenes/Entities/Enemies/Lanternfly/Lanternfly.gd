@@ -126,4 +126,7 @@ func _physics_process(delta: float) -> void:
 	super._physics_process(delta)
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(velocity) * wingFlapSpeedMult
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
-	move_and_slide()
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		var direction = collision_info.get_position().direction_to(global_position)
+		velocity += direction * GlobalConfig.LAVITY * bounceMult

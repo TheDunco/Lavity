@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://blju55g0a8qbd"]
+[gd_scene load_steps=10 format=3 uid="uid://blju55g0a8qbd"]
 
 [ext_resource type="PackedScene" uid="uid://cw21s1mqjep2n" path="res://scenes/GameModes/Modes/Maze/ProceduralMaze.tscn" id="1_twmfe"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="2_sx228"]
@@ -8,8 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="6_wha4l"]
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="7_a7c53"]
 [ext_resource type="PackedScene" uid="uid://cikbfevvqein8" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.tscn" id="8_kamvq"]
+[ext_resource type="PackedScene" uid="uid://cr6aiu061ntkf" path="res://scenes/Utils/WhiteBackground.tscn" id="9_qddfw"]
 
 [node name="MazeTest" type="Node2D"]
+
+[node name="WhiteBackground" parent="." instance=ExtResource("9_qddfw")]
+position = Vector2(18, 24)
 
 [node name="ProceduralMazeTilemap" parent="." instance=ExtResource("1_twmfe")]
 width = 3
@@ -20,22 +24,24 @@ height = 3
 [node name="DirectionalDarkness" parent="." instance=ExtResource("5_3yjgv")]
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("6_wha4l")]
-position = Vector2(81, 460)
+position = Vector2(459, 280)
 follow_target = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Menu" parent="CanvasLayer" instance=ExtResource("7_a7c53")]
+[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "_directionalDarkness", "_worldEnvironment") instance=ExtResource("7_a7c53")]
+player = NodePath("../../Player")
+_directionalDarkness = NodePath("../../DirectionalDarkness")
+_worldEnvironment = NodePath("../../WorldEnvironment")
 
 [node name="Enemies" type="Node" parent="."]
-process_mode = 4
 
 [node name="Firefly" parent="Enemies" instance=ExtResource("3_q8liu")]
 position = Vector2(270, 270)
 
 [node name="Lanternfly" parent="Enemies" instance=ExtResource("8_kamvq")]
-position = Vector2(316, 374)
+position = Vector2(439, 511)
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sx228")]
-position = Vector2(81, 460)
+position = Vector2(459, 280)
 worldEnvironment = NodePath("../WorldEnvironment")

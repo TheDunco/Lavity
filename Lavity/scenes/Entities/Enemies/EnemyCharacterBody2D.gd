@@ -1,7 +1,6 @@
 extends RepulsableBody
 class_name Enemy
 
-@export var acceleration := 25.0
 @export var playAnimatedSprite := true
 
 @onready var flippingSprite := $FlippingSprite
@@ -16,9 +15,6 @@ enum EnemyType {
 var type: EnemyType = EnemyType.BUG
 # Should be static per enemy type. random for base class
 var preferredMoteColor = ColorUtils.randColorFromSet()
-
-func moveToward(pos: Vector2) -> void:
-	velocity += global_position.direction_to(pos) * (acceleration + (global_position.distance_to(pos) * (1 / 100)))
 
 func _ready():
 	super._ready()

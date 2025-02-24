@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends RepulsableBody
 class_name Player
 
 @export var worldEnvironment: WorldEnvironment
@@ -91,15 +91,14 @@ func handleContinuousInput(delta):
 
 	var isHandlingVelocityInput := false
 
-	if Input.is_action_pressed("right_mouse") and not ColorUtils.isColorDying(playerLight.color):
+	if Input.is_action_pressed("repulse") and not ColorUtils.isColorDying(playerLight.color):
 		var bleedAmount = bleed * delta
 		takeDamage(bleedAmount)
 		GlobalSfx.playDrain(remap(stats["repulse"], 0.0, 1.0, 0.45, 1.2))
 		# TODO: increase the trackable distance when draining
 		# TODO: implement sonar when bleeding!
-	elif Input.is_action_just_released("right_mouse"):
+	elif Input.is_action_just_released("repulse"):
 		GlobalSfx.stopDrain()
-
 	if Input.is_action_pressed("move_right") and not (isLocked and isOnWall):
 		isHandlingVelocityInput = true
 		velocity.x += playerMovementSpeed

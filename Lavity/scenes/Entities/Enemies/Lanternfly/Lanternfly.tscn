@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://cikbfevvqein8"]
+[gd_scene load_steps=22 format=3 uid="uid://cikbfevvqein8"]
 
 [ext_resource type="Texture2D" uid="uid://waqjud1jctcg" path="res://assets/Laternfly/full-lanternfly_0001.png" id="1_5xslm"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/Lanternfly.gd" id="1_h7r8b"]
 [ext_resource type="Texture2D" uid="uid://c41n0y601vejq" path="res://assets/Laternfly/full-lanternfly_0002.png" id="2_fvopx"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_r1sna"]
 [ext_resource type="Texture2D" uid="uid://ckyq2uk3wmcaw" path="res://assets/Laternfly/full-lanternfly_0003.png" id="3_bulcg"]
-[ext_resource type="Shape2D" uid="uid://bgbwmoum5xag2" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyCollisionShape.tres" id="8_puo3w"]
 [ext_resource type="Texture2D" uid="uid://n66bjga885m2" path="res://scenes/Entities/Player/CharacterLightTexture.tres" id="9_lv5ek"]
 [ext_resource type="PackedScene" uid="uid://4ascxl37t4g1" path="res://scenes/Entities/Utils/EntityGravityArea.tscn" id="10_w4khb"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="11_2qfmd"]
@@ -59,6 +58,10 @@ radius = 517.0
 collision_layer = 40
 collision_mask = 49
 script = ExtResource("1_h7r8b")
+bounceMult = 30.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(48, 4, 45, -2, 49, -7, 44, -10, 39, -6, 40, -11, 34, -14, 30, -7, 11, -7, -15, -3, -19, 3, -20, 8, -18, 11, -12, 16, 2, 19, -15, 55, -13, 57, 5, 19, 17, 19, 24, 18, 32, 29, 32, 53, 36, 58, 39, 58, 34, 52, 36, 30, 28, 18, 40, 14, 61, 24, 74, 56, 80, 58, 83, 57, 75, 54, 64, 22, 44, 12)
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_7b4g4")
@@ -73,13 +76,6 @@ direction = Vector2(-1, 0)
 spread = 4.47
 gravity = Vector2(0, 0)
 initial_velocity_max = 37.27
-
-[node name="LanternflyCollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(15, 5)
-scale = Vector2(12.1167, 3.25052)
-shape = ExtResource("8_puo3w")
-debug_color = Color(0.917647, 0.309804, 0.160784, 0.0196078)
-metadata/_edit_lock_ = true
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_r1sna")]
 Entity = NodePath("..")

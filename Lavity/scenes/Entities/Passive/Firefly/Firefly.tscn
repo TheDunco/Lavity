@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://b1x6e0bi4gjo0"]
+[gd_scene load_steps=18 format=3 uid="uid://b1x6e0bi4gjo0"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/Firefly.gd" id="1_pi4ac"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_56n36"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyIdleState.gd" id="4_g8xe2"]
+[ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyFollowingFireflyState.gd" id="5_6xm45"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyRunningFromEntityState.gd" id="5_q35lm"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="5_y4je2"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyStateMachine.gd" id="6_b7k3y"]
@@ -59,6 +60,7 @@ radius = 481.067
 collision_layer = 40
 collision_mask = 49
 script = ExtResource("1_pi4ac")
+acceleration = 16.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_15xc2")
@@ -88,6 +90,9 @@ script = ExtResource("4_g8xe2")
 
 [node name="runningFromEntityState" type="Node" parent="FireflyStateMachine"]
 script = ExtResource("5_q35lm")
+
+[node name="followingFireflyState" type="Node" parent="FireflyStateMachine"]
+script = ExtResource("5_6xm45")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("2_56n36")]
 Entity = NodePath("..")

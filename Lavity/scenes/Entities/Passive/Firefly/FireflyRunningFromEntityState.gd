@@ -16,11 +16,6 @@ func update(_delta):
 		transition.emit(self, "idleState")
 		return
 
-	if firefly.distanceMoved <= 1:
-		firefly.percievedBodies = []
-		transition.emit(self, "idleState")
-		return
-	
 	closestBody = firefly.percievedBodies[0]
 	for body in firefly.percievedBodies:
 		if firefly.global_position.distance_to(body.global_position) < firefly.global_position.distance_to(closestBody.global_position):
