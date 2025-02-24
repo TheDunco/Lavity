@@ -9,6 +9,7 @@ class_name Firefly
 
 @onready var stateLabel: Label = $StateLabel
 @onready var velocityComponent: VelocityComponent = $VelocityComponent
+@onready var flippingSprite: AnimatedSprite2D = $FlippingSprite
 @onready var perceptionArea: Area2D = $PerceptionArea
 @onready var lavityLight: LavityLight = $LavityLight
 @onready var targetColor := ColorUtils.randColorFromSet()
@@ -29,6 +30,7 @@ func bodyExitedPerceptionArea(body: Node):
 
 func _ready() -> void:
 	super._ready()
+	flippingSprite.play()
 	perceptionArea.connect("body_entered", bodyEnteredPerceptionArea)
 	perceptionArea.connect("body_exited", bodyExitedPerceptionArea)
 	SignalBus.connect("lanternflyFreeing", func(fly): percievedBodies.erase(fly))
@@ -46,6 +48,7 @@ func _physics_process(_delta):
 var lightVisibleTime := 2.0
 
 func _process(delta):
+	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(self.velocity)
 	if lightVisibleTime > 0:
 		lightVisibleTime -= delta
 	else:

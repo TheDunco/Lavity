@@ -18,10 +18,10 @@ func _ready():
 	assert(Entity != null)
 
 func getAnimationSpeed(velo: Vector2):
-	var combinedVelocity: float = abs(velo.x) + abs(velo.y)
+	var summedVelocity := ColorUtils.sumVector2(velo)
 
-	if combinedVelocity > 0.0:
-		return log(combinedVelocity * animationSpeedVeloMult) - animationSpeedVeloTamingConst
+	if summedVelocity > 0.0:
+		return log(summedVelocity * animationSpeedVeloMult) - animationSpeedVeloTamingConst
 	return 0.0
 
 func handleExistingVelocity(velocity: Vector2) -> Vector2:

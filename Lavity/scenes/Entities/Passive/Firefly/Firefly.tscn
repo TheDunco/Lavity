@@ -1,14 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://b1x6e0bi4gjo0"]
+[gd_scene load_steps=17 format=3 uid="uid://b1x6e0bi4gjo0"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/Firefly.gd" id="1_pi4ac"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_56n36"]
-[ext_resource type="Texture2D" uid="uid://cv25og8ck8v4y" path="res://assets/Firefly/Firefly.png" id="3_kken1"]
-[ext_resource type="Shape2D" uid="uid://d1gaxyn4r0efc" path="res://scenes/Entities/Passive/Firefly/FireflyCollisionShape.tres" id="4_bqaxv"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyIdleState.gd" id="4_g8xe2"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyRunningFromEntityState.gd" id="5_q35lm"]
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="5_y4je2"]
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/FireflyStateMachine.gd" id="6_b7k3y"]
+[ext_resource type="Texture2D" uid="uid://dno31twrenixa" path="res://assets/Firefly/firefly_0000.png" id="7_cd4n0"]
+[ext_resource type="Texture2D" uid="uid://dgbtbrf52h8sw" path="res://assets/Firefly/firefly_0001.png" id="8_8hsab"]
+[ext_resource type="Texture2D" uid="uid://q4x6fdkinfpc" path="res://assets/Firefly/firefly_0002.png" id="9_lpbif"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="9_r8v3q"]
+[ext_resource type="Texture2D" uid="uid://bep52shlwy7dm" path="res://assets/Firefly/firefly_0003.png" id="10_cgjnu"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_15xc2"]
 light_mode = 1
@@ -29,10 +31,24 @@ fill_to = Vector2(0.777778, 0.213675)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_kken1")
+"texture": ExtResource("7_cd4n0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_8hsab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lpbif")
 }],
 "loop": true,
-"name": &"default",
+"name": &"flying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_cgjnu")
+}],
+"loop": true,
+"name": &"landed",
 "speed": 5.0
 }]
 
@@ -40,7 +56,7 @@ animations = [{
 radius = 481.067
 
 [node name="Firefly" type="CharacterBody2D"]
-collision_layer = 41
+collision_layer = 40
 collision_mask = 49
 script = ExtResource("1_pi4ac")
 
@@ -59,9 +75,9 @@ spread = 4.47
 gravity = Vector2(0, 0)
 initial_velocity_max = 37.27
 
-[node name="FireflyCollisionShape" type="CollisionShape2D" parent="."]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
-shape = ExtResource("4_bqaxv")
+polygon = PackedVector2Array(7.00017, 47, 4.00017, 47, -0.999877, 34, -4.99991, 24, -6.99995, 15, -6.00002, -5.99998, -11, -12, -10.0001, -17, 3.99988, -33, 5.99988, -33, 9.99987, -37, 13.9999, -36, 17.9999, -32.0001, 15.9999, -25.0001, 13.9999, -24.0001, 14.9999, -21.0001, 12.9999, -18, 11.0001, 20, 9.00011, 31, 10.0002, 47, 8.00017, 47)
 
 [node name="FireflyStateMachine" type="Node" parent="." node_paths=PackedStringArray("initialState")]
 script = ExtResource("6_b7k3y")
@@ -79,15 +95,17 @@ speedMultiplier = 30
 airResistance = 2
 
 [node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
-rotation = 1.5708
-scale = Vector2(0.1, 0.1)
+position = Vector2(6, -5)
+scale = Vector2(0.53, 0.53)
 sprite_frames = SubResource("SpriteFrames_cab34")
+animation = &"flying"
 
 [node name="PerceptionArea" type="Area2D" parent="."]
 collision_layer = 512
 collision_mask = 48
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PerceptionArea"]
+rotation = -0.000287538
 shape = SubResource("CircleShape2D_cc5c7")
 
 [node name="LavityLight" parent="." instance=ExtResource("5_y4je2")]

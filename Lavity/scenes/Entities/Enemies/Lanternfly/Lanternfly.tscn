@@ -56,7 +56,7 @@ radius = 97.0
 radius = 517.0
 
 [node name="Lanternfly" type="CharacterBody2D"]
-collision_layer = 41
+collision_layer = 40
 collision_mask = 49
 script = ExtResource("1_h7r8b")
 
