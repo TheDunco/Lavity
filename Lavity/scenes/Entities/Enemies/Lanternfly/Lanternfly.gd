@@ -42,12 +42,12 @@ func onPerceptionAreaExited(body: Node2D) -> void:
 func _ready() -> void:
 	super._ready()
 	self.add_to_group("lanternflies")
-	perceptionArea.connect("body_entered", onPerceptionAreaEntered)
-	perceptionArea.connect("body_exited", onPerceptionAreaExited)
+	perceptionArea.body_entered.connect(onPerceptionAreaEntered)
+	perceptionArea.body_exited.connect(onPerceptionAreaExited)
 	acceleration = lanternflyBaseAcceleration
 	preferredMoteColor = ColorUtils.RED
 
-	SignalBus.connect("moteFreeing", func(mote): percievedMotes.erase(mote))
+	SignalBus.moteFreeing.connect(func(mote): percievedMotes.erase(mote))
 	buzzSound.pitch_scale = randf_range(0.8, 1.2)
 
 func scoreLightDesire(lightEmitter) -> float:

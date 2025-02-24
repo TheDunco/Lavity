@@ -101,7 +101,7 @@ airResistance = 2
 
 [node name="FlippingSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(6, -5)
-scale = Vector2(0.53, 0.53)
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_cab34")
 animation = &"flying"
 
