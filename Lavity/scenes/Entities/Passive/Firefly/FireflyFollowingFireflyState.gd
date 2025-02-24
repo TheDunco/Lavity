@@ -14,7 +14,7 @@ var storedInitialBlinkTime: float
 
 func getBlendedColor() -> Color:
 	if is_instance_valid(self) and is_instance_valid(followFirefly):
-		return firefly.lavityLight.light.color.blend(followFirefly.lavityLight.light.color)
+		return firefly.lavityLight.light.color.lerp(followFirefly.lavityLight.light.color, 1.0)
 	return Color.BLACK
 
 func trySpawn():
@@ -43,6 +43,7 @@ func trySpawn():
 		spawnFirefly.scale = Vector2.ONE / 2.0
 		spawnFirefly.initialBlinkTime = firefly.initialBlinkTime
 		spawnFirefly.isChild = true
+		spawnFirefly.blinksToGrowUp = firefly.blinksToGrowUp + followFirefly.blinksToGrowUp
 		
 
 func enter() -> void:
@@ -64,8 +65,8 @@ func update(_delta) -> void:
 		transition.emit(self, "runningFromEntityState")
 		return
 
-	if firefly.global_position.distance_to(followFirefly.global_position) > 300:
-		firefly.moveToward(followFirefly.global_position, firefly.acceleration / 2)
+	if firefly.global_position.distance_to(followFirefly.global_position) > 250:
+		firefly.moveToward(followFirefly.global_position, firefly.acceleration / 100.0)
 
 func exit() -> void:
 	if firefly:

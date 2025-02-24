@@ -6,6 +6,8 @@ class_name Firefly
 
 @export var healRate := 0.00015
 @export var blinkTime := randf_range(0.5, 3.0)
+@export var blinksToGrowUp := 10.0
+@export var isFemale := randf() >= 0.5
 
 @onready var initialBlinkTime := blinkTime
 @onready var stateLabel: Label = $StateLabel
@@ -15,9 +17,9 @@ class_name Firefly
 @onready var lavityLight: LavityLight = $LavityLight
 @onready var targetColor := ColorUtils.randColorFromSet()
 @onready var particles: CPUParticles2D = $CPUParticles2D
-@onready var isFemale := randf() >= 0.5
 
 var isChild := false
+var childBlinkCount := 0.0
 
 signal blink
 
@@ -65,6 +67,13 @@ func _physics_process(delta):
 func resetBlinkTime(time: float = initialBlinkTime):
 	blinkTime = time
 	blink.emit()
+	if isChild:
+		childBlinkCount += 1.0
+		var grownUpRatio = childBlinkCount / blinksToGrowUp
+		scale = scale.lerp(Vector2(grownUpRatio, grownUpRatio), 1.0)
+	if childBlinkCount > blinksToGrowUp:
+		scale = Vector2.ONE
+		isChild = false
 
 func _process(delta):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(self.velocity)
@@ -72,7 +81,7 @@ func _process(delta):
 		blinkTime -= delta
 	else:
 		lavityLight.light.visible = !lavityLight.light.visible
-		# particles.emitting = !particles.emitting
+		particles.emitting = !particles.emitting
 		resetBlinkTime()
 		# # This is more or less what I want to replace the above but it isn't working as expected because it's repelling from the player at 0% when it should be at 50% (equal/opposite)
 		match lavityLight.process_mode:
