@@ -5,7 +5,7 @@ var fireflyScene = preload("res://scenes/Entities/Passive/Firefly/Firefly.tscn")
 
 @onready var maze: ProceduralMaze = get_parent()
 @export var lanternflySpawnChance := 0.1
-@export var fireflySpawnChance := 0.15
+@export var fireflySpawnChance := 0.20
 
 func spawnAtPoint(scene: PackedScene, point: Vector2, spawnChance: float):
 	if randf() < spawnChance:
@@ -23,4 +23,4 @@ func _ready() -> void:
 	for middlePoint in mazeMiddlePoints:
 		lanternflyCount += spawnAtPoint(lanternflyScene, middlePoint, lanternflySpawnChance)
 		fireflyCount += spawnAtPoint(fireflyScene, middlePoint, fireflySpawnChance)
-	print ("Spawned " + str(lanternflyCount) + " Lanternflies" + " and " + str(fireflyCount) + " Fireflies")
+	print("Spawned " + str(lanternflyCount) + " Lanternflies" + " and " + str(fireflyCount) + " Fireflies")

@@ -10,8 +10,8 @@ func handlePlayerRepulsed(playerGlobalPosition: Vector2):
 		var directionToPlayer = global_position.direction_to(playerGlobalPosition)
 		velocity += -directionToPlayer * 1500
 
-func moveToward(pos: Vector2) -> void:
-	velocity += global_position.direction_to(pos) * (acceleration + (global_position.distance_to(pos) * (1 / 100)))
+func moveToward(pos: Vector2, accel: float = acceleration) -> void:
+	velocity += global_position.direction_to(pos) * (accel + (global_position.distance_to(pos) * (1 / 100)))
 
 func _ready() -> void:
 	SignalBus.connect("playerRepulsed", handlePlayerRepulsed)

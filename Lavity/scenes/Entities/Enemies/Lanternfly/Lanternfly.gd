@@ -58,7 +58,7 @@ func scoreLightDesire(lightEmitter) -> float:
 	return moteColorScore
 
 func checkMote(mote) -> bool:
-	if not mote or mote.is_queued_for_deletion():
+	if not is_instance_valid(mote):
 		return false
 	return true
 

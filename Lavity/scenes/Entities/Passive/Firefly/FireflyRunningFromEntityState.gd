@@ -4,9 +4,11 @@ class_name FireflyRunningFromEntityState
 var closestBody: CharacterBody2D
 
 func moveAwayFromClosestBody():
-	if closestBody and not closestBody.is_queued_for_deletion():
+	if is_instance_valid(closestBody):
 		var direction = -firefly.global_position.direction_to(closestBody.global_position)
 		firefly.velocity += direction * firefly.acceleration
+	else:
+		closestBody = null
 
 func enter():
 	firefly.stateLabel.text = "Running"
