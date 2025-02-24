@@ -264,11 +264,11 @@ func _process(delta):
 	
 func _physics_process(delta):
 	handleContinuousInput(delta)
-	move_and_slide()
-	# var collision_info = move_and_collide(velocity * delta)
-	# if collision_info:
-	# 	var direction = collision_info.get_position().direction_to(global_position)
-	# 	velocity += direction * GlobalConfig.LAVITY * 100
+	# move_and_slide()
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		var direction = collision_info.get_position().direction_to(global_position)
+		velocity += direction * GlobalConfig.LAVITY * 25
 
 	velocity = velocityComponent.handleExistingVelocity(self.velocity)
 
