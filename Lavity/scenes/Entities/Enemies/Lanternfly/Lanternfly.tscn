@@ -58,7 +58,7 @@ radius = 517.0
 collision_layer = 40
 collision_mask = 49
 script = ExtResource("1_h7r8b")
-bounceMult = 30.0
+bounceMult = 35.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(48, 4, 45, -2, 49, -7, 44, -10, 39, -6, 40, -11, 34, -14, 30, -7, 11, -7, -15, -3, -19, 3, -20, 8, -18, 11, -12, 16, 2, 19, -15, 55, -13, 57, 5, 19, 17, 19, 24, 18, 32, 29, 32, 53, 36, 58, 39, 58, 34, 52, 36, 30, 28, 18, 40, 14, 61, 24, 74, 56, 80, 58, 83, 57, 75, 54, 64, 22, 44, 12)
