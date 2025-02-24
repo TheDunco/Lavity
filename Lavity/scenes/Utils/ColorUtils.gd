@@ -94,7 +94,6 @@ func getMostSimilarColor(color: Color) -> Color:
 		var comparisonColor = colors[colorName]
 		var currentScore = scoreColorLikeness(comparisonColor, mostCommon)
 		var newScore = scoreColorLikeness(comparisonColor, color)
-		print_debug(colorName, " score: ", newScore)
 		if newScore > currentScore:
 			mostCommon = comparisonColor
 	return mostCommon

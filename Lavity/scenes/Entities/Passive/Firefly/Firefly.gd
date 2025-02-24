@@ -15,13 +15,17 @@ class_name Firefly
 @onready var lavityLight: LavityLight = $LavityLight
 @onready var targetColor := ColorUtils.randColorFromSet()
 @onready var particles: CPUParticles2D = $CPUParticles2D
+@onready var isFemale := randf() >= 0.5
+
+var isChild := false
+
+signal blink
 
 var percievedBodies: Array[CharacterBody2D] = []
 var percievedFireflies: Array[Firefly] = []
 
 
 func bodyEnteredPerceptionArea(body: Node):
-	print_debug("entered", body)
 	if body is CharacterBody2D and body != self:
 		if body is Firefly:
 			print("adding firefly")
@@ -31,7 +35,6 @@ func bodyEnteredPerceptionArea(body: Node):
 			percievedBodies.append(body)
 
 func bodyExitedPerceptionArea(body: Node):
-	print_debug("exited", body)
 	if body is CharacterBody2D:
 		if body is Firefly:
 			print("removing firefly")
@@ -61,6 +64,7 @@ func _physics_process(delta):
 	
 func resetBlinkTime(time: float = initialBlinkTime):
 	blinkTime = time
+	blink.emit()
 
 func _process(delta):
 	flippingSprite.speed_scale = velocityComponent.getAnimationSpeed(self.velocity)

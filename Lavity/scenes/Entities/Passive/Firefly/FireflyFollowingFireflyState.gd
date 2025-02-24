@@ -4,10 +4,51 @@ class_name FireflyFollowingFireflyState
 var followFirefly: Firefly = null
 var storedInitialBlinkTime: float
 
+@export var mateMoteSpawnChance := 0.1
+@export var mateFireflySpawnChance := 0.05
+
+@onready var moteScene = preload("res://scenes/Objects/Mote.tscn")
+@onready var fireflyScene = preload("res://scenes/Entities/Passive/Firefly/Firefly.tscn")
+
+@onready var root := get_tree().root
+
+func getBlendedColor() -> Color:
+	if is_instance_valid(self) and is_instance_valid(followFirefly):
+		return firefly.lavityLight.light.color.blend(followFirefly.lavityLight.light.color)
+	return Color.BLACK
+
+func trySpawn():
+	var adults = not firefly.isChild and not followFirefly.isChild
+	var differentSex = firefly.isFemale == not followFirefly.isFemale
+	var notOverpopulated = firefly.percievedFireflies.size() < 5
+
+	var shouldSpawnMote: bool = (randf() < mateMoteSpawnChance) \
+		and notOverpopulated and adults and differentSex
+
+	var shouldSpawnFirefly: bool = (randf() < mateFireflySpawnChance) \
+		and notOverpopulated and adults and differentSex
+
+	if shouldSpawnMote:
+		var distractingMote = moteScene.instantiate()
+		distractingMote.global_position = firefly.global_position
+		root.add_child(distractingMote)
+		distractingMote.decayRate = 0.02
+		distractingMote.changeColor(getBlendedColor())
+		distractingMote.pop.play()
+	elif shouldSpawnFirefly:
+		var spawnFirefly = fireflyScene.instantiate()
+		spawnFirefly.global_position = firefly.global_position
+		root.add_child(spawnFirefly)
+		spawnFirefly.lavityLight.light.color = getBlendedColor()
+		spawnFirefly.scale = Vector2.ONE / 2.0
+		spawnFirefly.initialBlinkTime = firefly.initialBlinkTime
+		spawnFirefly.isChild = true
+		
+
 func enter() -> void:
 	if firefly:
 		followFirefly = firefly.percievedFireflies.pick_random()
-		print_debug("entering following firefly state")
+		followFirefly.blink.connect(trySpawn)
 		if not firefly.percievedBodies.is_empty():
 			transition.emit(self, "runningFromEntityState")
 		elif not firefly.percievedFireflies.is_empty():
@@ -30,4 +71,6 @@ func exit() -> void:
 	if firefly:
 		firefly.initialBlinkTime = storedInitialBlinkTime
 		firefly.resetBlinkTime(storedInitialBlinkTime)
+	
+	followFirefly.blink.disconnect(trySpawn)
 	followFirefly = null

@@ -24,7 +24,7 @@ height = 3
 [node name="DirectionalDarkness" parent="." instance=ExtResource("5_3yjgv")]
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("6_wha4l")]
-position = Vector2(459, 280)
+position = Vector2(540, 225)
 follow_target = NodePath("../Player")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -39,9 +39,12 @@ _worldEnvironment = NodePath("../../WorldEnvironment")
 [node name="Firefly" parent="Enemies" instance=ExtResource("3_q8liu")]
 position = Vector2(270, 270)
 
+[node name="Firefly2" parent="Enemies" instance=ExtResource("3_q8liu")]
+position = Vector2(397, 392)
+
 [node name="Lanternfly" parent="Enemies" instance=ExtResource("8_kamvq")]
-position = Vector2(439, 511)
+position = Vector2(801, 272)
 
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("2_sx228")]
-position = Vector2(459, 280)
+position = Vector2(540, 225)
 worldEnvironment = NodePath("../WorldEnvironment")
