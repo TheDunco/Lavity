@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://ddbdeagsxlayl" path="res://assets/audio/sfx/repulse.wav" id="5_pnbou"]
 [ext_resource type="AudioStream" uid="uid://rrw5klg1rx8n" path="res://assets/audio/sfx/imminent_death.wav" id="6_47t00"]
 [ext_resource type="AudioStream" uid="uid://cj1gxa1fqyphh" path="res://assets/audio/sfx/drain.wav" id="7_hvplu"]
-[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="8_0t0qk"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/pop.wav" id="8_0t0qk"]
 [ext_resource type="AudioStream" uid="uid://bp515erhdqtb" path="res://assets/audio/sfx/impulse.wav" id="9_fp7qj"]
 
 [node name="SfxComponent" type="AudioStreamPlayer"]

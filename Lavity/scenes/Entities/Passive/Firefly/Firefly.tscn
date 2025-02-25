@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b1x6e0bi4gjo0"]
+[gd_scene load_steps=19 format=3 uid="uid://b1x6e0bi4gjo0"]
 
 [ext_resource type="Script" path="res://scenes/Entities/Passive/Firefly/Firefly.gd" id="1_pi4ac"]
 [ext_resource type="PackedScene" uid="uid://yoivdmkuokl0" path="res://scenes/Entities/Utils/VelocityComponent.tscn" id="2_56n36"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://q4x6fdkinfpc" path="res://assets/Firefly/firefly_0002.png" id="9_lpbif"]
 [ext_resource type="Theme" uid="uid://dkc02dgojmkxd" path="res://scenes/Ui/Theme/MainUi.tres" id="9_r8v3q"]
 [ext_resource type="Texture2D" uid="uid://bep52shlwy7dm" path="res://assets/Firefly/firefly_0003.png" id="10_cgjnu"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/pop.wav" id="13_ebfi5"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_15xc2"]
 light_mode = 1
@@ -125,3 +126,7 @@ offset_bottom = 106.0
 theme = ExtResource("9_r8v3q")
 theme_override_font_sizes/font_size = 70
 text = "State"
+
+[node name="Pop" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_ebfi5")
+pitch_scale = 0.24

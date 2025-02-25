@@ -26,9 +26,7 @@ func canMate() -> bool:
 
 
 func trySpawn():
-
 	var shouldSpawnMote: bool = (randf() < mateMoteSpawnChance) and canMate()
-
 	var shouldSpawnFirefly: bool = (randf() < mateFireflySpawnChance) and canMate()
 
 	if shouldSpawnMote:
@@ -47,6 +45,7 @@ func trySpawn():
 		spawnFirefly.initialBlinkTime = firefly.initialBlinkTime
 		spawnFirefly.isChild = true
 		spawnFirefly.blinksToGrowUp = firefly.blinksToGrowUp + followFirefly.blinksToGrowUp
+		spawnFirefly.pop.play()
 		
 
 func enter() -> void:

@@ -17,6 +17,7 @@ class_name Firefly
 @onready var lavityLight: LavityLight = $LavityLight
 @onready var targetColor := ColorUtils.randColorFromSet()
 @onready var particles: CPUParticles2D = $CPUParticles2D
+@onready var pop = $Pop
 
 var isChild := false
 var childBlinkCount := 0.0
@@ -25,7 +26,6 @@ signal blink
 
 var percievedBodies: Array[CharacterBody2D] = []
 var percievedFireflies: Array[Firefly] = []
-
 
 func bodyEnteredPerceptionArea(body: Node):
 	if body is CharacterBody2D and body != self:

@@ -41,7 +41,15 @@ position = Vector2(270, 270)
 
 [node name="Firefly2" parent="Enemies" instance=ExtResource("3_q8liu")]
 position = Vector2(397, 392)
-isFemale = true
+
+[node name="Firefly3" parent="Enemies" instance=ExtResource("3_q8liu")]
+position = Vector2(397, 392)
+
+[node name="Firefly4" parent="Enemies" instance=ExtResource("3_q8liu")]
+position = Vector2(397, 392)
+
+[node name="Firefly5" parent="Enemies" instance=ExtResource("3_q8liu")]
+position = Vector2(397, 392)
 
 [node name="Lanternfly" parent="Enemies" instance=ExtResource("8_kamvq")]
 position = Vector2(801, 272)

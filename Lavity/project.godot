@@ -42,6 +42,12 @@ window/size/initial_position_type=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
+[editor]
+
+movie_writer/mjpeg_quality=1.0
+movie_writer/movie_file="C:/Users/duncv/dev/Lavity/Videos/latest.avi"
+movie_writer/fps=144
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")

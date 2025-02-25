@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflyIdleState.gd" id="13_glu8v"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForFireflyState.gd" id="14_2re5x"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForMoteState.gd" id="14_7adte"]
-[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="15_cvib8"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/pop.wav" id="15_cvib8"]
 [ext_resource type="Script" path="res://scenes/Entities/Enemies/Lanternfly/LanternflySearchingForPlayerState.gd" id="15_edsqd"]
 [ext_resource type="AudioStream" uid="uid://dramu25offpyw" path="res://assets/audio/sfx/lanternfly_buzz.wav" id="16_4g3op"]
 

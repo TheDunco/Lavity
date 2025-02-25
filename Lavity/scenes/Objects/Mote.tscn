@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://iynkceabfekf" path="res://scenes/Objects/LavityLight.tscn" id="1_5cqr6"]
 [ext_resource type="Script" path="res://scenes/Objects/Mote.gd" id="1_dckhx"]
-[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/sfx/pop.wav" id="3_wwi4m"]
+[ext_resource type="AudioStream" uid="uid://bh4mdl5w5kerr" path="res://assets/audio/pop.wav" id="3_wwi4m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mqtnc"]
 radius = 50.0
