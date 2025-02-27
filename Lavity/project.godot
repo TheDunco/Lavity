@@ -44,7 +44,6 @@ window/stretch/aspect="expand"
 
 [editor]
 
-movie_writer/mjpeg_quality=1.0
 movie_writer/movie_file="C:/Users/duncv/dev/Lavity/Videos/latest.avi"
 movie_writer/fps=144
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://br4oisj0kpf2q"]
+[gd_scene load_steps=31 format=3 uid="uid://br4oisj0kpf2q"]
 
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
@@ -101,6 +101,14 @@ unicode = 109
 
 [sub_resource type="Shortcut" id="Shortcut_7s2aa"]
 events = [SubResource("InputEventKey_14bgr"), SubResource("InputEventKey_ilvry")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kkpnd"]
+device = -1
+keycode = 70
+unicode = 102
+
+[sub_resource type="Shortcut" id="Shortcut_ux64n"]
+events = [SubResource("InputEventKey_kkpnd")]
 
 [node name="Menu" type="Control" node_paths=PackedStringArray("mainMenuButton")]
 layout_mode = 3
@@ -618,6 +626,15 @@ shortcut = SubResource("Shortcut_7s2aa")
 text = "Maze
 "
 
+[node name="Explore" type="Button" parent="Play/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+tooltip_text = "Play around in the maze"
+mouse_default_cursor_shape = 2
+theme = ExtResource("1_pq815")
+shortcut = SubResource("Shortcut_ux64n")
+text = "Explore"
+
 [node name="LightEffectsWorld" type="Button" parent="Play/CenterContainer/VBoxContainer"]
 visible = false
 layout_mode = 2
@@ -654,5 +671,6 @@ text = "Back"
 [connection signal="pressed" from="Controls/CenterContainer/VSplitContainer/Back" to="." method="_on_options_back_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/MarginContainer/HowTo" to="." method="_on_how_to_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Maze" to="." method="_on_maze_pressed"]
+[connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Explore" to="." method="_on_explore_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/LightEffectsWorld" to="." method="_on_light_effects_world_pressed"]
 [connection signal="pressed" from="Play/CenterContainer/VBoxContainer/Back" to="." method="_on_options_back_pressed"]

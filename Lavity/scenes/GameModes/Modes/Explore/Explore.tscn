@@ -1,0 +1,38 @@
+[gd_scene load_steps=9 format=3 uid="uid://c4gmr0nvpjmbm"]
+
+[ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="1_6e16m"]
+[ext_resource type="Script" path="res://scenes/GameModes/Modes/Explore/Explore.gd" id="1_t3v1f"]
+[ext_resource type="PackedScene" uid="uid://d2270agfvuxg" path="res://scenes/Utils/DirectionalDarkness.tscn" id="2_0221y"]
+[ext_resource type="PackedScene" uid="uid://caxoitn2q7lr6" path="res://scenes/Utils/Camera/PlayerFollowingCamera.tscn" id="3_xlj0r"]
+[ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="4_4ymxc"]
+[ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="5_00j7y"]
+[ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="6_pqopi"]
+[ext_resource type="PackedScene" uid="uid://cr6aiu061ntkf" path="res://scenes/Utils/WhiteBackground.tscn" id="7_5l5nd"]
+
+[node name="Explore" type="Node2D"]
+script = ExtResource("1_t3v1f")
+
+[node name="WhiteBackground" parent="." instance=ExtResource("7_5l5nd")]
+position = Vector2(-1.78814e-07, -1.78814e-07)
+
+[node name="WorldEnvironment" parent="." instance=ExtResource("1_6e16m")]
+
+[node name="DirectionalDarkness" parent="." instance=ExtResource("2_0221y")]
+
+[node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_xlj0r")]
+position = Vector2(147, 139)
+follow_target = NodePath("../Player")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Menu" parent="CanvasLayer" node_paths=PackedStringArray("player", "_directionalDarkness", "_worldEnvironment") instance=ExtResource("4_4ymxc")]
+player = NodePath("../../Player")
+_directionalDarkness = NodePath("../../DirectionalDarkness")
+_worldEnvironment = NodePath("../../WorldEnvironment")
+metadata/_edit_use_anchors_ = true
+
+[node name="Message" parent="CanvasLayer" instance=ExtResource("5_00j7y")]
+
+[node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("6_pqopi")]
+position = Vector2(147, 139)
+worldEnvironment = NodePath("../WorldEnvironment")

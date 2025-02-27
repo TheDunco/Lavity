@@ -264,4 +264,7 @@ func _on_calibration_pressed() -> void:
 func _on_how_to_pressed() -> void:
 	GameFlow.switchScene("res://scenes/Worlds/Intro/HowTo.tscn")
 	GameFlow.switchToDynamicMusic()
-	pass # Replace with function body.
+
+func _on_explore_pressed() -> void:
+	GameFlow.switchScene("res://scenes/GameModes/Modes/Explore/Explore.tscn")
+	GameFlow.switchToDynamicMusic()

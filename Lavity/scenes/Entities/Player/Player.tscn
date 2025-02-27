@@ -158,13 +158,12 @@ libraries = {
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-26, 18, -19, 26, -8, 30, 3, 30, 15, 27, 24, 24, 32, 20, 35, 16, 37, 10, 37, 4, 36, 0, 32, -8, 30, -17, 27, -11, 21, -18, 19, -21, 17, -15, -6, -21, -26, -13, -29, 1)
+polygon = PackedVector2Array(-28, 5, -26, 18, -19, 26, -8, 30, 3, 30, 15, 27, 24, 24, 32, 20, 35, 16, 37, 10, 37, 4, 36, 0, 32, -8, 30, -17, 27, -11, 21, -18, 19, -21, 17, -14, 4, -21, 6, -12, -5, -11, -19, -4)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("Entity") instance=ExtResource("7_0mjfq")]
 Entity = NodePath("..")
-airResistance = 4
 
 [node name="DamageEffectsTimer" type="Timer" parent="."]
 wait_time = 0.5
