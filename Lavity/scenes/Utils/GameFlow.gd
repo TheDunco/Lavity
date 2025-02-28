@@ -32,6 +32,16 @@ func gameOver():
 	heroText = gameOverText
 	SignalBus.emit_signal("displayHeroText", gameOverText)
 
+func spawnAtPoint(scene: PackedScene, point: Vector2, spawnChance: float, tries: int = 1, modifyInstance: Callable = func(_instance): pass ) -> int:
+	var numSpawned = 0
+	for _i in range(tries):
+		if randf() < spawnChance:
+			var instance = scene.instantiate()
+			instance.global_position = point
+			add_child(instance)
+			modifyInstance.call(instance)
+			numSpawned += 1
+	return numSpawned
 
 # TODO: The current song somehow needs to be more global for this to work right 
 # Perhaps instead of signals, use a global var and just change it. Nothing else needs to know that the song changed

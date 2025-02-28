@@ -10,6 +10,12 @@
 
 [node name="Explore" type="Node2D"]
 script = ExtResource("1_t3v1f")
+lanternflySpawnTries = 2
+lanternflySpawnChance = 0.334
+fireflySpawnTries = 5
+fireflySpawnChance = 0.5
+moteSpawnTries = 10
+moteSpawnChance = 0.75
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_6e16m")]
 
@@ -32,4 +38,3 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("6_pqopi")]
 position = Vector2(147, 139)
 worldEnvironment = NodePath("../WorldEnvironment")
-canTakeDamage = false

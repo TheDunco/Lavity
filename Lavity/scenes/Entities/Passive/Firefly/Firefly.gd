@@ -30,19 +30,15 @@ var percievedFireflies: Array[Firefly] = []
 func bodyEnteredPerceptionArea(body: Node):
 	if body is CharacterBody2D and body != self:
 		if body is Firefly:
-			print("adding firefly")
 			percievedFireflies.append(body)
 		else:
-			print("adding body")
 			percievedBodies.append(body)
 
 func bodyExitedPerceptionArea(body: Node):
 	if body is CharacterBody2D:
 		if body is Firefly:
-			print("removing firefly")
 			percievedFireflies.erase(body)
 		else:
-			print("removing body")
 			percievedBodies.erase(body)
 
 func _ready() -> void:

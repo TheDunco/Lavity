@@ -14,16 +14,17 @@ func start(_chunk_coords: Vector2i, chunk_size: int):
 	$Sprite2D.texture.height = chunk_size
 	$Coords.text = str(chunk_coords)
 	if WorldSave.loaded_coords.find(_chunk_coords) == -1:
-		color()
+		initialize()
 		WorldSave.add_chunk(chunk_coords)
 	else:
 		chunk_data = WorldSave.retrive_data(chunk_coords)
 		modulate = chunk_data.color
 
-func color():
-	var clr = ColorUtils.randColorFromSet()
-	modulate = clr
-	chunk_data.color = clr
+func initialize():
+	var randGrayscaleVal = randf_range(0.8, 1.0)
+	var color = Color(randGrayscaleVal, randGrayscaleVal, randGrayscaleVal)
+	modulate = color
+	chunk_data.color = color
 
 func save():
 	WorldSave.save_chunk(chunk_coords, chunk_data)
