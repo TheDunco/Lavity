@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c4gmr0nvpjmbm"]
+[gd_scene load_steps=8 format=3 uid="uid://c4gmr0nvpjmbm"]
 
 [ext_resource type="PackedScene" uid="uid://lv17fuwlpua4" path="res://scenes/Utils/WorldEnvironment.tscn" id="1_6e16m"]
 [ext_resource type="Script" path="res://scenes/GameModes/Modes/Explore/Explore.gd" id="1_t3v1f"]
@@ -7,19 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://br4oisj0kpf2q" path="res://scenes/Ui/Menu.tscn" id="4_4ymxc"]
 [ext_resource type="PackedScene" uid="uid://ci8v3mmoawwgt" path="res://scenes/Utils/Message.tscn" id="5_00j7y"]
 [ext_resource type="PackedScene" uid="uid://cjjaaagbuky2e" path="res://scenes/Entities/Player/Player.tscn" id="6_pqopi"]
-[ext_resource type="PackedScene" uid="uid://cr6aiu061ntkf" path="res://scenes/Utils/WhiteBackground.tscn" id="7_5l5nd"]
 
 [node name="Explore" type="Node2D"]
 script = ExtResource("1_t3v1f")
 
-[node name="WhiteBackground" parent="." instance=ExtResource("7_5l5nd")]
-visible = false
-position = Vector2(-1.78814e-07, -1.78814e-07)
-
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_6e16m")]
 
 [node name="DirectionalDarkness" parent="." instance=ExtResource("2_0221y")]
-energy = 0.15
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_xlj0r")]
 position = Vector2(147, 139)

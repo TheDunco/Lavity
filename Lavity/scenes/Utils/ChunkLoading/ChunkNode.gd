@@ -3,7 +3,9 @@ class_name ChunkNode
 
 var chunk_coords := Vector2i()
 var chunkSize: int = 0
-var chunk_data = []
+var chunk_data = {
+	"color": Color.WHITE
+}
 
 func start(_chunk_coords: Vector2i, chunk_size: int):
 	chunk_coords = _chunk_coords
@@ -16,12 +18,12 @@ func start(_chunk_coords: Vector2i, chunk_size: int):
 		WorldSave.add_chunk(chunk_coords)
 	else:
 		chunk_data = WorldSave.retrive_data(chunk_coords)
-		modulate = chunk_data[0]
+		modulate = chunk_data.color
 
 func color():
 	var clr = ColorUtils.randColorFromSet()
 	modulate = clr
-	chunk_data.append(clr)
+	chunk_data.color = clr
 
 func save():
 	WorldSave.save_chunk(chunk_coords, chunk_data)
