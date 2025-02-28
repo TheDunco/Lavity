@@ -13,6 +13,7 @@
 script = ExtResource("1_t3v1f")
 
 [node name="WhiteBackground" parent="." instance=ExtResource("7_5l5nd")]
+visible = false
 position = Vector2(-1.78814e-07, -1.78814e-07)
 
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_6e16m")]

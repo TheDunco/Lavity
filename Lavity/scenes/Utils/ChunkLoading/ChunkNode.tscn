@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://di84omw4smy6c"]
+
+[ext_resource type="Script" path="res://scenes/Utils/ChunkLoading/ChunkNode.gd" id="2"]
+
+[sub_resource type="Gradient" id="Gradient_861cx"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.608618, 0.608618, 0.608618, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_167sp"]
+gradient = SubResource("Gradient_861cx")
+
+[node name="ChunkNode" type="Node2D"]
+script = ExtResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_167sp")
+
+[node name="Coords" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)

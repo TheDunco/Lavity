@@ -33,6 +33,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 GlobalDynamicMusicComponent="*res://scenes/Music/Dynamic/DynamicMusicComponent.tscn"
 GlobalSfx="*res://scenes/Audio/SfxComponent.tscn"
 SignalBus="*res://scenes/Utils/SignalBus.tscn"
+WorldSave="*res://scenes/Utils/ChunkLoading/WorldSave.gd"
 
 [display]
 
