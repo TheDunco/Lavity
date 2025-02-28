@@ -19,9 +19,9 @@ func start(_chunk_coords: Vector2i, chunk_size: int):
 		modulate = chunk_data[0]
 
 func color():
-	var color = ColorUtils.randColorFromSet()
-	modulate = color
-	chunk_data.append(color)
+	var clr = ColorUtils.randColorFromSet()
+	modulate = clr
+	chunk_data.append(clr)
 
 func save():
 	WorldSave.save_chunk(chunk_coords, chunk_data)

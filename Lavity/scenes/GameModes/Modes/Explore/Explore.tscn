@@ -19,6 +19,7 @@ position = Vector2(-1.78814e-07, -1.78814e-07)
 [node name="WorldEnvironment" parent="." instance=ExtResource("1_6e16m")]
 
 [node name="DirectionalDarkness" parent="." instance=ExtResource("2_0221y")]
+energy = 0.15
 
 [node name="PlayerFollowingPhantomCam" parent="." node_paths=PackedStringArray("follow_target") instance=ExtResource("3_xlj0r")]
 position = Vector2(147, 139)
@@ -37,3 +38,4 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="." node_paths=PackedStringArray("worldEnvironment") instance=ExtResource("6_pqopi")]
 position = Vector2(147, 139)
 worldEnvironment = NodePath("../WorldEnvironment")
+canTakeDamage = false
