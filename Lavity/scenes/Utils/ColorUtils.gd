@@ -18,7 +18,7 @@ const PURPLE = Color(0.5, 0, 0.5)
 const PINK = Color(1, 0, 1) # Longevity
 
 ## An array of all of the color constants
-const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK, Color.BLACK]
+const colorsArray := [RED, RED_ORANGE, ORANGE, YELLOW_ORANGE, YELLOW, YELLOW_GREEN, GREEN, BLUE_GREEN, BLUE, BLUE_PURPLE, PURPLE, PINK]
 const colorNames := [
 	"red",
 	"red_orange",
