@@ -17,4 +17,5 @@ z_index = -1
 texture = SubResource("GradientTexture2D_167sp")
 
 [node name="Coords" type="Label" parent="."]
+visible = false
 modulate = Color(0, 0, 0, 1)

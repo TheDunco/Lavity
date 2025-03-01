@@ -21,10 +21,11 @@ func start(_chunk_coords: Vector2i, chunk_size: int):
 		modulate = chunk_data.color
 
 func initialize():
-	var randGrayscaleVal = randf_range(0.8, 1.0)
-	var color = Color(randGrayscaleVal, randGrayscaleVal, randGrayscaleVal)
-	modulate = color
-	chunk_data.color = color
+	pass
+	# var randGrayscaleVal = randf_range(0.8, 1.0)
+	# var color = Color(randGrayscaleVal, randGrayscaleVal, randGrayscaleVal)
+	# modulate = color
+	# chunk_data.color = color
 
 func save():
 	WorldSave.save_chunk(chunk_coords, chunk_data)

@@ -68,7 +68,7 @@ func enter() -> void:
 			transition.emit(self, "idleState")
 
 func update(_delta) -> void:
-	if not firefly.percievedBodies.is_empty():
+	if not firefly.percievedBodies.is_empty() or !is_instance_valid(followFirefly):
 		transition.emit(self, "runningFromEntityState")
 		return
 
@@ -78,8 +78,6 @@ func update(_delta) -> void:
 
 	if is_instance_valid(followFirefly) and firefly.global_position.distance_to(followFirefly.global_position) > minDistance:
 		firefly.moveToward(followFirefly.global_position, firefly.acceleration / 50.0)
-	else:
-		followFirefly = null
 
 func exit() -> void:
 	if is_instance_valid(firefly):
