@@ -238,7 +238,7 @@ func _process(delta):
 
 	if playerLight.enabled:
 		takeDamage(decayRate, true)
-		if ColorUtils.sumVector2(velocity) < 0.3:
+		if ColorUtils.sumVector2(velocity) < 1.0:
 			particles.process_mode = Node.PROCESS_MODE_DISABLED
 		else:
 			particles.process_mode = Node.PROCESS_MODE_INHERIT

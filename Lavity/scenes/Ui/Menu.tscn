@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://br4oisj0kpf2q"]
+[gd_scene load_steps=32 format=3 uid="uid://br4oisj0kpf2q"]
 
 [ext_resource type="Shader" path="res://shaders/ChromaticAberration.gdshader" id="1_a310j"]
 [ext_resource type="Script" path="res://scenes/Ui/Menu.gd" id="1_aei6w"]
@@ -102,13 +102,18 @@ unicode = 109
 [sub_resource type="Shortcut" id="Shortcut_7s2aa"]
 events = [SubResource("InputEventKey_14bgr"), SubResource("InputEventKey_ilvry")]
 
+[sub_resource type="InputEventKey" id="InputEventKey_8guxq"]
+device = -1
+keycode = 88
+unicode = 120
+
 [sub_resource type="InputEventKey" id="InputEventKey_kkpnd"]
 device = -1
-keycode = 70
-unicode = 102
+keycode = 69
+unicode = 101
 
 [sub_resource type="Shortcut" id="Shortcut_ux64n"]
-events = [SubResource("InputEventKey_kkpnd")]
+events = [SubResource("InputEventKey_8guxq"), SubResource("InputEventKey_kkpnd")]
 
 [node name="Menu" type="Control" node_paths=PackedStringArray("mainMenuButton")]
 layout_mode = 3

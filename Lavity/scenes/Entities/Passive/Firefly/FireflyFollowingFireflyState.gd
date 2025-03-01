@@ -18,12 +18,13 @@ func getBlendedColor() -> Color:
 	return Color.BLACK
 
 func canMate() -> bool:
-	var adults = not firefly.isChild and not followFirefly.isChild
-	var differentSex = firefly.isFemale == not followFirefly.isFemale
-	var notOverpopulated = firefly.percievedFireflies.size() < 5
+	if is_instance_valid(firefly) and is_instance_valid(followFirefly):
+		var adults = not firefly.isChild and not followFirefly.isChild
+		var differentSex = firefly.isFemale == not followFirefly.isFemale
+		var notOverpopulated = firefly.percievedFireflies.size() < 5
 
-	return adults && differentSex && notOverpopulated
-
+		return adults && differentSex && notOverpopulated
+	return false
 
 func trySpawn():
 	var shouldSpawnMote: bool = (randf() < mateMoteSpawnChance) and canMate()
@@ -49,7 +50,7 @@ func trySpawn():
 		
 
 func enter() -> void:
-	if firefly:
+	if is_instance_valid(firefly):
 		followFirefly = firefly.percievedFireflies.pick_random()
 		followFirefly.blink.connect(trySpawn)
 		if canMate():
@@ -77,6 +78,8 @@ func update(_delta) -> void:
 
 	if is_instance_valid(followFirefly) and firefly.global_position.distance_to(followFirefly.global_position) > minDistance:
 		firefly.moveToward(followFirefly.global_position, firefly.acceleration / 50.0)
+	else:
+		followFirefly = null
 
 func exit() -> void:
 	if is_instance_valid(firefly):

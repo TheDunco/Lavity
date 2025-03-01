@@ -13,6 +13,6 @@ func _ready() -> void:
 	var fireflyCount = 0
 
 	for middlePoint in mazeMiddlePoints:
-		lanternflyCount += GameFlow.spawnAtPoint(lanternflyScene, middlePoint, lanternflySpawnChance)
-		fireflyCount += GameFlow.spawnAtPoint(fireflyScene, middlePoint, fireflySpawnChance)
+		lanternflyCount += GameFlow.spawnAtPoint(lanternflyScene, middlePoint, lanternflySpawnChance).size()
+		fireflyCount += GameFlow.spawnAtPoint(fireflyScene, middlePoint, fireflySpawnChance).size()
 	print("Spawned " + str(lanternflyCount) + " Lanternflies" + " and " + str(fireflyCount) + " Fireflies")
