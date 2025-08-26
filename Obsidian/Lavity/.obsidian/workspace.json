@@ -8,20 +8,20 @@
         "type": "tabs",
         "children": [
           {
-            "id": "58ac3cb4587ee91a",
+            "id": "4adf779e9b5132fd",
             "type": "leaf",
             "state": {
               "type": "canvas",
               "state": {
-                "file": "Main Board.canvas",
+                "file": "New Game Flow Brainstorm.canvas",
                 "viewState": {
-                  "x": -11.799035829393802,
-                  "y": -256.80913943066594,
-                  "zoom": 1
+                  "x": 946.234231213738,
+                  "y": 692.2980491647759,
+                  "zoom": -0.6196864430696314
                 }
               },
               "icon": "lucide-layout-dashboard",
-              "title": "Main Board"
+              "title": "New Game Flow Brainstorm"
             }
           }
         ]
@@ -43,7 +43,8 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "alphabetical"
+                "sortOrder": "alphabetical",
+                "autoReveal": false
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -165,18 +166,20 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "58ac3cb4587ee91a",
+  "active": "4adf779e9b5132fd",
   "lastOpenFiles": [
     "Color Effect Mapping.canvas",
     "Main Board.canvas",
+    "New Game Flow Brainstorm.canvas",
+    "mof.png",
     "good-boyo-chibi.png",
-    "color-wheels-RYB-RGB.webp",
-    "basic-colors.webp",
+    "Untitled.md",
+    "TODOS.md",
     "Pasted image 20240731215944.jpg",
     "Pasted image 20240731220031.jpg",
-    "Untitled.md",
-    "mof.png",
-    "TODOS.md",
+    "New Game Flow.md",
+    "color-wheels-RYB-RGB.webp",
+    "basic-colors.webp",
     "README.md",
     "Welcome.md"
   ]
